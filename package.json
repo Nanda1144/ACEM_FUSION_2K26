@@ -7,6 +7,9 @@
     "dev:full": "concurrently \"npm run server\" \"npm run client\"",
     "client": "vite",
     "server": "nodemon server/index.js",
+    "diagnostic": "node diagnostic.js",
+    "test:backend": "./test-backend.sh",
+    "start:all": "./start.sh",
     "build": "echo 'Do not use this command, only use lint to check'",
     "lint": "tsgo -p tsconfig.check.json; npx biome lint; .rules/check.sh;npx tailwindcss -i ./src/index.css -o /dev/null 2>&1 | grep -E '^(CssSyntaxError|Error):.*' || true;.rules/testBuild.sh"
   },
