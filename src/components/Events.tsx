@@ -11,7 +11,6 @@ import type { Event } from '@/types/index';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Events() {
-  const navigate = useNavigate();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'Technical' | 'Cultural'>('Technical');
@@ -77,6 +76,10 @@ export default function Events() {
 function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
   const navigate = useNavigate();
   
+  const handleNavigate = (eventId: string) => {
+    navigate(`/event/${eventId}`);
+  };
+  
   if (loading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -118,7 +121,7 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
             {event.image_url && (
               <div 
                 className="relative h-48 overflow-hidden"
-                onClick={() => navigate(`/event/${event.id}`)}
+                onClick={() => handleNavigate(event.id)}
               >
                 <img
                   src={event.image_url}
@@ -128,7 +131,7 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
               </div>
             )}
-            <CardHeader onClick={() => navigate(`/event/${event.id}`)}>
+            <CardHeader onClick={() => handleNavigate(event.id)}>
               <div className="flex items-start justify-between gap-2">
                 <CardTitle className="text-xl group-hover:text-primary transition-colors">{event.name}</CardTitle>
                 <Badge variant="outline" className="border-primary text-primary">
@@ -170,7 +173,7 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
             <CardFooter className="flex gap-2">
               <Button
                 className="flex-1"
-                onClick={() => navigate(`/event/${event.id}`)}
+                onClick={() => handleNavigate(event.id)}
               >
                 View Details
               </Button>
