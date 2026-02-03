@@ -61,3 +61,13 @@ export interface AdminPasskey {
   updated_at: string;
 }
 
+export interface HeaderSettings {
+  id: string;
+  college_name: string;
+  logo_1_url: string | null;
+  logo_2_url: string | null;
+  logo_3_url: string | null;
+  logo_4_url: string | null;
+  updated_at: string;
+}
+

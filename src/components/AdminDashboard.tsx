@@ -6,6 +6,7 @@ import GalleryManagement from './admin/GalleryManagement';
 import AboutManagement from './admin/AboutManagement';
 import ContactManagement from './admin/ContactManagement';
 import PasskeyManagement from './admin/PasskeyManagement';
+import HeaderManagement from './admin/HeaderManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
@@ -32,12 +33,13 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 mb-8">
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
+            <TabsTrigger value="header">Header</TabsTrigger>
             <TabsTrigger value="passkey">Passkey</TabsTrigger>
           </TabsList>
 
@@ -59,6 +61,10 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
           <TabsContent value="contact">
             <ContactManagement />
+          </TabsContent>
+
+          <TabsContent value="header">
+            <HeaderManagement />
           </TabsContent>
 
           <TabsContent value="passkey">

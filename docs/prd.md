@@ -15,7 +15,20 @@ Web Application (College Fest Management Platform)
 
 ### 2.1 Public User Interface
 
-#### 2.1.1 Homepage
+#### 2.1.1 Header Section
+- Display college name
+- Display up to 4 college logos
+- Navigation menu with links:
+  - Home
+  - Committee
+  - Gallery
+  - Events
+  - Contact Us
+  - About Us
+- Sticky header with smooth scroll behavior
+- Responsive menu for mobile devices
+
+#### 2.1.2 Homepage
 - Cinematic hero section with parallax scrolling
 - Smooth transitions and motion-based micro-interactions
 - Dark theme with neon/gradient accents
@@ -23,7 +36,7 @@ Web Application (College Fest Management Platform)
 - Glow effects, animated cards, hover transitions
 - Animated loading states
 
-#### 2.1.2 Events Section
+#### 2.1.3 Events Section
 - Display events categorized by type (Technical/Cultural)
 - Each event card shows:
   - Event Name
@@ -34,22 +47,22 @@ Web Application (College Fest Management Platform)
   - Student Coordinators (Name, Contact)
   - Registration button linking to Google Form
 
-#### 2.1.3 Committee Section
+#### 2.1.4 Committee Section
 - Display committee members with:
   - Member images
   - Names
   - Assigned roles
 - Cinematic layout with smooth transitions
 
-#### 2.1.4 Gallery Section
+#### 2.1.5 Gallery Section
 - Cinematic grid/masonry layout displaying uploaded images
 - Lazy loading implementation
 - Smooth transitions between images
 
-#### 2.1.5 About Us Section
+#### 2.1.6 About Us Section
 - Editable text content displaying fest information
 
-#### 2.1.6 Contact Section
+#### 2.1.7 Contact Section
 - Display contact details
 - Social media links (Instagram, LinkedIn, WhatsApp, Email)
 
@@ -65,7 +78,12 @@ Web Application (College Fest Management Platform)
 
 ### 2.3 Admin Dashboard
 
-#### 2.3.1 Event Management
+#### 2.3.1 Header Management
+- Update college name
+- Upload up to 4 college logos
+- Changes reflect immediately on public UI header
+
+#### 2.3.2 Event Management
 - Add new events with fields:
   - Event Name
   - Event Type (Technical/Cultural)
@@ -78,26 +96,26 @@ Web Application (College Fest Management Platform)
 - Delete events
 - Events auto-display on public UI based on event type
 
-#### 2.3.2 Committee Management
+#### 2.3.3 Committee Management
 - Add committee members
 - Assign roles to members
 - Upload member images
 - Changes display dynamically on website
 
-#### 2.3.3 Gallery Management
+#### 2.3.4 Gallery Management
 - Upload multiple images
 - Images appear in cinematic gallery layout on public UI
 
-#### 2.3.4 About Us Management
+#### 2.3.5 About Us Management
 - Edit About Us section text content
 - Updates reflect immediately on public UI
 
-#### 2.3.5 Contact & Social Media Management
+#### 2.3.6 Contact & Social Media Management
 - Update contact details
 - Update social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Changes reflect instantly on public UI
 
-#### 2.3.6 Passkey Management
+#### 2.3.7 Passkey Management
 - Change passkey functionality with validation:
   - Enter old passkey
   - Enter new passkey
@@ -122,6 +140,7 @@ Web Application (College Fest Management Platform)
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
 - Smooth page transitions and animated loading states
+- Responsive header with mobile-friendly navigation menu
 
 ### 3.3 Performance Optimization
 - Optimized animations and images
@@ -134,6 +153,7 @@ Web Application (College Fest Management Platform)
 ### 4.1 Database
 - MongoDB for data storage
 - Collections for:
+  - Header content (college name, logos)
   - Events
   - Committee members
   - Gallery images
@@ -157,8 +177,8 @@ Web Application (College Fest Management Platform)
 ## 5. User Flow
 
 ### 5.1 Public User Flow
-1. User lands on cinematic homepage
-2. User navigates through sections (Events, Committee, Gallery, About, Contact)
+1. User lands on cinematic homepage with header displaying college name, logos, and navigation menu
+2. User navigates through sections using header menu (Home, Events, Committee, Gallery, About Us, Contact Us)
 3. User views events by category (Technical/Cultural)
 4. User clicks registration button to access Google Form
 5. User explores gallery and committee sections with smooth cinematic navigation
@@ -168,6 +188,6 @@ Web Application (College Fest Management Platform)
 2. Admin enters passkey in chatbot
 3. System validates passkey
 4. Upon successful validation, Admin Dashboard opens
-5. Admin manages content (Events, Committee, Gallery, About Us, Contact)
+5. Admin manages content (Header, Events, Committee, Gallery, About Us, Contact)
 6. Admin can change passkey through Passkey Management
 7. All changes save to MongoDB and reflect immediately on public UI

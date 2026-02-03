@@ -9,7 +9,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background">
         <div className="absolute inset-0 opacity-30">
@@ -18,7 +18,6 @@ export default function Hero() {
           <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-accent rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
         </div>
       </div>
-
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
@@ -26,9 +25,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">
-            FUSION26
-          </h1>
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">{"FUSION26"}</h1>
           <motion.p
             className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
@@ -53,7 +50,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"

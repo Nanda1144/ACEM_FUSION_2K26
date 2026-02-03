@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Events from '@/components/Events';
 import Committee from '@/components/Committee';
@@ -32,6 +33,7 @@ export default function HomePage() {
         <meta name="description" content="Welcome to Fusion26, the ultimate college fest experience! Join us for an unforgettable celebration of talent, creativity, and innovation." />
       </Helmet>
       <div className="min-h-screen">
+        <Header />
         <Hero />
         <Events />
         <Committee />

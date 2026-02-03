@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey } from '@/types/index';
+import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey, HeaderSettings } from '@/types/index';
 
 // Events API
 export const eventsApi = {
@@ -216,6 +216,32 @@ export const passkeyApi = {
     const { data, error } = await supabase
       .from('admin_passkey')
       .update({ passkey: newPasskey, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  }
+};
+
+// Header Settings API
+export const headerSettingsApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('header_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, settings: Partial<HeaderSettings>) => {
+    const { data, error } = await supabase
+      .from('header_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
       .eq('id', id)
       .select()
       .single();
