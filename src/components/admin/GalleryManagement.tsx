@@ -40,7 +40,7 @@ export default function GalleryManagement() {
     try {
       for (const file of Array.from(files)) {
         const url = await uploadImage(file, 'app-9dfi9jpj51xd_gallery_images');
-        await galleryApi.create(url);
+        await galleryApi.create({ image_url: url });
       }
       toast({
         title: 'Success',

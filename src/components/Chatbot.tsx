@@ -23,7 +23,7 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
 
     setLoading(true);
     try {
-      const isValid = await passkeyApi.validate(passkey);
+      const isValid = await passkeyApi.verify(passkey);
       if (isValid) {
         toast({
           title: 'Success',

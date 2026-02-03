@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities. The system connects to MongoDB Atlas cloud database with manual configuration support.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -207,7 +207,7 @@ Web Application (College Fest Management Platform)
 - Validation rules:
   - Old passkey must match database value
   - New passkey and confirm passkey must match
-- Passkey update stored securely in MongoDB
+- Passkey update stored securely in MongoDB Atlas
 
 #### 2.3.12 Complete Application Editing
 - Admin has full control to edit entire application:
@@ -218,6 +218,23 @@ Web Application (College Fest Management Platform)
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
+
+#### 2.3.13 MongoDB Atlas Connection Management
+- Manual database connection configuration interface
+- Step-by-step connection setup guide displayed in chatbot:
+  - Step 1: Create MongoDB Atlas account at mongodb.com/cloud/atlas
+  - Step 2: Create a new cluster (free tier available)
+  - Step 3: Create database user with username and password
+  - Step 4: Whitelist IP address (allow access from anywhere: 0.0.0.0/0)
+  - Step 5: Get connection string from Atlas dashboard
+  - Step 6: Replace <password> in connection string with database user password
+  - Step 7: Enter complete connection string in admin dashboard
+  - Step 8: Click Connect button to establish connection
+- Connection string input field in admin dashboard
+- Test connection functionality
+- Connection status indicator (Connected/Disconnected)
+- Automatic reconnection on connection failure
+- Connection string validation before attempting connection
 
 ## 3. Design Requirements
 
@@ -252,7 +269,8 @@ Web Application (College Fest Management Platform)
 ## 4. Technical Requirements
 
 ### 4.1 Database
-- MongoDB for data storage
+- MongoDB Atlas cloud database for data storage
+- Manual connection configuration support
 - Collections for:
   - Header content (college name: ACEM, logos with positioning data)
   - Text styling configurations (font, size, color)
@@ -265,18 +283,22 @@ Web Application (College Fest Management Platform)
   - About Us content
   - Contact information
   - Admin passkey
+  - Database connection configuration
 - Automatic data updates on admin changes
+- Connection string stored securely
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
+- MongoDB Atlas connection using mongoose or native MongoDB driver
 - Secure authentication logic for admin access
 - Clean REST API structure
 - Real-time data synchronization for live preview
 - All admin changes must:
-  - Store automatically in database
+  - Store automatically in MongoDB Atlas
   - Reflect instantly on user interface
   - Update live preview in real-time
 - API endpoints for:
+  - Database connection management
   - Logo positioning management
   - Text styling updates
   - Background customization
@@ -284,6 +306,8 @@ Web Application (College Fest Management Platform)
   - Footer management
   - Event detail page data
   - Complete application editing
+- Environment variable support for connection string storage
+- Error handling for database connection failures
 
 ### 4.3 Code Quality
 - Clean, modular, scalable codebase
@@ -291,6 +315,7 @@ Web Application (College Fest Management Platform)
 - Optimized for production deployment
 - Support for multiple web pages architecture
 - Efficient real-time update mechanism
+- Secure connection string handling
 
 ## 5. User Flow
 
@@ -316,7 +341,12 @@ Web Application (College Fest Management Platform)
 3. System validates passkey
 4. Upon successful validation, Admin Dashboard opens with split-screen interface
 5. Admin sees live preview panel on right side showing real-time website appearance
-6. Admin manages content with instant live preview updates:
+6. Admin configures MongoDB Atlas connection (first-time setup):
+   - Views step-by-step connection guide in chatbot
+   - Enters MongoDB Atlas connection string
+   - Tests connection
+   - Confirms successful connection
+7. Admin manages content with instant live preview updates:
    - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled)
@@ -324,8 +354,8 @@ Web Application (College Fest Management Platform)
    - Footer: Edit structure, update contact details, customize styling
    - Events: Add event details including rules, instructions, multiple images, student coordinator contacts, Google Form link
    - Committee, Gallery, About Us, Contact management
-7. Admin arranges homepage layout and header sections as desired
-8. Admin edits entire application including header, footer, and body sections
-9. Admin can change passkey through Passkey Management
-10. All changes save to MongoDB automatically and reflect immediately across all web pages on public UI and live preview
-11. Admin can access and edit multiple web pages with consistent editing interface
+8. Admin arranges homepage layout and header sections as desired
+9. Admin edits entire application including header, footer, and body sections
+10. Admin can change passkey through Passkey Management
+11. All changes save to MongoDB Atlas automatically and reflect immediately across all web pages on public UI and live preview
+12. Admin can access and edit multiple web pages with consistent editing interface

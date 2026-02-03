@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Save } from 'lucide-react';
-import { aboutUsApi } from '@/db/api';
+import { aboutApi } from '@/db/api';
 import type { AboutUs } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
 
@@ -20,7 +20,7 @@ export default function AboutManagement() {
 
   const loadAbout = async () => {
     try {
-      const data = await aboutUsApi.get();
+      const data = await aboutApi.get();
       setAbout(data);
       setContent(data?.content || '');
     } catch (error) {
@@ -39,7 +39,7 @@ export default function AboutManagement() {
 
     setSaving(true);
     try {
-      await aboutUsApi.update(about.id, content);
+      await aboutApi.update(about.id, content);
       toast({
         title: 'Success',
         description: 'About us content updated successfully'

@@ -1,490 +1,451 @@
-import { supabase } from './supabase';
-import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey, HeaderSettings, ThemeSettings, Page, PageSection, FooterSettings, ComponentTemplate } from '@/types/index';
+import { getDatabase, convertMongoDoc, convertMongoDocs, ObjectId } from './mongodb';
+import type { 
+  Event, 
+  CommitteeMember, 
+  GalleryImage, 
+  AboutUs, 
+  Contact, 
+  AdminPasskey, 
+  ThemeSettings, 
+  Page, 
+  PageSection, 
+  FooterSettings, 
+  ComponentTemplate 
+} from '@/types/index';
 
 // Events API
 export const eventsApi = {
-  getAll: async () => {
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getAll: async (): Promise<Event[]> => {
+    const db = await getDatabase();
+    const events = await db.collection('events')
+      .find({})
+      .sort({ created_at: -1 })
+      .toArray();
+    return convertMongoDocs<Event>(events);
   },
 
-  getById: async (id: string) => {
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .eq('id', id)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+  getById: async (id: string): Promise<Event | null> => {
+    const db = await getDatabase();
+    const event = await db.collection('events').findOne({ _id: new ObjectId(id) });
+    return event ? convertMongoDoc<Event>(event) : null;
   },
 
-  getByType: async (type: 'Technical' | 'Cultural') => {
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .eq('type', type)
-      .order('created_at', { ascending: false });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getByType: async (type: 'Technical' | 'Cultural'): Promise<Event[]> => {
+    const db = await getDatabase();
+    const events = await db.collection('events')
+      .find({ type })
+      .sort({ created_at: -1 })
+      .toArray();
+    return convertMongoDocs<Event>(events);
   },
 
-  create: async (event: Omit<Event, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('events')
-      .insert([event])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  create: async (event: Omit<Event, 'id' | 'created_at' | 'updated_at'>): Promise<Event> => {
+    const db = await getDatabase();
+    const now = new Date();
+    const result = await db.collection('events').insertOne({
+      ...event,
+      created_at: now,
+      updated_at: now
+    });
+    const newEvent = await db.collection('events').findOne({ _id: result.insertedId });
+    return convertMongoDoc<Event>(newEvent);
   },
 
-  update: async (id: string, event: Partial<Event>) => {
-    const { data, error } = await supabase
-      .from('events')
-      .update({ ...event, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, event: Partial<Event>): Promise<Event> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = event as any;
+    await db.collection('events').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('events').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<Event>(updated);
   },
 
-  delete: async (id: string) => {
-    const { error } = await supabase
-      .from('events')
-      .delete()
-      .eq('id', id);
-    
-    if (error) throw error;
+  delete: async (id: string): Promise<void> => {
+    const db = await getDatabase();
+    await db.collection('events').deleteOne({ _id: new ObjectId(id) });
   }
 };
 
 // Committee API
 export const committeeApi = {
-  getAll: async () => {
-    const { data, error } = await supabase
-      .from('committee')
-      .select('*')
-      .order('display_order', { ascending: true });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getAll: async (): Promise<CommitteeMember[]> => {
+    const db = await getDatabase();
+    const members = await db.collection('committee')
+      .find({})
+      .sort({ display_order: 1 })
+      .toArray();
+    return convertMongoDocs<CommitteeMember>(members);
   },
 
-  create: async (member: Omit<CommitteeMember, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('committee')
-      .insert([member])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  create: async (member: Omit<CommitteeMember, 'id' | 'created_at' | 'updated_at'>): Promise<CommitteeMember> => {
+    const db = await getDatabase();
+    const now = new Date();
+    const result = await db.collection('committee').insertOne({
+      ...member,
+      created_at: now,
+      updated_at: now
+    });
+    const newMember = await db.collection('committee').findOne({ _id: result.insertedId });
+    return convertMongoDoc<CommitteeMember>(newMember);
   },
 
-  update: async (id: string, member: Partial<CommitteeMember>) => {
-    const { data, error } = await supabase
-      .from('committee')
-      .update({ ...member, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, member: Partial<CommitteeMember>): Promise<CommitteeMember> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = member as any;
+    await db.collection('committee').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('committee').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<CommitteeMember>(updated);
   },
 
-  delete: async (id: string) => {
-    const { error } = await supabase
-      .from('committee')
-      .delete()
-      .eq('id', id);
-    
-    if (error) throw error;
+  delete: async (id: string): Promise<void> => {
+    const db = await getDatabase();
+    await db.collection('committee').deleteOne({ _id: new ObjectId(id) });
   }
 };
 
 // Gallery API
 export const galleryApi = {
-  getAll: async () => {
-    const { data, error } = await supabase
-      .from('gallery')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getAll: async (): Promise<GalleryImage[]> => {
+    const db = await getDatabase();
+    const images = await db.collection('gallery')
+      .find({})
+      .sort({ created_at: -1 })
+      .toArray();
+    return convertMongoDocs<GalleryImage>(images);
   },
 
-  create: async (image_url: string) => {
-    const { data, error } = await supabase
-      .from('gallery')
-      .insert([{ image_url }])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  create: async (image: Omit<GalleryImage, 'id' | 'created_at'>): Promise<GalleryImage> => {
+    const db = await getDatabase();
+    const result = await db.collection('gallery').insertOne({
+      ...image,
+      created_at: new Date()
+    });
+    const newImage = await db.collection('gallery').findOne({ _id: result.insertedId });
+    return convertMongoDoc<GalleryImage>(newImage);
   },
 
-  delete: async (id: string) => {
-    const { error } = await supabase
-      .from('gallery')
-      .delete()
-      .eq('id', id);
-    
-    if (error) throw error;
+  delete: async (id: string): Promise<void> => {
+    const db = await getDatabase();
+    await db.collection('gallery').deleteOne({ _id: new ObjectId(id) });
   }
 };
 
 // About Us API
-export const aboutUsApi = {
-  get: async () => {
-    const { data, error } = await supabase
-      .from('about_us')
-      .select('*')
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+export const aboutApi = {
+  get: async (): Promise<AboutUs | null> => {
+    const db = await getDatabase();
+    const about = await db.collection('about_us').findOne({});
+    return about ? convertMongoDoc<AboutUs>(about) : null;
   },
 
-  update: async (id: string, content: string) => {
-    const { data, error } = await supabase
-      .from('about_us')
-      .update({ content, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, content: string): Promise<AboutUs> => {
+    const db = await getDatabase();
+    await db.collection('about_us').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          content, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('about_us').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<AboutUs>(updated);
   }
 };
 
 // Contact API
 export const contactApi = {
-  get: async () => {
-    const { data, error } = await supabase
-      .from('contact')
-      .select('*')
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+  get: async (): Promise<Contact | null> => {
+    const db = await getDatabase();
+    const contact = await db.collection('contact').findOne({});
+    return contact ? convertMongoDoc<Contact>(contact) : null;
   },
 
-  update: async (id: string, contact: Partial<Contact>) => {
-    const { data, error } = await supabase
-      .from('contact')
-      .update({ ...contact, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, contact: Partial<Contact>): Promise<Contact> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = contact as any;
+    await db.collection('contact').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('contact').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<Contact>(updated);
   }
 };
 
 // Admin Passkey API
 export const passkeyApi = {
-  get: async () => {
-    const { data, error } = await supabase
-      .from('admin_passkey')
-      .select('*')
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+  verify: async (passkey: string): Promise<boolean> => {
+    const db = await getDatabase();
+    const result = await db.collection('admin_passkey').findOne({ passkey });
+    return !!result;
   },
 
-  validate: async (passkey: string) => {
-    const { data, error } = await supabase
-      .from('admin_passkey')
-      .select('*')
-      .eq('passkey', passkey)
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return !!data;
+  update: async (id: string, newPasskey: string): Promise<void> => {
+    const db = await getDatabase();
+    await db.collection('admin_passkey').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          passkey: newPasskey, 
+          updated_at: new Date() 
+        } 
+      }
+    );
   },
 
-  update: async (id: string, newPasskey: string) => {
-    const { data, error } = await supabase
-      .from('admin_passkey')
-      .update({ passkey: newPasskey, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
-  }
-};
-
-// Header Settings API
-export const headerSettingsApi = {
-  get: async () => {
-    const { data, error } = await supabase
-      .from('header_settings')
-      .select('*')
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
-  },
-
-  update: async (id: string, settings: Partial<HeaderSettings>) => {
-    const { data, error } = await supabase
-      .from('header_settings')
-      .update({ ...settings, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  get: async (): Promise<AdminPasskey | null> => {
+    const db = await getDatabase();
+    const passkey = await db.collection('admin_passkey').findOne({});
+    return passkey ? convertMongoDoc<AdminPasskey>(passkey) : null;
   }
 };
 
 // Theme Settings API
 export const themeSettingsApi = {
-  get: async () => {
-    const { data, error } = await supabase
-      .from('theme_settings')
-      .select('*')
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+  get: async (): Promise<ThemeSettings | null> => {
+    const db = await getDatabase();
+    const settings = await db.collection('theme_settings').findOne({});
+    return settings ? convertMongoDoc<ThemeSettings>(settings) : null;
   },
 
-  update: async (id: string, settings: Partial<ThemeSettings>) => {
-    const { data, error } = await supabase
-      .from('theme_settings')
-      .update({ ...settings, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, settings: Partial<ThemeSettings>): Promise<ThemeSettings> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = settings as any;
+    await db.collection('theme_settings').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('theme_settings').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<ThemeSettings>(updated);
   }
 };
 
 // Pages API
 export const pagesApi = {
-  getAll: async () => {
-    const { data, error } = await supabase
-      .from('pages')
-      .select('*')
-      .order('display_order', { ascending: true });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getAll: async (): Promise<Page[]> => {
+    const db = await getDatabase();
+    const pages = await db.collection('pages')
+      .find({})
+      .sort({ display_order: 1 })
+      .toArray();
+    return convertMongoDocs<Page>(pages);
   },
 
-  getBySlug: async (slug: string) => {
-    const { data, error } = await supabase
-      .from('pages')
-      .select('*')
-      .eq('slug', slug)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+  getPublished: async (): Promise<Page[]> => {
+    const db = await getDatabase();
+    const pages = await db.collection('pages')
+      .find({ is_published: true, show_in_menu: true })
+      .sort({ display_order: 1 })
+      .toArray();
+    return convertMongoDocs<Page>(pages);
   },
 
-  create: async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('pages')
-      .insert([page])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  getBySlug: async (slug: string): Promise<Page | null> => {
+    const db = await getDatabase();
+    const page = await db.collection('pages').findOne({ slug });
+    return page ? convertMongoDoc<Page>(page) : null;
   },
 
-  update: async (id: string, page: Partial<Page>) => {
-    const { data, error } = await supabase
-      .from('pages')
-      .update({ ...page, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  create: async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>): Promise<Page> => {
+    const db = await getDatabase();
+    const now = new Date();
+    const result = await db.collection('pages').insertOne({
+      ...page,
+      created_at: now,
+      updated_at: now
+    });
+    const newPage = await db.collection('pages').findOne({ _id: result.insertedId });
+    return convertMongoDoc<Page>(newPage);
   },
 
-  delete: async (id: string) => {
-    const { error } = await supabase
-      .from('pages')
-      .delete()
-      .eq('id', id);
-    
-    if (error) throw error;
+  update: async (id: string, page: Partial<Page>): Promise<Page> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = page as any;
+    await db.collection('pages').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('pages').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<Page>(updated);
+  },
+
+  delete: async (id: string): Promise<void> => {
+    const db = await getDatabase();
+    await db.collection('pages').deleteOne({ _id: new ObjectId(id) });
   }
 };
 
 // Page Sections API
 export const pageSectionsApi = {
-  getByPageId: async (pageId: string) => {
-    const { data, error } = await supabase
-      .from('page_sections')
-      .select('*')
-      .eq('page_id', pageId)
-      .order('display_order', { ascending: true });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getByPageId: async (pageId: string): Promise<PageSection[]> => {
+    const db = await getDatabase();
+    const sections = await db.collection('page_sections')
+      .find({ page_id: pageId })
+      .sort({ display_order: 1 })
+      .toArray();
+    return convertMongoDocs<PageSection>(sections);
   },
 
-  create: async (section: Omit<PageSection, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('page_sections')
-      .insert([section])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  create: async (section: Omit<PageSection, 'id' | 'created_at' | 'updated_at'>): Promise<PageSection> => {
+    const db = await getDatabase();
+    const now = new Date();
+    const result = await db.collection('page_sections').insertOne({
+      ...section,
+      created_at: now,
+      updated_at: now
+    });
+    const newSection = await db.collection('page_sections').findOne({ _id: result.insertedId });
+    return convertMongoDoc<PageSection>(newSection);
   },
 
-  update: async (id: string, section: Partial<PageSection>) => {
-    const { data, error } = await supabase
-      .from('page_sections')
-      .update({ ...section, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, section: Partial<PageSection>): Promise<PageSection> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = section as any;
+    await db.collection('page_sections').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('page_sections').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<PageSection>(updated);
   },
 
-  delete: async (id: string) => {
-    const { error } = await supabase
-      .from('page_sections')
-      .delete()
-      .eq('id', id);
-    
-    if (error) throw error;
+  delete: async (id: string): Promise<void> => {
+    const db = await getDatabase();
+    await db.collection('page_sections').deleteOne({ _id: new ObjectId(id) });
   }
 };
 
 // Footer Settings API
 export const footerSettingsApi = {
-  get: async () => {
-    const { data, error } = await supabase
-      .from('footer_settings')
-      .select('*')
-      .limit(1)
-      .maybeSingle();
-    
-    if (error) throw error;
-    return data;
+  get: async (): Promise<FooterSettings | null> => {
+    const db = await getDatabase();
+    const settings = await db.collection('footer_settings').findOne({});
+    return settings ? convertMongoDoc<FooterSettings>(settings) : null;
   },
 
-  update: async (id: string, settings: Partial<FooterSettings>) => {
-    const { data, error } = await supabase
-      .from('footer_settings')
-      .update({ ...settings, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+  update: async (id: string, settings: Partial<FooterSettings>): Promise<FooterSettings> => {
+    const db = await getDatabase();
+    const { id: _, ...updateData } = settings as any;
+    await db.collection('footer_settings').updateOne(
+      { _id: new ObjectId(id) },
+      { 
+        $set: { 
+          ...updateData, 
+          updated_at: new Date() 
+        } 
+      }
+    );
+    const updated = await db.collection('footer_settings').findOne({ _id: new ObjectId(id) });
+    return convertMongoDoc<FooterSettings>(updated);
   }
 };
 
 // Component Templates API
 export const componentTemplatesApi = {
-  getAll: async () => {
-    const { data, error } = await supabase
-      .from('component_templates')
-      .select('*')
-      .order('category', { ascending: true });
-    
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
+  getAll: async (): Promise<ComponentTemplate[]> => {
+    const db = await getDatabase();
+    const templates = await db.collection('component_templates')
+      .find({})
+      .sort({ category: 1 })
+      .toArray();
+    return convertMongoDocs<ComponentTemplate>(templates);
   },
 
-  getByCategory: async (category: string) => {
-    const { data, error } = await supabase
-      .from('component_templates')
-      .select('*')
-      .eq('category', category);
+  getByCategory: async (category: string): Promise<ComponentTemplate[]> => {
+    const db = await getDatabase();
+    const templates = await db.collection('component_templates')
+      .find({ category })
+      .toArray();
+    return convertMongoDocs<ComponentTemplate>(templates);
+  }
+};
+
+// Image Upload Helper (using base64 storage in MongoDB)
+export async function uploadImage(file: File, bucket: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
     
-    if (error) throw error;
-    return Array.isArray(data) ? data : [];
-  }
-};
+    reader.onload = async () => {
+      try {
+        const base64String = reader.result as string;
+        const db = await getDatabase();
+        
+        // Store image in MongoDB
+        const result = await db.collection('images').insertOne({
+          bucket,
+          filename: file.name,
+          contentType: file.type,
+          size: file.size,
+          data: base64String,
+          created_at: new Date()
+        });
+        
+        // Return a reference URL
+        const imageUrl = `/api/images/${result.insertedId}`;
+        resolve(imageUrl);
+      } catch (error) {
+        reject(error);
+      }
+    };
+    
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
 
-// Image Upload Helper
-export const uploadImage = async (
-  file: File,
-  bucket: 'app-9dfi9jpj51xd_events_images' | 'app-9dfi9jpj51xd_committee_images' | 'app-9dfi9jpj51xd_gallery_images'
-): Promise<string> => {
-  // Validate file name
-  const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-  const fileName = `${Date.now()}_${sanitizedFileName}`;
-
-  // Check file size and compress if needed
-  let fileToUpload = file;
-  if (file.size > 1024 * 1024) {
-    // File is larger than 1MB, compress it
-    fileToUpload = await compressImage(file);
-  }
-
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .upload(fileName, fileToUpload, {
-      cacheControl: '3600',
-      upsert: false
-    });
-
-  if (error) throw error;
-
-  const { data: { publicUrl } } = supabase.storage
-    .from(bucket)
-    .getPublicUrl(data.path);
-
-  return publicUrl;
-};
-
-// Image Compression Helper
-const compressImage = async (file: File): Promise<File> => {
+// Image compression helper
+async function compressImage(file: File): Promise<File> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
+    
     reader.onload = (event) => {
       const img = new Image();
       img.src = event.target?.result as string;
+      
       img.onload = () => {
         const canvas = document.createElement('canvas');
         let width = img.width;
         let height = img.height;
-
-        // Resize to max 1080p
+        
+        // Resize if larger than 1080p
         const maxDimension = 1080;
         if (width > maxDimension || height > maxDimension) {
           if (width > height) {
@@ -495,17 +456,17 @@ const compressImage = async (file: File): Promise<File> => {
             height = maxDimension;
           }
         }
-
+        
         canvas.width = width;
         canvas.height = height;
-
+        
         const ctx = canvas.getContext('2d');
         ctx?.drawImage(img, 0, 0, width, height);
-
+        
         canvas.toBlob(
           (blob) => {
             if (blob) {
-              const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, '.webp'), {
+              const compressedFile = new File([blob], file.name, {
                 type: 'image/webp',
                 lastModified: Date.now()
               });
@@ -518,8 +479,12 @@ const compressImage = async (file: File): Promise<File> => {
           0.8
         );
       };
-      img.onerror = reject;
+      
+      img.onerror = () => reject(new Error('Image load failed'));
     };
-    reader.onerror = reject;
+    
+    reader.onerror = () => reject(reader.error);
   });
-};
+}
+
+export { compressImage };
