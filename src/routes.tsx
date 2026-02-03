@@ -1,4 +1,5 @@
 import HomePage from './pages/HomePage';
+import EventDetailPage from './pages/EventDetailPage';
 import type { ReactNode } from 'react';
 
 interface RouteConfig {
@@ -10,9 +11,14 @@ interface RouteConfig {
 
 const routes: RouteConfig[] = [
   {
-    name: 'Fusion26',
+    name: 'ACEM',
     path: '/',
     element: <HomePage />
+  },
+  {
+    name: 'Event Details',
+    path: '/event/:id',
+    element: <EventDetailPage />
   }
 ];
 

@@ -13,6 +13,17 @@ export const eventsApi = {
     return Array.isArray(data) ? data : [];
   },
 
+  getById: async (id: string) => {
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
   getByType: async (type: 'Technical' | 'Cultural') => {
     const { data, error } = await supabase
       .from('events')

@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -42,34 +42,52 @@ Web Application (College Fest Management Platform)
 - Admin-configurable layout for header sections
 - Admin-configurable logo arrangement (add/delete logos)
 - Admin-editable body content with flexible text box placement
+- Background image removed, admin can update background settings
 
 #### 2.1.3 Events Section
 - Display events categorized by type (Technical/Cultural)
 - Each event card shows:
   - Event Name
   - Event Type
-  - Event Description
   - Event Image
+  - Brief description preview
+- Clicking on event card navigates to dedicated event detail page
+
+#### 2.1.4 Event Detail Page
+- Display complete event information:
+  - Event Name
+  - Event Type
+  - Full Event Description
+  - Event Rules
+  - Event Instructions
+  - Event Images (multiple images support)
   - Staff Coordinators (Name, Contact)
   - Student Coordinators (Name, Contact)
-  - Registration button linking to Google Form
+  - Registration button linking to Google Form (admin-provided link)
+- Clicking registration button opens Google Form in new tab or embedded view
+- Cinematic layout with smooth transitions
+- Back navigation to Events Section
 
-#### 2.1.4 Committee Section
+#### 2.1.5 Committee Section
 - Display committee members with:
   - Member images
   - Names
   - Assigned roles
 - Cinematic layout with smooth transitions
 
-#### 2.1.5 Gallery Section
+#### 2.1.6 Gallery Section
 - Cinematic grid/masonry layout displaying uploaded images
 - Lazy loading implementation
 - Smooth transitions between images
 
-#### 2.1.6 About Us Section
+#### 2.1.7 About Us Section
 - Editable text content displaying fest information
 
-#### 2.1.7 Footer Section
+#### 2.1.8 Contact Us Section
+- Display contact details
+- Contact form or contact information display
+
+#### 2.1.9 Footer Section
 - Display contact details
 - Social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Admin-editable footer structure and content
@@ -107,7 +125,7 @@ Web Application (College Fest Management Platform)
   - Text color customization
 - Background customization:
   - Background color changing
-  - Background image upload and changing
+  - Background image upload and changing (admin-controlled)
   - Default background color configuration
 - Edit header structure and layout
 - Changes reflect immediately on public UI header and live preview
@@ -149,13 +167,16 @@ Web Application (College Fest Management Platform)
   - Event Name
   - Event Type (Technical/Cultural)
   - Event Description
-  - Event Image upload
+  - Event Rules
+  - Event Instructions
+  - Event Images upload (multiple images support)
   - Staff Coordinators (Name, Contact)
   - Student Coordinators (Name, Contact)
   - Google Form registration link
 - Edit existing events
 - Delete events
 - Events auto-display on public UI based on event type
+- Event cards link to dedicated event detail pages
 - Changes visible in live preview immediately
 
 #### 2.3.7 Committee Management
@@ -211,6 +232,7 @@ Web Application (College Fest Management Platform)
 - Minimal but powerful layout
 - Default background color with admin override capability
 - Enhanced footer design with improved visual hierarchy
+- Background image removed by default, admin can upload and update background
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
@@ -237,7 +259,7 @@ Web Application (College Fest Management Platform)
   - Background settings (color, image)
   - Body content (text boxes with positioning data)
   - Footer content and styling
-  - Events
+  - Events (including rules, instructions, multiple images, Google Form links)
   - Committee members
   - Gallery images
   - About Us content
@@ -260,6 +282,7 @@ Web Application (College Fest Management Platform)
   - Background customization
   - Text box positioning and content
   - Footer management
+  - Event detail page data
   - Complete application editing
 
 ### 4.3 Code Quality
@@ -275,10 +298,17 @@ Web Application (College Fest Management Platform)
 1. User lands on cinematic homepage with header displaying ACEM, logos (2 left, 2 right), and navigation menu
 2. User navigates through multiple web pages using header menu (Home, Events, Committee, Gallery, About Us, Contact Us)
 3. User experiences consistent responsive design across all screen sizes
-4. User views events by category (Technical/Cultural)
-5. User clicks registration button to access Google Form
-6. User explores gallery and committee sections with smooth cinematic navigation
-7. User views improved footer section with contact details and social media links
+4. User views events by category (Technical/Cultural) on Events page
+5. User clicks on event card to navigate to dedicated event detail page
+6. User views complete event information including:
+   - Full description
+   - Rules and instructions
+   - Event images
+   - Student coordinator contact details
+7. User clicks registration button on event detail page
+8. Google Form opens (link provided by admin)
+9. User explores gallery and committee sections with smooth cinematic navigation
+10. User views improved footer section with contact details and social media links
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -289,10 +319,11 @@ Web Application (College Fest Management Platform)
 6. Admin manages content with instant live preview updates:
    - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
    - Text Styling: Adjust font, size, color
-   - Background: Change color or upload background image
+   - Background: Change color or upload background image (admin-controlled)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
-   - Events, Committee, Gallery, About Us, Contact management
+   - Events: Add event details including rules, instructions, multiple images, student coordinator contacts, Google Form link
+   - Committee, Gallery, About Us, Contact management
 7. Admin arranges homepage layout and header sections as desired
 8. Admin edits entire application including header, footer, and body sections
 9. Admin can change passkey through Passkey Management

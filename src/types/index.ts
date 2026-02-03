@@ -20,6 +20,14 @@ export interface Event {
   staff_coordinators: Coordinator[];
   student_coordinators: Coordinator[];
   registration_link: string | null;
+  rules: string | null;
+  instructions: string | null;
+  additional_images: string[];
+  venue: string | null;
+  event_date: string | null;
+  duration: string | null;
+  prize_details: string | null;
+  team_size: string | null;
   created_at: string;
   updated_at: string;
 }
