@@ -1,4 +1,3 @@
-import { getDatabase, convertMongoDoc, convertMongoDocs, ObjectId } from './mongodb';
 import type { 
   Event, 
   CommitteeMember, 
@@ -13,391 +12,250 @@ import type {
   ComponentTemplate 
 } from '@/types/index';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+// Helper function for API calls
+async function apiCall<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+    ...options,
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Request failed' }));
+    throw new Error(error.error || 'Request failed');
+  }
+
+  return response.json();
+}
+
 // Events API
 export const eventsApi = {
   getAll: async (): Promise<Event[]> => {
-    const db = await getDatabase();
-    const events = await db.collection('events')
-      .find({})
-      .sort({ created_at: -1 })
-      .toArray();
-    return convertMongoDocs<Event>(events);
+    return apiCall<Event[]>('/events');
   },
 
   getById: async (id: string): Promise<Event | null> => {
-    const db = await getDatabase();
-    const event = await db.collection('events').findOne({ _id: new ObjectId(id) });
-    return event ? convertMongoDoc<Event>(event) : null;
+    return apiCall<Event>(`/events/${id}`);
   },
 
   getByType: async (type: 'Technical' | 'Cultural'): Promise<Event[]> => {
-    const db = await getDatabase();
-    const events = await db.collection('events')
-      .find({ type })
-      .sort({ created_at: -1 })
-      .toArray();
-    return convertMongoDocs<Event>(events);
+    return apiCall<Event[]>(`/events?type=${type}`);
   },
 
   create: async (event: Omit<Event, 'id' | 'created_at' | 'updated_at'>): Promise<Event> => {
-    const db = await getDatabase();
-    const now = new Date();
-    const result = await db.collection('events').insertOne({
-      ...event,
-      created_at: now,
-      updated_at: now
+    return apiCall<Event>('/events', {
+      method: 'POST',
+      body: JSON.stringify(event),
     });
-    const newEvent = await db.collection('events').findOne({ _id: result.insertedId });
-    return convertMongoDoc<Event>(newEvent);
   },
 
   update: async (id: string, event: Partial<Event>): Promise<Event> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = event as any;
-    await db.collection('events').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('events').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<Event>(updated);
+    return apiCall<Event>(`/events/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(event),
+    });
   },
 
   delete: async (id: string): Promise<void> => {
-    const db = await getDatabase();
-    await db.collection('events').deleteOne({ _id: new ObjectId(id) });
+    await apiCall(`/events/${id}`, { method: 'DELETE' });
   }
 };
 
 // Committee API
 export const committeeApi = {
   getAll: async (): Promise<CommitteeMember[]> => {
-    const db = await getDatabase();
-    const members = await db.collection('committee')
-      .find({})
-      .sort({ display_order: 1 })
-      .toArray();
-    return convertMongoDocs<CommitteeMember>(members);
+    return apiCall<CommitteeMember[]>('/committee');
   },
 
   create: async (member: Omit<CommitteeMember, 'id' | 'created_at' | 'updated_at'>): Promise<CommitteeMember> => {
-    const db = await getDatabase();
-    const now = new Date();
-    const result = await db.collection('committee').insertOne({
-      ...member,
-      created_at: now,
-      updated_at: now
+    return apiCall<CommitteeMember>('/committee', {
+      method: 'POST',
+      body: JSON.stringify(member),
     });
-    const newMember = await db.collection('committee').findOne({ _id: result.insertedId });
-    return convertMongoDoc<CommitteeMember>(newMember);
   },
 
   update: async (id: string, member: Partial<CommitteeMember>): Promise<CommitteeMember> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = member as any;
-    await db.collection('committee').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('committee').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<CommitteeMember>(updated);
+    return apiCall<CommitteeMember>(`/committee/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(member),
+    });
   },
 
   delete: async (id: string): Promise<void> => {
-    const db = await getDatabase();
-    await db.collection('committee').deleteOne({ _id: new ObjectId(id) });
+    await apiCall(`/committee/${id}`, { method: 'DELETE' });
   }
 };
 
 // Gallery API
 export const galleryApi = {
   getAll: async (): Promise<GalleryImage[]> => {
-    const db = await getDatabase();
-    const images = await db.collection('gallery')
-      .find({})
-      .sort({ created_at: -1 })
-      .toArray();
-    return convertMongoDocs<GalleryImage>(images);
+    return apiCall<GalleryImage[]>('/gallery');
   },
 
   create: async (image: Omit<GalleryImage, 'id' | 'created_at'>): Promise<GalleryImage> => {
-    const db = await getDatabase();
-    const result = await db.collection('gallery').insertOne({
-      ...image,
-      created_at: new Date()
+    return apiCall<GalleryImage>('/gallery', {
+      method: 'POST',
+      body: JSON.stringify(image),
     });
-    const newImage = await db.collection('gallery').findOne({ _id: result.insertedId });
-    return convertMongoDoc<GalleryImage>(newImage);
   },
 
   delete: async (id: string): Promise<void> => {
-    const db = await getDatabase();
-    await db.collection('gallery').deleteOne({ _id: new ObjectId(id) });
+    await apiCall(`/gallery/${id}`, { method: 'DELETE' });
   }
 };
 
 // About Us API
 export const aboutApi = {
   get: async (): Promise<AboutUs | null> => {
-    const db = await getDatabase();
-    const about = await db.collection('about_us').findOne({});
-    return about ? convertMongoDoc<AboutUs>(about) : null;
+    return apiCall<AboutUs>('/about');
   },
 
   update: async (id: string, content: string): Promise<AboutUs> => {
-    const db = await getDatabase();
-    await db.collection('about_us').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          content, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('about_us').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<AboutUs>(updated);
+    return apiCall<AboutUs>(`/about/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ content }),
+    });
   }
 };
 
 // Contact API
 export const contactApi = {
   get: async (): Promise<Contact | null> => {
-    const db = await getDatabase();
-    const contact = await db.collection('contact').findOne({});
-    return contact ? convertMongoDoc<Contact>(contact) : null;
+    return apiCall<Contact>('/contact');
   },
 
   update: async (id: string, contact: Partial<Contact>): Promise<Contact> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = contact as any;
-    await db.collection('contact').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('contact').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<Contact>(updated);
+    return apiCall<Contact>(`/contact/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(contact),
+    });
   }
 };
 
 // Admin Passkey API
 export const passkeyApi = {
   verify: async (passkey: string): Promise<boolean> => {
-    const db = await getDatabase();
-    const result = await db.collection('admin_passkey').findOne({ passkey });
-    return !!result;
+    const result = await apiCall<{ valid: boolean }>('/passkey/verify', {
+      method: 'POST',
+      body: JSON.stringify({ passkey }),
+    });
+    return result.valid;
   },
 
   update: async (id: string, newPasskey: string): Promise<void> => {
-    const db = await getDatabase();
-    await db.collection('admin_passkey').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          passkey: newPasskey, 
-          updated_at: new Date() 
-        } 
-      }
-    );
+    await apiCall(`/passkey/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ passkey: newPasskey }),
+    });
   },
 
   get: async (): Promise<AdminPasskey | null> => {
-    const db = await getDatabase();
-    const passkey = await db.collection('admin_passkey').findOne({});
-    return passkey ? convertMongoDoc<AdminPasskey>(passkey) : null;
+    return apiCall<AdminPasskey>('/passkey');
   }
 };
 
 // Theme Settings API
 export const themeSettingsApi = {
   get: async (): Promise<ThemeSettings | null> => {
-    const db = await getDatabase();
-    const settings = await db.collection('theme_settings').findOne({});
-    return settings ? convertMongoDoc<ThemeSettings>(settings) : null;
+    return apiCall<ThemeSettings>('/theme');
   },
 
   update: async (id: string, settings: Partial<ThemeSettings>): Promise<ThemeSettings> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = settings as any;
-    await db.collection('theme_settings').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('theme_settings').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<ThemeSettings>(updated);
+    return apiCall<ThemeSettings>(`/theme/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(settings),
+    });
   }
 };
 
 // Pages API
 export const pagesApi = {
   getAll: async (): Promise<Page[]> => {
-    const db = await getDatabase();
-    const pages = await db.collection('pages')
-      .find({})
-      .sort({ display_order: 1 })
-      .toArray();
-    return convertMongoDocs<Page>(pages);
+    return apiCall<Page[]>('/pages');
   },
 
   getPublished: async (): Promise<Page[]> => {
-    const db = await getDatabase();
-    const pages = await db.collection('pages')
-      .find({ is_published: true, show_in_menu: true })
-      .sort({ display_order: 1 })
-      .toArray();
-    return convertMongoDocs<Page>(pages);
+    return apiCall<Page[]>('/pages?published=true');
   },
 
   getBySlug: async (slug: string): Promise<Page | null> => {
-    const db = await getDatabase();
-    const page = await db.collection('pages').findOne({ slug });
-    return page ? convertMongoDoc<Page>(page) : null;
+    return apiCall<Page>(`/pages/slug/${slug}`);
   },
 
   create: async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>): Promise<Page> => {
-    const db = await getDatabase();
-    const now = new Date();
-    const result = await db.collection('pages').insertOne({
-      ...page,
-      created_at: now,
-      updated_at: now
+    return apiCall<Page>('/pages', {
+      method: 'POST',
+      body: JSON.stringify(page),
     });
-    const newPage = await db.collection('pages').findOne({ _id: result.insertedId });
-    return convertMongoDoc<Page>(newPage);
   },
 
   update: async (id: string, page: Partial<Page>): Promise<Page> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = page as any;
-    await db.collection('pages').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('pages').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<Page>(updated);
+    return apiCall<Page>(`/pages/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(page),
+    });
   },
 
   delete: async (id: string): Promise<void> => {
-    const db = await getDatabase();
-    await db.collection('pages').deleteOne({ _id: new ObjectId(id) });
+    await apiCall(`/pages/${id}`, { method: 'DELETE' });
   }
 };
 
 // Page Sections API
 export const pageSectionsApi = {
   getByPageId: async (pageId: string): Promise<PageSection[]> => {
-    const db = await getDatabase();
-    const sections = await db.collection('page_sections')
-      .find({ page_id: pageId })
-      .sort({ display_order: 1 })
-      .toArray();
-    return convertMongoDocs<PageSection>(sections);
+    return apiCall<PageSection[]>(`/page-sections/${pageId}`);
   },
 
   create: async (section: Omit<PageSection, 'id' | 'created_at' | 'updated_at'>): Promise<PageSection> => {
-    const db = await getDatabase();
-    const now = new Date();
-    const result = await db.collection('page_sections').insertOne({
-      ...section,
-      created_at: now,
-      updated_at: now
+    return apiCall<PageSection>('/page-sections', {
+      method: 'POST',
+      body: JSON.stringify(section),
     });
-    const newSection = await db.collection('page_sections').findOne({ _id: result.insertedId });
-    return convertMongoDoc<PageSection>(newSection);
   },
 
   update: async (id: string, section: Partial<PageSection>): Promise<PageSection> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = section as any;
-    await db.collection('page_sections').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('page_sections').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<PageSection>(updated);
+    return apiCall<PageSection>(`/page-sections/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(section),
+    });
   },
 
   delete: async (id: string): Promise<void> => {
-    const db = await getDatabase();
-    await db.collection('page_sections').deleteOne({ _id: new ObjectId(id) });
+    await apiCall(`/page-sections/${id}`, { method: 'DELETE' });
   }
 };
 
 // Footer Settings API
 export const footerSettingsApi = {
   get: async (): Promise<FooterSettings | null> => {
-    const db = await getDatabase();
-    const settings = await db.collection('footer_settings').findOne({});
-    return settings ? convertMongoDoc<FooterSettings>(settings) : null;
+    return apiCall<FooterSettings>('/footer');
   },
 
   update: async (id: string, settings: Partial<FooterSettings>): Promise<FooterSettings> => {
-    const db = await getDatabase();
-    const { id: _, ...updateData } = settings as any;
-    await db.collection('footer_settings').updateOne(
-      { _id: new ObjectId(id) },
-      { 
-        $set: { 
-          ...updateData, 
-          updated_at: new Date() 
-        } 
-      }
-    );
-    const updated = await db.collection('footer_settings').findOne({ _id: new ObjectId(id) });
-    return convertMongoDoc<FooterSettings>(updated);
+    return apiCall<FooterSettings>(`/footer/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(settings),
+    });
   }
 };
 
 // Component Templates API
 export const componentTemplatesApi = {
   getAll: async (): Promise<ComponentTemplate[]> => {
-    const db = await getDatabase();
-    const templates = await db.collection('component_templates')
-      .find({})
-      .sort({ category: 1 })
-      .toArray();
-    return convertMongoDocs<ComponentTemplate>(templates);
+    return apiCall<ComponentTemplate[]>('/component-templates');
   },
 
   getByCategory: async (category: string): Promise<ComponentTemplate[]> => {
-    const db = await getDatabase();
-    const templates = await db.collection('component_templates')
-      .find({ category })
-      .toArray();
-    return convertMongoDocs<ComponentTemplate>(templates);
+    return apiCall<ComponentTemplate[]>(`/component-templates?category=${category}`);
   }
 };
 
-// Image Upload Helper (using base64 storage in MongoDB)
+// Image Upload Helper
 export async function uploadImage(file: File, bucket: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -405,20 +263,29 @@ export async function uploadImage(file: File, bucket: string): Promise<string> {
     reader.onload = async () => {
       try {
         const base64String = reader.result as string;
-        const db = await getDatabase();
         
-        // Store image in MongoDB
-        const result = await db.collection('images').insertOne({
-          bucket,
-          filename: file.name,
-          contentType: file.type,
-          size: file.size,
-          data: base64String,
-          created_at: new Date()
+        const response = await fetch(`${API_BASE_URL}/images/upload`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: base64String,
+            filename: file.name,
+            contentType: file.type,
+            bucket,
+          }),
         });
-        
-        // Return a reference URL
-        const imageUrl = `/api/images/${result.insertedId}`;
+
+        if (!response.ok) {
+          throw new Error('Upload failed');
+        }
+
+        const result = await response.json();
+        // Convert relative URL to absolute URL
+        const imageUrl = result.url.startsWith('http') 
+          ? result.url 
+          : `${API_BASE_URL.replace('/api', '')}${result.url}`;
         resolve(imageUrl);
       } catch (error) {
         reject(error);
