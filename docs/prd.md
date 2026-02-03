@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities. The system connects to MongoDB Atlas cloud database with manual configuration support.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -227,7 +227,7 @@ Web Application (College Fest Management Platform)
 - Validation rules:
   - Old passkey must match database value
   - New passkey and confirm passkey must match
-- Passkey update stored securely in MongoDB Atlas
+- Passkey update stored securely in Supabase
 
 #### 2.3.12 Complete Application Editing
 - Admin has full control to edit entire application:
@@ -239,22 +239,24 @@ Web Application (College Fest Management Platform)
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
 
-#### 2.3.13 MongoDB Atlas Connection Management
+#### 2.3.13 Supabase Connection Management
 - Manual database connection configuration interface
 - Step-by-step connection setup guide displayed in chatbot:
-  - Step 1: Create MongoDB Atlas account at mongodb.com/cloud/atlas
-  - Step 2: Create a new cluster (free tier available)
-  - Step 3: Create database user with username and password
-  - Step 4: Whitelist IP address (allow access from anywhere: 0.0.0.0/0)
-  - Step 5: Get connection string from Atlas dashboard
-  - Step 6: Replace <password> in connection string with database user password
-  - Step 7: Enter complete connection string in admin dashboard
-  - Step 8: Click Connect button to establish connection
-- Connection string input field in admin dashboard
+  - Step 1: Create Supabase account at supabase.com
+  - Step 2: Create a new project (free tier available)
+  - Step 3: Navigate to Project Settings > API
+  - Step 4: Copy Project URL and anon/public API key
+  - Step 5: Enter Project URL in admin dashboard
+  - Step 6: Enter API key in admin dashboard
+  - Step 7: Click Connect button to establish connection
+  - Step 8: System will automatically create required tables
+- Project URL input field in admin dashboard
+- API key input field in admin dashboard
 - Test connection functionality
 - Connection status indicator (Connected/Disconnected)
 - Automatic reconnection on connection failure
-- Connection string validation before attempting connection
+- Connection credentials validation before attempting connection
+- Automatic table schema creation on first connection
 
 ## 3. Design Requirements
 
@@ -289,9 +291,9 @@ Web Application (College Fest Management Platform)
 ## 4. Technical Requirements
 
 ### 4.1 Database
-- MongoDB Atlas cloud database for data storage
+- Supabase cloud database for data storage
 - Manual connection configuration support
-- Collections for:
+- Tables for:
   - Header content (college name: ACEM, logos with positioning data)
   - Text styling configurations (font, size, color)
   - Background settings (color, image)
@@ -306,16 +308,17 @@ Web Application (College Fest Management Platform)
   - Database connection configuration
   - Chatbot information content
 - Automatic data updates on admin changes
-- Connection string stored securely
+- Connection credentials stored securely
+- Supabase Storage for image uploads
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
-- MongoDB Atlas connection using mongoose or native MongoDB driver
+- Supabase connection using @supabase/supabase-js client library
 - Secure authentication logic for admin access
 - Clean REST API structure
-- Real-time data synchronization for live preview
+- Real-time data synchronization for live preview using Supabase Realtime
 - All admin changes must:
-  - Store automatically in MongoDB Atlas
+  - Store automatically in Supabase
   - Reflect instantly on user interface
   - Update live preview in real-time
 - API endpoints for:
@@ -328,7 +331,8 @@ Web Application (College Fest Management Platform)
   - Event detail page data
   - Complete application editing
   - Chatbot information retrieval
-- Environment variable support for connection string storage
+  - Image upload to Supabase Storage
+- Environment variable support for connection credentials storage
 - Error handling for database connection failures
 
 ### 4.3 Code Quality
@@ -337,7 +341,7 @@ Web Application (College Fest Management Platform)
 - Optimized for production deployment
 - Support for multiple web pages architecture
 - Efficient real-time update mechanism
-- Secure connection string handling
+- Secure connection credentials handling
 
 ## 5. User Flow
 
@@ -366,11 +370,13 @@ Web Application (College Fest Management Platform)
 5. System validates passkey
 6. Upon successful validation, Admin Dashboard opens with split-screen interface
 7. Admin sees live preview panel on right side showing real-time website appearance
-8. Admin configures MongoDB Atlas connection (first-time setup):
+8. Admin configures Supabase connection (first-time setup):
    - Views step-by-step connection guide in chatbot
-   - Enters MongoDB Atlas connection string
+   - Enters Supabase Project URL
+   - Enters Supabase API key
    - Tests connection
    - Confirms successful connection
+   - System automatically creates required tables
 9. Admin manages content with instant live preview updates:
    - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
    - Text Styling: Adjust font, size, color
@@ -383,5 +389,191 @@ Web Application (College Fest Management Platform)
 10. Admin arranges homepage layout and header sections as desired
 11. Admin edits entire application including header, footer, and body sections
 12. Admin can change passkey through Passkey Management
-13. All changes save to MongoDB Atlas automatically and reflect immediately across all web pages on public UI and live preview
+13. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview
 14. Admin can access and edit multiple web pages with consistent editing interface
+
+## 6. Development and Deployment Guide
+
+### 6.1 Local Development Setup (VS Code)
+
+#### Step 1: Prerequisites
+- Install Node.js (version 16 or higher)
+- Install VS Code
+- Install Git
+
+#### Step 2: Project Setup
+1. Open VS Code
+2. Open Terminal in VS Code (View > Terminal or Ctrl+`)
+3. Navigate to project directory
+4. Install dependencies:
+   ```
+   npm install
+   ```
+
+#### Step 3: Environment Configuration
+1. Create .env file in project root directory
+2. Add Supabase credentials:
+   ```
+   SUPABASE_URL=your_project_url
+   SUPABASE_ANON_KEY=your_anon_key
+   PORT=3000
+   ```
+
+#### Step 4: Run Development Server
+1. Start backend server:
+   ```
+   npm run server
+   ```
+2. Start frontend development server:
+   ```
+   npm run dev
+   ```
+3. Open browser and navigate to http://localhost:3000
+
+#### Step 5: Testing
+1. Test public user interface
+2. Test chatbot authentication
+3. Test admin dashboard functionality
+4. Test database connection
+5. Verify live preview updates
+
+### 6.2 Publishing on MeDo Platform
+
+#### Step 1: Prepare for Deployment
+1. Ensure all code is committed to version control
+2. Verify all dependencies are listed in package.json
+3. Test application thoroughly in local environment
+4. Create production build:
+   ```
+   npm run build
+   ```
+
+#### Step 2: MeDo Platform Deployment
+1. Log in to MeDo platform
+2. Navigate to deployment section
+3. Select project for deployment
+4. Configure deployment settings:
+   - Set environment variables (SUPABASE_URL, SUPABASE_ANON_KEY)
+   - Configure build commands
+   - Set start commands
+5. Click Deploy button
+
+#### Step 3: Post-Deployment Configuration
+1. Verify deployment status
+2. Test deployed application URL
+3. Configure custom domain (if required)
+4. Set up SSL certificate
+5. Configure Supabase connection in deployed environment
+
+#### Step 4: Verification
+1. Access deployed website URL
+2. Test all public user features
+3. Test admin authentication and dashboard
+4. Verify database connectivity
+5. Test live preview functionality
+6. Verify image uploads to Supabase Storage
+
+#### Step 5: Monitoring and Maintenance
+1. Monitor application performance
+2. Check error logs regularly
+3. Update dependencies as needed
+4. Backup Supabase database regularly
+5. Monitor Supabase usage and quotas
+
+### 6.3 Version Control (v8 Rollback)
+
+#### Rollback to v8
+1. Open Terminal in VS Code
+2. Check current branch:
+   ```
+   git branch
+   ```
+3. View commit history:
+   ```
+   git log --oneline
+   ```
+4. Identify v8 commit hash
+5. Create new branch from v8:
+   ```
+   git checkout -b v8-supabase <v8-commit-hash>
+   ```
+6. Verify v8 code is loaded
+7. Continue with Supabase migration from v8 codebase
+
+#### Alternative: Tag-based Rollback
+1. List all tags:
+   ```
+   git tag
+   ```
+2. Checkout v8 tag:
+   ```
+   git checkout v8
+   ```
+3. Create new branch:
+   ```
+   git checkout -b v8-supabase
+   ```
+
+### 6.4 Supabase Migration from v8
+
+#### Step 1: Install Supabase Client
+```
+npm install @supabase/supabase-js
+```
+
+#### Step 2: Replace MongoDB Code
+1. Remove MongoDB dependencies:
+   ```
+   npm uninstall mongodb mongoose
+   ```
+2. Update database connection files
+3. Replace MongoDB queries with Supabase queries
+4. Update API endpoints
+
+#### Step 3: Update Environment Variables
+1. Remove MongoDB connection string
+2. Add Supabase credentials:
+   ```
+   SUPABASE_URL=your_project_url
+   SUPABASE_ANON_KEY=your_anon_key
+   ```
+
+#### Step 4: Test Migration
+1. Run local development server
+2. Test all database operations
+3. Verify data persistence
+4. Test admin dashboard functionality
+5. Verify live preview updates
+
+#### Step 5: Deploy Migrated Version
+1. Commit changes to version control
+2. Follow MeDo deployment steps (Section 6.2)
+3. Verify deployed application
+
+## 7. Other Requirements
+
+### 7.1 Supabase Table Schema
+System will automatically create the following tables on first connection:
+- header_content (id, college_name, logos, created_at, updated_at)
+- text_styling (id, font_family, font_size, text_color, created_at, updated_at)
+- background_settings (id, background_color, background_image_url, created_at, updated_at)
+- body_content (id, text_boxes, created_at, updated_at)
+- footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
+- events (id, name, type, description, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
+- committee_members (id, name, role, image_url, created_at, updated_at)
+- gallery_images (id, image_url, created_at, updated_at)
+- about_us (id, content, created_at, updated_at)
+- contact_info (id, details, created_at, updated_at)
+- admin_config (id, passkey, created_at, updated_at)
+- chatbot_info (id, content, created_at, updated_at)
+
+### 7.2 Image Storage
+- All uploaded images stored in Supabase Storage
+- Separate storage buckets for:
+  - Logos
+  - Event images
+  - Committee member images
+  - Gallery images
+  - Background images
+- Public access configured for image buckets
+- Automatic URL generation for uploaded images
