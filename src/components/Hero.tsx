@@ -29,29 +29,6 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Floating Image */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/50 shadow-2xl z-10"
-        animate={{ 
-          y: [0, -20, 0],
-          rotate: [0, 5, -5, 0],
-          scale: [1, 1.05, 1]
-        }}
-        transition={{ 
-          repeat: Number.POSITIVE_INFINITY, 
-          duration: 8,
-          ease: "easeInOut"
-        }}
-      >
-        <img 
-          src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80"
-          alt="Fusion26 Event"
-          className="w-full h-full object-cover"
-        />
-        {/* Glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-secondary/30 mix-blend-overlay" />
-      </motion.div>
-      
       {/* Content - Positioned at Bottom */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
