@@ -104,45 +104,48 @@ export default function FlexibleHeader() {
             </h1>
           </div>
 
-          {/* Right Logos */}
-          <div className="hidden lg:flex items-center gap-3">
-            {rightLogos.map((logo) => (
-              <div
-                key={logo.id}
-                className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110"
-              >
-                <img
-                  src={logo.url}
-                  alt={`Logo ${logo.id}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          {/* Desktop Navigation and Right Logos */}
+          <div className="hidden lg:flex items-center gap-6">
+            {/* Navigation Menu */}
+            <nav className="flex items-center gap-6">
+              {pages.map((page) => (
+                <button
+                  key={page.id}
+                  onClick={() => scrollToSection(page.slug)}
+                  className="transition-colors duration-300 font-medium relative group"
+                  style={navStyle}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = themeSettings?.nav_hover_color || '#00D9FF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = themeSettings?.nav_text_color || '#FFFFFF';
+                  }}
+                >
+                  {page.title}
+                  <span 
+                    className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
+                    style={{ backgroundColor: themeSettings?.nav_hover_color || '#00D9FF' }}
+                  />
+                </button>
+              ))}
+            </nav>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {pages.map((page) => (
-              <button
-                key={page.id}
-                onClick={() => scrollToSection(page.slug)}
-                className="transition-colors duration-300 font-medium relative group"
-                style={navStyle}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = themeSettings?.nav_hover_color || '#00D9FF';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = themeSettings?.nav_text_color || '#FFFFFF';
-                }}
-              >
-                {page.title}
-                <span 
-                  className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
-                  style={{ backgroundColor: themeSettings?.nav_hover_color || '#00D9FF' }}
-                />
-              </button>
-            ))}
-          </nav>
+            {/* Right Logos */}
+            <div className="flex items-center gap-3 ml-4">
+              {rightLogos.map((logo) => (
+                <div
+                  key={logo.id}
+                  className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110"
+                >
+                  <img
+                    src={logo.url}
+                    alt={`Logo ${logo.id}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Mobile Menu Button */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
