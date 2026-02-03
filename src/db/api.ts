@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey, HeaderSettings } from '@/types/index';
+import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey, HeaderSettings, ThemeSettings, Page } from '@/types/index';
 
 // Events API
 export const eventsApi = {
@@ -248,6 +248,88 @@ export const headerSettingsApi = {
     
     if (error) throw error;
     return data;
+  }
+};
+
+// Theme Settings API
+export const themeSettingsApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('theme_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, settings: Partial<ThemeSettings>) => {
+    const { data, error } = await supabase
+      .from('theme_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  }
+};
+
+// Pages API
+export const pagesApi = {
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
+  },
+
+  getBySlug: async (slug: string) => {
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  create: async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('pages')
+      .insert([page])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, page: Partial<Page>) => {
+    const { data, error } = await supabase
+      .from('pages')
+      .update({ ...page, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('pages')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 

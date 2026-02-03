@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard accessible via chatbot authentication for comprehensive content management.
+A cinematic, immersive web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard accessible via chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -16,8 +16,10 @@ Web Application (College Fest Management Platform)
 ### 2.1 Public User Interface
 
 #### 2.1.1 Header Section
-- Display college name
-- Display up to 4 college logos
+- Display college name: ACEM (replacing Fusion26)
+- Display up to 4 college logos with specific positioning:
+  - Two logos positioned on the left side
+  - Two logos positioned on the right side
 - Navigation menu with links:
   - Home
   - Committee
@@ -27,6 +29,7 @@ Web Application (College Fest Management Platform)
   - About Us
 - Sticky header with smooth scroll behavior
 - Responsive menu for mobile devices
+- Fully responsive across all screen sizes for easy access
 
 #### 2.1.2 Homepage
 - Cinematic hero section with parallax scrolling
@@ -35,6 +38,8 @@ Web Application (College Fest Management Platform)
 - Bold modern typography
 - Glow effects, animated cards, hover transitions
 - Animated loading states
+- Admin-configurable layout for header sections
+- Admin-configurable logo arrangement (add/delete logos)
 
 #### 2.1.3 Events Section
 - Display events categorized by type (Technical/Cultural)
@@ -79,11 +84,28 @@ Web Application (College Fest Management Platform)
 ### 2.3 Admin Dashboard
 
 #### 2.3.1 Header Management
-- Update college name
+- Update college name (default: ACEM)
 - Upload up to 4 college logos
+- Configure logo positioning:
+  - Replace logo positions (left/right arrangement)
+  - Add or delete logos
+- Text styling controls:
+  - Font selection
+  - Font size adjustment
+  - Text color customization
+- Background customization:
+  - Background color changing
+  - Background image upload and changing
+  - Default background color configuration
 - Changes reflect immediately on public UI header
 
-#### 2.3.2 Event Management
+#### 2.3.2 Homepage Layout Management
+- Arrange header sections as desired
+- Add or delete logos dynamically
+- Configure layout elements positioning
+- All customizations apply across multiple web pages
+
+#### 2.3.3 Event Management
 - Add new events with fields:
   - Event Name
   - Event Type (Technical/Cultural)
@@ -96,26 +118,26 @@ Web Application (College Fest Management Platform)
 - Delete events
 - Events auto-display on public UI based on event type
 
-#### 2.3.3 Committee Management
+#### 2.3.4 Committee Management
 - Add committee members
 - Assign roles to members
 - Upload member images
 - Changes display dynamically on website
 
-#### 2.3.4 Gallery Management
+#### 2.3.5 Gallery Management
 - Upload multiple images
 - Images appear in cinematic gallery layout on public UI
 
-#### 2.3.5 About Us Management
+#### 2.3.6 About Us Management
 - Edit About Us section text content
 - Updates reflect immediately on public UI
 
-#### 2.3.6 Contact & Social Media Management
+#### 2.3.7 Contact & Social Media Management
 - Update contact details
 - Update social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Changes reflect instantly on public UI
 
-#### 2.3.7 Passkey Management
+#### 2.3.8 Passkey Management
 - Change passkey functionality with validation:
   - Enter old passkey
   - Enter new passkey
@@ -136,11 +158,14 @@ Web Application (College Fest Management Platform)
 - Glow effects on key elements
 - Animated cards with hover transitions
 - Minimal but powerful layout
+- Default background color with admin override capability
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
+- Flexible layout adapting to all screen sizes for easy access
 - Smooth page transitions and animated loading states
 - Responsive header with mobile-friendly navigation menu
+- Multiple web pages with consistent responsive behavior
 
 ### 3.3 Performance Optimization
 - Optimized animations and images
@@ -153,7 +178,9 @@ Web Application (College Fest Management Platform)
 ### 4.1 Database
 - MongoDB for data storage
 - Collections for:
-  - Header content (college name, logos)
+  - Header content (college name: ACEM, logos with positioning data)
+  - Text styling configurations (font, size, color)
+  - Background settings (color, image)
   - Events
   - Committee members
   - Gallery images
@@ -168,26 +195,37 @@ Web Application (College Fest Management Platform)
 - All admin changes must:
   - Store automatically in database
   - Reflect instantly on user interface
+- API endpoints for:
+  - Logo positioning management
+  - Text styling updates
+  - Background customization
 
 ### 4.3 Code Quality
 - Clean, modular, scalable codebase
 - Maintainable UI component structure
 - Optimized for production deployment
+- Support for multiple web pages architecture
 
 ## 5. User Flow
 
 ### 5.1 Public User Flow
-1. User lands on cinematic homepage with header displaying college name, logos, and navigation menu
-2. User navigates through sections using header menu (Home, Events, Committee, Gallery, About Us, Contact Us)
-3. User views events by category (Technical/Cultural)
-4. User clicks registration button to access Google Form
-5. User explores gallery and committee sections with smooth cinematic navigation
+1. User lands on cinematic homepage with header displaying ACEM, logos (2 left, 2 right), and navigation menu
+2. User navigates through multiple web pages using header menu (Home, Events, Committee, Gallery, About Us, Contact Us)
+3. User experiences consistent responsive design across all screen sizes
+4. User views events by category (Technical/Cultural)
+5. User clicks registration button to access Google Form
+6. User explores gallery and committee sections with smooth cinematic navigation
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
 2. Admin enters passkey in chatbot
 3. System validates passkey
 4. Upon successful validation, Admin Dashboard opens
-5. Admin manages content (Header, Events, Committee, Gallery, About Us, Contact)
-6. Admin can change passkey through Passkey Management
-7. All changes save to MongoDB and reflect immediately on public UI
+5. Admin manages content:
+   - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
+   - Text Styling: Adjust font, size, color
+   - Background: Change color or upload background image
+   - Events, Committee, Gallery, About Us, Contact management
+6. Admin arranges homepage layout and header sections as desired
+7. Admin can change passkey through Passkey Management
+8. All changes save to MongoDB and reflect immediately across all web pages on public UI

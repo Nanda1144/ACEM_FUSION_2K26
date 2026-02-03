@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="border-t border-primary/20 py-8 px-4">
       <div className="container mx-auto text-center">
         <p className="text-muted-foreground">
-          © 2026 Fusion26. All rights reserved.
+          © 2026 ACEM. All rights reserved.
         </p>
       </div>
     </footer>

@@ -71,3 +71,39 @@ export interface HeaderSettings {
   updated_at: string;
 }
 
+export interface Logo {
+  id: number;
+  url: string;
+  position: 'left' | 'right';
+  order: number;
+}
+
+export interface ThemeSettings {
+  id: string;
+  header_title: string;
+  header_font_family: string;
+  header_font_size: string;
+  header_text_color: string;
+  header_bg_color: string;
+  header_bg_image: string | null;
+  logos: Logo[];
+  page_bg_color: string;
+  page_bg_image: string | null;
+  nav_font_size: string;
+  nav_text_color: string;
+  nav_hover_color: string;
+  updated_at: string;
+}
+
+export interface Page {
+  id: string;
+  title: string;
+  slug: string;
+  content: string | null;
+  is_published: boolean;
+  display_order: number;
+  show_in_menu: boolean;
+  created_at: string;
+  updated_at: string;
+}
+

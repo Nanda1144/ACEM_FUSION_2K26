@@ -6,7 +6,8 @@ import GalleryManagement from './admin/GalleryManagement';
 import AboutManagement from './admin/AboutManagement';
 import ContactManagement from './admin/ContactManagement';
 import PasskeyManagement from './admin/PasskeyManagement';
-import HeaderManagement from './admin/HeaderManagement';
+import ThemeManagement from './admin/ThemeManagement';
+import PageManagement from './admin/PageManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
@@ -15,7 +16,7 @@ interface AdminDashboardProps {
 }
 
 export default function AdminDashboard({ onClose }: AdminDashboardProps) {
-  const [activeTab, setActiveTab] = useState('events');
+  const [activeTab, setActiveTab] = useState('theme');
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,15 +34,24 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 mb-8">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-8 mb-8">
+            <TabsTrigger value="theme">Theme</TabsTrigger>
+            <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
-            <TabsTrigger value="header">Header</TabsTrigger>
             <TabsTrigger value="passkey">Passkey</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="theme">
+            <ThemeManagement />
+          </TabsContent>
+
+          <TabsContent value="pages">
+            <PageManagement />
+          </TabsContent>
 
           <TabsContent value="events">
             <EventManagement />
@@ -61,10 +71,6 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
           <TabsContent value="contact">
             <ContactManagement />
-          </TabsContent>
-
-          <TabsContent value="header">
-            <HeaderManagement />
           </TabsContent>
 
           <TabsContent value="passkey">

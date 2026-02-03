@@ -25,7 +25,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">{"FUSION26"}</h1>
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">{"ACEM"}</h1>
           <motion.p
             className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}

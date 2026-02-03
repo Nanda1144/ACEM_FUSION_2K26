@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Header from '@/components/Header';
+import FlexibleHeader from '@/components/FlexibleHeader';
 import Hero from '@/components/Hero';
 import Events from '@/components/Events';
 import Committee from '@/components/Committee';
@@ -10,16 +10,40 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
 import AdminDashboard from '@/components/AdminDashboard';
+import { themeSettingsApi } from '@/db/api';
+import type { ThemeSettings } from '@/types/index';
 
 export default function HomePage() {
   const [showAdmin, setShowAdmin] = useState(false);
+  const [themeSettings, setThemeSettings] = useState<ThemeSettings | null>(null);
+
+  useEffect(() => {
+    loadThemeSettings();
+  }, []);
+
+  const loadThemeSettings = async () => {
+    try {
+      const data = await themeSettingsApi.get();
+      setThemeSettings(data);
+    } catch (error) {
+      console.error('Error loading theme settings:', error);
+    }
+  };
+
+  const pageStyle = {
+    backgroundColor: themeSettings?.page_bg_color || '#0A0F1E',
+    backgroundImage: themeSettings?.page_bg_image ? `url(${themeSettings.page_bg_image})` : 'none',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
+  };
 
   if (showAdmin) {
     return (
       <>
         <Helmet>
-          <title>Admin Dashboard - Fusion26</title>
-          <meta name="description" content="Fusion26 Admin Dashboard" />
+          <title>Admin Dashboard - ACEM</title>
+          <meta name="description" content="ACEM Admin Dashboard" />
         </Helmet>
         <AdminDashboard onClose={() => setShowAdmin(false)} />
       </>
@@ -29,11 +53,11 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Fusion26 - College Fest 2026</title>
-        <meta name="description" content="Welcome to Fusion26, the ultimate college fest experience! Join us for an unforgettable celebration of talent, creativity, and innovation." />
+        <title>ACEM - College Fest 2026</title>
+        <meta name="description" content="Welcome to ACEM, the ultimate college fest experience! Join us for an unforgettable celebration of talent, creativity, and innovation." />
       </Helmet>
-      <div className="min-h-screen">
-        <Header />
+      <div className="min-h-screen" style={pageStyle}>
+        <FlexibleHeader />
         <Hero />
         <Events />
         <Committee />
