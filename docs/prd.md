@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities. The system connects to MongoDB Atlas cloud database with manual configuration support.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities. The system connects to MongoDB Atlas cloud database with manual configuration support.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -93,15 +93,35 @@ Web Application (College Fest Management Platform)
 - Admin-editable footer structure and content
 - Improved layout with enhanced visual presentation
 
-### 2.2 Chatbot-Based Admin Authentication
+### 2.2 Enhanced Chatbot-Based Admin Authentication
 
 #### 2.2.1 Chatbot Interface
 - Floating chatbot fixed at bottom-right corner
-- Admin authentication flow:
-  - Admin enters passkey in chatbot
-  - System validates passkey against database
-  - Correct passkey opens Admin Dashboard
-- Default passkey: acemadmin@fusion
+- Enhanced chatbot functionality providing:
+  - Website information and details
+  - Admin passkey information
+  - Interactive guidance and support
+
+#### 2.2.2 Chatbot Information Features
+- Provide comprehensive website details including:
+  - Website purpose and overview
+  - Available features and sections
+  - Navigation guidance
+  - Event information summary
+  - Committee structure overview
+  - Gallery highlights
+  - Contact information
+  - About the fest details
+- Display admin passkey information:
+  - Default passkey: acemadmin@fusion
+  - Instructions for admin access
+  - Passkey usage guidelines
+
+#### 2.2.3 Admin Authentication Flow
+- Admin enters passkey in chatbot
+- System validates passkey against database
+- Correct passkey opens Admin Dashboard
+- Enhanced chatbot provides contextual help during authentication process
 
 ### 2.3 Admin Dashboard
 
@@ -284,6 +304,7 @@ Web Application (College Fest Management Platform)
   - Contact information
   - Admin passkey
   - Database connection configuration
+  - Chatbot information content
 - Automatic data updates on admin changes
 - Connection string stored securely
 
@@ -306,6 +327,7 @@ Web Application (College Fest Management Platform)
   - Footer management
   - Event detail page data
   - Complete application editing
+  - Chatbot information retrieval
 - Environment variable support for connection string storage
 - Error handling for database connection failures
 
@@ -334,19 +356,22 @@ Web Application (College Fest Management Platform)
 8. Google Form opens (link provided by admin)
 9. User explores gallery and committee sections with smooth cinematic navigation
 10. User views improved footer section with contact details and social media links
+11. User can interact with chatbot to get website information and details
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
-2. Admin enters passkey in chatbot
-3. System validates passkey
-4. Upon successful validation, Admin Dashboard opens with split-screen interface
-5. Admin sees live preview panel on right side showing real-time website appearance
-6. Admin configures MongoDB Atlas connection (first-time setup):
+2. Admin can request website details and admin passkey information from chatbot
+3. Chatbot provides comprehensive website information and displays admin passkey
+4. Admin enters passkey in chatbot
+5. System validates passkey
+6. Upon successful validation, Admin Dashboard opens with split-screen interface
+7. Admin sees live preview panel on right side showing real-time website appearance
+8. Admin configures MongoDB Atlas connection (first-time setup):
    - Views step-by-step connection guide in chatbot
    - Enters MongoDB Atlas connection string
    - Tests connection
    - Confirms successful connection
-7. Admin manages content with instant live preview updates:
+9. Admin manages content with instant live preview updates:
    - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled)
@@ -354,8 +379,9 @@ Web Application (College Fest Management Platform)
    - Footer: Edit structure, update contact details, customize styling
    - Events: Add event details including rules, instructions, multiple images, student coordinator contacts, Google Form link
    - Committee, Gallery, About Us, Contact management
-8. Admin arranges homepage layout and header sections as desired
-9. Admin edits entire application including header, footer, and body sections
-10. Admin can change passkey through Passkey Management
-11. All changes save to MongoDB Atlas automatically and reflect immediately across all web pages on public UI and live preview
-12. Admin can access and edit multiple web pages with consistent editing interface
+   - Chatbot information content management
+10. Admin arranges homepage layout and header sections as desired
+11. Admin edits entire application including header, footer, and body sections
+12. Admin can change passkey through Passkey Management
+13. All changes save to MongoDB Atlas automatically and reflect immediately across all web pages on public UI and live preview
+14. Admin can access and edit multiple web pages with consistent editing interface
