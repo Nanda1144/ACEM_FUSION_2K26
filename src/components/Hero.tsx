@@ -9,7 +9,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-screen flex flex-col justify-end overflow-hidden pt-20 pb-32">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -17,12 +17,12 @@ export default function Hero() {
           alt="Fusion26 College Fest Background"
           className="w-full h-full object-cover"
         />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Gradient overlay from transparent to dark at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
       </div>
       
       {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
@@ -30,16 +30,16 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Content */}
+      {/* Content - Positioned at Bottom */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text Pro Text'] font-['SimSun'] border-solid border-[#1414e6] border-[0px] font-['SimSun'] border-[#0909fd]">{"Fusion26"}</h1>
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">Fusion26</h1>
           <motion.p
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
@@ -62,6 +62,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
+      
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
