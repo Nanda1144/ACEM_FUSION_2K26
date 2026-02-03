@@ -7,7 +7,7 @@ import Committee from '@/components/Committee';
 import Gallery from '@/components/Gallery';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+import EnhancedFooter from '@/components/EnhancedFooter';
 import Chatbot from '@/components/Chatbot';
 import AdminDashboard from '@/components/AdminDashboard';
 import { themeSettingsApi } from '@/db/api';
@@ -64,7 +64,7 @@ export default function HomePage() {
         <Gallery />
         <About />
         <Contact />
-        <Footer />
+        <EnhancedFooter />
         <Chatbot onAuthenticated={() => setShowAdmin(true)} />
       </div>
     </>

@@ -8,6 +8,8 @@ import ContactManagement from './admin/ContactManagement';
 import PasskeyManagement from './admin/PasskeyManagement';
 import ThemeManagement from './admin/ThemeManagement';
 import PageManagement from './admin/PageManagement';
+import PageBuilder from './admin/PageBuilder';
+import FooterManagement from './admin/FooterManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
@@ -16,7 +18,7 @@ interface AdminDashboardProps {
 }
 
 export default function AdminDashboard({ onClose }: AdminDashboardProps) {
-  const [activeTab, setActiveTab] = useState('theme');
+  const [activeTab, setActiveTab] = useState('builder');
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,9 +36,11 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-8 mb-8">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:grid-cols-10 mb-8">
+            <TabsTrigger value="builder">Page Builder</TabsTrigger>
             <TabsTrigger value="theme">Theme</TabsTrigger>
             <TabsTrigger value="pages">Pages</TabsTrigger>
+            <TabsTrigger value="footer">Footer</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
@@ -45,12 +49,20 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
             <TabsTrigger value="passkey">Passkey</TabsTrigger>
           </TabsList>
 
+          <TabsContent value="builder">
+            <PageBuilder />
+          </TabsContent>
+
           <TabsContent value="theme">
             <ThemeManagement />
           </TabsContent>
 
           <TabsContent value="pages">
             <PageManagement />
+          </TabsContent>
+
+          <TabsContent value="footer">
+            <FooterManagement />
           </TabsContent>
 
           <TabsContent value="events">

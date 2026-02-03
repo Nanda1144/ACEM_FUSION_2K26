@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey, HeaderSettings, ThemeSettings, Page } from '@/types/index';
+import type { Event, CommitteeMember, GalleryImage, AboutUs, Contact, AdminPasskey, HeaderSettings, ThemeSettings, Page, PageSection, FooterSettings, ComponentTemplate } from '@/types/index';
 
 // Events API
 export const eventsApi = {
@@ -330,6 +330,101 @@ export const pagesApi = {
       .eq('id', id);
     
     if (error) throw error;
+  }
+};
+
+// Page Sections API
+export const pageSectionsApi = {
+  getByPageId: async (pageId: string) => {
+    const { data, error } = await supabase
+      .from('page_sections')
+      .select('*')
+      .eq('page_id', pageId)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
+  },
+
+  create: async (section: Omit<PageSection, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('page_sections')
+      .insert([section])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, section: Partial<PageSection>) => {
+    const { data, error } = await supabase
+      .from('page_sections')
+      .update({ ...section, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('page_sections')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
+};
+
+// Footer Settings API
+export const footerSettingsApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('footer_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, settings: Partial<FooterSettings>) => {
+    const { data, error } = await supabase
+      .from('footer_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  }
+};
+
+// Component Templates API
+export const componentTemplatesApi = {
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('component_templates')
+      .select('*')
+      .order('category', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
+  },
+
+  getByCategory: async (category: string) => {
+    const { data, error } = await supabase
+      .from('component_templates')
+      .select('*')
+      .eq('category', category);
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   }
 };
 

@@ -107,3 +107,55 @@ export interface Page {
   updated_at: string;
 }
 
+export interface PageComponent {
+  id: string;
+  type: string;
+  props: Record<string, any>;
+  position: {
+    x: number;
+    y: number;
+  };
+  size: {
+    width: string;
+    height: string;
+  };
+}
+
+export interface PageSection {
+  id: string;
+  page_id: string;
+  section_type: 'header' | 'body' | 'footer';
+  section_name: string;
+  components: PageComponent[];
+  styles: Record<string, any>;
+  display_order: number;
+  is_visible: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FooterSettings {
+  id: string;
+  college_name: string;
+  address: string | null;
+  phone: string | null;
+  email: string | null;
+  website: string | null;
+  social_links: Record<string, string>;
+  additional_info: string | null;
+  layout_style: string;
+  bg_color: string;
+  text_color: string;
+  updated_at: string;
+}
+
+export interface ComponentTemplate {
+  id: string;
+  name: string;
+  type: string;
+  default_props: Record<string, any>;
+  preview_image: string | null;
+  category: string;
+  created_at: string;
+}
+
