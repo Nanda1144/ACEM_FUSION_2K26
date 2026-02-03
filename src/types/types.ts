@@ -1,10 +1,3 @@
-export interface Option {
-  label: string;
-  value: string;
-  icon?: React.ComponentType<{ className?: string }>;
-  withCount?: boolean;
-}
-
 // Fusion26 Types
 export interface Coordinator {
   name: string;
@@ -60,4 +53,3 @@ export interface AdminPasskey {
   passkey: string;
   updated_at: string;
 }
-
