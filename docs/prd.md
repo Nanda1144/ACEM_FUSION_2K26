@@ -79,6 +79,7 @@ Web Application (College Fest Management Platform)
 - Cinematic grid/masonry layout displaying uploaded images
 - Lazy loading implementation
 - Smooth transitions between images
+- Display images uploaded by admin through Gallery Management
 
 #### 2.1.7 About Us Section
 - Editable text content displaying fest information
@@ -206,9 +207,14 @@ Web Application (College Fest Management Platform)
 - Changes display dynamically on website and live preview
 
 #### 2.3.8 Gallery Management
-- Upload multiple images
-- Images appear in cinematic gallery layout on public UI
+- Upload multiple images to gallery
+- Image upload interface with file selection
+- Uploaded images stored in Supabase Storage
+- Image URLs automatically generated and stored in gallery_images table
+- Images appear in cinematic gallery layout on public UI Gallery Section
 - Live preview shows gallery updates instantly
+- Delete images from gallery
+- Rearrange image display order
 
 #### 2.3.9 About Us Management
 - Edit About Us section text content
@@ -301,7 +307,7 @@ Web Application (College Fest Management Platform)
   - Footer content and styling
   - Events (including rules, instructions, multiple images, Google Form links)
   - Committee members
-  - Gallery images
+  - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
   - Contact information
   - Admin passkey
@@ -332,10 +338,26 @@ Web Application (College Fest Management Platform)
   - Complete application editing
   - Chatbot information retrieval
   - Image upload to Supabase Storage
+  - Gallery image management (upload, retrieve, delete)
 - Environment variable support for connection credentials storage
 - Error handling for database connection failures
 
-### 4.3 Code Quality
+### 4.3 Image Upload Implementation
+- Gallery image upload flow:
+  - Admin selects images through Gallery Management interface
+  - Frontend sends image files to backend API endpoint
+  - Backend uploads images to Supabase Storage gallery bucket
+  - Backend receives public URL from Supabase Storage
+  - Backend stores image URL in gallery_images table
+  - Frontend retrieves image URLs from gallery_images table
+  - Public UI Gallery Section displays images using stored URLs
+- File update locations for gallery image upload:
+  - Backend API file: Create/update gallery upload endpoint (e.g., /api/gallery/upload)
+  - Admin Dashboard component: Add image upload interface in Gallery Management section
+  - Public Gallery component: Fetch and display images from gallery_images table
+  - Supabase Storage configuration: Create gallery bucket with public access
+
+### 4.4 Code Quality
 - Clean, modular, scalable codebase
 - Maintainable UI component structure
 - Optimized for production deployment
@@ -358,9 +380,10 @@ Web Application (College Fest Management Platform)
    - Student coordinator contact details
 7. User clicks registration button on event detail page
 8. Google Form opens (link provided by admin)
-9. User explores gallery and committee sections with smooth cinematic navigation
-10. User views improved footer section with contact details and social media links
-11. User can interact with chatbot to get website information and details
+9. User explores gallery section and views images uploaded by admin
+10. User explores committee sections with smooth cinematic navigation
+11. User views improved footer section with contact details and social media links
+12. User can interact with chatbot to get website information and details
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -376,7 +399,7 @@ Web Application (College Fest Management Platform)
    - Enters Supabase API key
    - Tests connection
    - Confirms successful connection
-   - System automatically creates required tables
+   - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
    - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
    - Text Styling: Adjust font, size, color
@@ -384,7 +407,9 @@ Web Application (College Fest Management Platform)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
    - Events: Add event details including rules, instructions, multiple images, student coordinator contacts, Google Form link
-   - Committee, Gallery, About Us, Contact management
+   - Committee management
+   - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
+   - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and header sections as desired
 11. Admin edits entire application including header, footer, and body sections
@@ -436,6 +461,7 @@ Web Application (College Fest Management Platform)
 3. Test admin dashboard functionality
 4. Test database connection
 5. Verify live preview updates
+6. Test gallery image upload and display
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -464,6 +490,7 @@ Web Application (College Fest Management Platform)
 3. Configure custom domain (if required)
 4. Set up SSL certificate
 5. Configure Supabase connection in deployed environment
+6. Verify Supabase Storage bucket permissions
 
 #### Step 4: Verification
 1. Access deployed website URL
@@ -472,6 +499,7 @@ Web Application (College Fest Management Platform)
 4. Verify database connectivity
 5. Test live preview functionality
 6. Verify image uploads to Supabase Storage
+7. Test gallery image display on public UI
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -479,6 +507,7 @@ Web Application (College Fest Management Platform)
 3. Update dependencies as needed
 4. Backup Supabase database regularly
 5. Monitor Supabase usage and quotas
+6. Monitor Supabase Storage usage
 
 ### 6.3 Version Control (v8 Rollback)
 
@@ -529,6 +558,7 @@ npm install @supabase/supabase-js
 2. Update database connection files
 3. Replace MongoDB queries with Supabase queries
 4. Update API endpoints
+5. Add gallery image upload endpoint
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -544,11 +574,69 @@ npm install @supabase/supabase-js
 3. Verify data persistence
 4. Test admin dashboard functionality
 5. Verify live preview updates
+6. Test gallery image upload and display
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
 2. Follow MeDo deployment steps (Section 6.2)
 3. Verify deployed application
+
+### 6.5 Gallery Image Upload Implementation Guide
+
+#### Backend Implementation
+1. Create gallery upload API endpoint:
+   - File location: backend/routes/gallery.js or backend/api/gallery.js
+   - Endpoint: POST /api/gallery/upload
+   - Implementation steps:
+     - Accept multipart/form-data image files
+     - Validate image file types (jpg, png, gif, webp)
+     - Upload images to Supabase Storage gallery bucket
+     - Retrieve public URL from Supabase Storage
+     - Insert image URL into gallery_images table
+     - Return success response with image URL
+
+2. Create gallery retrieval API endpoint:
+   - Endpoint: GET /api/gallery/images
+   - Implementation: Fetch all image URLs from gallery_images table
+
+3. Create gallery delete API endpoint:
+   - Endpoint: DELETE /api/gallery/images/:id
+   - Implementation: Delete image from Supabase Storage and remove record from gallery_images table
+
+#### Frontend Implementation
+1. Admin Dashboard Gallery Management component:
+   - File location: frontend/components/admin/GalleryManagement.jsx or similar
+   - Add image upload interface:
+     - File input for selecting multiple images
+     - Upload button triggering API call to /api/gallery/upload
+     - Display uploaded images with delete option
+     - Show upload progress indicator
+
+2. Public Gallery Section component:
+   - File location: frontend/components/public/Gallery.jsx or similar
+   - Implementation:
+     - Fetch image URLs from /api/gallery/images endpoint
+     - Display images in cinematic grid/masonry layout
+     - Implement lazy loading for performance
+     - Add smooth transitions and hover effects
+
+#### Supabase Storage Configuration
+1. Create gallery storage bucket:
+   - Bucket name: gallery
+   - Public access: enabled
+   - File size limit: configure as needed
+
+2. Set bucket policies:
+   - Allow public read access
+   - Restrict write access to authenticated admin users
+
+#### Code Update Summary
+Files requiring updates for gallery image upload:
+1. Backend API routes file (e.g., backend/routes/gallery.js)
+2. Admin Dashboard Gallery Management component (e.g., frontend/components/admin/GalleryManagement.jsx)
+3. Public Gallery Section component (e.g., frontend/components/public/Gallery.jsx)
+4. Supabase client configuration file (e.g., backend/config/supabase.js)
+5. Environment configuration file (.env)
 
 ## 7. Other Requirements
 
@@ -573,7 +661,8 @@ System will automatically create the following tables on first connection:
   - Logos
   - Event images
   - Committee member images
-  - Gallery images
+  - Gallery images (for Gallery Section display)
   - Background images
 - Public access configured for image buckets
 - Automatic URL generation for uploaded images
+- Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section
