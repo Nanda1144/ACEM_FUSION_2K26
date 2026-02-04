@@ -143,9 +143,10 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-1 space-y-4">
+              {/* Staff Coordinators - Always show 1 */}
               {event.staff_coordinators && event.staff_coordinators.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-semibold mb-2 text-primary">Staff Coordinators</h4>
+                  <h4 className="text-sm font-semibold mb-2 text-primary">Staff Coordinator</h4>
                   {event.staff_coordinators.slice(0, 1).map((coord, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <User className="h-3 w-3" />
@@ -156,10 +157,17 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
                   ))}
                 </div>
               )}
+              
+              {/* Student Coordinators - Show all for Cultural, 1 for Technical */}
               {event.student_coordinators && event.student_coordinators.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-semibold mb-2 text-secondary">Student Coordinators</h4>
-                  {event.student_coordinators.slice(0, 1).map((coord, idx) => (
+                  <h4 className="text-sm font-semibold mb-2 text-secondary">
+                    Student Coordinator{event.type === 'Cultural' && event.student_coordinators.length > 1 ? 's' : ''}
+                  </h4>
+                  {(event.type === 'Cultural' 
+                    ? event.student_coordinators 
+                    : event.student_coordinators.slice(0, 1)
+                  ).map((coord, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <User className="h-3 w-3" />
                       <span>{coord.name}</span>

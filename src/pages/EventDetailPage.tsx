@@ -216,45 +216,51 @@ export default function EventDetailPage() {
 
               {/* Coordinators */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Staff Coordinators */}
-                <Card>
-                  <CardContent className="pt-6">
-                    <h2 className="text-2xl font-bold mb-4">Staff Coordinators</h2>
-                    <div className="space-y-4">
-                      {event.staff_coordinators.map((coordinator, index) => (
-                        <div key={index} className="p-4 bg-muted rounded-lg">
-                          <h3 className="font-semibold text-lg mb-2">{coordinator.name}</h3>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Phone className="h-4 w-4" />
-                            <a href={`tel:${coordinator.contact}`} className="hover:text-primary transition-colors">
-                              {coordinator.contact}
-                            </a>
+                {/* Staff Coordinator */}
+                {event.staff_coordinators && event.staff_coordinators.length > 0 && (
+                  <Card>
+                    <CardContent className="pt-6">
+                      <h2 className="text-2xl font-bold mb-4">Staff Coordinator</h2>
+                      <div className="space-y-4">
+                        {event.staff_coordinators.slice(0, 1).map((coordinator, index) => (
+                          <div key={index} className="p-4 bg-muted rounded-lg">
+                            <h3 className="font-semibold text-lg mb-2">{coordinator.name}</h3>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Phone className="h-4 w-4" />
+                              <a href={`tel:${coordinator.contact}`} className="hover:text-primary transition-colors">
+                                {coordinator.contact}
+                              </a>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 {/* Student Coordinators */}
-                <Card>
-                  <CardContent className="pt-6">
-                    <h2 className="text-2xl font-bold mb-4">Student Coordinators</h2>
-                    <div className="space-y-4">
-                      {event.student_coordinators.map((coordinator, index) => (
-                        <div key={index} className="p-4 bg-muted rounded-lg">
-                          <h3 className="font-semibold text-lg mb-2">{coordinator.name}</h3>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Phone className="h-4 w-4" />
-                            <a href={`tel:${coordinator.contact}`} className="hover:text-primary transition-colors">
-                              {coordinator.contact}
-                            </a>
+                {event.student_coordinators && event.student_coordinators.length > 0 && (
+                  <Card>
+                    <CardContent className="pt-6">
+                      <h2 className="text-2xl font-bold mb-4">
+                        Student Coordinator{event.student_coordinators.length > 1 ? 's' : ''}
+                      </h2>
+                      <div className="space-y-4">
+                        {event.student_coordinators.map((coordinator, index) => (
+                          <div key={index} className="p-4 bg-muted rounded-lg">
+                            <h3 className="font-semibold text-lg mb-2">{coordinator.name}</h3>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Phone className="h-4 w-4" />
+                              <a href={`tel:${coordinator.contact}`} className="hover:text-primary transition-colors">
+                                {coordinator.contact}
+                              </a>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
 
               {/* Bottom Registration CTA */}

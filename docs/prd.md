@@ -86,27 +86,43 @@ Web Application (College Fest Management Platform)
 - Cinematic layout with smooth transitions
 - Back navigation to Events Section
 
-#### 2.1.6 Committee Section
+#### 2.1.6 Staff and Student Details Section
+- Positioned below Technical and Cultural events sections
+- Display staff details:
+  - Staff Name
+  - Staff Contact
+  - Associated Event Type (Technical/Cultural)
+- Display student details:
+  - Student Name
+  - Student Contact
+  - Associated Event Type (Technical/Cultural)
+- Dynamic filtering based on event type selection:
+  - When Technical event is selected: Display one staff name and student names associated with Technical events
+  - When Cultural event is selected: Display one staff name and student names associated with Cultural events
+- Admin-editable staff and student information
+- Cinematic layout with smooth transitions
+
+#### 2.1.7 Committee Section
 - Display committee members with:
   - Member images
   - Names
   - Assigned roles
 - Cinematic layout with smooth transitions
 
-#### 2.1.7 Gallery Section
+#### 2.1.8 Gallery Section
 - Cinematic grid/masonry layout displaying uploaded images
 - Lazy loading implementation
 - Smooth transitions between images
 - Display images uploaded by admin through Gallery Management
 
-#### 2.1.8 About Us Section
+#### 2.1.9 About Us Section
 - Editable text content displaying fest information
 
-#### 2.1.9 Contact Us Section
+#### 2.1.10 Contact Us Section
 - Display contact details
 - Contact form or contact information display
 
-#### 2.1.10 Footer Section
+#### 2.1.11 Footer Section
 - Display contact details
 - Social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Admin-editable footer structure and content
@@ -241,13 +257,28 @@ Web Application (College Fest Management Platform)
 - Event cards link to dedicated event detail pages
 - Changes visible in live preview immediately
 
-#### 2.3.8 Committee Management
+#### 2.3.8 Staff and Student Details Management
+- Add staff details:
+  - Staff Name
+  - Staff Contact
+  - Associated Event Type (Technical/Cultural)
+- Add student details:
+  - Student Name
+  - Student Contact
+  - Associated Event Type (Technical/Cultural)
+- Edit existing staff and student information
+- Delete staff and student records
+- Associate staff and students with specific event types
+- Staff and student details display dynamically on public UI based on selected event type
+- Changes visible in live preview immediately
+
+#### 2.3.9 Committee Management
 - Add committee members
 - Assign roles to members
 - Upload member images
 - Changes display dynamically on website and live preview
 
-#### 2.3.9 Gallery Management
+#### 2.3.10 Gallery Management
 - Upload multiple images to gallery
 - Image upload interface with file selection
 - Uploaded images stored in Supabase Storage
@@ -257,16 +288,16 @@ Web Application (College Fest Management Platform)
 - Delete images from gallery
 - Rearrange image display order
 
-#### 2.3.10 About Us Management
+#### 2.3.11 About Us Management
 - Edit About Us section text content
 - Updates reflect immediately on public UI and live preview
 
-#### 2.3.11 Contact & Social Media Management
+#### 2.3.12 Contact & Social Media Management
 - Update contact details
 - Update social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Changes reflect instantly on public UI and live preview
 
-#### 2.3.12 Passkey Management
+#### 2.3.13 Passkey Management
 - Change passkey functionality with validation:
   - Enter old passkey
   - Enter new passkey
@@ -276,7 +307,7 @@ Web Application (College Fest Management Platform)
   - New passkey and confirm passkey must match
 - Passkey update stored securely in Supabase
 
-#### 2.3.13 Complete Application Editing
+#### 2.3.14 Complete Application Editing
 - Admin has full control to edit entire application:
   - Primary header sections
   - Secondary logo and college information header sections
@@ -287,7 +318,7 @@ Web Application (College Fest Management Platform)
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
 
-#### 2.3.14 Supabase Connection Management
+#### 2.3.15 Supabase Connection Management
 - Manual database connection configuration interface
 - Step-by-step connection setup guide displayed in chatbot:
   - Step 1: Create Supabase account at supabase.com
@@ -352,6 +383,8 @@ Web Application (College Fest Management Platform)
   - Body content (text boxes with positioning data)
   - Footer content and styling
   - Events (including rules, instructions, multiple images, Google Form links)
+  - Staff details (name, contact, event type association)
+  - Student details (name, contact, event type association)
   - Committee members
   - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
@@ -382,6 +415,7 @@ Web Application (College Fest Management Platform)
   - Text box positioning and content
   - Footer management
   - Event detail page data
+  - Staff and student details management
   - Complete application editing
   - Chatbot information retrieval
   - Image upload to Supabase Storage
@@ -429,10 +463,13 @@ Web Application (College Fest Management Platform)
    - Student coordinator contact details
 7. User clicks registration button on event detail page
 8. Google Form opens (link provided by admin)
-9. User explores gallery section and views images uploaded by admin
-10. User explores committee sections with smooth cinematic navigation
-11. User views improved footer section with contact details and social media links
-12. User can interact with chatbot to get website information and details
+9. User views Staff and Student Details Section below Technical and Cultural events
+10. When user selects Technical event: System displays one staff name and student names associated with Technical events
+11. When user selects Cultural event: System displays one staff name and student names associated with Cultural events
+12. User explores gallery section and views images uploaded by admin
+13. User explores committee sections with smooth cinematic navigation
+14. User views improved footer section with contact details and social media links
+15. User can interact with chatbot to get website information and details
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -457,6 +494,7 @@ Web Application (College Fest Management Platform)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
    - Events: Add event details including rules, instructions, multiple images, student coordinator contacts, Google Form link
+   - Staff and Student Details: Add staff names, contacts, and event type associations; Add student names, contacts, and event type associations
    - Committee management
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
@@ -513,6 +551,7 @@ Web Application (College Fest Management Platform)
 5. Verify live preview updates
 6. Test gallery image upload and display
 7. Test primary and secondary header management
+8. Test staff and student details display and filtering
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -552,6 +591,7 @@ Web Application (College Fest Management Platform)
 6. Verify image uploads to Supabase Storage
 7. Test gallery image display on public UI
 8. Test primary and secondary header display and management
+9. Test staff and student details display and filtering functionality
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -612,6 +652,7 @@ npm install @supabase/supabase-js
 4. Update API endpoints
 5. Add gallery image upload endpoint
 6. Add primary and secondary header management endpoints
+7. Add staff and student details management endpoints
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -629,6 +670,7 @@ npm install @supabase/supabase-js
 5. Verify live preview updates
 6. Test gallery image upload and display
 7. Test dual header system management
+8. Test staff and student details management and filtering
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -692,6 +734,49 @@ Files requiring updates for gallery image upload:
 4. Supabase client configuration file (e.g., backend/config/supabase.js)
 5. Environment configuration file (.env)
 
+### 6.6 Staff and Student Details Implementation Guide
+
+#### Backend Implementation
+1. Create staff details API endpoints:
+   - POST /api/staff - Add new staff member
+   - GET /api/staff - Retrieve all staff members
+   - GET /api/staff/:eventType - Retrieve staff by event type (Technical/Cultural)
+   - PUT /api/staff/:id - Update staff member
+   - DELETE /api/staff/:id - Delete staff member
+
+2. Create student details API endpoints:
+   - POST /api/students - Add new student
+   - GET /api/students - Retrieve all students
+   - GET /api/students/:eventType - Retrieve students by event type (Technical/Cultural)
+   - PUT /api/students/:id - Update student
+   - DELETE /api/students/:id - Delete student
+
+#### Frontend Implementation
+1. Admin Dashboard Staff and Student Management component:
+   - File location: frontend/components/admin/StaffStudentManagement.jsx or similar
+   - Add staff management interface:
+     - Input fields for staff name, contact, event type
+     - Add/Edit/Delete functionality
+   - Add student management interface:
+     - Input fields for student name, contact, event type
+     - Add/Edit/Delete functionality
+
+2. Public Staff and Student Details Section component:
+   - File location: frontend/components/public/StaffStudentDetails.jsx or similar
+   - Implementation:
+     - Fetch staff and student data from API endpoints
+     - Display staff and student details below Technical and Cultural events
+     - Implement filtering logic based on selected event type
+     - When Technical event selected: Display one staff name and student names for Technical
+     - When Cultural event selected: Display one staff name and student names for Cultural
+
+#### Code Update Summary
+Files requiring updates for staff and student details:
+1. Backend API routes file (e.g., backend/routes/staffStudents.js)
+2. Admin Dashboard Staff and Student Management component (e.g., frontend/components/admin/StaffStudentManagement.jsx)
+3. Public Staff and Student Details Section component (e.g., frontend/components/public/StaffStudentDetails.jsx)
+4. Database schema file for staff_details and student_details tables
+
 ## 7. Other Requirements
 
 ### 7.1 Supabase Table Schema
@@ -703,6 +788,8 @@ System will automatically create the following tables on first connection:
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
 - events (id, name, type, description, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
+- staff_details (id, name, contact, event_type, created_at, updated_at)
+- student_details (id, name, contact, event_type, created_at, updated_at)
 - committee_members (id, name, role, image_url, created_at, updated_at)
 - gallery_images (id, image_url, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)

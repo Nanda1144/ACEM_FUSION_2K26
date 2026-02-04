@@ -253,15 +253,19 @@ export default function EventManagement() {
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label>Staff Coordinators</Label>
+                    <div>
+                      <Label>Staff Coordinator</Label>
+                      <p className="text-xs text-muted-foreground">Add one staff member for this event</p>
+                    </div>
                     <Button type="button" size="sm" variant="outline" onClick={() => addCoordinator('staff')}>
-                      <Plus className="h-4 w-4" />
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add Staff
                     </Button>
                   </div>
                   {form.watch('staff_coordinators').map((coord, index) => (
                     <div key={index} className="flex gap-2 mb-2">
                       <Input
-                        placeholder="Name"
+                        placeholder="Staff Name"
                         value={coord.name}
                         onChange={(e) => {
                           const coords = form.getValues('staff_coordinators');
@@ -270,7 +274,7 @@ export default function EventManagement() {
                         }}
                       />
                       <Input
-                        placeholder="Contact"
+                        placeholder="Contact Number"
                         value={coord.contact}
                         onChange={(e) => {
                           const coords = form.getValues('staff_coordinators');
@@ -287,15 +291,23 @@ export default function EventManagement() {
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label>Student Coordinators</Label>
+                    <div>
+                      <Label>Student Coordinators</Label>
+                      <p className="text-xs text-muted-foreground">
+                        {form.watch('type') === 'Cultural' 
+                          ? 'Add multiple students for cultural events' 
+                          : 'Add one student for technical events'}
+                      </p>
+                    </div>
                     <Button type="button" size="sm" variant="outline" onClick={() => addCoordinator('student')}>
-                      <Plus className="h-4 w-4" />
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add Student
                     </Button>
                   </div>
                   {form.watch('student_coordinators').map((coord, index) => (
                     <div key={index} className="flex gap-2 mb-2">
                       <Input
-                        placeholder="Name"
+                        placeholder="Student Name"
                         value={coord.name}
                         onChange={(e) => {
                           const coords = form.getValues('student_coordinators');
@@ -304,7 +316,7 @@ export default function EventManagement() {
                         }}
                       />
                       <Input
-                        placeholder="Contact"
+                        placeholder="Contact Number"
                         value={coord.contact}
                         onChange={(e) => {
                           const coords = form.getValues('student_coordinators');
