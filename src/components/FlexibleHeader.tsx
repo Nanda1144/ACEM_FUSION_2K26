@@ -81,8 +81,28 @@ export default function FlexibleHeader() {
         style={headerStyle}
       >
         <div className="container mx-auto px-4">
-          {/* Single Row: College Name (Left/Center) and Navigation (Right) */}
-          <div className="flex items-center justify-between h-20">
+          {/* Single Row: Logos (Left) + College Name (Center-Left) + Navigation (Right) */}
+          <div className="flex items-center justify-between h-20 gap-4">
+            {/* Left Logos */}
+            {leftLogos.length > 0 && (
+              <div className="flex items-center gap-3 shrink-0">
+                {leftLogos.map((logo) => (
+                  <div
+                    key={logo.id}
+                    className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                    }`}
+                  >
+                    <img
+                      src={logo.url}
+                      alt={`Logo ${logo.id}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* College Name with Subtitle and Tagline */}
             <div className="hidden md:block">
               <h1 
@@ -137,10 +157,10 @@ export default function FlexibleHeader() {
               </p>
             </div>
 
-            {/* Right: Navigation */}
-            <div className="flex items-center gap-6 ml-auto">
+            {/* Right: Navigation + Right Logos */}
+            <div className="flex items-center gap-4 ml-auto">
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-6">
+              <nav className="hidden lg:flex items-center gap-6 relative z-50">
                 {pages.map((page) => (
                   <button
                     key={page.id}
@@ -162,6 +182,26 @@ export default function FlexibleHeader() {
                   </button>
                 ))}
               </nav>
+
+              {/* Right Logos */}
+              {rightLogos.length > 0 && (
+                <div className="hidden md:flex items-center gap-3 shrink-0">
+                  {rightLogos.map((logo) => (
+                    <div
+                      key={logo.id}
+                      className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                        logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                      }`}
+                    >
+                      <img
+                        src={logo.url}
+                        alt={`Logo ${logo.id}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Mobile Menu Button */}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -216,53 +256,6 @@ export default function FlexibleHeader() {
           </div>
         </div>
       </header>
-
-      {/* Logo Section Below Header */}
-      {(leftLogos.length > 0 || rightLogos.length > 0) && (
-        <div 
-          className="fixed top-20 left-0 right-0 z-40 border-b border-primary/10"
-        >
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              {/* Left Logos */}
-              <div className="flex items-center gap-6">
-                {leftLogos.map((logo) => (
-                  <div
-                    key={logo.id}
-                    className={`w-20 h-20 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
-                    }`}
-                  >
-                    <img
-                      src={logo.url}
-                      alt={`Logo ${logo.id}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* Right Logos */}
-              <div className="flex items-center gap-6">
-                {rightLogos.map((logo) => (
-                  <div
-                    key={logo.id}
-                    className={`w-20 h-20 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
-                    }`}
-                  >
-                    <img
-                      src={logo.url}
-                      alt={`Logo ${logo.id}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
