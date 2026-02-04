@@ -80,13 +80,16 @@ export default function FlexibleHeader() {
       style={headerStyle}
     >
       <div className="container mx-auto px-4">
+        {/* Top Row: Logos and Navigation */}
         <div className="flex items-center justify-between h-20">
           {/* Left Logos */}
           <div className="flex items-center gap-3">
             {leftLogos.map((logo) => (
               <div
                 key={logo.id}
-                className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110"
+                className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                  logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                }`}
               >
                 <img
                   src={logo.url}
@@ -97,39 +100,10 @@ export default function FlexibleHeader() {
             ))}
           </div>
 
-          {/* College Name with Subtitle and Tagline */}
-          <div className="hidden md:block text-center">
-            <h1 className="font-bold whitespace-nowrap" style={titleStyle}>
-              {themeSettings?.header_title || 'ACEM'}
-            </h1>
-            {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
-              <p 
-                className="text-sm mt-1 opacity-90" 
-                style={{ 
-                  color: themeSettings?.header_text_color || '#00D9FF',
-                  fontSize: '0.875rem'
-                }}
-              >
-                {themeSettings.header_subtitle}
-              </p>
-            )}
-            {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
-              <p 
-                className="text-xs mt-0.5 opacity-75 italic" 
-                style={{ 
-                  color: themeSettings?.header_text_color || '#00D9FF',
-                  fontSize: '0.75rem'
-                }}
-              >
-                {themeSettings.header_tagline}
-              </p>
-            )}
-          </div>
-
-          {/* Desktop Navigation and Right Logos */}
-          <div className="hidden lg:flex items-center gap-6">
-            {/* Navigation Menu */}
-            <nav className="flex items-center gap-6">
+          {/* Right: Navigation and Right Logos */}
+          <div className="flex items-center gap-6">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-6">
               {pages.map((page) => (
                 <button
                   key={page.id}
@@ -153,11 +127,13 @@ export default function FlexibleHeader() {
             </nav>
 
             {/* Right Logos */}
-            <div className="flex items-center gap-3 ml-4">
+            <div className="hidden lg:flex items-center gap-3">
               {rightLogos.map((logo) => (
                 <div
                   key={logo.id}
-                  className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110"
+                  className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                    logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                  }`}
                 >
                   <img
                     src={logo.url}
@@ -167,55 +143,102 @@ export default function FlexibleHeader() {
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="lg:hidden border-primary/50 hover:border-primary"
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="backdrop-blur-glass border-primary/20">
-              <div className="flex flex-col gap-6 mt-8">
-                <div className="mb-4">
-                  <h2 className="text-2xl font-bold" style={titleStyle}>
-                    {themeSettings?.header_title || 'ACEM'}
-                  </h2>
-                  {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
-                    <p 
-                      className="text-sm mt-2 opacity-90" 
-                      style={{ color: themeSettings?.header_text_color || '#00D9FF' }}
+            {/* Mobile Menu Button */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="lg:hidden border-primary/50 hover:border-primary"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="backdrop-blur-glass border-primary/20">
+                <div className="flex flex-col gap-6 mt-8">
+                  <div className="mb-4">
+                    <h2 className="text-2xl font-bold" style={titleStyle}>
+                      {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
+                    </h2>
+                    {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
+                      <p 
+                        className="text-sm mt-2 opacity-90" 
+                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                      >
+                        {themeSettings.header_subtitle}
+                      </p>
+                    )}
+                    {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
+                      <p 
+                        className="text-xs mt-1 opacity-75 italic" 
+                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                      >
+                        {themeSettings.header_tagline}
+                      </p>
+                    )}
+                  </div>
+                  {pages.map((page) => (
+                    <button
+                      key={page.id}
+                      onClick={() => scrollToSection(page.slug)}
+                      className="text-left text-lg transition-colors duration-300 font-medium"
+                      style={navStyle}
                     >
-                      {themeSettings.header_subtitle}
-                    </p>
-                  )}
-                  {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
-                    <p 
-                      className="text-xs mt-1 opacity-75 italic" 
-                      style={{ color: themeSettings?.header_text_color || '#00D9FF' }}
-                    >
-                      {themeSettings.header_tagline}
-                    </p>
-                  )}
+                      {page.title}
+                    </button>
+                  ))}
                 </div>
-                {pages.map((page) => (
-                  <button
-                    key={page.id}
-                    onClick={() => scrollToSection(page.slug)}
-                    className="text-left text-lg transition-colors duration-300 font-medium"
-                    style={navStyle}
-                  >
-                    {page.title}
-                  </button>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+
+        {/* Bottom Row: College Name (Centered) */}
+        <div className="hidden md:flex items-center justify-center pb-3">
+          <div className="text-center">
+            <h1 
+              className="font-bold whitespace-nowrap" 
+              style={{
+                ...titleStyle,
+                color: themeSettings?.header_text_color || '#D4AF37',
+                textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
+                WebkitTextStroke: '1.5px #000000',
+                paintOrder: 'stroke fill'
+              }}
+            >
+              {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
+            </h1>
+            {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
+              <p 
+                className="text-sm mt-1 opacity-90 font-semibold" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#D4AF37',
+                  fontSize: '0.875rem',
+                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '0.5px #000000',
+                  paintOrder: 'stroke fill',
+                  letterSpacing: '0.1em'
+                }}
+              >
+                {themeSettings.header_subtitle}
+              </p>
+            )}
+            {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
+              <p 
+                className="text-xs mt-0.5 opacity-75 italic font-medium" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#D4AF37',
+                  fontSize: '0.75rem',
+                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '0.5px #000000',
+                  paintOrder: 'stroke fill'
+                }}
+              >
+                {themeSettings.header_tagline}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </header>

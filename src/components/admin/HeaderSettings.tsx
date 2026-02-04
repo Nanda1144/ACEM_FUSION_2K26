@@ -66,7 +66,8 @@ export default function HeaderSettings() {
       id: Date.now(),
       url: '',
       position: 'left',
-      order: settings.logos.length
+      order: settings.logos.length,
+      shape: 'circle'
     };
 
     setSettings({
@@ -128,7 +129,7 @@ export default function HeaderSettings() {
               id="header_title"
               value={settings.header_title}
               onChange={(e) => setSettings({ ...settings, header_title: e.target.value })}
-              placeholder="e.g., ACEM, Fusion26"
+              placeholder="e.g., ADITYA College of Engineering Madanapalle"
             />
           </div>
 
@@ -152,7 +153,7 @@ export default function HeaderSettings() {
               id="header_subtitle"
               value={settings.header_subtitle || ''}
               onChange={(e) => setSettings({ ...settings, header_subtitle: e.target.value })}
-              placeholder="e.g., College of Engineering & Technology"
+              placeholder="e.g., MADANAPALLE"
               disabled={!settings.show_header_subtitle}
             />
           </div>
@@ -177,7 +178,7 @@ export default function HeaderSettings() {
               id="header_tagline"
               value={settings.header_tagline || ''}
               onChange={(e) => setSettings({ ...settings, header_tagline: e.target.value })}
-              placeholder="e.g., Excellence in Education"
+              placeholder="e.g., UGC - Autonomous Institution"
               disabled={!settings.show_header_tagline}
             />
           </div>
@@ -207,7 +208,7 @@ export default function HeaderSettings() {
                 <Input
                   value={settings.header_text_color}
                   onChange={(e) => setSettings({ ...settings, header_text_color: e.target.value })}
-                  placeholder="#00D9FF"
+                  placeholder="#D4AF37"
                 />
               </div>
             </div>
@@ -377,16 +378,20 @@ export default function HeaderSettings() {
                     <img
                       src={logo.url}
                       alt={`Logo ${index + 1}`}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-primary/30"
+                      className={`w-12 h-12 object-cover border-2 border-primary/30 ${
+                        logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                      }`}
                     />
                   ) : (
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center border-2 border-primary/30">
+                    <div className={`w-12 h-12 bg-muted flex items-center justify-center border-2 border-primary/30 ${
+                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                    }`}>
                       <Upload className="h-5 w-5 text-muted-foreground" />
                     </div>
                   )}
                 </div>
 
-                <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="space-y-2">
                     <Label>Logo URL</Label>
                     <Input
@@ -394,6 +399,22 @@ export default function HeaderSettings() {
                       onChange={(e) => handleLogoChange(logo.id, 'url', e.target.value)}
                       placeholder="https://example.com/logo.png"
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Shape</Label>
+                    <Select
+                      value={logo.shape || 'circle'}
+                      onValueChange={(value) => handleLogoChange(logo.id, 'shape', value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="circle">Circle</SelectItem>
+                        <SelectItem value="semi-square">Semi-Square</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="space-y-2">

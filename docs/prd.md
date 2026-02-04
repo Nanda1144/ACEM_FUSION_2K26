@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including header, footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including dual header system, footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -15,12 +15,17 @@ Web Application (College Fest Management Platform)
 
 ### 2.1 Public User Interface
 
-#### 2.1.1 Header Section
-- Display college name: ACEM (replacing Fusion26)
-- Display up to 4 college logos with specific positioning:
-  - Two logos positioned on the left side
-  - Two logos positioned on the right side
-- Navigation menu with links:
+#### 2.1.1 Primary Header Section (Top Header)
+- Display college name: \"ADITYA College of Engineering Madanapalle\"
+  - Styling: Golden dark color with black border for attractiveness
+  - Prominent display with enhanced visual appeal
+- Display location: \"MADANAPALLE\"
+  - Font size: 12px or 14px
+  - Positioned below college name
+- Display institution status: \"UGC - Autonomous Institution\"
+  - Font size: 12px or 14px
+  - Positioned below location on next line
+- Navigation menu positioned at top-right corner with links:
   - Home
   - Committee
   - Gallery
@@ -32,7 +37,19 @@ Web Application (College Fest Management Platform)
 - Fully responsive across all screen sizes for easy access
 - Admin-editable header structure and content
 
-#### 2.1.2 Homepage
+#### 2.1.2 Secondary Header Section (Logo Header)
+- Dedicated header section for logo display
+- Support for multiple college logos with configurable shapes:
+  - Circle shape option
+  - Semi-square shape option
+- Admin-configurable logo arrangement and positioning
+- Static data display capabilities managed by admin
+- Header details fully updatable through admin dashboard
+- Responsive layout adapting to all screen sizes
+- Admin can add, edit, or delete logos
+- Admin can configure logo shapes individually
+
+#### 2.1.3 Homepage
 - Cinematic hero section with parallax scrolling
 - Smooth transitions and motion-based micro-interactions
 - Dark theme with neon/gradient accents
@@ -40,11 +57,11 @@ Web Application (College Fest Management Platform)
 - Glow effects, animated cards, hover transitions
 - Animated loading states
 - Admin-configurable layout for header sections
-- Admin-configurable logo arrangement (add/delete logos)
+- Admin-configurable logo arrangement (add/delete logos with shape options)
 - Admin-editable body content with flexible text box placement
 - Background image removed, admin can update background settings
 
-#### 2.1.3 Events Section
+#### 2.1.4 Events Section
 - Display events categorized by type (Technical/Cultural)
 - Each event card shows:
   - Event Name
@@ -53,7 +70,7 @@ Web Application (College Fest Management Platform)
   - Brief description preview
 - Clicking on event card navigates to dedicated event detail page
 
-#### 2.1.4 Event Detail Page
+#### 2.1.5 Event Detail Page
 - Display complete event information:
   - Event Name
   - Event Type
@@ -68,27 +85,27 @@ Web Application (College Fest Management Platform)
 - Cinematic layout with smooth transitions
 - Back navigation to Events Section
 
-#### 2.1.5 Committee Section
+#### 2.1.6 Committee Section
 - Display committee members with:
   - Member images
   - Names
   - Assigned roles
 - Cinematic layout with smooth transitions
 
-#### 2.1.6 Gallery Section
+#### 2.1.7 Gallery Section
 - Cinematic grid/masonry layout displaying uploaded images
 - Lazy loading implementation
 - Smooth transitions between images
 - Display images uploaded by admin through Gallery Management
 
-#### 2.1.7 About Us Section
+#### 2.1.8 About Us Section
 - Editable text content displaying fest information
 
-#### 2.1.8 Contact Us Section
+#### 2.1.9 Contact Us Section
 - Display contact details
 - Contact form or contact information display
 
-#### 2.1.9 Footer Section
+#### 2.1.10 Footer Section
 - Display contact details
 - Social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Admin-editable footer structure and content
@@ -134,12 +151,19 @@ Web Application (College Fest Management Platform)
 - Preview updates automatically as admin edits content
 - Preview shows exact appearance of public website across multiple web pages
 
-#### 2.3.2 Header Management
-- Update college name (default: ACEM)
-- Upload up to 4 college logos
-- Configure logo positioning:
-  - Replace logo positions (left/right arrangement)
-  - Add or delete logos
+#### 2.3.2 Primary Header Management
+- Update college name (default: \"ADITYA College of Engineering Madanapalle\")
+- Configure college name styling:
+  - Golden dark color with black border
+  - Font selection
+  - Font size adjustment
+  - Enhanced visual styling for attractiveness
+- Update location text (default: \"MADANAPALLE\")
+  - Font size: 12px or 14px
+- Update institution status (default: \"UGC - Autonomous Institution\")
+  - Font size: 12px or 14px
+- Configure navigation menu positioning (top-right corner)
+- Edit navigation menu items
 - Text styling controls:
   - Font selection
   - Font size adjustment
@@ -151,7 +175,22 @@ Web Application (College Fest Management Platform)
 - Edit header structure and layout
 - Changes reflect immediately on public UI header and live preview
 
-#### 2.3.3 Body Content Management
+#### 2.3.3 Secondary Header (Logo Header) Management
+- Upload multiple college logos
+- Configure individual logo shapes:
+  - Circle shape option
+  - Semi-square shape option
+- Add or delete logos dynamically
+- Configure logo positioning and arrangement
+- Update static data displayed in logo header
+- Edit header details and content
+- Customize logo header styling:
+  - Background color/image
+  - Spacing and layout
+  - Border and shadow effects
+- All changes update automatically in database and reflect in live preview
+
+#### 2.3.4 Body Content Management
 - Add text boxes anywhere on the page with drag-and-drop functionality
 - Position text boxes freely according to admin preference
 - Edit text box content, styling, and positioning
@@ -160,7 +199,7 @@ Web Application (College Fest Management Platform)
 - Customize body layout structure
 - All changes update automatically in database and reflect in live preview
 
-#### 2.3.4 Footer Management
+#### 2.3.5 Footer Management
 - Edit footer structure and layout
 - Update contact details:
   - Phone numbers
@@ -176,14 +215,15 @@ Web Application (College Fest Management Platform)
 - Add or remove footer sections
 - Changes reflect instantly on public UI and live preview
 
-#### 2.3.5 Homepage Layout Management
-- Arrange header sections as desired
-- Add or delete logos dynamically
+#### 2.3.6 Homepage Layout Management
+- Arrange primary header sections as desired
+- Configure secondary logo header layout
+- Add or delete logos dynamically with shape configuration
 - Configure layout elements positioning
 - Drag-and-drop interface for section reordering
 - All customizations apply across multiple web pages
 
-#### 2.3.6 Event Management
+#### 2.3.7 Event Management
 - Add new events with fields:
   - Event Name
   - Event Type (Technical/Cultural)
@@ -200,13 +240,13 @@ Web Application (College Fest Management Platform)
 - Event cards link to dedicated event detail pages
 - Changes visible in live preview immediately
 
-#### 2.3.7 Committee Management
+#### 2.3.8 Committee Management
 - Add committee members
 - Assign roles to members
 - Upload member images
 - Changes display dynamically on website and live preview
 
-#### 2.3.8 Gallery Management
+#### 2.3.9 Gallery Management
 - Upload multiple images to gallery
 - Image upload interface with file selection
 - Uploaded images stored in Supabase Storage
@@ -216,16 +256,16 @@ Web Application (College Fest Management Platform)
 - Delete images from gallery
 - Rearrange image display order
 
-#### 2.3.9 About Us Management
+#### 2.3.10 About Us Management
 - Edit About Us section text content
 - Updates reflect immediately on public UI and live preview
 
-#### 2.3.10 Contact & Social Media Management
+#### 2.3.11 Contact & Social Media Management
 - Update contact details
 - Update social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Changes reflect instantly on public UI and live preview
 
-#### 2.3.11 Passkey Management
+#### 2.3.12 Passkey Management
 - Change passkey functionality with validation:
   - Enter old passkey
   - Enter new passkey
@@ -235,9 +275,10 @@ Web Application (College Fest Management Platform)
   - New passkey and confirm passkey must match
 - Passkey update stored securely in Supabase
 
-#### 2.3.12 Complete Application Editing
+#### 2.3.13 Complete Application Editing
 - Admin has full control to edit entire application:
-  - Header sections
+  - Primary header sections
+  - Secondary logo header sections
   - Footer sections
   - Body parts
   - All content areas
@@ -245,7 +286,7 @@ Web Application (College Fest Management Platform)
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
 
-#### 2.3.13 Supabase Connection Management
+#### 2.3.14 Supabase Connection Management
 - Manual database connection configuration interface
 - Step-by-step connection setup guide displayed in chatbot:
   - Step 1: Create Supabase account at supabase.com
@@ -278,12 +319,14 @@ Web Application (College Fest Management Platform)
 - Default background color with admin override capability
 - Enhanced footer design with improved visual hierarchy
 - Background image removed by default, admin can upload and update background
+- Primary header with golden dark college name styling and black border for enhanced attractiveness
+- Secondary logo header with configurable logo shapes (circle/semi-square)
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
 - Flexible layout adapting to all screen sizes for easy access
 - Smooth page transitions and animated loading states
-- Responsive header with mobile-friendly navigation menu
+- Responsive dual header system with mobile-friendly navigation menu positioned at top-right
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
 
@@ -300,7 +343,8 @@ Web Application (College Fest Management Platform)
 - Supabase cloud database for data storage
 - Manual connection configuration support
 - Tables for:
-  - Header content (college name: ACEM, logos with positioning data)
+  - Primary header content (college name: \"ADITYA College of Engineering Madanapalle\", location: \"MADANAPALLE\", institution status: \"UGC - Autonomous Institution\", styling configurations)
+  - Secondary logo header content (logos with shape configurations: circle/semi-square, positioning data, static data)
   - Text styling configurations (font, size, color)
   - Background settings (color, image)
   - Body content (text boxes with positioning data)
@@ -329,7 +373,8 @@ Web Application (College Fest Management Platform)
   - Update live preview in real-time
 - API endpoints for:
   - Database connection management
-  - Logo positioning management
+  - Primary header management (college name, location, institution status styling)
+  - Secondary logo header management (logo upload, shape configuration, positioning)
   - Text styling updates
   - Background customization
   - Text box positioning and content
@@ -368,8 +413,10 @@ Web Application (College Fest Management Platform)
 ## 5. User Flow
 
 ### 5.1 Public User Flow
-1. User lands on cinematic homepage with header displaying ACEM, logos (2 left, 2 right), and navigation menu
-2. User navigates through multiple web pages using header menu (Home, Events, Committee, Gallery, About Us, Contact Us)
+1. User lands on cinematic homepage with dual header system:
+   - Primary header displaying \"ADITYA College of Engineering Madanapalle\" (golden dark with black border), \"MADANAPALLE\" (font 12/14), \"UGC - Autonomous Institution\" (font 12/14), and navigation menu at top-right corner
+   - Secondary logo header displaying college logos with configured shapes (circle/semi-square)
+2. User navigates through multiple web pages using top-right navigation menu (Home, Events, Committee, Gallery, About Us, Contact Us)
 3. User experiences consistent responsive design across all screen sizes
 4. User views events by category (Technical/Cultural) on Events page
 5. User clicks on event card to navigate to dedicated event detail page
@@ -401,7 +448,8 @@ Web Application (College Fest Management Platform)
    - Confirms successful connection
    - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
-   - Header: Update ACEM text, configure logo positions (left/right), add/delete logos
+   - Primary Header: Update college name (\"ADITYA College of Engineering Madanapalle\"), location (\"MADANAPALLE\"), institution status (\"UGC - Autonomous Institution\"), configure golden dark styling with black border, position navigation menu at top-right
+   - Secondary Logo Header: Upload logos, configure logo shapes (circle/semi-square), manage positioning, update static data
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
@@ -411,8 +459,8 @@ Web Application (College Fest Management Platform)
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
    - Chatbot information content management
-10. Admin arranges homepage layout and header sections as desired
-11. Admin edits entire application including header, footer, and body sections
+10. Admin arranges homepage layout and dual header sections as desired
+11. Admin edits entire application including primary header, secondary logo header, footer, and body sections
 12. Admin can change passkey through Passkey Management
 13. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview
 14. Admin can access and edit multiple web pages with consistent editing interface
@@ -456,12 +504,13 @@ Web Application (College Fest Management Platform)
 3. Open browser and navigate to http://localhost:3000
 
 #### Step 5: Testing
-1. Test public user interface
+1. Test public user interface with dual header system
 2. Test chatbot authentication
 3. Test admin dashboard functionality
 4. Test database connection
 5. Verify live preview updates
 6. Test gallery image upload and display
+7. Test primary and secondary header management
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -494,12 +543,13 @@ Web Application (College Fest Management Platform)
 
 #### Step 4: Verification
 1. Access deployed website URL
-2. Test all public user features
+2. Test all public user features including dual header system
 3. Test admin authentication and dashboard
 4. Verify database connectivity
 5. Test live preview functionality
 6. Verify image uploads to Supabase Storage
 7. Test gallery image display on public UI
+8. Test primary and secondary header display and management
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -559,6 +609,7 @@ npm install @supabase/supabase-js
 3. Replace MongoDB queries with Supabase queries
 4. Update API endpoints
 5. Add gallery image upload endpoint
+6. Add primary and secondary header management endpoints
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -575,6 +626,7 @@ npm install @supabase/supabase-js
 4. Test admin dashboard functionality
 5. Verify live preview updates
 6. Test gallery image upload and display
+7. Test dual header system management
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -642,7 +694,8 @@ Files requiring updates for gallery image upload:
 
 ### 7.1 Supabase Table Schema
 System will automatically create the following tables on first connection:
-- header_content (id, college_name, logos, created_at, updated_at)
+- primary_header_content (id, college_name, location, institution_status, styling, navigation_position, created_at, updated_at)
+- secondary_header_content (id, logos, logo_shapes, static_data, created_at, updated_at)
 - text_styling (id, font_family, font_size, text_color, created_at, updated_at)
 - background_settings (id, background_color, background_image_url, created_at, updated_at)
 - body_content (id, text_boxes, created_at, updated_at)
@@ -658,7 +711,7 @@ System will automatically create the following tables on first connection:
 ### 7.2 Image Storage
 - All uploaded images stored in Supabase Storage
 - Separate storage buckets for:
-  - Logos
+  - Logos (including secondary header logos with shape configurations)
   - Event images
   - Committee member images
   - Gallery images (for Gallery Section display)
@@ -666,3 +719,4 @@ System will automatically create the following tables on first connection:
 - Public access configured for image buckets
 - Automatic URL generation for uploaded images
 - Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section
+- Logo bucket supports circle and semi-square shape configurations

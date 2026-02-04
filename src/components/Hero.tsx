@@ -36,14 +36,44 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">Fusion26</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center" style={{
+            color: '#D4AF37',
+            textShadow: '0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3)',
+            WebkitTextStroke: '2px #000000',
+            paintOrder: 'stroke fill',
+            letterSpacing: '0.05em'
+          }}>
+            ADITYA College of Engineering Madanapalle
+          </h1>
           <motion.p
-            className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto"
+            className="text-lg md:text-xl mb-2 text-center font-semibold"
+            style={{
+              color: '#D4AF37',
+              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+              WebkitTextStroke: '1px #000000',
+              paintOrder: 'stroke fill',
+              letterSpacing: '0.1em'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+          >
+            MADANAPALLE
+          </motion.p>
+          <motion.p
+            className="text-sm md:text-base text-center font-medium mb-8"
+            style={{
+              color: '#D4AF37',
+              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+              WebkitTextStroke: '0.5px #000000',
+              paintOrder: 'stroke fill',
+              letterSpacing: '0.05em'
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            Where Innovation Meets Celebration
+            UGC - Autonomous Institution
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

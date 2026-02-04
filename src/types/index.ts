@@ -84,6 +84,7 @@ export interface Logo {
   url: string;
   position: 'left' | 'right';
   order: number;
+  shape?: 'circle' | 'semi-square';
 }
 
 export interface ThemeSettings {
