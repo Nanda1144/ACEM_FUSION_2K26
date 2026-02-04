@@ -86,20 +86,20 @@ Web Application (College Fest Management Platform)
 - Cinematic layout with smooth transitions
 - Back navigation to Events Section
 
-#### 2.1.6 Staff and Student Details Section
+#### 2.1.6 Staff and Student Coordinators Section
 - Positioned below Technical and Cultural events sections
-- Display staff details:
+- Dynamic display based on event type selection:
+  - When Technical event is selected: Display staff coordinators and student coordinators associated with Technical events
+  - When Cultural event is selected: Display staff coordinators and student coordinators associated with Cultural events
+- Display staff coordinator details:
   - Staff Name
   - Staff Contact
   - Associated Event Type (Technical/Cultural)
-- Display student details:
+- Display student coordinator details:
   - Student Name
   - Student Contact
   - Associated Event Type (Technical/Cultural)
-- Dynamic filtering based on event type selection:
-  - When Technical event is selected: Display one staff name and student names associated with Technical events
-  - When Cultural event is selected: Display one staff name and student names associated with Cultural events
-- Admin-editable staff and student information
+- Admin-editable staff and student coordinator information through Events Section management
 - Cinematic layout with smooth transitions
 
 #### 2.1.7 Committee Section
@@ -248,37 +248,25 @@ Web Application (College Fest Management Platform)
   - Event Rules
   - Event Instructions
   - Event Images upload (multiple images support)
-  - Staff Coordinators (Name, Contact)
-  - Student Coordinators (Name, Contact)
+  - Staff Coordinators (Name, Contact) - editable within Events Section
+  - Student Coordinators (Name, Contact) - editable within Events Section
   - Google Form registration link
-- Edit existing events
+- Edit existing events including staff and student coordinator details
 - Delete events
+- Admin can add, edit, or delete staff coordinator details directly in Events Section
+- Admin can add, edit, or delete student coordinator details directly in Events Section
 - Events auto-display on public UI based on event type
 - Event cards link to dedicated event detail pages
+- Staff and student coordinators display dynamically below Technical and Cultural events based on event type selection
 - Changes visible in live preview immediately
 
-#### 2.3.8 Staff and Student Details Management
-- Add staff details:
-  - Staff Name
-  - Staff Contact
-  - Associated Event Type (Technical/Cultural)
-- Add student details:
-  - Student Name
-  - Student Contact
-  - Associated Event Type (Technical/Cultural)
-- Edit existing staff and student information
-- Delete staff and student records
-- Associate staff and students with specific event types
-- Staff and student details display dynamically on public UI based on selected event type
-- Changes visible in live preview immediately
-
-#### 2.3.9 Committee Management
+#### 2.3.8 Committee Management
 - Add committee members
 - Assign roles to members
 - Upload member images
 - Changes display dynamically on website and live preview
 
-#### 2.3.10 Gallery Management
+#### 2.3.9 Gallery Management
 - Upload multiple images to gallery
 - Image upload interface with file selection
 - Uploaded images stored in Supabase Storage
@@ -288,16 +276,16 @@ Web Application (College Fest Management Platform)
 - Delete images from gallery
 - Rearrange image display order
 
-#### 2.3.11 About Us Management
+#### 2.3.10 About Us Management
 - Edit About Us section text content
 - Updates reflect immediately on public UI and live preview
 
-#### 2.3.12 Contact & Social Media Management
+#### 2.3.11 Contact & Social Media Management
 - Update contact details
 - Update social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Changes reflect instantly on public UI and live preview
 
-#### 2.3.13 Passkey Management
+#### 2.3.12 Passkey Management
 - Change passkey functionality with validation:
   - Enter old passkey
   - Enter new passkey
@@ -307,18 +295,19 @@ Web Application (College Fest Management Platform)
   - New passkey and confirm passkey must match
 - Passkey update stored securely in Supabase
 
-#### 2.3.14 Complete Application Editing
+#### 2.3.13 Complete Application Editing
 - Admin has full control to edit entire application:
   - Primary header sections
   - Secondary logo and college information header sections
   - Footer sections
   - Body parts
   - All content areas
+  - Staff and student coordinator details through Events Section
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
 
-#### 2.3.15 Supabase Connection Management
+#### 2.3.14 Supabase Connection Management
 - Manual database connection configuration interface
 - Step-by-step connection setup guide displayed in chatbot:
   - Step 1: Create Supabase account at supabase.com
@@ -382,9 +371,7 @@ Web Application (College Fest Management Platform)
   - Background settings (color, image)
   - Body content (text boxes with positioning data)
   - Footer content and styling
-  - Events (including rules, instructions, multiple images, Google Form links)
-  - Staff details (name, contact, event type association)
-  - Student details (name, contact, event type association)
+  - Events (including rules, instructions, multiple images, staff coordinators, student coordinators, Google Form links)
   - Committee members
   - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
@@ -395,6 +382,7 @@ Web Application (College Fest Management Platform)
 - Automatic data updates on admin changes
 - Connection credentials stored securely
 - Supabase Storage for image uploads
+- Staff and student coordinator details stored within events table
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
@@ -414,8 +402,7 @@ Web Application (College Fest Management Platform)
   - Background customization
   - Text box positioning and content
   - Footer management
-  - Event detail page data
-  - Staff and student details management
+  - Event detail page data (including staff and student coordinator management)
   - Complete application editing
   - Chatbot information retrieval
   - Image upload to Supabase Storage
@@ -460,12 +447,13 @@ Web Application (College Fest Management Platform)
    - Full description
    - Rules and instructions
    - Event images
+   - Staff coordinator contact details
    - Student coordinator contact details
 7. User clicks registration button on event detail page
 8. Google Form opens (link provided by admin)
-9. User views Staff and Student Details Section below Technical and Cultural events
-10. When user selects Technical event: System displays one staff name and student names associated with Technical events
-11. When user selects Cultural event: System displays one staff name and student names associated with Cultural events
+9. User views Staff and Student Coordinators Section below Technical and Cultural events
+10. When user selects Technical event: System displays staff coordinators and student coordinators associated with Technical events
+11. When user selects Cultural event: System displays staff coordinators and student coordinators associated with Cultural events
 12. User explores gallery section and views images uploaded by admin
 13. User explores committee sections with smooth cinematic navigation
 14. User views improved footer section with contact details and social media links
@@ -493,14 +481,13 @@ Web Application (College Fest Management Platform)
    - Background: Change color or upload background image (admin-controlled)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
-   - Events: Add event details including rules, instructions, multiple images, student coordinator contacts, Google Form link
-   - Staff and Student Details: Add staff names, contacts, and event type associations; Add student names, contacts, and event type associations
+   - Events: Add event details including rules, instructions, multiple images, staff coordinator details (name, contact), student coordinator details (name, contact), Google Form link; Edit staff and student coordinator details directly within Events Section
    - Committee management
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and dual header sections as desired
-11. Admin edits entire application including primary header, secondary header, footer, and body sections
+11. Admin edits entire application including primary header, secondary header, footer, body sections, and staff/student coordinator details through Events Section
 12. Admin can change passkey through Passkey Management
 13. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview
 14. Admin can access and edit multiple web pages with consistent editing interface
@@ -551,7 +538,8 @@ Web Application (College Fest Management Platform)
 5. Verify live preview updates
 6. Test gallery image upload and display
 7. Test primary and secondary header management
-8. Test staff and student details display and filtering
+8. Test staff and student coordinator details display and filtering
+9. Test staff and student coordinator editing within Events Section
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -591,7 +579,8 @@ Web Application (College Fest Management Platform)
 6. Verify image uploads to Supabase Storage
 7. Test gallery image display on public UI
 8. Test primary and secondary header display and management
-9. Test staff and student details display and filtering functionality
+9. Test staff and student coordinator details display and filtering functionality
+10. Test staff and student coordinator editing within Events Section
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -652,7 +641,7 @@ npm install @supabase/supabase-js
 4. Update API endpoints
 5. Add gallery image upload endpoint
 6. Add primary and secondary header management endpoints
-7. Add staff and student details management endpoints
+7. Add staff and student coordinator management endpoints within Events Section
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -670,7 +659,7 @@ npm install @supabase/supabase-js
 5. Verify live preview updates
 6. Test gallery image upload and display
 7. Test dual header system management
-8. Test staff and student details management and filtering
+8. Test staff and student coordinator management and filtering within Events Section
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -734,48 +723,64 @@ Files requiring updates for gallery image upload:
 4. Supabase client configuration file (e.g., backend/config/supabase.js)
 5. Environment configuration file (.env)
 
-### 6.6 Staff and Student Details Implementation Guide
+### 6.6 Staff and Student Coordinator Management Implementation Guide
 
 #### Backend Implementation
-1. Create staff details API endpoints:
-   - POST /api/staff - Add new staff member
-   - GET /api/staff - Retrieve all staff members
-   - GET /api/staff/:eventType - Retrieve staff by event type (Technical/Cultural)
-   - PUT /api/staff/:id - Update staff member
-   - DELETE /api/staff/:id - Delete staff member
+1. Update event management API endpoints to include staff and student coordinator fields:
+   - POST /api/events - Add new event with staff and student coordinators
+   - GET /api/events - Retrieve all events with coordinator details
+   - GET /api/events/:id - Retrieve specific event with coordinator details
+   - GET /api/events/type/:eventType - Retrieve events by type (Technical/Cultural) with coordinators
+   - PUT /api/events/:id - Update event including staff and student coordinator details
+   - DELETE /api/events/:id - Delete event
 
-2. Create student details API endpoints:
-   - POST /api/students - Add new student
-   - GET /api/students - Retrieve all students
-   - GET /api/students/:eventType - Retrieve students by event type (Technical/Cultural)
-   - PUT /api/students/:id - Update student
-   - DELETE /api/students/:id - Delete student
+2. API endpoint structure for coordinator data:
+   - Staff coordinators stored as array within event record
+   - Student coordinators stored as array within event record
+   - Each coordinator object contains: name, contact, event_type
 
 #### Frontend Implementation
-1. Admin Dashboard Staff and Student Management component:
-   - File location: frontend/components/admin/StaffStudentManagement.jsx or similar
-   - Add staff management interface:
-     - Input fields for staff name, contact, event type
-     - Add/Edit/Delete functionality
-   - Add student management interface:
-     - Input fields for student name, contact, event type
-     - Add/Edit/Delete functionality
+1. Admin Dashboard Event Management component:
+   - File location: frontend/components/admin/EventManagement.jsx or similar
+   - Add staff coordinator management interface within event form:
+     - Input fields for staff name, contact
+     - Add/Edit/Delete functionality for staff coordinators
+     - Associate staff with event type automatically
+   - Add student coordinator management interface within event form:
+     - Input fields for student name, contact
+     - Add/Edit/Delete functionality for student coordinators
+     - Associate students with event type automatically
 
-2. Public Staff and Student Details Section component:
-   - File location: frontend/components/public/StaffStudentDetails.jsx or similar
+2. Public Staff and Student Coordinators Section component:
+   - File location: frontend/components/public/StaffStudentCoordinators.jsx or similar
    - Implementation:
-     - Fetch staff and student data from API endpoints
-     - Display staff and student details below Technical and Cultural events
+     - Fetch event data including coordinator details from API endpoints
+     - Display staff and student coordinators below Technical and Cultural events
      - Implement filtering logic based on selected event type
-     - When Technical event selected: Display one staff name and student names for Technical
-     - When Cultural event selected: Display one staff name and student names for Cultural
+     - When Technical event selected: Display staff coordinators and student coordinators for Technical events
+     - When Cultural event selected: Display staff coordinators and student coordinators for Cultural events
+
+#### Database Schema Update
+- Events table structure:
+  - id (primary key)
+  - name (text)
+  - type (text: Technical/Cultural)
+  - description (text)
+  - rules (text)
+  - instructions (text)
+  - images (array)
+  - staff_coordinators (jsonb array: [{name, contact}])
+  - student_coordinators (jsonb array: [{name, contact}])
+  - registration_link (text)
+  - created_at (timestamp)
+  - updated_at (timestamp)
 
 #### Code Update Summary
-Files requiring updates for staff and student details:
-1. Backend API routes file (e.g., backend/routes/staffStudents.js)
-2. Admin Dashboard Staff and Student Management component (e.g., frontend/components/admin/StaffStudentManagement.jsx)
-3. Public Staff and Student Details Section component (e.g., frontend/components/public/StaffStudentDetails.jsx)
-4. Database schema file for staff_details and student_details tables
+Files requiring updates for staff and student coordinator management:
+1. Backend API routes file (e.g., backend/routes/events.js)
+2. Admin Dashboard Event Management component (e.g., frontend/components/admin/EventManagement.jsx)
+3. Public Staff and Student Coordinators Section component (e.g., frontend/components/public/StaffStudentCoordinators.jsx)
+4. Database schema file for events table with coordinator fields
 
 ## 7. Other Requirements
 
@@ -788,8 +793,6 @@ System will automatically create the following tables on first connection:
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
 - events (id, name, type, description, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
-- staff_details (id, name, contact, event_type, created_at, updated_at)
-- student_details (id, name, contact, event_type, created_at, updated_at)
 - committee_members (id, name, role, image_url, created_at, updated_at)
 - gallery_images (id, image_url, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)

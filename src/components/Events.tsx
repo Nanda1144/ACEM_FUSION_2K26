@@ -68,6 +68,21 @@ export default function Events() {
             <EventGrid events={filteredEvents} loading={loading} />
           </TabsContent>
         </Tabs>
+
+        {/* Coordinator Details Section */}
+        {!loading && filteredEvents.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mt-16"
+          >
+            <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center gradient-text">
+              Event Coordinators
+            </h3>
+            <CoordinatorDetails events={filteredEvents} eventType={activeTab} />
+          </motion.div>
+        )}
       </div>
     </section>
   );
@@ -201,6 +216,106 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
           </Card>
         </motion.div>
       ))}
+    </div>
+  );
+}
+
+function CoordinatorDetails({ events, eventType }: { events: Event[]; eventType: 'Technical' | 'Cultural' }) {
+  // Collect all unique coordinators from events
+  const allStaffCoordinators = events.flatMap(event => event.staff_coordinators || []);
+  const allStudentCoordinators = events.flatMap(event => event.student_coordinators || []);
+
+  // For Technical: Show limited coordinators (1 staff, 1 student)
+  // For Cultural: Show more coordinators (all staff, all students)
+  const displayStaffCoordinators = eventType === 'Technical' 
+    ? allStaffCoordinators.slice(0, 1)
+    : allStaffCoordinators;
+  
+  const displayStudentCoordinators = eventType === 'Technical'
+    ? allStudentCoordinators.slice(0, 1)
+    : allStudentCoordinators;
+
+  if (displayStaffCoordinators.length === 0 && displayStudentCoordinators.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-muted-foreground">No coordinators assigned yet</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {/* Staff Coordinators */}
+      {displayStaffCoordinators.length > 0 && (
+        <Card className="backdrop-blur-glass border-primary/20">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center gap-2">
+              <User className="h-6 w-6 text-primary" />
+              Staff Coordinator{displayStaffCoordinators.length > 1 ? 's' : ''}
+            </CardTitle>
+            <CardDescription>
+              {eventType === 'Technical' 
+                ? 'Contact person for technical events' 
+                : 'Contact persons for cultural events'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {displayStaffCoordinators.map((coordinator, index) => (
+              <div 
+                key={index} 
+                className="p-4 bg-muted/50 rounded-lg border border-primary/10 hover:border-primary/30 transition-colors"
+              >
+                <h4 className="font-semibold text-lg mb-2 text-primary">{coordinator.name}</h4>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <a 
+                    href={`tel:${coordinator.contact}`} 
+                    className="hover:text-primary transition-colors"
+                  >
+                    {coordinator.contact}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Student Coordinators */}
+      {displayStudentCoordinators.length > 0 && (
+        <Card className="backdrop-blur-glass border-secondary/20">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center gap-2">
+              <User className="h-6 w-6 text-secondary" />
+              Student Coordinator{displayStudentCoordinators.length > 1 ? 's' : ''}
+            </CardTitle>
+            <CardDescription>
+              {eventType === 'Technical'
+                ? 'Student contact for technical events'
+                : 'Student contacts for cultural events'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {displayStudentCoordinators.map((coordinator, index) => (
+              <div 
+                key={index} 
+                className="p-4 bg-muted/50 rounded-lg border border-secondary/10 hover:border-secondary/30 transition-colors"
+              >
+                <h4 className="font-semibold text-lg mb-2 text-secondary">{coordinator.name}</h4>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <a 
+                    href={`tel:${coordinator.contact}`} 
+                    className="hover:text-secondary transition-colors"
+                  >
+                    {coordinator.contact}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
