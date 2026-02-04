@@ -71,177 +71,193 @@ export default function FlexibleHeader() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled && !themeSettings?.header_bg_color
-          ? 'backdrop-blur-glass border-b border-primary/20 shadow-lg'
-          : ''
-      }`}
-      style={headerStyle}
-    >
-      <div className="container mx-auto px-4">
-        {/* Top Row: Logos and Navigation */}
-        <div className="flex items-center justify-between h-20">
-          {/* Left Logos */}
-          <div className="flex items-center gap-3">
-            {leftLogos.map((logo) => (
-              <div
-                key={logo.id}
-                className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                  logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
-                }`}
-              >
-                <img
-                  src={logo.url}
-                  alt={`Logo ${logo.id}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Right: Navigation and Right Logos */}
-          <div className="flex items-center gap-6">
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6">
-              {pages.map((page) => (
-                <button
-                  key={page.id}
-                  onClick={() => scrollToSection(page.slug)}
-                  className="transition-colors duration-300 font-medium relative group"
-                  style={navStyle}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = themeSettings?.nav_hover_color || '#00D9FF';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = themeSettings?.nav_text_color || '#FFFFFF';
-                  }}
-                >
-                  {page.title}
-                  <span 
-                    className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
-                    style={{ backgroundColor: themeSettings?.nav_hover_color || '#00D9FF' }}
-                  />
-                </button>
-              ))}
-            </nav>
-
-            {/* Right Logos */}
-            <div className="hidden lg:flex items-center gap-3">
-              {rightLogos.map((logo) => (
-                <div
-                  key={logo.id}
-                  className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                    logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
-                  }`}
-                >
-                  <img
-                    src={logo.url}
-                    alt={`Logo ${logo.id}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="lg:hidden border-primary/50 hover:border-primary"
-                >
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="backdrop-blur-glass border-primary/20">
-                <div className="flex flex-col gap-6 mt-8">
-                  <div className="mb-4">
-                    <h2 className="text-2xl font-bold" style={titleStyle}>
-                      {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
-                    </h2>
-                    {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
-                      <p 
-                        className="text-sm mt-2 opacity-90" 
-                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                      >
-                        {themeSettings.header_subtitle}
-                      </p>
-                    )}
-                    {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
-                      <p 
-                        className="text-xs mt-1 opacity-75 italic" 
-                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                      >
-                        {themeSettings.header_tagline}
-                      </p>
-                    )}
-                  </div>
-                  {pages.map((page) => (
-                    <button
-                      key={page.id}
-                      onClick={() => scrollToSection(page.slug)}
-                      className="text-left text-lg transition-colors duration-300 font-medium"
-                      style={navStyle}
-                    >
-                      {page.title}
-                    </button>
-                  ))}
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-
-        {/* Bottom Row: College Name (Centered) */}
-        <div className="hidden md:flex items-center justify-center pb-3">
-          <div className="text-center">
-            <h1 
-              className="font-bold whitespace-nowrap" 
-              style={{
-                ...titleStyle,
-                color: themeSettings?.header_text_color || '#D4AF37',
-                textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
-                WebkitTextStroke: '1.5px #000000',
-                paintOrder: 'stroke fill'
-              }}
-            >
-              {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
-            </h1>
-            {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
-              <p 
-                className="text-sm mt-1 opacity-90 font-semibold" 
-                style={{ 
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled && !themeSettings?.header_bg_color
+            ? 'backdrop-blur-glass border-b border-primary/20 shadow-lg'
+            : ''
+        }`}
+        style={headerStyle}
+      >
+        <div className="container mx-auto px-4">
+          {/* Single Row: College Name (Left/Center) and Navigation (Right) */}
+          <div className="flex items-center justify-between h-20">
+            {/* College Name with Subtitle and Tagline */}
+            <div className="hidden md:block">
+              <h1 
+                className="font-bold whitespace-nowrap" 
+                style={{
+                  ...titleStyle,
                   color: themeSettings?.header_text_color || '#D4AF37',
-                  fontSize: '0.875rem',
-                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.5px #000000',
-                  paintOrder: 'stroke fill',
-                  letterSpacing: '0.1em'
-                }}
-              >
-                {themeSettings.header_subtitle}
-              </p>
-            )}
-            {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
-              <p 
-                className="text-xs mt-0.5 opacity-75 italic font-medium" 
-                style={{ 
-                  color: themeSettings?.header_text_color || '#D4AF37',
-                  fontSize: '0.75rem',
-                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.5px #000000',
+                  textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
+                  WebkitTextStroke: '1.5px #000000',
                   paintOrder: 'stroke fill'
                 }}
               >
-                {themeSettings.header_tagline}
-              </p>
-            )}
+                {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
+              </h1>
+              {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
+                <p 
+                  className="text-sm mt-1 opacity-90 font-semibold" 
+                  style={{ 
+                    color: themeSettings?.header_text_color || '#D4AF37',
+                    fontSize: '0.875rem',
+                    textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                    WebkitTextStroke: '0.5px #000000',
+                    paintOrder: 'stroke fill',
+                    letterSpacing: '0.1em'
+                  }}
+                >
+                  {themeSettings.header_subtitle}
+                </p>
+              )}
+              {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
+                <p 
+                  className="text-xs mt-0.5 opacity-75 italic font-medium" 
+                  style={{ 
+                    color: themeSettings?.header_text_color || '#D4AF37',
+                    fontSize: '0.75rem',
+                    textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                    WebkitTextStroke: '0.5px #000000',
+                    paintOrder: 'stroke fill'
+                  }}
+                >
+                  {themeSettings.header_tagline}
+                </p>
+              )}
+            </div>
+
+            {/* Right: Navigation */}
+            <div className="flex items-center gap-6 ml-auto">
+              {/* Desktop Navigation */}
+              <nav className="hidden lg:flex items-center gap-6">
+                {pages.map((page) => (
+                  <button
+                    key={page.id}
+                    onClick={() => scrollToSection(page.slug)}
+                    className="transition-colors duration-300 font-medium relative group"
+                    style={navStyle}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = themeSettings?.nav_hover_color || '#D4AF37';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = themeSettings?.nav_text_color || '#FFFFFF';
+                    }}
+                  >
+                    {page.title}
+                    <span 
+                      className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
+                      style={{ backgroundColor: themeSettings?.nav_hover_color || '#D4AF37' }}
+                    />
+                  </button>
+                ))}
+              </nav>
+
+              {/* Mobile Menu Button */}
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="lg:hidden border-primary/50 hover:border-primary"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="backdrop-blur-glass border-primary/20">
+                  <div className="flex flex-col gap-6 mt-8">
+                    <div className="mb-4">
+                      <h2 className="text-2xl font-bold" style={titleStyle}>
+                        {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
+                      </h2>
+                      {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
+                        <p 
+                          className="text-sm mt-2 opacity-90" 
+                          style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                        >
+                          {themeSettings.header_subtitle}
+                        </p>
+                      )}
+                      {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
+                        <p 
+                          className="text-xs mt-1 opacity-75 italic" 
+                          style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                        >
+                          {themeSettings.header_tagline}
+                        </p>
+                      )}
+                    </div>
+                    {pages.map((page) => (
+                      <button
+                        key={page.id}
+                        onClick={() => scrollToSection(page.slug)}
+                        className="text-left text-lg transition-colors duration-300 font-medium"
+                        style={navStyle}
+                      >
+                        {page.title}
+                      </button>
+                    ))}
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Logo Section Below Header */}
+      {(leftLogos.length > 0 || rightLogos.length > 0) && (
+        <div 
+          className="fixed top-20 left-0 right-0 z-40 backdrop-blur-sm border-b border-primary/10"
+          style={{
+            backgroundColor: themeSettings?.header_bg_color 
+              ? `${themeSettings.header_bg_color}dd` 
+              : 'rgba(0, 0, 0, 0.3)'
+          }}
+        >
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              {/* Left Logos */}
+              <div className="flex items-center gap-4">
+                {leftLogos.map((logo) => (
+                  <div
+                    key={logo.id}
+                    className={`w-14 h-14 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                    }`}
+                  >
+                    <img
+                      src={logo.url}
+                      alt={`Logo ${logo.id}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Logos */}
+              <div className="flex items-center gap-4">
+                {rightLogos.map((logo) => (
+                  <div
+                    key={logo.id}
+                    className={`w-14 h-14 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                    }`}
+                  >
+                    <img
+                      src={logo.url}
+                      alt={`Logo ${logo.id}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

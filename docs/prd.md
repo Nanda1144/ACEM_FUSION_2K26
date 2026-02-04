@@ -16,15 +16,6 @@ Web Application (College Fest Management Platform)
 ### 2.1 Public User Interface
 
 #### 2.1.1 Primary Header Section (Top Header)
-- Display college name: \"ADITYA College of Engineering Madanapalle\"
-  - Styling: Golden dark color with black border for attractiveness
-  - Prominent display with enhanced visual appeal
-- Display location: \"MADANAPALLE\"
-  - Font size: 12px or 14px
-  - Positioned below college name
-- Display institution status: \"UGC - Autonomous Institution\"
-  - Font size: 12px or 14px
-  - Positioned below location on next line
 - Navigation menu positioned at top-right corner with links:
   - Home
   - Committee
@@ -37,8 +28,18 @@ Web Application (College Fest Management Platform)
 - Fully responsive across all screen sizes for easy access
 - Admin-editable header structure and content
 
-#### 2.1.2 Secondary Header Section (Logo Header)
-- Dedicated header section for logo display
+#### 2.1.2 Secondary Header Section (Logo and College Information Header)
+- Positioned below the primary header section
+- Display college name: ADITYA College of Engineering Madanapalle
+  - Styling: Golden dark color with black border for attractiveness
+  - Prominent display with enhanced visual appeal
+- Display location: MADANAPALLE
+  - Font size: 12px or 14px
+  - Positioned below college name
+- Display institution status: UGC - Autonomous Institution
+  - Font size: 12px or 14px
+  - Positioned below location on next line
+- Dedicated section for logo display
 - Support for multiple college logos with configurable shapes:
   - Circle shape option
   - Semi-square shape option
@@ -152,16 +153,6 @@ Web Application (College Fest Management Platform)
 - Preview shows exact appearance of public website across multiple web pages
 
 #### 2.3.2 Primary Header Management
-- Update college name (default: \"ADITYA College of Engineering Madanapalle\")
-- Configure college name styling:
-  - Golden dark color with black border
-  - Font selection
-  - Font size adjustment
-  - Enhanced visual styling for attractiveness
-- Update location text (default: \"MADANAPALLE\")
-  - Font size: 12px or 14px
-- Update institution status (default: \"UGC - Autonomous Institution\")
-  - Font size: 12px or 14px
 - Configure navigation menu positioning (top-right corner)
 - Edit navigation menu items
 - Text styling controls:
@@ -175,7 +166,17 @@ Web Application (College Fest Management Platform)
 - Edit header structure and layout
 - Changes reflect immediately on public UI header and live preview
 
-#### 2.3.3 Secondary Header (Logo Header) Management
+#### 2.3.3 Secondary Header (Logo and College Information Header) Management
+- Update college name (default: ADITYA College of Engineering Madanapalle)
+- Configure college name styling:
+  - Golden dark color with black border
+  - Font selection
+  - Font size adjustment
+  - Enhanced visual styling for attractiveness
+- Update location text (default: MADANAPALLE)
+  - Font size: 12px or 14px
+- Update institution status (default: UGC - Autonomous Institution)
+  - Font size: 12px or 14px
 - Upload multiple college logos
 - Configure individual logo shapes:
   - Circle shape option
@@ -217,7 +218,7 @@ Web Application (College Fest Management Platform)
 
 #### 2.3.6 Homepage Layout Management
 - Arrange primary header sections as desired
-- Configure secondary logo header layout
+- Configure secondary logo and college information header layout
 - Add or delete logos dynamically with shape configuration
 - Configure layout elements positioning
 - Drag-and-drop interface for section reordering
@@ -278,7 +279,7 @@ Web Application (College Fest Management Platform)
 #### 2.3.13 Complete Application Editing
 - Admin has full control to edit entire application:
   - Primary header sections
-  - Secondary logo header sections
+  - Secondary logo and college information header sections
   - Footer sections
   - Body parts
   - All content areas
@@ -319,8 +320,9 @@ Web Application (College Fest Management Platform)
 - Default background color with admin override capability
 - Enhanced footer design with improved visual hierarchy
 - Background image removed by default, admin can upload and update background
-- Primary header with golden dark college name styling and black border for enhanced attractiveness
-- Secondary logo header with configurable logo shapes (circle/semi-square)
+- Primary header with navigation menu positioned at top-right corner
+- Secondary header with golden dark college name styling and black border for enhanced attractiveness, positioned below primary header
+- Secondary header includes configurable logo shapes (circle/semi-square)
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
@@ -343,8 +345,8 @@ Web Application (College Fest Management Platform)
 - Supabase cloud database for data storage
 - Manual connection configuration support
 - Tables for:
-  - Primary header content (college name: \"ADITYA College of Engineering Madanapalle\", location: \"MADANAPALLE\", institution status: \"UGC - Autonomous Institution\", styling configurations)
-  - Secondary logo header content (logos with shape configurations: circle/semi-square, positioning data, static data)
+  - Primary header content (navigation menu, positioning, styling configurations)
+  - Secondary header content (college name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, positioning data, static data, styling)
   - Text styling configurations (font, size, color)
   - Background settings (color, image)
   - Body content (text boxes with positioning data)
@@ -373,8 +375,8 @@ Web Application (College Fest Management Platform)
   - Update live preview in real-time
 - API endpoints for:
   - Database connection management
-  - Primary header management (college name, location, institution status styling)
-  - Secondary logo header management (logo upload, shape configuration, positioning)
+  - Primary header management (navigation menu, positioning)
+  - Secondary header management (college name, location, institution status styling, logo upload, shape configuration, positioning)
   - Text styling updates
   - Background customization
   - Text box positioning and content
@@ -414,9 +416,9 @@ Web Application (College Fest Management Platform)
 
 ### 5.1 Public User Flow
 1. User lands on cinematic homepage with dual header system:
-   - Primary header displaying \"ADITYA College of Engineering Madanapalle\" (golden dark with black border), \"MADANAPALLE\" (font 12/14), \"UGC - Autonomous Institution\" (font 12/14), and navigation menu at top-right corner
-   - Secondary logo header displaying college logos with configured shapes (circle/semi-square)
-2. User navigates through multiple web pages using top-right navigation menu (Home, Events, Committee, Gallery, About Us, Contact Us)
+   - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us)
+   - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden dark with black border), MADANAPALLE (font 12/14), UGC - Autonomous Institution (font 12/14), and college logos with configured shapes (circle/semi-square)
+2. User navigates through multiple web pages using top-right navigation menu
 3. User experiences consistent responsive design across all screen sizes
 4. User views events by category (Technical/Cultural) on Events page
 5. User clicks on event card to navigate to dedicated event detail page
@@ -448,8 +450,8 @@ Web Application (College Fest Management Platform)
    - Confirms successful connection
    - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
-   - Primary Header: Update college name (\"ADITYA College of Engineering Madanapalle\"), location (\"MADANAPALLE\"), institution status (\"UGC - Autonomous Institution\"), configure golden dark styling with black border, position navigation menu at top-right
-   - Secondary Logo Header: Upload logos, configure logo shapes (circle/semi-square), manage positioning, update static data
+   - Primary Header: Position navigation menu at top-right, configure styling
+   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden dark styling with black border, upload logos, configure logo shapes (circle/semi-square), manage positioning, update static data
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
@@ -460,7 +462,7 @@ Web Application (College Fest Management Platform)
    - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and dual header sections as desired
-11. Admin edits entire application including primary header, secondary logo header, footer, and body sections
+11. Admin edits entire application including primary header, secondary header, footer, and body sections
 12. Admin can change passkey through Passkey Management
 13. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview
 14. Admin can access and edit multiple web pages with consistent editing interface
@@ -694,8 +696,8 @@ Files requiring updates for gallery image upload:
 
 ### 7.1 Supabase Table Schema
 System will automatically create the following tables on first connection:
-- primary_header_content (id, college_name, location, institution_status, styling, navigation_position, created_at, updated_at)
-- secondary_header_content (id, logos, logo_shapes, static_data, created_at, updated_at)
+- primary_header_content (id, navigation_menu, navigation_position, styling, created_at, updated_at)
+- secondary_header_content (id, college_name, location, institution_status, logos, logo_shapes, static_data, styling, created_at, updated_at)
 - text_styling (id, font_family, font_size, text_color, created_at, updated_at)
 - background_settings (id, background_color, background_image_url, created_at, updated_at)
 - body_content (id, text_boxes, created_at, updated_at)
