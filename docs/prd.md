@@ -107,6 +107,7 @@ Web Application (College Fest Management Platform)
   - Member images
   - Names
   - Assigned roles
+  - Info section about each person
 - Cinematic layout with smooth transitions
 
 #### 2.1.8 Gallery Section
@@ -264,6 +265,9 @@ Web Application (College Fest Management Platform)
 - Add committee members
 - Assign roles to members
 - Upload member images
+- Add info section about each person
+- Edit member information including personal info section
+- Delete committee members
 - Changes display dynamically on website and live preview
 
 #### 2.3.9 Gallery Management
@@ -303,6 +307,7 @@ Web Application (College Fest Management Platform)
   - Body parts
   - All content areas
   - Staff and student coordinator details through Events Section
+  - Committee member information including personal info sections
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
@@ -372,7 +377,7 @@ Web Application (College Fest Management Platform)
   - Body content (text boxes with positioning data)
   - Footer content and styling
   - Events (including rules, instructions, multiple images, staff coordinators, student coordinators, Google Form links)
-  - Committee members
+  - Committee members (including name, role, image, info section)
   - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
   - Contact information
@@ -383,6 +388,7 @@ Web Application (College Fest Management Platform)
 - Connection credentials stored securely
 - Supabase Storage for image uploads
 - Staff and student coordinator details stored within events table
+- Committee member info section stored within committee_members table
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
@@ -403,6 +409,7 @@ Web Application (College Fest Management Platform)
   - Text box positioning and content
   - Footer management
   - Event detail page data (including staff and student coordinator management)
+  - Committee management (including member info section)
   - Complete application editing
   - Chatbot information retrieval
   - Image upload to Supabase Storage
@@ -454,8 +461,8 @@ Web Application (College Fest Management Platform)
 9. User views Staff and Student Coordinators Section below Technical and Cultural events
 10. When user selects Technical event: System displays staff coordinators and student coordinators associated with Technical events
 11. When user selects Cultural event: System displays staff coordinators and student coordinators associated with Cultural events
-12. User explores gallery section and views images uploaded by admin
-13. User explores committee sections with smooth cinematic navigation
+12. User explores committee section and views member details including personal info sections
+13. User explores gallery section and views images uploaded by admin
 14. User views improved footer section with contact details and social media links
 15. User can interact with chatbot to get website information and details
 
@@ -482,12 +489,12 @@ Web Application (College Fest Management Platform)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
    - Events: Add event details including rules, instructions, multiple images, staff coordinator details (name, contact), student coordinator details (name, contact), Google Form link; Edit staff and student coordinator details directly within Events Section
-   - Committee management
+   - Committee: Add members with name, role, image, and info section; Edit member information including personal info sections
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and dual header sections as desired
-11. Admin edits entire application including primary header, secondary header, footer, body sections, and staff/student coordinator details through Events Section
+11. Admin edits entire application including primary header, secondary header, footer, body sections, staff/student coordinator details through Events Section, and committee member info sections
 12. Admin can change passkey through Passkey Management
 13. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview
 14. Admin can access and edit multiple web pages with consistent editing interface
@@ -540,6 +547,7 @@ Web Application (College Fest Management Platform)
 7. Test primary and secondary header management
 8. Test staff and student coordinator details display and filtering
 9. Test staff and student coordinator editing within Events Section
+10. Test committee member info section display and editing
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -581,6 +589,7 @@ Web Application (College Fest Management Platform)
 8. Test primary and secondary header display and management
 9. Test staff and student coordinator details display and filtering functionality
 10. Test staff and student coordinator editing within Events Section
+11. Test committee member info section display and editing functionality
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -642,6 +651,7 @@ npm install @supabase/supabase-js
 5. Add gallery image upload endpoint
 6. Add primary and secondary header management endpoints
 7. Add staff and student coordinator management endpoints within Events Section
+8. Add committee member info section management endpoints
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -660,6 +670,7 @@ npm install @supabase/supabase-js
 6. Test gallery image upload and display
 7. Test dual header system management
 8. Test staff and student coordinator management and filtering within Events Section
+9. Test committee member info section management
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -782,6 +793,53 @@ Files requiring updates for staff and student coordinator management:
 3. Public Staff and Student Coordinators Section component (e.g., frontend/components/public/StaffStudentCoordinators.jsx)
 4. Database schema file for events table with coordinator fields
 
+### 6.7 Committee Member Info Section Implementation Guide
+
+#### Backend Implementation
+1. Update committee management API endpoints to include info section field:
+   - POST /api/committee - Add new committee member with info section
+   - GET /api/committee - Retrieve all committee members with info sections
+   - GET /api/committee/:id - Retrieve specific committee member with info section
+   - PUT /api/committee/:id - Update committee member including info section
+   - DELETE /api/committee/:id - Delete committee member
+
+2. API endpoint structure for committee member data:
+   - Each committee member object contains: name, role, image_url, info_section
+
+#### Frontend Implementation
+1. Admin Dashboard Committee Management component:
+   - File location: frontend/components/admin/CommitteeManagement.jsx or similar
+   - Add info section input field within committee member form:
+     - Text area or rich text editor for info section content
+     - Character limit indicator (optional)
+     - Preview functionality
+   - Edit functionality for existing member info sections
+
+2. Public Committee Section component:
+   - File location: frontend/components/public/Committee.jsx or similar
+   - Implementation:
+     - Fetch committee member data including info sections from API endpoints
+     - Display member cards with image, name, role, and info section
+     - Implement expandable/collapsible info section or modal view
+     - Add smooth transitions and cinematic effects
+
+#### Database Schema Update
+- Committee members table structure:
+  - id (primary key)
+  - name (text)
+  - role (text)
+  - image_url (text)
+  - info_section (text)
+  - created_at (timestamp)
+  - updated_at (timestamp)
+
+#### Code Update Summary
+Files requiring updates for committee member info section:
+1. Backend API routes file (e.g., backend/routes/committee.js)
+2. Admin Dashboard Committee Management component (e.g., frontend/components/admin/CommitteeManagement.jsx)
+3. Public Committee Section component (e.g., frontend/components/public/Committee.jsx)
+4. Database schema file for committee_members table with info_section field
+
 ## 7. Other Requirements
 
 ### 7.1 Supabase Table Schema
@@ -793,7 +851,7 @@ System will automatically create the following tables on first connection:
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
 - events (id, name, type, description, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
-- committee_members (id, name, role, image_url, created_at, updated_at)
+- committee_members (id, name, role, image_url, info_section, created_at, updated_at)
 - gallery_images (id, image_url, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)
 - contact_info (id, details, created_at, updated_at)

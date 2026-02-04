@@ -87,7 +87,12 @@ export default function Committee() {
                   </div>
                   <CardContent className="p-4 text-center">
                     <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-                    <p className="text-sm text-primary">{member.role}</p>
+                    <p className="text-sm text-primary mb-2">{member.role}</p>
+                    {member.info && (
+                      <p className="text-xs text-muted-foreground line-clamp-3">
+                        {member.info}
+                      </p>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>

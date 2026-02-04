@@ -37,6 +37,7 @@ export interface CommitteeMember {
   name: string;
   role: string;
   image_url: string | null;
+  info: string | null;
   display_order: number;
   created_at: string;
   updated_at: string;

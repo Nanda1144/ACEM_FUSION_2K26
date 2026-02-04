@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -23,6 +24,7 @@ export default function CommitteeManagement() {
     defaultValues: {
       name: '',
       role: '',
+      info: '',
       image_url: '',
       display_order: 0
     }
@@ -100,6 +102,7 @@ export default function CommitteeManagement() {
     form.reset({
       name: member.name,
       role: member.role,
+      info: member.info || '',
       image_url: member.image_url || '',
       display_order: member.display_order
     });
@@ -173,6 +176,25 @@ export default function CommitteeManagement() {
                       <FormLabel>Role</FormLabel>
                       <FormControl>
                         <Input {...field} placeholder="Enter member role" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="info"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Info / Bio</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          {...field} 
+                          placeholder="Enter member information or bio (optional)" 
+                          rows={3}
+                          className="resize-none"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
