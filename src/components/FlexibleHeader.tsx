@@ -80,12 +80,12 @@ export default function FlexibleHeader() {
         }`}
         style={headerStyle}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           {/* Single Row: Logos (Left) + College Name (Center-Left) + Navigation (Right) */}
-          <div className="flex items-center justify-between h-20 gap-4">
+          <div className="flex items-center justify-between h-20 gap-6">
             {/* Left Logos */}
             {leftLogos.length > 0 && (
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center shrink-0" style={{ gap: '9px' }}>
                 {leftLogos.map((logo) => (
                   <div
                     key={logo.id}
@@ -104,7 +104,7 @@ export default function FlexibleHeader() {
             )}
 
             {/* College Name with Subtitle and Tagline */}
-            <div className="hidden md:block">
+            <div className="hidden md:block flex-1 px-6">
               <h1 
                 className="font-bold whitespace-nowrap" 
                 style={{
@@ -158,9 +158,9 @@ export default function FlexibleHeader() {
             </div>
 
             {/* Right: Navigation + Right Logos */}
-            <div className="flex items-center gap-4 ml-auto">
+            <div className="flex items-center gap-6 ml-auto">
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-6 relative z-50">
+              <nav className="hidden lg:flex items-center gap-8 relative z-50">
                 {pages.map((page) => (
                   <button
                     key={page.id}
@@ -185,7 +185,7 @@ export default function FlexibleHeader() {
 
               {/* Right Logos */}
               {rightLogos.length > 0 && (
-                <div className="hidden md:flex items-center gap-3 shrink-0">
+                <div className="hidden md:flex items-center shrink-0" style={{ gap: '9px' }}>
                   {rightLogos.map((logo) => (
                     <div
                       key={logo.id}
