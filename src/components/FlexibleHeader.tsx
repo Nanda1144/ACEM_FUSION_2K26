@@ -95,37 +95,46 @@ export default function FlexibleHeader() {
                   paintOrder: 'stroke fill'
                 }}
               >
-                {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
+                {themeSettings?.header_title || 'ACEM FUSION 2k26'}
               </h1>
-              {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
-                <p 
-                  className="text-sm mt-1 opacity-90 font-semibold" 
-                  style={{ 
-                    color: themeSettings?.header_text_color || '#D4AF37',
-                    fontSize: '0.875rem',
-                    textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                    WebkitTextStroke: '0.5px #000000',
-                    paintOrder: 'stroke fill',
-                    letterSpacing: '0.1em'
-                  }}
-                >
-                  {themeSettings.header_subtitle}
-                </p>
-              )}
-              {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
-                <p 
-                  className="text-xs mt-0.5 opacity-75 italic font-medium" 
-                  style={{ 
-                    color: themeSettings?.header_text_color || '#D4AF37',
-                    fontSize: '0.75rem',
-                    textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                    WebkitTextStroke: '0.5px #000000',
-                    paintOrder: 'stroke fill'
-                  }}
-                >
-                  {themeSettings.header_tagline}
-                </p>
-              )}
+              <p 
+                className="text-sm mt-1 opacity-90 font-semibold" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#D4AF37',
+                  fontSize: '0.875rem',
+                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '0.5px #000000',
+                  paintOrder: 'stroke fill',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                {themeSettings?.header_subtitle || 'Aditya College of Engineering'}
+              </p>
+              <p 
+                className="text-xs mt-0.5 opacity-85 font-medium" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#D4AF37',
+                  fontSize: '0.75rem',
+                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '0.5px #000000',
+                  paintOrder: 'stroke fill',
+                  letterSpacing: '0.1em'
+                }}
+              >
+                Madanapalle
+              </p>
+              <p 
+                className="text-xs mt-0.5 opacity-75 italic font-medium" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#D4AF37',
+                  fontSize: '0.7rem',
+                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '0.5px #000000',
+                  paintOrder: 'stroke fill'
+                }}
+              >
+                {themeSettings?.header_tagline || '(UGC - Autonomous Institution)'}
+              </p>
             </div>
 
             {/* Right: Navigation */}
@@ -169,24 +178,26 @@ export default function FlexibleHeader() {
                   <div className="flex flex-col gap-6 mt-8">
                     <div className="mb-4">
                       <h2 className="text-2xl font-bold" style={titleStyle}>
-                        {themeSettings?.header_title || 'ADITYA College of Engineering Madanapalle'}
+                        {themeSettings?.header_title || 'ACEM FUSION 2k26'}
                       </h2>
-                      {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
-                        <p 
-                          className="text-sm mt-2 opacity-90" 
-                          style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                        >
-                          {themeSettings.header_subtitle}
-                        </p>
-                      )}
-                      {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
-                        <p 
-                          className="text-xs mt-1 opacity-75 italic" 
-                          style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                        >
-                          {themeSettings.header_tagline}
-                        </p>
-                      )}
+                      <p 
+                        className="text-sm mt-2 opacity-90" 
+                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                      >
+                        {themeSettings?.header_subtitle || 'Aditya College of Engineering'}
+                      </p>
+                      <p 
+                        className="text-xs mt-1 opacity-85" 
+                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                      >
+                        Madanapalle
+                      </p>
+                      <p 
+                        className="text-xs mt-1 opacity-75 italic" 
+                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
+                      >
+                        {themeSettings?.header_tagline || '(UGC - Autonomous Institution)'}
+                      </p>
                     </div>
                     {pages.map((page) => (
                       <button

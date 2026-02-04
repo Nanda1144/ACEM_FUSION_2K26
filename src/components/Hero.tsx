@@ -43,7 +43,7 @@ export default function Hero() {
             paintOrder: 'stroke fill',
             letterSpacing: '0.05em'
           }}>
-            ADITYA College of Engineering Madanapalle
+            ACEM FUSION 2k26
           </h1>
           <motion.p
             className="text-lg md:text-xl mb-2 text-center font-semibold"
@@ -52,13 +52,28 @@ export default function Hero() {
               textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
               WebkitTextStroke: '1px #000000',
               paintOrder: 'stroke fill',
-              letterSpacing: '0.1em'
+              letterSpacing: '0.05em'
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            MADANAPALLE
+            Aditya College of Engineering
+          </motion.p>
+          <motion.p
+            className="text-base md:text-lg mb-2 text-center font-semibold"
+            style={{
+              color: '#D4AF37',
+              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
+              WebkitTextStroke: '0.8px #000000',
+              paintOrder: 'stroke fill',
+              letterSpacing: '0.1em'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}
+          >
+            Madanapalle
           </motion.p>
           <motion.p
             className="text-sm md:text-base text-center font-medium mb-8"
@@ -73,7 +88,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            UGC - Autonomous Institution
+            (UGC - Autonomous Institution)
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

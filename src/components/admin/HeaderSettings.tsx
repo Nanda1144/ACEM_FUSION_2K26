@@ -129,57 +129,27 @@ export default function HeaderSettings() {
               id="header_title"
               value={settings.header_title}
               onChange={(e) => setSettings({ ...settings, header_title: e.target.value })}
-              placeholder="e.g., ADITYA College of Engineering Madanapalle"
+              placeholder="e.g., ACEM FUSION 2k26"
             />
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="header_subtitle">Header Subtitle</Label>
-              <div className="flex items-center gap-2">
-                <Label htmlFor="show_subtitle" className="text-sm text-muted-foreground">
-                  Show
-                </Label>
-                <Switch
-                  id="show_subtitle"
-                  checked={settings.show_header_subtitle}
-                  onCheckedChange={(checked) =>
-                    setSettings({ ...settings, show_header_subtitle: checked })
-                  }
-                />
-              </div>
-            </div>
+            <Label htmlFor="header_subtitle">Header Subtitle</Label>
             <Input
               id="header_subtitle"
               value={settings.header_subtitle || ''}
               onChange={(e) => setSettings({ ...settings, header_subtitle: e.target.value })}
-              placeholder="e.g., MADANAPALLE"
-              disabled={!settings.show_header_subtitle}
+              placeholder="e.g., Aditya College of Engineering"
             />
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="header_tagline">Header Tagline</Label>
-              <div className="flex items-center gap-2">
-                <Label htmlFor="show_tagline" className="text-sm text-muted-foreground">
-                  Show
-                </Label>
-                <Switch
-                  id="show_tagline"
-                  checked={settings.show_header_tagline}
-                  onCheckedChange={(checked) =>
-                    setSettings({ ...settings, show_header_tagline: checked })
-                  }
-                />
-              </div>
-            </div>
+            <Label htmlFor="header_tagline">Header Tagline</Label>
             <Input
               id="header_tagline"
               value={settings.header_tagline || ''}
               onChange={(e) => setSettings({ ...settings, header_tagline: e.target.value })}
-              placeholder="e.g., UGC - Autonomous Institution"
-              disabled={!settings.show_header_tagline}
+              placeholder="e.g., (UGC - Autonomous Institution)"
             />
           </div>
         </CardContent>
