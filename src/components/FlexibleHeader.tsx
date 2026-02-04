@@ -209,21 +209,16 @@ export default function FlexibleHeader() {
       {/* Logo Section Below Header */}
       {(leftLogos.length > 0 || rightLogos.length > 0) && (
         <div 
-          className="fixed top-20 left-0 right-0 z-40 backdrop-blur-sm border-b border-primary/10"
-          style={{
-            backgroundColor: themeSettings?.header_bg_color 
-              ? `${themeSettings.header_bg_color}dd` 
-              : 'rgba(0, 0, 0, 0.3)'
-          }}
+          className="fixed top-20 left-0 right-0 z-40 border-b border-primary/10"
         >
-          <div className="container mx-auto px-4 py-3">
+          <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               {/* Left Logos */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-6">
                 {leftLogos.map((logo) => (
                   <div
                     key={logo.id}
-                    className={`w-14 h-14 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                    className={`w-20 h-20 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
                       logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
                     }`}
                   >
@@ -237,11 +232,11 @@ export default function FlexibleHeader() {
               </div>
 
               {/* Right Logos */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-6">
                 {rightLogos.map((logo) => (
                   <div
                     key={logo.id}
-                    className={`w-14 h-14 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                    className={`w-20 h-20 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
                       logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
                     }`}
                   >
