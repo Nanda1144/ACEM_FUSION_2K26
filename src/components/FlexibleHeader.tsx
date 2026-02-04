@@ -97,11 +97,33 @@ export default function FlexibleHeader() {
             ))}
           </div>
 
-          {/* College Name */}
-          <div className="hidden md:block">
+          {/* College Name with Subtitle and Tagline */}
+          <div className="hidden md:block text-center">
             <h1 className="font-bold whitespace-nowrap" style={titleStyle}>
               {themeSettings?.header_title || 'ACEM'}
             </h1>
+            {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
+              <p 
+                className="text-sm mt-1 opacity-90" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#00D9FF',
+                  fontSize: '0.875rem'
+                }}
+              >
+                {themeSettings.header_subtitle}
+              </p>
+            )}
+            {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
+              <p 
+                className="text-xs mt-0.5 opacity-75 italic" 
+                style={{ 
+                  color: themeSettings?.header_text_color || '#00D9FF',
+                  fontSize: '0.75rem'
+                }}
+              >
+                {themeSettings.header_tagline}
+              </p>
+            )}
           </div>
 
           {/* Desktop Navigation and Right Logos */}
@@ -160,9 +182,27 @@ export default function FlexibleHeader() {
             </SheetTrigger>
             <SheetContent side="right" className="backdrop-blur-glass border-primary/20">
               <div className="flex flex-col gap-6 mt-8">
-                <h2 className="text-2xl font-bold mb-4" style={titleStyle}>
-                  {themeSettings?.header_title || 'ACEM'}
-                </h2>
+                <div className="mb-4">
+                  <h2 className="text-2xl font-bold" style={titleStyle}>
+                    {themeSettings?.header_title || 'ACEM'}
+                  </h2>
+                  {themeSettings?.show_header_subtitle && themeSettings?.header_subtitle && (
+                    <p 
+                      className="text-sm mt-2 opacity-90" 
+                      style={{ color: themeSettings?.header_text_color || '#00D9FF' }}
+                    >
+                      {themeSettings.header_subtitle}
+                    </p>
+                  )}
+                  {themeSettings?.show_header_tagline && themeSettings?.header_tagline && (
+                    <p 
+                      className="text-xs mt-1 opacity-75 italic" 
+                      style={{ color: themeSettings?.header_text_color || '#00D9FF' }}
+                    >
+                      {themeSettings.header_tagline}
+                    </p>
+                  )}
+                </div>
                 {pages.map((page) => (
                   <button
                     key={page.id}

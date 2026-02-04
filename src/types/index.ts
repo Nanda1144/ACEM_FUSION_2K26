@@ -89,11 +89,15 @@ export interface Logo {
 export interface ThemeSettings {
   id: string;
   header_title: string;
+  header_subtitle: string | null;
+  header_tagline: string | null;
   header_font_family: string;
   header_font_size: string;
   header_text_color: string;
   header_bg_color: string;
   header_bg_image: string | null;
+  show_header_subtitle: boolean;
+  show_header_tagline: boolean;
   logos: Logo[];
   page_bg_color: string;
   page_bg_image: string | null;
