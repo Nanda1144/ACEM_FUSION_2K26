@@ -46,8 +46,9 @@
   - [x] Remove duplicate coordinators
   - [x] Add animations and transitions
 - [x] Step 6: Enhance Gallery Section
-  - [x] Add golden color border (3px solid #D4AF37) to each image
-  - [x] Add glow effect to images (box-shadow with golden color)
+  - [x] Add golden color border (4px solid #D4AF37) to each image
+  - [x] Add animated glow effect to images (pulsing animation)
+  - [x] Create goldenGlow keyframe animation with 3s duration
   - [x] Add hover effects with enhanced glow
   - [x] Maintain masonry layout
 - [x] Step 7: Update Event Cards Display
@@ -95,7 +96,9 @@
 - ✅ Hero title now responsive using clamp(2.5rem, 12vw, 10rem) - stays in single line
 - ✅ Hero background image now animated with zoom effect (scale 1 to 1.1)
 - ✅ Hero subtitle changed to "Integrate Modern Technology With Traditional Culture"
-- ✅ Gallery images now have golden borders (3px solid #D4AF37) with glow effects
+- ✅ Gallery images now have golden borders (4px solid #D4AF37) with animated glow effects
+- ✅ Gallery golden glow animation pulses continuously (3s duration, infinite loop)
+- ✅ Gallery animation includes outer glow (15px to 75px) and inner glow effects
 - ✅ Gallery images have enhanced hover effects with gradient overlay
 - ✅ Event cards show only 1 staff and 1 student coordinator (name only)
 - ✅ Contact details removed from event cards

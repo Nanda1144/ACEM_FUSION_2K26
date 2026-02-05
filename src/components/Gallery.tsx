@@ -63,11 +63,10 @@ export default function Gallery() {
                 className="mb-4 break-inside-avoid"
               >
                 <div 
-                  className="relative overflow-hidden rounded-lg group cursor-pointer p-2"
+                  className="relative overflow-hidden rounded-lg group cursor-pointer p-2 animate-golden-glow"
                   style={{
-                    border: '3px solid #D4AF37',
-                    boxShadow: '0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3)',
-                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05))'
+                    border: '4px solid #D4AF37',
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05))'
                   }}
                 >
                   <div className="relative overflow-hidden rounded">
