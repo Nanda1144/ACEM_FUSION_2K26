@@ -72,9 +72,8 @@ export default function Hero() {
           transition={{ duration: 1 }}
         >
           <h1 
-            className="font-bold mb-4 sm:mb-6 text-center tracking-wider overflow-hidden animated-gradient-text px-2 sm:px-4" 
+            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-hidden animated-gradient-text px-2 sm:px-4" 
             style={{
-              letterSpacing: '0.05em',
               fontSize: 'clamp(2rem, 10vw, 10rem)',
               lineHeight: '1.2',
             }}
