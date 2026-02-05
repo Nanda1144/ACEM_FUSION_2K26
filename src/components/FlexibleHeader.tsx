@@ -111,13 +111,13 @@ export default function FlexibleHeader() {
 
             {/* College Name with Subtitle and Tagline - Responsive Typography */}
             <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0 text-center sm:text-left">
-              {/* ADITYA COLLEGE OF ENGINEERING - Gold */}
+              {/* ADITYA COLLEGE OF ENGINEERING - Gold with Glow */}
               <h1 
-                className="font-bold truncate text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl" 
+                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" 
                 style={{
                   color: '#D4AF37',
-                  textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
-                  WebkitTextStroke: '1.5px #000000',
+                  textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.6), 0 0 50px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '1px #000000',
                   paintOrder: 'stroke fill',
                   letterSpacing: '0.05em'
                 }}
@@ -125,9 +125,9 @@ export default function FlexibleHeader() {
                 {themeSettings?.header_title || 'ADITYA COLLEGE OF ENGINEERING'}
               </h1>
               
-              {/* Madanapalle - White - 显示在所有屏幕尺寸 */}
+              {/* Madanapalle - White */}
               <p 
-                className="text-xs sm:text-sm md:text-base lg:text-lg mt-0.5 sm:mt-1 font-medium truncate" 
+                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 sm:mt-1 font-medium truncate" 
                 style={{ 
                   color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
@@ -136,9 +136,9 @@ export default function FlexibleHeader() {
                 {themeSettings?.header_subtitle || 'Madanapalle'}
               </p>
               
-              {/* UGC Autonomous - White - 显示在所有屏幕尺寸 */}
+              {/* UGC Autonomous - White */}
               <p 
-                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 italic font-normal truncate" 
+                className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5 italic font-normal truncate" 
                 style={{ 
                   color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
@@ -208,27 +208,16 @@ export default function FlexibleHeader() {
                 <SheetContent side="right" className="backdrop-blur-glass border-primary/20">
                   <div className="flex flex-col gap-6 mt-8">
                     <div className="mb-4">
-                      <h2 className="text-2xl font-bold" style={titleStyle}>
-                        {themeSettings?.header_title || 'ACEM FUSION 2k26'}
+                      {/* FUSION2K26 with Glow Effect */}
+                      <h2 
+                        className="text-2xl font-bold" 
+                        style={{
+                          color: themeSettings?.header_text_color || '#00D9FF',
+                          textShadow: '0 0 20px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.6), 0 0 40px rgba(0, 217, 255, 0.4)',
+                        }}
+                      >
+                        {themeSettings?.header_title || 'FUSION2K26'}
                       </h2>
-                      <p 
-                        className="text-sm mt-2 opacity-90" 
-                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                      >
-                        {themeSettings?.header_subtitle || 'Aditya College of Engineering'}
-                      </p>
-                      <p 
-                        className="text-xs mt-1 opacity-85" 
-                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                      >
-                        Madanapalle
-                      </p>
-                      <p 
-                        className="text-xs mt-1 opacity-75 italic" 
-                        style={{ color: themeSettings?.header_text_color || '#D4AF37' }}
-                      >
-                        {themeSettings?.header_tagline || '(UGC - Autonomous Institution)'}
-                      </p>
                     </div>
                     {pages.map((page) => (
                       <button
