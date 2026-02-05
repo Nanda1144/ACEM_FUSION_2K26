@@ -28,6 +28,7 @@ export default function EventManagement() {
       name: '',
       type: 'Technical' as 'Technical' | 'Cultural',
       description: '',
+      description_format: 'paragraph' as 'paragraph' | 'list',
       registration_link: '',
       image_url: '',
       staff_coordinators: [] as Coordinator[],
@@ -108,6 +109,7 @@ export default function EventManagement() {
       name: event.name,
       type: event.type,
       description: event.description,
+      description_format: event.description_format || 'paragraph',
       registration_link: event.registration_link || '',
       image_url: event.image_url || '',
       staff_coordinators: event.staff_coordinators || [],
@@ -211,17 +213,53 @@ export default function EventManagement() {
 
                 <FormField
                   control={form.control}
+                  name="description_format"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description Format</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select format" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="paragraph">Paragraph</SelectItem>
+                          <SelectItem value="list">List (Bullet Points)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
                   name="description"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <RichTextEditor 
-                          value={field.value} 
-                          onChange={field.onChange}
-                          placeholder="Enter event description with formatting..."
-                        />
+                        {form.watch('description_format') === 'list' ? (
+                          <Textarea 
+                            {...field}
+                            placeholder="Enter each point on a new line:&#10;• Point 1&#10;• Point 2&#10;• Point 3"
+                            className="min-h-[200px] font-mono"
+                          />
+                        ) : (
+                          <RichTextEditor 
+                            value={field.value} 
+                            onChange={field.onChange}
+                            placeholder="Enter event description with formatting..."
+                          />
+                        )}
                       </FormControl>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {form.watch('description_format') === 'list' 
+                          ? 'Enter each point on a new line. You can start with • or - for bullets.'
+                          : 'Use the rich text editor to format your description.'
+                        }
+                      </p>
                       <FormMessage />
                     </FormItem>
                   )}

@@ -211,11 +211,24 @@ Web Application (College Fest Management Platform)
     - Description text automatically justified for professional appearance
     - Support for bullet point lists within description
     - Support for numbered lists within description
-    - Admin can select specific content and convert to list format
+    - Admin can select specific content and convert to list format (bullet or numbered)
     - Admin can change text color for selected content
     - Admin can apply bold formatting to selected text
-  - Event Rules
-  - Event Instructions
+    - All content formatting options available for all events
+  - Event Rules with enhanced formatting:
+    - Rules text automatically justified for professional appearance
+    - Support for bullet point lists within rules
+    - Support for numbered lists within rules
+    - Admin can select specific content and convert to list format (bullet or numbered)
+    - Admin can change text color for selected content
+    - Admin can apply bold formatting to selected text
+  - Event Instructions with enhanced formatting:
+    - Instructions text automatically justified for professional appearance
+    - Support for bullet point lists within instructions
+    - Support for numbered lists within instructions
+    - Admin can select specific content and convert to list format (bullet or numbered)
+    - Admin can change text color for selected content
+    - Admin can apply bold formatting to selected text
   - Event Images (multiple images support)
   - Event-Specific Staff Coordinators:
     - Staff Name
@@ -496,12 +509,34 @@ Web Application (College Fest Management Platform)
       - Text alignment options
       - Text color picker for selected content
       - Bold text button for selected content
-    - Select content and convert to list format functionality
+    - Select content and convert to list format functionality (bullet or numbered)
     - Select content and change text color functionality
     - Select content and apply bold formatting functionality
     - Preview of formatted description
-  - Event Rules
-  - Event Instructions
+  - Event Rules with enhanced rich text formatting:
+    - Text justification enabled by default
+    - Toolbar with formatting options:
+      - Bullet list button
+      - Numbered list button
+      - Text alignment options
+      - Text color picker for selected content
+      - Bold text button for selected content
+    - Select content and convert to list format functionality (bullet or numbered)
+    - Select content and change text color functionality
+    - Select content and apply bold formatting functionality
+    - Preview of formatted rules
+  - Event Instructions with enhanced rich text formatting:
+    - Text justification enabled by default
+    - Toolbar with formatting options:
+      - Bullet list button
+      - Numbered list button
+      - Text alignment options
+      - Text color picker for selected content
+      - Bold text button for selected content
+    - Select content and convert to list format functionality (bullet or numbered)
+    - Select content and change text color functionality
+    - Select content and apply bold formatting functionality
+    - Preview of formatted instructions
   - Event Images upload (multiple images support)
   - Event-Specific Staff Coordinators:
     - Staff Name
@@ -515,11 +550,12 @@ Web Application (College Fest Management Platform)
     - Photo shape configuration (round or semi-circle)
   - Photo display enable/disable option per event
   - Google Form registration link
-- Edit existing events including event-specific coordinator details
+- Edit existing events including event-specific coordinator details and all content formatting
 - Delete events
 - Admin can add, edit, or delete event-specific staff coordinator details directly in Events Section
 - Admin can add, edit, or delete event-specific student coordinator details directly in Events Section
 - Admin can upload coordinator photos and configure photo shapes
+- Admin can format event description, rules, and instructions with justification, lists, text colors, and bold formatting for all events
 - Events auto-display on public UI based on event type
 - Event cards link to dedicated event detail pages
 - Changes visible in live preview immediately
@@ -611,7 +647,7 @@ Web Application (College Fest Management Platform)
   - Event type coordinator details with photo management and role field
   - Event-specific coordinator details with photo management and role field
   - Committee information including title, description, image, and coordinator details with photo management and role field
-  - Event descriptions with justified text, list formatting, text color customization, and bold text formatting
+  - Event descriptions, rules, and instructions with justified text, list formatting (bullet and numbered), text color customization, and bold text formatting for all events
   - Gallery image frame width configuration
   - Committee card purple glow effect on click
 - Flexible editing interface allowing customization of any component
@@ -661,7 +697,7 @@ Web Application (College Fest Management Platform)
 - Mobile logo scrolling section (homepage only) with semi-square logos (20px height) and automatic left-to-right scrolling animation
 - Event poster section with automatic horizontal scrolling animation (left to right)
 - Event type coordinators section with photo display options (round or semi-circle shapes) and optional event type display
-- Event descriptions displayed with justified text alignment, list formatting support, text color customization, and bold text formatting
+- Event descriptions, rules, and instructions displayed with justified text alignment, list formatting support (bullet and numbered), text color customization, and bold text formatting for all events
 - Committee section displaying committee groups with optional images, descriptions, and coordinator details with role field
 - Committee coordinator photos with configurable shapes (round or semi-circle)
 - Clickable committee cards with smooth animations opening detailed committee view
@@ -702,7 +738,7 @@ Web Application (College Fest Management Platform)
 - Event type coordinators section responsive with photo display options and optional event type display
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
-- Event descriptions maintain justified alignment, list formatting, text colors, and bold formatting across all screen sizes
+- Event descriptions, rules, and instructions maintain justified alignment, list formatting (bullet and numbered), text colors, and bold formatting across all screen sizes for all events
 - Committee detail view responsive across all devices
 - Committee cards with purple glow effect on click responsive across all devices
 - Coordinator photos display responsively in round or semi-circle shapes
@@ -741,7 +777,7 @@ Web Application (College Fest Management Platform)
   - Body content (text boxes with positioning data)
   - Footer content and styling
   - Event posters (image URLs, display order, animation settings)
-  - Events (including rules, instructions, multiple images, event-specific staff coordinators with photos and role field, event-specific student coordinators with photos, Google Form links, description formatting data with text color and bold formatting, photo display settings, photo shape configurations)
+  - Events (including rules with formatting, instructions with formatting, multiple images, event-specific staff coordinators with photos and role field, event-specific student coordinators with photos, Google Form links, description formatting data with text color and bold formatting, rules formatting data with text color and bold formatting, instructions formatting data with text color and bold formatting, photo display settings, photo shape configurations)
   - Event type coordinators (staff coordinators with name, role, photo, event type, event type display toggle; student coordinators with name, contact number, photo, event type, event type display toggle; photo display settings, photo shape configurations)
   - Committees (committee title, description, image, coordinators with name, role, photo, contact, photo display settings, photo shape configurations, purple glow effect settings)
   - Gallery images (storing image URLs from Supabase Storage, frame width configuration)
@@ -756,7 +792,7 @@ Web Application (College Fest Management Platform)
 - Event-specific coordinator details stored within events table
 - Event type coordinator details stored in separate event_type_coordinators table with role field and event type display toggle
 - Committee details stored in committees table with coordinator role field and purple glow effect settings
-- Event description formatting metadata including text color and bold formatting stored within events table
+- Event description, rules, and instructions formatting metadata including text color, bold formatting, and list formatting (bullet and numbered) stored within events table for all events
 - Mobile logo scrolling data stored in mobile_logo_scrolling table (homepage only)
 - Splash screen data stored in splash_screen_content table
 - Total body background data stored in total_body_background_content table
@@ -785,7 +821,7 @@ Web Application (College Fest Management Platform)
   - Text box positioning and content
   - Footer management
   - Event poster management (upload, retrieve, delete, animation settings)
-  - Event detail page data (including event-specific coordinator management with photo upload and role field, description formatting with text color and bold formatting, photo display settings, photo shape configuration)
+  - Event detail page data (including event-specific coordinator management with photo upload and role field, description formatting with text color, bold formatting, and list formatting for bullet and numbered lists, rules formatting with text color, bold formatting, and list formatting, instructions formatting with text color, bold formatting, and list formatting, photo display settings, photo shape configuration)
   - Event type coordinators management (add, edit, delete staff and student coordinators with photo upload, role field, event type display toggle, photo display settings, photo shape configuration)
   - Committee management (add, edit, delete committees with title, description, image, coordinator details with photo upload and role field, photo display settings, photo shape configuration, purple glow effect settings)
   - Committee detail retrieval for detailed view
@@ -909,15 +945,43 @@ Web Application (College Fest Management Platform)
     - Text alignment options (left, center, right, justify)
     - Text color picker for selected content
     - Bold text button for selected content
-  - Content selection and list conversion functionality
+  - Content selection and list conversion functionality (bullet or numbered)
   - Content selection and text color change functionality
   - Content selection and bold formatting functionality
   - HTML output storage in events table
   - Frontend rendering of formatted HTML content with text colors and bold formatting
+- Event rules rich text editor:
+  - Implement rich text editor component with same features as description editor
+  - Toolbar features:
+    - Text justification button (default enabled)
+    - Bullet list button
+    - Numbered list button
+    - Text alignment options (left, center, right, justify)
+    - Text color picker for selected content
+    - Bold text button for selected content
+  - Content selection and list conversion functionality (bullet or numbered)
+  - Content selection and text color change functionality
+  - Content selection and bold formatting functionality
+  - HTML output storage in events table rules field
+  - Frontend rendering of formatted HTML content with text colors and bold formatting
+- Event instructions rich text editor:
+  - Implement rich text editor component with same features as description editor
+  - Toolbar features:
+    - Text justification button (default enabled)
+    - Bullet list button
+    - Numbered list button
+    - Text alignment options (left, center, right, justify)
+    - Text color picker for selected content
+    - Bold text button for selected content
+  - Content selection and list conversion functionality (bullet or numbered)
+  - Content selection and text color change functionality
+  - Content selection and bold formatting functionality
+  - HTML output storage in events table instructions field
+  - Frontend rendering of formatted HTML content with text colors and bold formatting
 - File update locations for rich text editor:
-  - Admin Dashboard Event Management component: Integrate rich text editor with text color and bold formatting options
-  - Backend API: Store formatted HTML content with text color and bold formatting in events table description field
-  - Public Event Detail Page component: Render formatted HTML with proper styling including text colors and bold formatting
+  - Admin Dashboard Event Management component: Integrate rich text editor with text color and bold formatting options for description, rules, and instructions fields
+  - Backend API: Store formatted HTML content with text color, bold formatting, and list formatting in events table description, rules, and instructions fields
+  - Public Event Detail Page component: Render formatted HTML with proper styling including text colors, bold formatting, and list formatting for description, rules, and instructions
 
 ### 4.5 Committee Detail View Implementation
 - Committee detail view functionality:
@@ -1071,7 +1135,7 @@ Web Application (College Fest Management Platform)
 - Secure connection credentials handling
 - Responsive design implementation using CSS media queries and flexible layouts
 - Responsive image scaling implementation for splash screen, total body background, and FUSION 2k26 background images
-- Rich text editor integration with proper sanitization and text color/bold formatting support
+- Rich text editor integration with proper sanitization and text color/bold formatting support for description, rules, and instructions
 - Modal/detail view component with proper state management
 - Automatic scrolling animation implementation for event posters
 - Text animation implementation for FUSION 2k26 text
@@ -1105,8 +1169,9 @@ Web Application (College Fest Management Platform)
    - Event type field displayed optionally based on admin configuration
 10. User clicks on event card to navigate to dedicated event detail page
 11. User views complete event information including:
-   - Full description with justified text alignment, list formatting, text color customization, and bold text formatting
-   - Rules and instructions
+   - Full description with justified text alignment, list formatting (bullet and numbered), text color customization, and bold text formatting
+   - Rules with justified text alignment, list formatting (bullet and numbered), text color customization, and bold text formatting
+   - Instructions with justified text alignment, list formatting (bullet and numbered), text color customization, and bold text formatting
    - Event images
    - Event-specific staff coordinator details (name, role, photo if enabled in round or semi-circle shape)
    - Event-specific student coordinator details (name, contact number, photo if enabled in round or semi-circle shape)
@@ -1154,7 +1219,7 @@ Web Application (College Fest Management Platform)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
    - Event Posters: Upload event poster images, configure automatic scrolling animation settings, rearrange poster display order
-   - Events: Add event details including rules, instructions, multiple images, event-specific staff coordinator details (name, role, photo with shape configuration), event-specific student coordinator details (name, contact number, photo with shape configuration), Google Form link; Use rich text editor for event description with text justification, list formatting options, text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
+   - Events: Add event details including rules with rich text formatting, instructions with rich text formatting, multiple images, event-specific staff coordinator details (name, role, photo with shape configuration), event-specific student coordinator details (name, contact number, photo with shape configuration), Google Form link; Use rich text editor for event description, rules, and instructions with text justification, list formatting options (bullet and numbered), text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
    - Event Type Coordinators: Add staff coordinator details (name, role, photo with shape configuration, event type, event type display toggle), add student coordinator details (name, contact number, photo with shape configuration, event type, event type display toggle); Configure photo display enable/disable option for coordinators; Edit coordinator details including name, role/contact, photo, event type
    - Committees: Add committees with title, description, image (optional), coordinator details (name, role, photo with shape configuration, contact); Edit committee information; Configure photo display enable/disable option per committee; Configure purple glow effect settings
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section; Configure image frame width (increased by 1-2px for enhanced visual presentation)
@@ -1168,9 +1233,9 @@ Web Application (College Fest Management Platform)
 15. Admin configures responsive behavior for secondary header including logo sizing (minimum two visible on mobile with left-right positioning) and text scaling with golden color, black border, and glowing background for different devices
 16. Admin configures mobile logo scrolling section (homepage only) with logo upload, order settings, and animation configuration (semi-square shape, 20px height, left-to-right animation)
 17. Admin uploads event poster images and configures automatic scrolling animation
-18. Admin edits entire application including splash screen, total body background, primary header with FUSION 2k26 background image, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, mobile logo scrolling section (homepage only), event poster section with scrolling animation, footer, body sections, event type coordinator details with photo management and role field, event-specific coordinator details with photo management and role field, committee information including title, description, image, and coordinator details with photo management and role field, event descriptions with rich text formatting including text color and bold formatting, gallery image frame width configuration, and committee card purple glow effect settings
+18. Admin edits entire application including splash screen, total body background, primary header with FUSION 2k26 background image, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, mobile logo scrolling section (homepage only), event poster section with scrolling animation, footer, body sections, event type coordinator details with photo management and role field, event-specific coordinator details with photo management and role field, committee information including title, description, image, and coordinator details with photo management and role field, event descriptions, rules, and instructions with rich text formatting including justified text, list formatting (bullet and numbered), text color customization, and bold text formatting for all events, gallery image frame width configuration, and committee card purple glow effect settings
 19. Admin can change passkey through Passkey Management
-20. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including splash screen display, total body background image scaling, FUSION 2k26 background image scaling, text animations, poster scrolling, photo display, mobile logo scrolling (homepage only), committee card purple glow effect, and gallery frame width configuration
+20. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including splash screen display, total body background image scaling, FUSION 2k26 background image scaling, text animations, poster scrolling, photo display, mobile logo scrolling (homepage only), committee card purple glow effect, gallery frame width configuration, and event content formatting with justified text, lists (bullet and numbered), text colors, and bold formatting
 21. Admin can access and edit multiple web pages with consistent editing interface
 
 ## 6. Development and Deployment Guide
@@ -1250,8 +1315,10 @@ Web Application (College Fest Management Platform)
 36. Test committee card purple glow effect on click
 37. Test committee detail view display with complete committee information including coordinator role field
 38. Test committee detail view close/back functionality
-39. Test event description rich text editor with justification, list formatting, text color picker, and bold text button
-40. Test event description display with formatted content including text colors and bold formatting
+39. Test event description rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
+40. Test event rules rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
+41. Test event instructions rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
+42. Test event description, rules, and instructions display with formatted content including text colors, bold formatting, and list formatting (bullet and numbered) for all events
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -1322,8 +1389,10 @@ Web Application (College Fest Management Platform)
 37. Test committee card purple glow effect on click on actual devices
 38. Test committee detail view responsiveness across different screen sizes
 39. Test committee detail view close/back functionality
-40. Test event description rich text editor functionality with text color and bold formatting
-41. Test event description display with justified and listified formatting including text colors and bold formatting
+40. Test event description rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
+41. Test event rules rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
+42. Test event instructions rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
+43. Test event description, rules, and instructions display with justified and listified formatting including text colors, bold formatting, and list formatting (bullet and numbered) for all events
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -1395,7 +1464,7 @@ npm install @supabase/supabase-js
 15. Add event-specific coordinator management endpoints with photo upload and role field within Events Section
 16. Add committee management endpoints with image and coordinator photo upload including role field and purple glow effect settings
 17. Add committee detail retrieval endpoint
-18. Add event description formatting endpoints with text color and bold formatting
+18. Add event description, rules, and instructions formatting endpoints with text color, bold formatting, and list formatting (bullet and numbered)
 19. Add gallery frame width configuration endpoint
 20. Update chatbot endpoints to remove admin passkey information display
 
@@ -1426,7 +1495,7 @@ npm install @supabase/supabase-js
 16. Test event-specific coordinator management and photo upload with shape configuration and role field within Events Section
 17. Test committee management with title, description, image, and coordinator photo upload including role field and purple glow effect settings
 18. Test committee card click and detail view functionality with purple glow effect
-19. Test event description rich text editor with text color and bold formatting
+19. Test event description, rules, and instructions rich text editor with text color, bold formatting, and list formatting (bullet and numbered)
 20. Test gallery frame width configuration
 21. Test chatbot functionality (verify no admin access option or passkey information displayed)
 22. Test admin authentication with automatic passkey recognition
@@ -1614,7 +1683,7 @@ System will automatically create the following tables on first connection:
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
 - event_posters (id, image_url, display_order, animation_settings, created_at, updated_at)
-- events (id, name, type, description_html_with_text_color_and_bold_formatting, rules, instructions, images, event_specific_staff_coordinators_with_photos_and_role, event_specific_student_coordinators_with_photos, registration_link, photo_display_enabled, created_at, updated_at)
+- events (id, name, type, description_html_with_text_color_bold_formatting_and_list_formatting, rules_html_with_text_color_bold_formatting_and_list_formatting, instructions_html_with_text_color_bold_formatting_and_list_formatting, images, event_specific_staff_coordinators_with_photos_and_role, event_specific_student_coordinators_with_photos, registration_link, photo_display_enabled, created_at, updated_at)
 - event_type_coordinators (id, coordinator_type (staff/student), name, role_or_contact, photo_url, photo_shape, event_type, photo_display_enabled, event_type_display_enabled, created_at, updated_at)
 - committees (id, title, description, image_url, coordinators_with_photos_and_role, photo_display_enabled, purple_glow_enabled, created_at, updated_at)
 - gallery_images (id, image_url, frame_width, created_at, updated_at)

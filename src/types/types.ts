@@ -9,6 +9,7 @@ export interface Event {
   name: string;
   type: 'Technical' | 'Cultural';
   description: string;
+  description_format: 'paragraph' | 'list';
   image_url: string | null;
   staff_coordinators: Coordinator[];
   student_coordinators: Coordinator[];

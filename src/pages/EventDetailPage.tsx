@@ -108,9 +108,22 @@ export default function EventDetailPage() {
                   <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
                     {event.name}
                   </h1>
-                  <p className="text-lg text-muted-foreground mb-6">
-                    {event.description}
-                  </p>
+                  
+                  {/* Description with format support */}
+                  {event.description_format === 'list' ? (
+                    <ul className="text-lg text-muted-foreground mb-6 space-y-2 list-disc list-inside">
+                      {event.description.split('\n').filter(line => line.trim()).map((line, index) => (
+                        <li key={index} className="text-justify leading-relaxed">
+                          {line.replace(/^[•\-]\s*/, '').trim()}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div 
+                      className="text-lg text-muted-foreground mb-6 text-justify leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: event.description }}
+                    />
+                  )}
 
                   {/* Quick Info */}
                   <div className="space-y-3 mb-6">

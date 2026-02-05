@@ -185,10 +185,20 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
                   {event.type}
                 </Badge>
               </div>
-              <CardDescription 
-                className="line-clamp-3 prose prose-sm dark:prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: event.description }}
-              />
+              {event.description_format === 'list' ? (
+                <CardDescription className="line-clamp-3">
+                  {event.description.split('\n').filter(line => line.trim()).slice(0, 2).map((line, idx) => (
+                    <div key={idx} className="text-justify leading-relaxed">
+                      • {line.replace(/^[•\-]\s*/, '').trim()}
+                    </div>
+                  ))}
+                </CardDescription>
+              ) : (
+                <CardDescription 
+                  className="line-clamp-3 prose prose-sm dark:prose-invert max-w-none text-justify"
+                  dangerouslySetInnerHTML={{ __html: event.description }}
+                />
+              )}
             </CardHeader>
             <CardContent className="flex-1 space-y-4">
               {/* Staff Coordinators - Always show only 1 */}

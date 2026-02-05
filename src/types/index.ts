@@ -17,6 +17,7 @@ export interface Event {
   name: string;
   type: 'Technical' | 'Cultural';
   description: string;
+  description_format: 'paragraph' | 'list';
   description_html?: string;
   image_url: string | null;
   staff_coordinators: Coordinator[];

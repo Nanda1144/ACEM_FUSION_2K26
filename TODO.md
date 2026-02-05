@@ -20,6 +20,7 @@
   - [x] Make title responsive with clamp() for all screen sizes
   - [x] Keep title in single line with whitespace-nowrap
   - [x] Add animated background with zoom effect
+  - [x] Change FUSION 2K26 font to classic golden serif style (Cinzel)
 - [x] Step 3: Create Event Posters Section
   - [x] Create database table for event posters
   - [x] Build auto-scrolling carousel (left to right)
@@ -48,6 +49,16 @@
 - [x] Step 6: Enhance Gallery Section
   - [x] Add golden color border (3px solid #D4AF37) to each image
   - [x] Add animated glow effect to images (pulsing animation)
+- [x] Step 7: Add Event Description Format Options
+  - [x] Add description_format field to events table (paragraph/list)
+  - [x] Update Event type interface with description_format
+  - [x] Add format selector in admin event form
+  - [x] Support paragraph format (rich text editor)
+  - [x] Support list format (bullet points, one per line)
+  - [x] Apply text-justify to all event descriptions
+  - [x] Update EventDetailPage to render both formats
+  - [x] Update Events component to display both formats
+  - [x] Add helper text for list format input
   - [x] Create goldenGlow keyframe animation with 3s duration
   - [x] Optimize glow effect for smaller frame size
   - [x] Add hover effects with enhanced glow
