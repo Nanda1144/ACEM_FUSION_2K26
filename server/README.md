@@ -16,12 +16,9 @@ All database operations are handled through:
 - `src/db/supabase.ts` - Supabase client configuration
 - `src/db/api.ts` - API functions for all CRUD operations
 
-## Old MongoDB Server
+## Database Migration Complete
 
-The previous MongoDB/Express server has been backed up to:
-- `server/index.js.mongodb.backup`
-
-This file is kept for reference only and is not used in the application.
+This application has been fully migrated from MongoDB to Supabase. All data is now stored in Supabase PostgreSQL database.
 
 ## Environment Variables
 
@@ -38,3 +35,11 @@ All database tables and policies are defined in:
 - `supabase/migrations/` directory
 
 To view or modify the database schema, check the migration files.
+
+## Current Supabase Configuration
+
+The application is connected to:
+- **Supabase URL**: https://nrgunuzhzlvjkujclrqf.supabase.co
+- **Project**: Fusion26 College Fest
+
+All data (events, committee members, gallery images, etc.) is stored in Supabase.
