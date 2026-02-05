@@ -80,17 +80,17 @@ export default function FlexibleHeader() {
         }`}
         style={headerStyle}
       >
-        <div className="container mx-auto px-6">
-          {/* Single Row: Logos (Left) + College Name (Center-Left) + Navigation (Right) */}
-          <div className="flex items-center justify-between h-20 gap-6">
-            {/* Left Logos */}
+        <div className="container mx-auto px-3 sm:px-4 md:px-6">
+          {/* Responsive Row: Logos + College Name + Navigation */}
+          <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 gap-2 sm:gap-4 md:gap-6">
+            {/* Left Logos - Responsive Size */}
             {leftLogos.length > 0 && (
-              <div className="flex items-center shrink-0" style={{ gap: '9px' }}>
+              <div className="flex items-center shrink-0" style={{ gap: '6px' }}>
                 {leftLogos.map((logo) => (
                   <div
                     key={logo.id}
-                    className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                    className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden border border-primary/30 sm:border-2 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                      logo.shape === 'semi-square' ? 'rounded-md sm:rounded-lg' : 'rounded-full'
                     }`}
                   >
                     <img
@@ -103,27 +103,26 @@ export default function FlexibleHeader() {
               </div>
             )}
 
-            {/* College Name with Subtitle and Tagline */}
-            <div className="hidden md:block flex-1 px-6">
+            {/* College Name with Subtitle and Tagline - Responsive Typography */}
+            <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0">
               <h1 
-                className="font-bold whitespace-nowrap" 
+                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl" 
                 style={{
                   ...titleStyle,
                   color: themeSettings?.header_text_color || '#D4AF37',
                   textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
-                  WebkitTextStroke: '1.5px #000000',
+                  WebkitTextStroke: '0.5px #000000',
                   paintOrder: 'stroke fill'
                 }}
               >
                 {themeSettings?.header_title || 'ACEM FUSION 2k26'}
               </h1>
               <p 
-                className="text-sm mt-1 opacity-90 font-semibold" 
+                className="hidden sm:block text-[10px] sm:text-xs md:text-sm mt-0.5 sm:mt-1 opacity-90 font-semibold truncate" 
                 style={{ 
                   color: themeSettings?.header_text_color || '#D4AF37',
-                  fontSize: '0.875rem',
                   textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.5px #000000',
+                  WebkitTextStroke: '0.3px #000000',
                   paintOrder: 'stroke fill',
                   letterSpacing: '0.05em'
                 }}
@@ -131,12 +130,11 @@ export default function FlexibleHeader() {
                 {themeSettings?.header_subtitle || 'Aditya College of Engineering'}
               </p>
               <p 
-                className="text-xs mt-0.5 opacity-85 font-medium" 
+                className="hidden md:block text-[9px] md:text-xs mt-0.5 opacity-85 font-medium truncate" 
                 style={{ 
                   color: themeSettings?.header_text_color || '#D4AF37',
-                  fontSize: '0.75rem',
                   textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.5px #000000',
+                  WebkitTextStroke: '0.3px #000000',
                   paintOrder: 'stroke fill',
                   letterSpacing: '0.1em'
                 }}
@@ -144,12 +142,11 @@ export default function FlexibleHeader() {
                 Madanapalle
               </p>
               <p 
-                className="text-xs mt-0.5 opacity-75 italic font-medium" 
+                className="hidden lg:block text-[8px] lg:text-xs mt-0.5 opacity-75 italic font-medium truncate" 
                 style={{ 
                   color: themeSettings?.header_text_color || '#D4AF37',
-                  fontSize: '0.7rem',
                   textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.5px #000000',
+                  WebkitTextStroke: '0.3px #000000',
                   paintOrder: 'stroke fill'
                 }}
               >
@@ -158,14 +155,14 @@ export default function FlexibleHeader() {
             </div>
 
             {/* Right: Navigation + Right Logos */}
-            <div className="flex items-center gap-6 ml-auto">
-              {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-8 relative z-50">
+            <div className="flex items-center gap-2 sm:gap-4 md:gap-6 ml-auto shrink-0">
+              {/* Desktop Navigation - Responsive Font */}
+              <nav className="hidden lg:flex items-center gap-4 xl:gap-8 relative z-50">
                 {pages.map((page) => (
                   <button
                     key={page.id}
                     onClick={() => scrollToSection(page.slug)}
-                    className="transition-colors duration-300 font-medium relative group"
+                    className="transition-colors duration-300 font-medium relative group text-xs xl:text-sm"
                     style={navStyle}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = themeSettings?.nav_hover_color || '#D4AF37';
@@ -183,14 +180,14 @@ export default function FlexibleHeader() {
                 ))}
               </nav>
 
-              {/* Right Logos */}
+              {/* Right Logos - Responsive Size */}
               {rightLogos.length > 0 && (
-                <div className="hidden md:flex items-center shrink-0" style={{ gap: '9px' }}>
+                <div className="hidden sm:flex items-center shrink-0" style={{ gap: '6px' }}>
                   {rightLogos.map((logo) => (
                     <div
                       key={logo.id}
-                      className={`w-12 h-12 overflow-hidden border-2 border-primary/30 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                        logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                      className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden border border-primary/30 sm:border-2 hover:border-primary transition-all duration-300 hover:scale-110 ${
+                        logo.shape === 'semi-square' ? 'rounded-md sm:rounded-lg' : 'rounded-full'
                       }`}
                     >
                       <img

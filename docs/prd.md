@@ -30,23 +30,37 @@ Web Application (College Fest Management Platform)
 
 #### 2.1.2 Secondary Header Section (Logo and College Information Header)
 - Positioned below the primary header section
+- Fully responsive and flexible layout adapting to all screen sizes
 - Display college name: ADITYA College of Engineering Madanapalle
   - Styling: Golden dark color with black border for attractiveness
   - Prominent display with enhanced visual appeal
+  - Font size automatically adjusts based on screen size:
+    - Desktop: Large font size for prominence
+    - Tablet: Medium font size for readability
+    - Mobile: Smaller font size optimized for mobile view
 - Display location: MADANAPALLE
-  - Font size: 12px or 14px
+  - Font size: Responsive sizing (adjusts from 12px-14px based on screen size)
   - Positioned below college name
 - Display institution status: UGC - Autonomous Institution
-  - Font size: 12px or 14px
+  - Font size: Responsive sizing (adjusts from 12px-14px based on screen size)
   - Positioned below location on next line
-- Dedicated section for logo display
+- Dedicated section for logo display with flexible responsive behavior:
+  - Logos automatically adjust size and positioning based on screen size
+  - Desktop view: Logos display in optimal size with full spacing
+  - Tablet view: Logos scale proportionally with adjusted spacing
+  - Mobile view: Logos resize to fit mobile screen width while maintaining aspect ratio and visibility
 - Support for multiple college logos with configurable shapes:
   - Circle shape option
   - Semi-square shape option
+- Responsive logo arrangement:
+  - Logos reposition automatically for optimal display on different screen sizes
+  - Mobile view: Logos stack or arrange in mobile-friendly layout
+  - Maintains visual hierarchy across all devices
 - Admin-configurable logo arrangement and positioning
 - Static data display capabilities managed by admin
 - Header details fully updatable through admin dashboard
-- Responsive layout adapting to all screen sizes
+- All text elements (college name, location, institution status) use responsive font sizing
+- Flexible layout ensures readability and visual appeal across all devices
 - Admin can add, edit, or delete logos
 - Admin can configure logo shapes individually
 
@@ -188,25 +202,34 @@ Web Application (College Fest Management Platform)
 - Configure college name styling:
   - Golden dark color with black border
   - Font selection
-  - Font size adjustment
+  - Responsive font size adjustment for different screen sizes
   - Enhanced visual styling for attractiveness
 - Update location text (default: MADANAPALLE)
-  - Font size: 12px or 14px
+  - Responsive font size configuration (12px-14px range)
 - Update institution status (default: UGC - Autonomous Institution)
-  - Font size: 12px or 14px
+  - Responsive font size configuration (12px-14px range)
 - Upload multiple college logos
 - Configure individual logo shapes:
   - Circle shape option
   - Semi-square shape option
+- Configure responsive logo sizing:
+  - Set logo sizes for desktop view
+  - Set logo sizes for tablet view
+  - Set logo sizes for mobile view
+- Configure responsive logo positioning:
+  - Desktop layout configuration
+  - Tablet layout configuration
+  - Mobile layout configuration (stacking or mobile-friendly arrangement)
 - Add or delete logos dynamically
-- Configure logo positioning and arrangement
+- Configure logo positioning and arrangement for all screen sizes
 - Update static data displayed in logo header
 - Edit header details and content
 - Customize logo header styling:
   - Background color/image
   - Spacing and layout
   - Border and shadow effects
-- All changes update automatically in database and reflect in live preview
+- Configure responsive breakpoints for automatic font and logo adjustments
+- All changes update automatically in database and reflect in live preview across all screen sizes
 
 #### 2.3.4 Body Content Management
 - Add text boxes anywhere on the page with drag-and-drop functionality
@@ -302,7 +325,7 @@ Web Application (College Fest Management Platform)
 #### 2.3.13 Complete Application Editing
 - Admin has full control to edit entire application:
   - Primary header sections
-  - Secondary logo and college information header sections
+  - Secondary logo and college information header sections with responsive configurations
   - Footer sections
   - Body parts
   - All content areas
@@ -348,12 +371,19 @@ Web Application (College Fest Management Platform)
 - Primary header with navigation menu positioned at top-right corner
 - Secondary header with golden dark college name styling and black border for enhanced attractiveness, positioned below primary header
 - Secondary header includes configurable logo shapes (circle/semi-square)
+- Fully responsive secondary header with flexible logo sizing and text scaling across all devices
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
 - Flexible layout adapting to all screen sizes for easy access
 - Smooth page transitions and animated loading states
 - Responsive dual header system with mobile-friendly navigation menu positioned at top-right
+- Secondary header with intelligent responsive behavior:
+  - College name, location, and institution status text automatically resize based on screen size
+  - Logos automatically adjust size and positioning for optimal display on all devices
+  - Mobile view: Logos and text scale appropriately for mobile screens
+  - Tablet view: Proportional scaling for tablet displays
+  - Desktop view: Full-size display with optimal spacing
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
 
@@ -371,7 +401,8 @@ Web Application (College Fest Management Platform)
 - Manual connection configuration support
 - Tables for:
   - Primary header content (navigation menu, positioning, styling configurations)
-  - Secondary header content (college name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, positioning data, static data, styling)
+  - Secondary header content (college name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, responsive sizing configurations, positioning data, static data, styling)
+  - Responsive configuration (breakpoints, font size mappings, logo size mappings for different screen sizes)
   - Text styling configurations (font, size, color)
   - Background settings (color, image)
   - Body content (text boxes with positioning data)
@@ -403,7 +434,8 @@ Web Application (College Fest Management Platform)
 - API endpoints for:
   - Database connection management
   - Primary header management (navigation menu, positioning)
-  - Secondary header management (college name, location, institution status styling, logo upload, shape configuration, positioning)
+  - Secondary header management (college name, location, institution status styling, logo upload, shape configuration, responsive sizing configuration, positioning)
+  - Responsive configuration management (breakpoints, font size mappings, logo size mappings)
   - Text styling updates
   - Background customization
   - Text box positioning and content
@@ -439,15 +471,16 @@ Web Application (College Fest Management Platform)
 - Support for multiple web pages architecture
 - Efficient real-time update mechanism
 - Secure connection credentials handling
+- Responsive design implementation using CSS media queries and flexible layouts
 
 ## 5. User Flow
 
 ### 5.1 Public User Flow
 1. User lands on cinematic homepage with dual header system:
    - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us)
-   - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden dark with black border), MADANAPALLE (font 12/14), UGC - Autonomous Institution (font 12/14), and college logos with configured shapes (circle/semi-square)
+   - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden dark with black border, responsive font sizing), MADANAPALLE (responsive font 12/14), UGC - Autonomous Institution (responsive font 12/14), and college logos with configured shapes (circle/semi-square) that automatically adjust size based on screen size
 2. User navigates through multiple web pages using top-right navigation menu
-3. User experiences consistent responsive design across all screen sizes
+3. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments
 4. User views events by category (Technical/Cultural) on Events page
 5. User clicks on event card to navigate to dedicated event detail page
 6. User views complete event information including:
@@ -465,6 +498,7 @@ Web Application (College Fest Management Platform)
 13. User explores gallery section and views images uploaded by admin
 14. User views improved footer section with contact details and social media links
 15. User can interact with chatbot to get website information and details
+16. User experiences optimal viewing on mobile devices with properly scaled logos and text in secondary header
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -483,7 +517,8 @@ Web Application (College Fest Management Platform)
    - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
    - Primary Header: Position navigation menu at top-right, configure styling
-   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden dark styling with black border, upload logos, configure logo shapes (circle/semi-square), manage positioning, update static data
+   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden dark styling with black border, upload logos, configure logo shapes (circle/semi-square), configure responsive sizing for logos and text across different screen sizes, manage positioning, update static data
+   - Responsive Configuration: Set breakpoints, configure font size mappings for different screen sizes, configure logo size mappings for desktop/tablet/mobile views
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
@@ -494,10 +529,11 @@ Web Application (College Fest Management Platform)
    - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and dual header sections as desired
-11. Admin edits entire application including primary header, secondary header, footer, body sections, staff/student coordinator details through Events Section, and committee member info sections
-12. Admin can change passkey through Passkey Management
-13. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview
-14. Admin can access and edit multiple web pages with consistent editing interface
+11. Admin configures responsive behavior for secondary header including logo sizing and text scaling for different devices
+12. Admin edits entire application including primary header, secondary header with responsive configurations, footer, body sections, staff/student coordinator details through Events Section, and committee member info sections
+13. Admin can change passkey through Passkey Management
+14. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior
+15. Admin can access and edit multiple web pages with consistent editing interface
 
 ## 6. Development and Deployment Guide
 
@@ -539,15 +575,18 @@ Web Application (College Fest Management Platform)
 
 #### Step 5: Testing
 1. Test public user interface with dual header system
-2. Test chatbot authentication
-3. Test admin dashboard functionality
-4. Test database connection
-5. Verify live preview updates
-6. Test gallery image upload and display
-7. Test primary and secondary header management
-8. Test staff and student coordinator details display and filtering
-9. Test staff and student coordinator editing within Events Section
-10. Test committee member info section display and editing
+2. Test responsive behavior of secondary header across different screen sizes
+3. Verify logo sizing adjustments on mobile, tablet, and desktop views
+4. Verify text scaling for college name, location, and institution status across devices
+5. Test chatbot authentication
+6. Test admin dashboard functionality
+7. Test database connection
+8. Verify live preview updates
+9. Test gallery image upload and display
+10. Test primary and secondary header management including responsive configurations
+11. Test staff and student coordinator details display and filtering
+12. Test staff and student coordinator editing within Events Section
+13. Test committee member info section display and editing
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -581,15 +620,17 @@ Web Application (College Fest Management Platform)
 #### Step 4: Verification
 1. Access deployed website URL
 2. Test all public user features including dual header system
-3. Test admin authentication and dashboard
-4. Verify database connectivity
-5. Test live preview functionality
-6. Verify image uploads to Supabase Storage
-7. Test gallery image display on public UI
-8. Test primary and secondary header display and management
-9. Test staff and student coordinator details display and filtering functionality
-10. Test staff and student coordinator editing within Events Section
-11. Test committee member info section display and editing functionality
+3. Test responsive behavior of secondary header on actual mobile devices
+4. Verify logo and text scaling across different screen sizes
+5. Test admin authentication and dashboard
+6. Verify database connectivity
+7. Test live preview functionality
+8. Verify image uploads to Supabase Storage
+9. Test gallery image display on public UI
+10. Test primary and secondary header display and management with responsive configurations
+11. Test staff and student coordinator details display and filtering functionality
+12. Test staff and student coordinator editing within Events Section
+13. Test committee member info section display and editing functionality
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -650,8 +691,9 @@ npm install @supabase/supabase-js
 4. Update API endpoints
 5. Add gallery image upload endpoint
 6. Add primary and secondary header management endpoints
-7. Add staff and student coordinator management endpoints within Events Section
-8. Add committee member info section management endpoints
+7. Add responsive configuration management endpoints
+8. Add staff and student coordinator management endpoints within Events Section
+9. Add committee member info section management endpoints
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -669,8 +711,9 @@ npm install @supabase/supabase-js
 5. Verify live preview updates
 6. Test gallery image upload and display
 7. Test dual header system management
-8. Test staff and student coordinator management and filtering within Events Section
-9. Test committee member info section management
+8. Test responsive configuration management for secondary header
+9. Test staff and student coordinator management and filtering within Events Section
+10. Test committee member info section management
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -840,12 +883,79 @@ Files requiring updates for committee member info section:
 3. Public Committee Section component (e.g., frontend/components/public/Committee.jsx)
 4. Database schema file for committee_members table with info_section field
 
+### 6.8 Responsive Secondary Header Implementation Guide
+
+#### Backend Implementation
+1. Create responsive configuration API endpoints:
+   - POST /api/responsive-config - Create responsive configuration
+   - GET /api/responsive-config - Retrieve responsive configuration
+   - PUT /api/responsive-config/:id - Update responsive configuration
+   - Implementation includes:
+     - Breakpoint definitions (mobile, tablet, desktop)
+     - Font size mappings for college name, location, institution status
+     - Logo size mappings for different screen sizes
+     - Logo positioning configurations
+
+2. Update secondary header management API endpoints:
+   - PUT /api/secondary-header/responsive - Update responsive settings
+   - GET /api/secondary-header/responsive - Retrieve responsive settings
+
+#### Frontend Implementation
+1. Admin Dashboard Responsive Configuration component:
+   - File location: frontend/components/admin/ResponsiveConfig.jsx or similar
+   - Add responsive configuration interface:
+     - Breakpoint configuration inputs
+     - Font size sliders/inputs for different screen sizes
+     - Logo size configuration for mobile/tablet/desktop
+     - Logo positioning controls for different devices
+     - Preview panel showing changes across screen sizes
+
+2. Public Secondary Header component:
+   - File location: frontend/components/public/SecondaryHeader.jsx or similar
+   - Implementation:
+     - Fetch responsive configuration from API
+     - Apply CSS media queries based on breakpoints
+     - Dynamically adjust font sizes based on screen size
+     - Dynamically adjust logo sizes based on screen size
+     - Implement flexible logo positioning for mobile view
+     - Use CSS flexbox or grid for responsive layout
+
+#### CSS Implementation
+1. Create responsive styles file:
+   - File location: frontend/styles/responsive-header.css or similar
+   - Implementation:
+     - Define media queries for mobile, tablet, desktop
+     - Create font size classes for different screen sizes
+     - Create logo size classes for different screen sizes
+     - Implement flexible layout using flexbox/grid
+     - Add smooth transitions for size changes
+
+#### Database Schema Update
+- Responsive configuration table structure:
+  - id (primary key)
+  - breakpoints (jsonb: {mobile, tablet, desktop})
+  - font_size_mappings (jsonb: {college_name: {mobile, tablet, desktop}, location: {mobile, tablet, desktop}, institution_status: {mobile, tablet, desktop}})
+  - logo_size_mappings (jsonb: {mobile, tablet, desktop})
+  - logo_positioning (jsonb: {mobile, tablet, desktop})
+  - created_at (timestamp)
+  - updated_at (timestamp)
+
+#### Code Update Summary
+Files requiring updates for responsive secondary header:
+1. Backend API routes file (e.g., backend/routes/responsive-config.js)
+2. Backend secondary header routes file (e.g., backend/routes/secondary-header.js)
+3. Admin Dashboard Responsive Configuration component (e.g., frontend/components/admin/ResponsiveConfig.jsx)
+4. Public Secondary Header component (e.g., frontend/components/public/SecondaryHeader.jsx)
+5. Responsive styles file (e.g., frontend/styles/responsive-header.css)
+6. Database schema file for responsive_configuration table
+
 ## 7. Other Requirements
 
 ### 7.1 Supabase Table Schema
 System will automatically create the following tables on first connection:
 - primary_header_content (id, navigation_menu, navigation_position, styling, created_at, updated_at)
 - secondary_header_content (id, college_name, location, institution_status, logos, logo_shapes, static_data, styling, created_at, updated_at)
+- responsive_configuration (id, breakpoints, font_size_mappings, logo_size_mappings, logo_positioning, created_at, updated_at)
 - text_styling (id, font_family, font_size, text_color, created_at, updated_at)
 - background_settings (id, background_color, background_image_url, created_at, updated_at)
 - body_content (id, text_boxes, created_at, updated_at)
@@ -861,7 +971,7 @@ System will automatically create the following tables on first connection:
 ### 7.2 Image Storage
 - All uploaded images stored in Supabase Storage
 - Separate storage buckets for:
-  - Logos (including secondary header logos with shape configurations)
+  - Logos (including secondary header logos with shape configurations and responsive sizing)
   - Event images
   - Committee member images
   - Gallery images (for Gallery Section display)
@@ -869,4 +979,4 @@ System will automatically create the following tables on first connection:
 - Public access configured for image buckets
 - Automatic URL generation for uploaded images
 - Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section
-- Logo bucket supports circle and semi-square shape configurations
+- Logo bucket supports circle and semi-square shape configurations with responsive sizing capabilities
