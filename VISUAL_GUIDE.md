@@ -27,27 +27,53 @@ Click on the URL or open your browser to: **http://localhost:5173**
 
 ## 🎯 What You'll See on the Homepage
 
-### 1. HEADER (Top of Page) - ✨ ENHANCED!
+### 1. HEADER (Top of Page) - ✨ ENHANCED WITH DISTINCT COLORS!
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  🔵 Logo    FUSION 2K26 ✨ (Golden, Glowing)    Menu  🔵   │
-│             Aditya College of Engineering                    │
-│             Madanapalle                                      │
+│  🔵 Logo    ACEM FUSION 2K26 ⚡ (Cyan+Purple)    Menu  🔵  │
+│             ADITYA COLLEGE OF ENGINEERING 🏆 (Gold+Amber)   │
+│             Madanapalle 📍 (Silver+White)                    │
+│             (UGC - Autonomous) ✨ (Soft Gold)               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **What's New:**
-- "FUSION 2K26" text is now **GOLDEN** (#D4AF37)
-- Text has a **pulsing glow** effect (animates continuously)
-- **Black borders** around text for better visibility
-- Text size **adjusts automatically** on different screen sizes
+- **"ACEM FUSION 2K26"** is now **CYAN + PURPLE** gradient (#00D9FF → #8A2BE2)
+  - Strong electric pulsing glow (cyan + purple)
+  - Black borders for perfect visibility
+  - Extra bold font (weight 900)
+  - Wide letter spacing
+  
+- **"ADITYA COLLEGE OF ENGINEERING"** is now **GOLDEN + AMBER** gradient (#D4AF37 → #FFD700 → #FFA500)
+  - Warm golden pulsing glow
+  - Black borders for definition
+  - Bold font (weight 700)
+  - Medium letter spacing
+  
+- **"Madanapalle"** is now **SILVER + WHITE** gradient (#C0C0C0 → #FFFFFF)
+  - Cool static glow
+  - Black borders for clarity
+  - Semi-bold font (weight 600)
+  - Wide letter spacing
+  
+- **"(UGC - Autonomous Institution)"** is now **SOFT GOLD** gradient (#DAA520 → #F0E68C)
+  - Gentle static glow
+  - Black borders for readability
+  - Medium font (weight 500)
+  - Italic style
+
+- Text sizes **adjust automatically** on different screen sizes
+- Each element has **distinct color identity**
 - Smooth **fade-in animations** when page loads
+- **Pulsing animations** on main title and subtitle (2.5s and 3s cycles)
 
 **How to Test:**
-1. Look at the header text - should be golden and glowing
-2. Resize your browser window - text should get smaller/larger
-3. Watch the glow effect - it should pulse gently
+1. Look at the header - each text should have different colors
+2. "ACEM FUSION 2K26" should pulse with cyan-purple glow
+3. "ADITYA COLLEGE OF ENGINEERING" should pulse with golden glow
+4. Resize your browser window - text should get smaller/larger
+5. Watch the glow effects - they should pulse smoothly
 
 ---
 
@@ -287,10 +313,14 @@ Click on the URL or open your browser to: **http://localhost:5173**
 ## 🔍 How to Verify Each Feature
 
 ### ✅ Header Animation
-1. **Look for golden text** - Should be #D4AF37 color
-2. **Watch for glow** - Should pulse gently (2s cycle)
-3. **Check borders** - Black outline around text
-4. **Resize window** - Text should scale smoothly
+1. **Look for distinct colors** - Each text should have different color:
+   - "ACEM FUSION 2K26" = Cyan + Purple gradient
+   - "ADITYA COLLEGE OF ENGINEERING" = Gold + Amber gradient
+   - "Madanapalle" = Silver + White gradient
+   - "UGC Autonomous" = Soft Gold gradient
+2. **Watch for glows** - Main title and subtitle should pulse (2.5s and 3s cycles)
+3. **Check borders** - Black outline around all text
+4. **Resize window** - Text should scale smoothly and elements hide/show at breakpoints
 
 ### ✅ Event Posters Carousel
 1. **Check if section exists** - Should be above Events
@@ -326,11 +356,16 @@ npm run client
 - Overall Coordinators: Add via admin
 - These sections won't show if empty
 
-### Issue: "Header text not golden"
+### Issue: "Header text not showing correct colors"
 **Solution:** 
 1. Hard refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
 2. Clear browser cache
 3. Check browser console for errors (F12)
+4. Expected colors:
+   - ACEM FUSION 2K26 = Cyan/Purple
+   - ADITYA COLLEGE = Gold/Amber
+   - Madanapalle = Silver/White
+   - UGC = Soft Gold
 
 ### Issue: "Animations not working"
 **Solution:**
@@ -349,8 +384,11 @@ Before reporting issues, verify:
 - [ ] Application opened in browser (http://localhost:5173)
 - [ ] Page loaded without errors
 - [ ] Header is visible at top
-- [ ] Header text is golden color
-- [ ] Can see glow effect on header text
+- [ ] "ACEM FUSION 2K26" is cyan-purple gradient with pulsing glow
+- [ ] "ADITYA COLLEGE OF ENGINEERING" is golden-amber gradient with pulsing glow
+- [ ] "Madanapalle" is silver-white gradient (on medium+ screens)
+- [ ] "UGC Autonomous" is soft gold gradient (on large+ screens)
+- [ ] Can see distinct colors for each header element
 - [ ] Hero section loads with background
 - [ ] Can scroll down the page
 - [ ] All sections are present (even if empty)

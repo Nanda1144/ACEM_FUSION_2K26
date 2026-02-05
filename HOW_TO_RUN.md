@@ -24,11 +24,15 @@ This will start the Vite development server on **http://localhost:5173**
 
 When you open the application, you'll see:
 
-1. **Enhanced Header** (Top of page)
-   - Golden "FUSION 2K26" text with glowing animation
-   - Responsive font sizes
-   - Black text borders for visibility
+1. **Enhanced Header** (Top of page) - ✨ NEW COLOR SCHEME!
+   - **"ACEM FUSION 2K26"** - Cyan/Purple gradient with electric pulsing glow
+   - **"ADITYA COLLEGE OF ENGINEERING"** - Golden/Amber gradient with warm pulsing glow
+   - **"Madanapalle"** - Silver/White gradient with cool static glow
+   - **"UGC Autonomous"** - Soft Gold gradient with subtle glow
+   - Responsive font sizes (12px mobile → 24px desktop)
+   - Black text borders for perfect visibility
    - Smooth fade-in animations
+   - Each element has distinct color identity
 
 2. **Hero Section** (Full screen)
    - Background image with gradient overlay
@@ -91,9 +95,13 @@ When you open the application, you'll see:
 ### Test Header Animation
 1. Open the application
 2. Look at the top header
-3. You should see "FUSION 2K26" in golden color
-4. The text should have a pulsing glow effect
-5. Try resizing the browser - text should adjust size
+3. You should see:
+   - **"ACEM FUSION 2K26"** in cyan-purple gradient with strong pulsing glow
+   - **"ADITYA COLLEGE OF ENGINEERING"** in golden-amber gradient with moderate pulsing glow
+   - **"Madanapalle"** in silver-white gradient (on medium+ screens)
+   - **"UGC Autonomous"** in soft gold gradient (on large+ screens)
+4. Each text element should have its own distinct color and glow effect
+5. Try resizing the browser - text should adjust size and visibility
 
 ### Test Event Posters (After Adding Data)
 To test the carousel, you need to add posters via admin:

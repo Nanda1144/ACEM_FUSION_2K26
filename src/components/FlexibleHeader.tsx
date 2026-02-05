@@ -117,76 +117,114 @@ export default function FlexibleHeader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
+              {/* ACEM FUSION 2K26 - Cyan/Electric Blue with Purple Glow */}
               <motion.h1 
                 className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" 
                 style={{
                   ...titleStyle,
-                  color: '#D4AF37',
-                  textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5), 0 0 90px rgba(212, 175, 55, 0.3)',
+                  textShadow: '0 0 30px rgba(0, 217, 255, 0.9), 0 0 60px rgba(138, 43, 226, 0.6), 0 0 90px rgba(0, 217, 255, 0.4)',
                   WebkitTextStroke: '1px #000000',
                   paintOrder: 'stroke fill',
-                  letterSpacing: '0.08em',
-                  background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%)',
+                  letterSpacing: '0.12em',
+                  background: 'linear-gradient(135deg, #00D9FF 0%, #8A2BE2 50%, #00D9FF 100%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))'
+                  filter: 'drop-shadow(0 0 25px rgba(0, 217, 255, 0.8)) drop-shadow(0 0 15px rgba(138, 43, 226, 0.6))',
+                  fontWeight: '900'
                 }}
                 animate={{
                   textShadow: [
-                    '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)',
-                    '0 0 40px rgba(212, 175, 55, 1), 0 0 80px rgba(212, 175, 55, 0.7)',
-                    '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)'
+                    '0 0 30px rgba(0, 217, 255, 0.9), 0 0 60px rgba(138, 43, 226, 0.6)',
+                    '0 0 50px rgba(0, 217, 255, 1), 0 0 90px rgba(138, 43, 226, 0.9)',
+                    '0 0 30px rgba(0, 217, 255, 0.9), 0 0 60px rgba(138, 43, 226, 0.6)'
+                  ],
+                  filter: [
+                    'drop-shadow(0 0 25px rgba(0, 217, 255, 0.8)) drop-shadow(0 0 15px rgba(138, 43, 226, 0.6))',
+                    'drop-shadow(0 0 35px rgba(0, 217, 255, 1)) drop-shadow(0 0 25px rgba(138, 43, 226, 0.9))',
+                    'drop-shadow(0 0 25px rgba(0, 217, 255, 0.8)) drop-shadow(0 0 15px rgba(138, 43, 226, 0.6))'
                   ]
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 2.5,
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut"
                 }}
               >
-                {themeSettings?.header_title || 'FUSION 2K26'}
+                {themeSettings?.header_title || 'ACEM FUSION 2K26'}
               </motion.h1>
+              
+              {/* ADITYA COLLEGE OF ENGINEERING - Golden/Amber with Warm Glow */}
               <motion.p 
-                className="hidden sm:block text-[10px] sm:text-xs md:text-sm mt-0.5 sm:mt-1 opacity-90 font-semibold truncate" 
+                className="hidden sm:block text-[10px] sm:text-xs md:text-sm mt-0.5 sm:mt-1 font-bold truncate" 
                 style={{ 
-                  color: '#D4AF37',
-                  textShadow: '0 0 15px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.4)',
+                  textShadow: '0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(255, 215, 0, 0.6)',
+                  WebkitTextStroke: '0.6px #000000',
+                  paintOrder: 'stroke fill',
+                  letterSpacing: '0.08em',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #FFA500 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.7))',
+                  fontWeight: '700'
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ 
+                  opacity: 1,
+                  textShadow: [
+                    '0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(255, 215, 0, 0.6)',
+                    '0 0 30px rgba(212, 175, 55, 1), 0 0 60px rgba(255, 215, 0, 0.8)',
+                    '0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(255, 215, 0, 0.6)'
+                  ]
+                }}
+                transition={{ 
+                  opacity: { delay: 0.2, duration: 0.6 },
+                  textShadow: { duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }
+                }}
+              >
+                {themeSettings?.header_subtitle || 'ADITYA COLLEGE OF ENGINEERING'}
+              </motion.p>
+              
+              {/* Madanapalle - Silver/White with Cool Glow */}
+              <motion.p 
+                className="hidden md:block text-[9px] md:text-xs mt-0.5 font-semibold truncate" 
+                style={{ 
+                  textShadow: '0 0 15px rgba(192, 192, 192, 0.7), 0 0 30px rgba(255, 255, 255, 0.5)',
                   WebkitTextStroke: '0.5px #000000',
                   paintOrder: 'stroke fill',
-                  letterSpacing: '0.05em'
+                  letterSpacing: '0.15em',
+                  background: 'linear-gradient(135deg, #C0C0C0 0%, #FFFFFF 50%, #C0C0C0 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 10px rgba(192, 192, 192, 0.6))',
+                  fontWeight: '600'
                 }}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-              >
-                {themeSettings?.header_subtitle || 'Aditya College of Engineering'}
-              </motion.p>
-              <motion.p 
-                className="hidden md:block text-[9px] md:text-xs mt-0.5 opacity-85 font-medium truncate" 
-                style={{ 
-                  color: '#D4AF37',
-                  textShadow: '0 0 10px rgba(212, 175, 55, 0.5)',
-                  WebkitTextStroke: '0.4px #000000',
-                  paintOrder: 'stroke fill',
-                  letterSpacing: '0.1em'
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.85 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
                 Madanapalle
               </motion.p>
+              
+              {/* UGC Autonomous - Soft Gold with Subtle Glow */}
               <motion.p 
-                className="hidden lg:block text-[8px] lg:text-xs mt-0.5 opacity-75 italic font-medium truncate" 
+                className="hidden lg:block text-[8px] lg:text-xs mt-0.5 italic font-medium truncate" 
                 style={{ 
-                  color: '#D4AF37',
-                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.3px #000000',
-                  paintOrder: 'stroke fill'
+                  textShadow: '0 0 12px rgba(218, 165, 32, 0.6)',
+                  WebkitTextStroke: '0.4px #000000',
+                  paintOrder: 'stroke fill',
+                  letterSpacing: '0.05em',
+                  background: 'linear-gradient(135deg, #DAA520 0%, #F0E68C 50%, #DAA520 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 8px rgba(218, 165, 32, 0.5))',
+                  fontWeight: '500'
                 }}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.75 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
                 {themeSettings?.header_tagline || '(UGC - Autonomous Institution)'}
