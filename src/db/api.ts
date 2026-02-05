@@ -15,7 +15,8 @@ import type {
   Page, 
   PageSection, 
   FooterSettings, 
-  ComponentTemplate 
+  ComponentTemplate,
+  SponsorLogo
 } from '@/types/index';
 
 // Events API
@@ -811,4 +812,49 @@ const compressImage = async (file: File): Promise<File> => {
     };
     reader.onerror = reject;
   });
+};
+
+// Sponsor Logos API
+export const sponsorLogosApi = {
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('sponsor_logos')
+      .select('*')
+      .order('order_number', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
+  },
+
+  create: async (logo: { image_url: string; order_number: number }) => {
+    const { data, error } = await supabase
+      .from('sponsor_logos')
+      .insert([logo])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, logo: { image_url?: string; order_number?: number }) => {
+    const { data, error } = await supabase
+      .from('sponsor_logos')
+      .update(logo)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('sponsor_logos')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
 };

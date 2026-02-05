@@ -65,7 +65,7 @@ export default function Gallery() {
                 <div 
                   className="relative overflow-hidden rounded-lg group cursor-pointer p-1.5 animate-golden-glow"
                   style={{
-                    border: '2px solid #D4AF37',
+                    border: '3px solid #D4AF37',
                     background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.04))'
                   }}
                 >

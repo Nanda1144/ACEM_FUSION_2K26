@@ -224,3 +224,10 @@ export interface ComponentTemplate {
   created_at: string;
 }
 
+export interface SponsorLogo {
+  id: string;
+  image_url: string;
+  order_number: number;
+  created_at: string;
+}
+

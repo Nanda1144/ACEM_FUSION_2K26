@@ -46,12 +46,29 @@
   - [x] Remove duplicate coordinators
   - [x] Add animations and transitions
 - [x] Step 6: Enhance Gallery Section
-  - [x] Add golden color border (2px solid #D4AF37) to each image
+  - [x] Add golden color border (3px solid #D4AF37) to each image
   - [x] Add animated glow effect to images (pulsing animation)
   - [x] Create goldenGlow keyframe animation with 3s duration
   - [x] Optimize glow effect for smaller frame size
   - [x] Add hover effects with enhanced glow
   - [x] Maintain masonry layout
+- [x] Step 7: Add Mobile Logo Carousel
+  - [x] Create sponsor_logos database table with RLS policies
+  - [x] Add SponsorLogo type to types/index.ts
+  - [x] Create sponsorLogosApi in db/api.ts
+  - [x] Create LogoCarousel component with auto-scroll animation
+  - [x] Add CSS animations for seamless infinite scroll
+  - [x] Display logos in semi-square containers (80px height)
+  - [x] Make carousel visible only on mobile devices
+  - [x] Add carousel to HomePage only
+  - [x] Create SponsorLogoManagement admin component
+  - [x] Add upload, delete, and order management features
+  - [x] Add "Mobile Logos" tab to Admin Dashboard
+- [x] Step 8: Add Purple Glow Effect to Committee Cards
+  - [x] Create purpleClickGlow keyframe animation
+  - [x] Add click handler to committee cards
+  - [x] Apply purple-glow-active class on click
+  - [x] Animation duration: 0.6s with ease-out timing
 - [x] Step 7: Update Event Cards Display
   - [x] Show only 1 staff coordinator (name only, no contact)
   - [x] Show only 1 student coordinator (name only, no contact)
@@ -98,11 +115,18 @@
 - ✅ Hero background image now animated with zoom effect (scale 1 to 1.1)
 - ✅ Hero subtitle changed to "Integrate Modern Technology With Traditional Culture"
 - ✅ About section text brightness increased (changed from text-muted-foreground to text-foreground with 95% opacity)
-- ✅ Gallery images now have smaller golden borders (2px solid #D4AF37) with optimized animated glow effects
+- ✅ Gallery images now have golden borders (3px solid #D4AF37) with optimized animated glow effects
 - ✅ Gallery golden glow animation pulses continuously (3s duration, infinite loop)
 - ✅ Gallery animation optimized for smaller frame: 10px-60px outer glow range with enhanced intensity
 - ✅ Gallery frame padding reduced from p-2 to p-1.5 for more compact appearance
 - ✅ Gallery images have enhanced hover effects with gradient overlay
+- ✅ Committee section now has purple glow effect on card click (0.6s animation)
+- ✅ Mobile logo carousel added (visible only on mobile devices, homepage only)
+- ✅ Logo carousel features horizontal auto-scroll animation (left to right, 30s duration)
+- ✅ Logos displayed in semi-square containers (80px x 80px) with golden borders
+- ✅ Admin can manage logos with upload, delete, and order settings
+- ✅ SponsorLogoManagement component created with full CRUD operations
+- ✅ Database table sponsor_logos created with RLS policies
 - ✅ Event cards show only 1 staff and 1 student coordinator (name only)
 - ✅ Contact details removed from event cards
 - ✅ EventDetailPage shows ALL coordinators with full contact information
@@ -122,7 +146,7 @@
 - ✅ Switched from MongoDB to Supabase API
 - ✅ All lint errors fixed
 - ✅ Application ready to run with `npm run client`
-- ✅ Admin dashboard updated with new "Coordinators" tab
+- ✅ Admin dashboard updated with new "Mobile Logos" tab
 - ⏳ Need to add admin management UI for event posters
 - ⏳ Need to enhance event descriptions with rich text editor
 - ⏳ Need to restructure committee system to groups

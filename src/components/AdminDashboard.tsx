@@ -12,6 +12,7 @@ import PageBuilder from './admin/PageBuilder';
 import FooterManagement from './admin/FooterManagement';
 import HeaderSettings from './admin/HeaderSettings';
 import OverallCoordinatorManagement from './admin/OverallCoordinatorManagement';
+import SponsorLogoManagement from './admin/SponsorLogoManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
@@ -48,6 +49,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
             <TabsTrigger value="coordinators">Coordinators</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
+            <TabsTrigger value="logos">Mobile Logos</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
             <TabsTrigger value="passkey">Passkey</TabsTrigger>
@@ -87,6 +89,10 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
           <TabsContent value="gallery">
             <GalleryManagement />
+          </TabsContent>
+
+          <TabsContent value="logos">
+            <SponsorLogoManagement />
           </TabsContent>
 
           <TabsContent value="about">

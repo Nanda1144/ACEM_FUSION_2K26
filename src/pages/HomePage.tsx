@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import FlexibleHeader from '@/components/FlexibleHeader';
 import Hero from '@/components/Hero';
+import LogoCarousel from '@/components/LogoCarousel';
 import EventPosters from '@/components/EventPosters';
 import Events from '@/components/Events';
 import OverallCoordinators from '@/components/OverallCoordinators';
@@ -61,6 +62,7 @@ export default function HomePage() {
       <div className="min-h-screen" style={pageStyle}>
         <FlexibleHeader />
         <Hero />
+        <LogoCarousel />
         <EventPosters />
         <Events />
         <OverallCoordinators />
