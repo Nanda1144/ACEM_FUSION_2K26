@@ -8,6 +8,7 @@
   - [x] Make text flexible with responsive font sizes
   - [x] Add text animations
   - [x] Ensure logo and at least 2 items visible on mobile
+  - [x] Simplify header styling with inline CSS
 - [x] Step 2: Create Event Posters Section
   - [x] Create database table for event posters
   - [x] Build auto-scrolling carousel (left to right)
@@ -22,38 +23,51 @@
   - [x] Add optional photos (round/semi-circle shape)
   - [x] Add API endpoints
   - [ ] Create admin management interface (pending)
-- [ ] Step 4: Enhance Event Descriptions
+- [x] Step 4: Add Event-Specific Coordinator Contact Section
+  - [x] Display all staff coordinators for selected event type
+  - [x] Display all student coordinators for selected event type
+  - [x] Position below event cards grid
+  - [x] Update dynamically when switching tabs (Technical/Cultural)
+  - [x] Add styled cards with hover effects
+  - [x] Remove duplicate coordinators
+  - [x] Add animations and transitions
+- [ ] Step 5: Enhance Event Descriptions
   - [ ] Add rich text editor for descriptions
   - [ ] Support text justification
   - [ ] Support bullet points/lists
   - [ ] Add text color picker
   - [ ] Add bold text option
   - [ ] Store as HTML in database
-- [ ] Step 5: Add Event Coordinator Photos
+- [ ] Step 6: Add Event Coordinator Photos
   - [ ] Add photo fields to event coordinators
   - [ ] Display in round/semi-circle shape
   - [ ] Make display optional via admin toggle
   - [ ] Update admin event management
-- [ ] Step 6: Restructure Committee System
+- [ ] Step 7: Restructure Committee System
   - [ ] Rename to "Committees" (groups not persons)
   - [x] Update database schema (title, description, image, coordinators)
   - [ ] Rebuild Committee component for groups
   - [ ] Update admin management for committee groups
   - [ ] Add coordinator details to each committee
-- [x] Step 7: Switch to Supabase API
+- [x] Step 8: Switch to Supabase API
   - [x] Update API to use Supabase instead of MongoDB
   - [x] Fix import errors
   - [x] Run lint validation
   - [x] Verify all components work with Supabase
-- [ ] Step 8: Validate and Test
+- [ ] Step 9: Validate and Test
   - [ ] Test all new features
   - [ ] Verify responsive design
   - [ ] Complete admin UI for new features
 
 ## Notes
 - ✅ Header updated with golden animated text and enhanced glow effects
+- ✅ Header simplified with inline CSS styling (removed Framer Motion animations)
 - ✅ Event posters carousel created with auto-scroll animation
 - ✅ Overall coordinators section added with staff/student separation
+- ✅ Event-specific coordinator contact section added below event cards
+- ✅ Coordinator section updates dynamically when switching between Technical/Cultural tabs
+- ✅ All coordinators displayed with styled cards, hover effects, and animations
+- ✅ Duplicate coordinators removed using contact number as unique identifier
 - ✅ Backend API routes added for all new features
 - ✅ Database migrations applied successfully
 - ✅ Switched from MongoDB to Supabase API
