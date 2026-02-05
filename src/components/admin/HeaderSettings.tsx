@@ -52,7 +52,7 @@ export default function HeaderSettings() {
     }
 
     try {
-      const imageUrl = await uploadImage(file, 'header-backgrounds');
+      const imageUrl = await uploadImage(file, 'app-9dfi9jpj51xd_events_images');
       setSettings({ ...settings, header_bg_image: imageUrl });
       toast({
         title: 'Success',

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { aboutApi } from '@/db/api';
+import { aboutUsApi } from '@/db/api';
 import type { AboutUs } from '@/types/index';
 
 export default function About() {
@@ -13,7 +13,7 @@ export default function About() {
 
   const loadAbout = async () => {
     try {
-      const data = await aboutApi.get();
+      const data = await aboutUsApi.get();
       setAbout(data);
     } catch (error) {
       console.error('Error loading about us:', error);

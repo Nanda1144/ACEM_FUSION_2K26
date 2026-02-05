@@ -213,7 +213,7 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
       await simulateTyping(500);
 
       try {
-        const isValid = await passkeyApi.verify(userInput);
+        const isValid = await passkeyApi.validate(userInput);
         if (isValid) {
           addBotMessage(
             "✅ Authentication successful! Opening admin dashboard...",

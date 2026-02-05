@@ -1,6 +1,7 @@
+import { supabase } from './supabase';
 import type { 
   Event, 
-  CommitteeMember,
+  CommitteeMember, 
   Committee,
   CommitteeCoordinator,
   EventPoster,
@@ -9,6 +10,7 @@ import type {
   AboutUs, 
   Contact, 
   AdminPasskey, 
+  HeaderSettings, 
   ThemeSettings, 
   Page, 
   PageSection, 
@@ -16,282 +18,542 @@ import type {
   ComponentTemplate 
 } from '@/types/index';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
-// Helper function for API calls
-async function apiCall<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-    ...options,
-  });
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Request failed' }));
-    throw new Error(error.error || 'Request failed');
-  }
-
-  return response.json();
-}
-
 // Events API
 export const eventsApi = {
-  getAll: async (): Promise<Event[]> => {
-    return apiCall<Event[]>('/events');
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  getById: async (id: string): Promise<Event | null> => {
-    return apiCall<Event>(`/events/${id}`);
+  getById: async (id: string) => {
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  getByType: async (type: 'Technical' | 'Cultural'): Promise<Event[]> => {
-    return apiCall<Event[]>(`/events?type=${type}`);
+  getByType: async (type: 'Technical' | 'Cultural') => {
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .eq('type', type)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  create: async (event: Omit<Event, 'id' | 'created_at' | 'updated_at'>): Promise<Event> => {
-    return apiCall<Event>('/events', {
-      method: 'POST',
-      body: JSON.stringify(event),
-    });
+  create: async (event: Omit<Event, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('events')
+      .insert([event])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, event: Partial<Event>): Promise<Event> => {
-    return apiCall<Event>(`/events/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(event),
-    });
+  update: async (id: string, event: Partial<Event>) => {
+    const { data, error } = await supabase
+      .from('events')
+      .update({ ...event, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  delete: async (id: string): Promise<void> => {
-    await apiCall(`/events/${id}`, { method: 'DELETE' });
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('events')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Committee API
 export const committeeApi = {
-  getAll: async (): Promise<CommitteeMember[]> => {
-    return apiCall<CommitteeMember[]>('/committee');
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('committee')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  create: async (member: Omit<CommitteeMember, 'id' | 'created_at' | 'updated_at'>): Promise<CommitteeMember> => {
-    return apiCall<CommitteeMember>('/committee', {
-      method: 'POST',
-      body: JSON.stringify(member),
-    });
+  create: async (member: Omit<CommitteeMember, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('committee')
+      .insert([member])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, member: Partial<CommitteeMember>): Promise<CommitteeMember> => {
-    return apiCall<CommitteeMember>(`/committee/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(member),
-    });
+  update: async (id: string, member: Partial<CommitteeMember>) => {
+    const { data, error } = await supabase
+      .from('committee')
+      .update({ ...member, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  delete: async (id: string): Promise<void> => {
-    await apiCall(`/committee/${id}`, { method: 'DELETE' });
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('committee')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Gallery API
 export const galleryApi = {
-  getAll: async (): Promise<GalleryImage[]> => {
-    return apiCall<GalleryImage[]>('/gallery');
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('gallery')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  create: async (image: Omit<GalleryImage, 'id' | 'created_at'>): Promise<GalleryImage> => {
-    return apiCall<GalleryImage>('/gallery', {
-      method: 'POST',
-      body: JSON.stringify(image),
-    });
+  create: async (image_url: string) => {
+    const { data, error } = await supabase
+      .from('gallery')
+      .insert([{ image_url }])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  delete: async (id: string): Promise<void> => {
-    await apiCall(`/gallery/${id}`, { method: 'DELETE' });
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('gallery')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // About Us API
-export const aboutApi = {
-  get: async (): Promise<AboutUs | null> => {
-    return apiCall<AboutUs>('/about');
+export const aboutUsApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('about_us')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, content: string): Promise<AboutUs> => {
-    return apiCall<AboutUs>(`/about/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ content }),
-    });
+  update: async (id: string, content: string) => {
+    const { data, error } = await supabase
+      .from('about_us')
+      .update({ content, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 };
 
 // Contact API
 export const contactApi = {
-  get: async (): Promise<Contact | null> => {
-    return apiCall<Contact>('/contact');
+  get: async () => {
+    const { data, error } = await supabase
+      .from('contact')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, contact: Partial<Contact>): Promise<Contact> => {
-    return apiCall<Contact>(`/contact/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(contact),
-    });
+  update: async (id: string, contact: Partial<Contact>) => {
+    const { data, error } = await supabase
+      .from('contact')
+      .update({ ...contact, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 };
 
 // Admin Passkey API
 export const passkeyApi = {
-  verify: async (passkey: string): Promise<boolean> => {
-    const result = await apiCall<{ valid: boolean }>('/passkey/verify', {
-      method: 'POST',
-      body: JSON.stringify({ passkey }),
-    });
-    return result.valid;
+  get: async () => {
+    const { data, error } = await supabase
+      .from('admin_passkey')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, newPasskey: string): Promise<void> => {
-    await apiCall(`/passkey/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ passkey: newPasskey }),
-    });
+  validate: async (passkey: string) => {
+    const { data, error } = await supabase
+      .from('admin_passkey')
+      .select('*')
+      .eq('passkey', passkey)
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return !!data;
   },
 
-  get: async (): Promise<AdminPasskey | null> => {
-    return apiCall<AdminPasskey>('/passkey');
+  update: async (id: string, newPasskey: string) => {
+    const { data, error } = await supabase
+      .from('admin_passkey')
+      .update({ passkey: newPasskey, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  }
+};
+
+// Header Settings API
+export const headerSettingsApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('header_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, settings: Partial<HeaderSettings>) => {
+    const { data, error } = await supabase
+      .from('header_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 };
 
 // Theme Settings API
 export const themeSettingsApi = {
-  get: async (): Promise<ThemeSettings | null> => {
-    return apiCall<ThemeSettings>('/theme');
+  get: async () => {
+    const { data, error } = await supabase
+      .from('theme_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, settings: Partial<ThemeSettings>): Promise<ThemeSettings> => {
-    return apiCall<ThemeSettings>(`/theme/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(settings),
-    });
+  update: async (id: string, settings: Partial<ThemeSettings>) => {
+    const { data, error } = await supabase
+      .from('theme_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 };
 
 // Pages API
 export const pagesApi = {
-  getAll: async (): Promise<Page[]> => {
-    return apiCall<Page[]>('/pages');
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  getPublished: async (): Promise<Page[]> => {
-    return apiCall<Page[]>('/pages?published=true');
+  getBySlug: async (slug: string) => {
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  getBySlug: async (slug: string): Promise<Page | null> => {
-    return apiCall<Page>(`/pages/slug/${slug}`);
+  create: async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('pages')
+      .insert([page])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  create: async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>): Promise<Page> => {
-    return apiCall<Page>('/pages', {
-      method: 'POST',
-      body: JSON.stringify(page),
-    });
+  update: async (id: string, page: Partial<Page>) => {
+    const { data, error } = await supabase
+      .from('pages')
+      .update({ ...page, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, page: Partial<Page>): Promise<Page> => {
-    return apiCall<Page>(`/pages/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(page),
-    });
-  },
-
-  delete: async (id: string): Promise<void> => {
-    await apiCall(`/pages/${id}`, { method: 'DELETE' });
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('pages')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Page Sections API
 export const pageSectionsApi = {
-  getByPageId: async (pageId: string): Promise<PageSection[]> => {
-    return apiCall<PageSection[]>(`/page-sections/${pageId}`);
+  getByPageId: async (pageId: string) => {
+    const { data, error } = await supabase
+      .from('page_sections')
+      .select('*')
+      .eq('page_id', pageId)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  create: async (section: Omit<PageSection, 'id' | 'created_at' | 'updated_at'>): Promise<PageSection> => {
-    return apiCall<PageSection>('/page-sections', {
-      method: 'POST',
-      body: JSON.stringify(section),
-    });
+  create: async (section: Omit<PageSection, 'id' | 'created_at' | 'updated_at'>) => {
+    const { data, error } = await supabase
+      .from('page_sections')
+      .insert([section])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, section: Partial<PageSection>): Promise<PageSection> => {
-    return apiCall<PageSection>(`/page-sections/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(section),
-    });
+  update: async (id: string, section: Partial<PageSection>) => {
+    const { data, error } = await supabase
+      .from('page_sections')
+      .update({ ...section, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
-  delete: async (id: string): Promise<void> => {
-    await apiCall(`/page-sections/${id}`, { method: 'DELETE' });
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('page_sections')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Footer Settings API
 export const footerSettingsApi = {
-  get: async (): Promise<FooterSettings | null> => {
-    return apiCall<FooterSettings>('/footer');
+  get: async () => {
+    const { data, error } = await supabase
+      .from('footer_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
-  update: async (id: string, settings: Partial<FooterSettings>): Promise<FooterSettings> => {
-    return apiCall<FooterSettings>(`/footer/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(settings),
-    });
+  update: async (id: string, settings: Partial<FooterSettings>) => {
+    const { data, error } = await supabase
+      .from('footer_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 };
 
 // Component Templates API
 export const componentTemplatesApi = {
-  getAll: async (): Promise<ComponentTemplate[]> => {
-    return apiCall<ComponentTemplate[]>('/component-templates');
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('component_templates')
+      .select('*')
+      .order('category', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
-  getByCategory: async (category: string): Promise<ComponentTemplate[]> => {
-    return apiCall<ComponentTemplate[]>(`/component-templates?category=${category}`);
+  getByCategory: async (category: string) => {
+    const { data, error } = await supabase
+      .from('component_templates')
+      .select('*')
+      .eq('category', category);
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   }
+};
+
+// Image Upload Helper
+export const uploadImage = async (
+  file: File,
+  bucket: 'app-9dfi9jpj51xd_events_images' | 'app-9dfi9jpj51xd_committee_images' | 'app-9dfi9jpj51xd_gallery_images'
+): Promise<string> => {
+  // Validate file name
+  const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+  const fileName = `${Date.now()}_${sanitizedFileName}`;
+
+  // Check file size and compress if needed
+  let fileToUpload = file;
+  if (file.size > 1024 * 1024) {
+    // File is larger than 1MB, compress it
+    fileToUpload = await compressImage(file);
+  }
+
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .upload(fileName, fileToUpload, {
+      cacheControl: '3600',
+      upsert: false
+    });
+
+  if (error) throw error;
+
+  const { data: { publicUrl } } = supabase.storage
+    .from(bucket)
+    .getPublicUrl(data.path);
+
+  return publicUrl;
 };
 
 // Event Posters API
 export const eventPostersApi = {
   getAll: async () => {
-    return apiCall('/event-posters');
+    const { data, error } = await supabase
+      .from('event_posters')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
   create: async (poster: { image_url: string; display_order: number }) => {
-    return apiCall('/event-posters', {
-      method: 'POST',
-      body: JSON.stringify(poster),
-    });
+    const { data, error } = await supabase
+      .from('event_posters')
+      .insert([poster])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   update: async (id: string, poster: { image_url?: string; display_order?: number }) => {
-    return apiCall(`/event-posters/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(poster),
-    });
+    const { data, error } = await supabase
+      .from('event_posters')
+      .update(poster)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   delete: async (id: string) => {
-    await apiCall(`/event-posters/${id}`, { method: 'DELETE' });
+    const { error } = await supabase
+      .from('event_posters')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Overall Coordinators API
 export const overallCoordinatorsApi = {
   getAll: async () => {
-    return apiCall('/overall-coordinators');
+    const { data, error } = await supabase
+      .from('overall_coordinators')
+      .select('*')
+      .order('display_order', { ascending: true});
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
   getByType: async (type: 'staff' | 'student') => {
-    return apiCall(`/overall-coordinators?type=${type}`);
+    const { data, error } = await supabase
+      .from('overall_coordinators')
+      .select('*')
+      .eq('type', type)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
   create: async (coordinator: {
@@ -303,10 +565,14 @@ export const overallCoordinatorsApi = {
     display_order: number;
     show_photo: boolean;
   }) => {
-    return apiCall('/overall-coordinators', {
-      method: 'POST',
-      body: JSON.stringify(coordinator),
-    });
+    const { data, error } = await supabase
+      .from('overall_coordinators')
+      .insert([coordinator])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   update: async (id: string, coordinator: Partial<{
@@ -317,25 +583,48 @@ export const overallCoordinatorsApi = {
     display_order: number;
     show_photo: boolean;
   }>) => {
-    return apiCall(`/overall-coordinators/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(coordinator),
-    });
+    const { data, error } = await supabase
+      .from('overall_coordinators')
+      .update(coordinator)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   delete: async (id: string) => {
-    await apiCall(`/overall-coordinators/${id}`, { method: 'DELETE' });
+    const { error } = await supabase
+      .from('overall_coordinators')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Committees API (new groups-based system)
 export const committeesApi = {
   getAll: async () => {
-    return apiCall('/committees');
+    const { data, error } = await supabase
+      .from('committees')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
   getById: async (id: string) => {
-    return apiCall(`/committees/${id}`);
+    const { data, error } = await supabase
+      .from('committees')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
   },
 
   create: async (committee: {
@@ -344,10 +633,14 @@ export const committeesApi = {
     image_url?: string;
     display_order: number;
   }) => {
-    return apiCall('/committees', {
-      method: 'POST',
-      body: JSON.stringify(committee),
-    });
+    const { data, error } = await supabase
+      .from('committees')
+      .insert([committee])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   update: async (id: string, committee: Partial<{
@@ -356,25 +649,55 @@ export const committeesApi = {
     image_url: string;
     display_order: number;
   }>) => {
-    return apiCall(`/committees/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(committee),
-    });
+    const { data, error } = await supabase
+      .from('committees')
+      .update(committee)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   delete: async (id: string) => {
-    await apiCall(`/committees/${id}`, { method: 'DELETE' });
+    // Delete committee coordinators first
+    await supabase
+      .from('committee_coordinators')
+      .delete()
+      .eq('committee_id', id);
+    
+    // Then delete the committee
+    const { error } = await supabase
+      .from('committees')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
 // Committee Coordinators API
 export const committeeCoordinatorsApi = {
   getAll: async () => {
-    return apiCall('/committee-coordinators');
+    const { data, error } = await supabase
+      .from('committee_coordinators')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
   getByCommittee: async (committeeId: string) => {
-    return apiCall(`/committee-coordinators?committee_id=${committeeId}`);
+    const { data, error } = await supabase
+      .from('committee_coordinators')
+      .select('*')
+      .eq('committee_id', committeeId)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
   },
 
   create: async (coordinator: {
@@ -385,10 +708,14 @@ export const committeeCoordinatorsApi = {
     image_url?: string;
     display_order: number;
   }) => {
-    return apiCall('/committee-coordinators', {
-      method: 'POST',
-      body: JSON.stringify(coordinator),
-    });
+    const { data, error } = await supabase
+      .from('committee_coordinators')
+      .insert([coordinator])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   update: async (id: string, coordinator: Partial<{
@@ -398,75 +725,41 @@ export const committeeCoordinatorsApi = {
     image_url: string;
     display_order: number;
   }>) => {
-    return apiCall(`/committee-coordinators/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(coordinator),
-    });
+    const { data, error} = await supabase
+      .from('committee_coordinators')
+      .update(coordinator)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   },
 
   delete: async (id: string) => {
-    await apiCall(`/committee-coordinators/${id}`, { method: 'DELETE' });
+    const { error } = await supabase
+      .from('committee_coordinators')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
   }
 };
 
-// Image Upload Helper
-export async function uploadImage(file: File, bucket: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    
-    reader.onload = async () => {
-      try {
-        const base64String = reader.result as string;
-        
-        const response = await fetch(`${API_BASE_URL}/images/upload`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            data: base64String,
-            filename: file.name,
-            contentType: file.type,
-            bucket,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Upload failed');
-        }
-
-        const result = await response.json();
-        // Convert relative URL to absolute URL
-        const imageUrl = result.url.startsWith('http') 
-          ? result.url 
-          : `${API_BASE_URL.replace('/api', '')}${result.url}`;
-        resolve(imageUrl);
-      } catch (error) {
-        reject(error);
-      }
-    };
-    
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-}
-
-// Image compression helper
-async function compressImage(file: File): Promise<File> {
+// Image Compression Helper
+const compressImage = async (file: File): Promise<File> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    
     reader.onload = (event) => {
       const img = new Image();
       img.src = event.target?.result as string;
-      
       img.onload = () => {
         const canvas = document.createElement('canvas');
         let width = img.width;
         let height = img.height;
-        
-        // Resize if larger than 1080p
+
+        // Resize to max 1080p
         const maxDimension = 1080;
         if (width > maxDimension || height > maxDimension) {
           if (width > height) {
@@ -477,17 +770,17 @@ async function compressImage(file: File): Promise<File> {
             height = maxDimension;
           }
         }
-        
+
         canvas.width = width;
         canvas.height = height;
-        
+
         const ctx = canvas.getContext('2d');
         ctx?.drawImage(img, 0, 0, width, height);
-        
+
         canvas.toBlob(
           (blob) => {
             if (blob) {
-              const compressedFile = new File([blob], file.name, {
+              const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, '.webp'), {
                 type: 'image/webp',
                 lastModified: Date.now()
               });
@@ -500,12 +793,8 @@ async function compressImage(file: File): Promise<File> {
           0.8
         );
       };
-      
-      img.onerror = () => reject(new Error('Image load failed'));
+      img.onerror = reject;
     };
-    
-    reader.onerror = () => reject(reader.error);
+    reader.onerror = reject;
   });
-}
-
-export { compressImage };
+};
