@@ -125,12 +125,12 @@ export default function FlexibleHeader() {
                 {themeSettings?.header_title || 'ADITYA COLLEGE OF ENGINEERING'}
               </h1>
               
-              {/* Madanapalle - White */}
+              {/* Madanapalle - Light-Dark Gold with Glow */}
               <p 
-                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 sm:mt-1 font-medium truncate" 
+                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 sm:mt-1 font-medium truncate text-center" 
                 style={{ 
-                  color: '#FFFFFF',
-                  textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
+                  color: '#E6C86F',
+                  textShadow: '0 0 20px rgba(230, 200, 111, 0.7), 0 0 30px rgba(230, 200, 111, 0.5), 0 0 40px rgba(230, 200, 111, 0.3)',
                 }}
               >
                 {themeSettings?.header_subtitle || 'Madanapalle'}
@@ -138,7 +138,7 @@ export default function FlexibleHeader() {
               
               {/* UGC Autonomous - White */}
               <p 
-                className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5 italic font-normal truncate" 
+                className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5 italic font-normal truncate text-center" 
                 style={{ 
                   color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
