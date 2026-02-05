@@ -62,14 +62,32 @@ export default function Gallery() {
                 transition={{ delay: index * 0.05, duration: 0.5 }}
                 className="mb-4 break-inside-avoid"
               >
-                <div className="relative overflow-hidden rounded-lg group cursor-pointer">
-                  <img
-                    src={image.image_url}
-                    alt={`Gallery ${index + 1}`}
-                    className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div 
+                  className="relative overflow-hidden rounded-lg group cursor-pointer p-2"
+                  style={{
+                    border: '3px solid #D4AF37',
+                    boxShadow: '0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3)',
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05))'
+                  }}
+                >
+                  <div className="relative overflow-hidden rounded">
+                    <img
+                      src={image.image_url}
+                      alt={`Gallery ${index + 1}`}
+                      className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                      style={{
+                        filter: 'brightness(1) contrast(1.05)',
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(0, 217, 255, 0.2))',
+                        boxShadow: 'inset 0 0 30px rgba(212, 175, 55, 0.5)'
+                      }}
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}

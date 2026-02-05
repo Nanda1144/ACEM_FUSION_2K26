@@ -216,13 +216,15 @@ export default function EventDetailPage() {
 
               {/* Coordinators */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Staff Coordinator */}
+                {/* Staff Coordinators */}
                 {event.staff_coordinators && event.staff_coordinators.length > 0 && (
                   <Card>
                     <CardContent className="pt-6">
-                      <h2 className="text-2xl font-bold mb-4">Staff Coordinator</h2>
+                      <h2 className="text-2xl font-bold mb-4">
+                        Staff Coordinator{event.staff_coordinators.length > 1 ? 's' : ''}
+                      </h2>
                       <div className="space-y-4">
-                        {event.staff_coordinators.slice(0, 1).map((coordinator, index) => (
+                        {event.staff_coordinators.map((coordinator, index) => (
                           <div key={index} className="p-4 bg-muted rounded-lg">
                             <h3 className="font-semibold text-lg mb-2">{coordinator.name}</h3>
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">

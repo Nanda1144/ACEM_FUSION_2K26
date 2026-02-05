@@ -191,7 +191,7 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
               />
             </CardHeader>
             <CardContent className="flex-1 space-y-4">
-              {/* Staff Coordinators - Always show 1 */}
+              {/* Staff Coordinators - Always show only 1 */}
               {event.staff_coordinators && event.staff_coordinators.length > 0 && (
                 <div>
                   <h4 className="text-sm font-semibold mb-2 text-primary">Staff Coordinator</h4>
@@ -199,28 +199,21 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
                     <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <User className="h-3 w-3" />
                       <span>{coord.name}</span>
-                      <Phone className="h-3 w-3 ml-2" />
-                      <span>{coord.contact}</span>
                     </div>
                   ))}
                 </div>
               )}
               
-              {/* Student Coordinators - Show all for Cultural, 1 for Technical */}
+              {/* Student Coordinators - Show only 1 */}
               {event.student_coordinators && event.student_coordinators.length > 0 && (
                 <div>
                   <h4 className="text-sm font-semibold mb-2 text-secondary">
-                    Student Coordinator{event.type === 'Cultural' && event.student_coordinators.length > 1 ? 's' : ''}
+                    Student Coordinator
                   </h4>
-                  {(event.type === 'Cultural' 
-                    ? event.student_coordinators 
-                    : event.student_coordinators.slice(0, 1)
-                  ).map((coord, idx) => (
+                  {event.student_coordinators.slice(0, 1).map((coord, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <User className="h-3 w-3" />
                       <span>{coord.name}</span>
-                      <Phone className="h-3 w-3 ml-2" />
-                      <span>{coord.contact}</span>
                     </div>
                   ))}
                 </div>

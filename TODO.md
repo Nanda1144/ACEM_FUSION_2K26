@@ -17,6 +17,9 @@
   - [x] Style subtitle in white with text shadow
   - [x] Increase button size and styling
   - [x] Maintain smooth animations
+  - [x] Make title responsive with clamp() for all screen sizes
+  - [x] Keep title in single line with whitespace-nowrap
+  - [x] Add animated background with zoom effect
 - [x] Step 3: Create Event Posters Section
   - [x] Create database table for event posters
   - [x] Build auto-scrolling carousel (left to right)
@@ -42,30 +45,44 @@
   - [x] Add styled cards with hover effects
   - [x] Remove duplicate coordinators
   - [x] Add animations and transitions
-- [ ] Step 6: Enhance Event Descriptions
+- [x] Step 6: Enhance Gallery Section
+  - [x] Add golden color border (3px solid #D4AF37) to each image
+  - [x] Add glow effect to images (box-shadow with golden color)
+  - [x] Add hover effects with enhanced glow
+  - [x] Maintain masonry layout
+- [x] Step 7: Update Event Cards Display
+  - [x] Show only 1 staff coordinator (name only, no contact)
+  - [x] Show only 1 student coordinator (name only, no contact)
+  - [x] Remove phone icons and contact details from cards
+  - [x] Full details shown on EventDetailPage when clicking "View Details"
+- [x] Step 8: Update EventDetailPage
+  - [x] Display ALL staff coordinators with full details
+  - [x] Display ALL student coordinators with full details
+  - [x] Show contact information for all coordinators
+- [ ] Step 9: Enhance Event Descriptions
   - [ ] Add rich text editor for descriptions
   - [ ] Support text justification
   - [ ] Support bullet points/lists
   - [ ] Add text color picker
   - [ ] Add bold text option
   - [ ] Store as HTML in database
-- [ ] Step 7: Add Event Coordinator Photos
+- [ ] Step 10: Add Event Coordinator Photos
   - [ ] Add photo fields to event coordinators
   - [ ] Display in round/semi-circle shape
   - [ ] Make display optional via admin toggle
   - [ ] Update admin event management
-- [ ] Step 8: Restructure Committee System
+- [ ] Step 11: Restructure Committee System
   - [ ] Rename to "Committees" (groups not persons)
   - [x] Update database schema (title, description, image, coordinators)
   - [ ] Rebuild Committee component for groups
   - [ ] Update admin management for committee groups
   - [ ] Add coordinator details to each committee
-- [x] Step 9: Switch to Supabase API
+- [x] Step 12: Switch to Supabase API
   - [x] Update API to use Supabase instead of MongoDB
   - [x] Fix import errors
   - [x] Run lint validation
   - [x] Verify all components work with Supabase
-- [ ] Step 10: Validate and Test
+- [ ] Step 13: Validate and Test
   - [ ] Test all new features
   - [ ] Verify responsive design
   - [ ] Complete admin UI for new features
@@ -75,7 +92,14 @@
 - ✅ Header title changed to "ADITYA COLLEGE OF ENGINEERING" in golden color
 - ✅ Header subtitle and tagline styled in white
 - ✅ Hero section updated with "FUSION 2K26" in large golden letters with black stroke
+- ✅ Hero title now responsive using clamp(2.5rem, 12vw, 10rem) - stays in single line
+- ✅ Hero background image now animated with zoom effect (scale 1 to 1.1)
 - ✅ Hero subtitle changed to "Integrate Modern Technology With Traditional Culture"
+- ✅ Gallery images now have golden borders (3px solid #D4AF37) with glow effects
+- ✅ Gallery images have enhanced hover effects with gradient overlay
+- ✅ Event cards show only 1 staff and 1 student coordinator (name only)
+- ✅ Contact details removed from event cards
+- ✅ EventDetailPage shows ALL coordinators with full contact information
 - ✅ Event posters carousel created with auto-scroll animation
 - ✅ Overall coordinators section added with staff/student separation
 - ✅ Added event_type field to overall_coordinators table (Technical/Cultural/Both)
@@ -96,6 +120,7 @@
 - ⏳ Need to add admin management UI for event posters
 - ⏳ Need to enhance event descriptions with rich text editor
 - ⏳ Need to restructure committee system to groups
+- 📝 Background image can be updated by admin (currently using placeholder)
 - react-quill already installed for rich text editing
 - Default admin passkey: acemadmin@fusion
 - Application uses Supabase (not MongoDB backend)

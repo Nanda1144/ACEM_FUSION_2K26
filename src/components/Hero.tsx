@@ -10,12 +10,21 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-end overflow-hidden pt-20 pb-32">
-      {/* Background Image */}
+      {/* Animated Background Image */}
       <div className="absolute inset-0">
-        <img 
+        <motion.img 
           src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
           alt="Fusion26 College Fest Background"
           className="w-full h-full object-cover"
+          initial={{ scale: 1 }}
+          animate={{ 
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut"
+          }}
         />
         {/* Gradient overlay from transparent to dark at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
@@ -37,13 +46,14 @@ export default function Hero() {
           transition={{ duration: 1 }}
         >
           <h1 
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-6 text-center tracking-wider" 
+            className="font-bold mb-6 text-center tracking-wider whitespace-nowrap overflow-hidden" 
             style={{
               color: '#D4AF37',
               textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)',
               WebkitTextStroke: '3px #000000',
               paintOrder: 'stroke fill',
-              letterSpacing: '0.1em'
+              letterSpacing: '0.1em',
+              fontSize: 'clamp(2.5rem, 12vw, 10rem)',
             }}
           >
             FUSION 2K26
