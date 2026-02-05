@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, X, Send, Bot, User, Calendar, Users, Image as ImageIcon, Info, Lock } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Calendar, Users, Image as ImageIcon, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,7 +26,6 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [awaitingPasskey, setAwaitingPasskey] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -48,7 +47,6 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
             { label: 'View Events', value: 'events', icon: <Calendar className="h-4 w-4" /> },
             { label: 'Committee Info', value: 'committee', icon: <Users className="h-4 w-4" /> },
             { label: 'Gallery', value: 'gallery', icon: <ImageIcon className="h-4 w-4" /> },
-            { label: 'Admin Access', value: 'admin', icon: <Lock className="h-4 w-4" /> },
           ]
         );
       }, 500);
@@ -170,7 +168,6 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
           "🔐 Admin Access\n\nTo access the admin dashboard, please enter your admin passkey below.\n\nNote: This area is restricted to authorized personnel only.",
           []
         );
-        setAwaitingPasskey(true);
         break;
 
       case 'menu':
@@ -181,7 +178,6 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
             { label: 'View Events', value: 'events', icon: <Calendar className="h-4 w-4" /> },
             { label: 'Committee Info', value: 'committee', icon: <Users className="h-4 w-4" /> },
             { label: 'Gallery', value: 'gallery', icon: <ImageIcon className="h-4 w-4" /> },
-            { label: 'Admin Access', value: 'admin', icon: <Lock className="h-4 w-4" /> },
           ]
         );
         break;
@@ -194,7 +190,6 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
             { label: 'View Events', value: 'events', icon: <Calendar className="h-4 w-4" /> },
             { label: 'Committee Info', value: 'committee', icon: <Users className="h-4 w-4" /> },
             { label: 'Gallery', value: 'gallery', icon: <ImageIcon className="h-4 w-4" /> },
-            { label: 'Admin Access', value: 'admin', icon: <Lock className="h-4 w-4" /> },
           ]
         );
     }
@@ -206,82 +201,42 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
 
     const userInput = input.trim();
     setInput('');
+    addUserMessage('••••••••••••'); // Show masked passkey
+    setLoading(true);
+    await simulateTyping(500);
 
-    if (awaitingPasskey) {
-      addUserMessage('••••••••••••');
-      setLoading(true);
-      await simulateTyping(500);
-
-      try {
-        const isValid = await passkeyApi.validate(userInput);
-        if (isValid) {
-          addBotMessage(
-            "✅ Authentication successful! Opening admin dashboard...",
-            []
-          );
-          toast({
-            title: 'Success',
-            description: 'Welcome, Admin!',
-          });
-          setTimeout(() => {
-            setIsOpen(false);
-            setAwaitingPasskey(false);
-            onAuthenticated();
-          }, 1000);
-        } else {
-          addBotMessage(
-            "❌ Invalid passkey. Please try again or contact the administrator.",
-            [
-              { label: 'Try Again', value: 'admin', icon: <Lock className="h-4 w-4" /> },
-              { label: 'Back to Menu', value: 'menu', icon: <MessageCircle className="h-4 w-4" /> },
-            ]
-          );
-          setAwaitingPasskey(false);
-        }
-      } catch (error) {
+    try {
+      const isValid = await passkeyApi.validate(userInput);
+      if (isValid) {
         addBotMessage(
-          "❌ Failed to validate passkey. Please check your connection and try again.",
+          "✅ Authentication successful! Opening admin dashboard...",
+          []
+        );
+        toast({
+          title: 'Success',
+          description: 'Welcome, Admin!',
+        });
+        setTimeout(() => {
+          setIsOpen(false);
+          onAuthenticated();
+        }, 1000);
+      } else {
+        addBotMessage(
+          "❌ Invalid passkey. Please try again or contact the administrator.",
           [
-            { label: 'Try Again', value: 'admin', icon: <Lock className="h-4 w-4" /> },
             { label: 'Back to Menu', value: 'menu', icon: <MessageCircle className="h-4 w-4" /> },
           ]
         );
-        setAwaitingPasskey(false);
-      } finally {
-        setLoading(false);
       }
-    } else {
-      // Handle general queries
-      addUserMessage(userInput);
-      await simulateTyping(800);
-
-      const lowerInput = userInput.toLowerCase();
-
-      if (lowerInput.includes('event') || lowerInput.includes('competition')) {
-        handleOptionClick('events', 'Tell me about events');
-      } else if (lowerInput.includes('committee') || lowerInput.includes('team') || lowerInput.includes('organizer')) {
-        handleOptionClick('committee', 'Who are the organizers?');
-      } else if (lowerInput.includes('gallery') || lowerInput.includes('photo') || lowerInput.includes('picture')) {
-        handleOptionClick('gallery', 'Show me the gallery');
-      } else if (lowerInput.includes('contact') || lowerInput.includes('email') || lowerInput.includes('phone')) {
-        handleOptionClick('contact', 'How to contact?');
-      } else if (lowerInput.includes('register') || lowerInput.includes('signup') || lowerInput.includes('join')) {
-        handleOptionClick('register', 'How to register?');
-      } else if (lowerInput.includes('admin') || lowerInput.includes('login') || lowerInput.includes('dashboard')) {
-        handleOptionClick('admin', 'Admin access');
-      } else if (lowerInput.includes('about') || lowerInput.includes('fusion') || lowerInput.includes('fest')) {
-        handleOptionClick('about', 'Tell me about Fusion26');
-      } else {
-        addBotMessage(
-          "I can help you with information about Fusion26! What would you like to know?",
-          [
-            { label: 'About Fusion26', value: 'about', icon: <Info className="h-4 w-4" /> },
-            { label: 'View Events', value: 'events', icon: <Calendar className="h-4 w-4" /> },
-            { label: 'Committee Info', value: 'committee', icon: <Users className="h-4 w-4" /> },
-            { label: 'Contact Us', value: 'contact', icon: <Info className="h-4 w-4" /> },
-          ]
-        );
-      }
+    } catch (error) {
+      addBotMessage(
+        "❌ Failed to validate passkey. Please check your connection and try again.",
+        [
+          { label: 'Back to Menu', value: 'menu', icon: <MessageCircle className="h-4 w-4" /> },
+        ]
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -290,7 +245,6 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
     // Reset state after animation
     setTimeout(() => {
       setMessages([]);
-      setAwaitingPasskey(false);
       setInput('');
     }, 300);
   };
@@ -415,8 +369,8 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
                 <div className="border-t border-primary/20 p-4">
                   <form onSubmit={handleSubmit} className="flex gap-2">
                     <Input
-                      type={awaitingPasskey ? 'password' : 'text'}
-                      placeholder={awaitingPasskey ? 'Enter admin passkey...' : 'Type your message...'}
+                      type="password"
+                      placeholder="Enter admin passkey..."
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       disabled={loading}
@@ -432,7 +386,7 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
                     </Button>
                   </form>
                   <p className="text-xs text-muted-foreground mt-2 text-center">
-                    {awaitingPasskey ? '🔒 Secure admin authentication' : '💬 Ask me anything about Fusion26!'}
+                    {'🔒 Enter your admin passkey to access the dashboard'}
                   </p>
                 </div>
               </CardContent>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
+import SplashScreen from '@/components/SplashScreen';
 
 import routes from './routes';
 
@@ -11,6 +12,7 @@ import { Toaster } from '@/components/ui/toaster';
 const App: React.FC = () => {
   return (
     <Router>
+      <SplashScreen />
       <IntersectObserver />
       <Routes>
         {routes.map((route, index) => (

@@ -10,12 +10,12 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-end overflow-hidden pt-20 pb-32">
-      {/* Animated Background Image */}
+      {/* Animated Background Image - Responsive */}
       <div className="absolute inset-0">
         <motion.img 
           src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
           alt="Fusion26 College Fest Background"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center md:object-center lg:object-top"
           initial={{ scale: 1 }}
           animate={{ 
             scale: [1, 1.1, 1],
@@ -24,6 +24,9 @@ export default function Hero() {
             duration: 20,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut"
+          }}
+          style={{
+            objectPosition: 'center center'
           }}
         />
         {/* Gradient overlay from transparent to dark at bottom */}
