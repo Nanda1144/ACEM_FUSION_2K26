@@ -10,25 +10,48 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-end overflow-hidden pt-20 pb-32">
-      {/* Animated Background Image - Responsive */}
+      {/* Animated Background Image - Responsive with Pop Animation */}
       <div className="absolute inset-0">
         <motion.img 
           src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
           alt="Fusion26 College Fest Background"
           className="w-full h-full object-cover object-center md:object-center lg:object-top"
-          initial={{ scale: 1 }}
+          initial={{ scale: 0.8, opacity: 0 }}
           animate={{ 
-            scale: [1, 1.1, 1],
+            scale: [0.8, 1.15, 1.05, 1],
+            opacity: [0, 1, 1, 1]
           }}
           transition={{
-            duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut"
+            duration: 2.5,
+            times: [0, 0.4, 0.7, 1],
+            ease: "easeOut"
           }}
           style={{
             objectPosition: 'center center'
           }}
         />
+        {/* Continuous breathing animation after initial pop */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{ 
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+            delay: 2.5
+          }}
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
+            alt=""
+            className="w-full h-full object-cover object-center md:object-center lg:object-top opacity-0"
+            style={{
+              objectPosition: 'center center'
+            }}
+          />
+        </motion.div>
         {/* Gradient overlay from transparent to dark at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
       </div>
@@ -49,21 +72,22 @@ export default function Hero() {
           transition={{ duration: 1 }}
         >
           <h1 
-            className="font-bold mb-6 text-center tracking-wider whitespace-nowrap overflow-hidden animated-gradient-text" 
+            className="font-bold mb-4 sm:mb-6 text-center tracking-wider overflow-hidden animated-gradient-text px-2 sm:px-4" 
             style={{
-              WebkitTextStroke: '3px #000000',
-              paintOrder: 'stroke fill',
-              letterSpacing: '0.1em',
-              fontSize: 'clamp(2.5rem, 12vw, 10rem)',
+              letterSpacing: '0.05em',
+              fontSize: 'clamp(2rem, 10vw, 10rem)',
+              lineHeight: '1.2',
             }}
           >
             {'FUSION 2K26'.split('').map((char, index) => (
               <span
                 key={index}
-                className="inline-block"
+                className="inline-block animated-letter"
                 style={{
                   animation: `colorWave 8s ease-in-out infinite`,
                   animationDelay: `${index * 0.15}s`,
+                  WebkitTextStroke: 'clamp(1px, 0.3vw, 3px) #000000',
+                  paintOrder: 'stroke fill',
                 }}
               >
                 {char === ' ' ? '\u00A0' : char}

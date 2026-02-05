@@ -217,33 +217,94 @@ All colors MUST be HSL.
     }
   }
 
-  /* 彩色波浪动画 - 从字母到字母传播颜色 */
+  /* Color wave animation - spreading color from letter to letter */
   @keyframes colorWave {
     0% {
-      color: #D4AF37; /* 金色 */
-      text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5);
+      color: #D4AF37; /* Gold */
+      text-shadow: 
+        0 0 15px rgba(212, 175, 55, 0.8), 
+        0 0 30px rgba(212, 175, 55, 0.5),
+        0 0 45px rgba(212, 175, 55, 0.3);
     }
     25% {
-      color: #00BFFF; /* 蓝色 */
-      text-shadow: 0 0 30px rgba(0, 191, 255, 0.8), 0 0 60px rgba(0, 191, 255, 0.5);
+      color: #00BFFF; /* Blue */
+      text-shadow: 
+        0 0 15px rgba(0, 191, 255, 0.8), 
+        0 0 30px rgba(0, 191, 255, 0.5),
+        0 0 45px rgba(0, 191, 255, 0.3);
     }
     50% {
-      color: #9D4EDD; /* 紫色 */
-      text-shadow: 0 0 30px rgba(157, 78, 221, 0.8), 0 0 60px rgba(157, 78, 221, 0.5);
+      color: #9D4EDD; /* Purple */
+      text-shadow: 
+        0 0 15px rgba(157, 78, 221, 0.8), 
+        0 0 30px rgba(157, 78, 221, 0.5),
+        0 0 45px rgba(157, 78, 221, 0.3);
     }
     75% {
-      color: #FFB6D9; /* 浅粉色 */
-      text-shadow: 0 0 30px rgba(255, 182, 217, 0.8), 0 0 60px rgba(255, 182, 217, 0.5);
+      color: #FFB6D9; /* Light Pink */
+      text-shadow: 
+        0 0 15px rgba(255, 182, 217, 0.8), 
+        0 0 30px rgba(255, 182, 217, 0.5),
+        0 0 45px rgba(255, 182, 217, 0.3);
     }
     100% {
-      color: #D4AF37; /* 金色 */
-      text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5);
+      color: #D4AF37; /* Gold */
+      text-shadow: 
+        0 0 15px rgba(212, 175, 55, 0.8), 
+        0 0 30px rgba(212, 175, 55, 0.5),
+        0 0 45px rgba(212, 175, 55, 0.3);
+    }
+  }
+
+  /* Enhanced text shadow for larger screens */
+  @media (min-width: 768px) {
+    @keyframes colorWave {
+      0% {
+        color: #D4AF37;
+        text-shadow: 
+          0 0 20px rgba(212, 175, 55, 0.9), 
+          0 0 40px rgba(212, 175, 55, 0.6),
+          0 0 60px rgba(212, 175, 55, 0.4);
+      }
+      25% {
+        color: #00BFFF;
+        text-shadow: 
+          0 0 20px rgba(0, 191, 255, 0.9), 
+          0 0 40px rgba(0, 191, 255, 0.6),
+          0 0 60px rgba(0, 191, 255, 0.4);
+      }
+      50% {
+        color: #9D4EDD;
+        text-shadow: 
+          0 0 20px rgba(157, 78, 221, 0.9), 
+          0 0 40px rgba(157, 78, 221, 0.6),
+          0 0 60px rgba(157, 78, 221, 0.4);
+      }
+      75% {
+        color: #FFB6D9;
+        text-shadow: 
+          0 0 20px rgba(255, 182, 217, 0.9), 
+          0 0 40px rgba(255, 182, 217, 0.6),
+          0 0 60px rgba(255, 182, 217, 0.4);
+      }
+      100% {
+        color: #D4AF37;
+        text-shadow: 
+          0 0 20px rgba(212, 175, 55, 0.9), 
+          0 0 40px rgba(212, 175, 55, 0.6),
+          0 0 60px rgba(212, 175, 55, 0.4);
+      }
     }
   }
 
   .animated-gradient-text span {
     display: inline-block;
     transition: color 0.3s ease;
+  }
+
+  .animated-letter {
+    will-change: color, text-shadow;
+    transform: translateZ(0);
   }
 
   .backdrop-blur-glass {
