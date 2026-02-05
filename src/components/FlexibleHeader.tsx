@@ -110,10 +110,10 @@ export default function FlexibleHeader() {
             )}
 
             {/* College Name with Subtitle and Tagline - Responsive Typography */}
-            <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0 text-center sm:text-left">
+            <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0 text-center">
               {/* ADITYA COLLEGE OF ENGINEERING - Gold with Glow */}
               <h1 
-                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" 
+                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-center" 
                 style={{
                   color: '#D4AF37',
                   textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.6), 0 0 50px rgba(212, 175, 55, 0.4)',
