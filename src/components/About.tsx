@@ -51,7 +51,7 @@ export default function About() {
               <div className="h-4 bg-muted rounded animate-pulse w-3/4" />
             </div>
           ) : (
-            <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
+            <p className="text-lg text-foreground leading-relaxed whitespace-pre-wrap" style={{ opacity: 0.95 }}>
               {about?.content || 'Welcome to Fusion26!'}
             </p>
           )}
