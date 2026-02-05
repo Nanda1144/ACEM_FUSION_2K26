@@ -3,19 +3,27 @@
 ## Plan
 - [x] Step 1: Update Header Section
   - [x] Make header responsive for all screen sizes
-  - [x] Add golden color with black borders to FUSION2K26 text
-  - [x] Add glowing background effect
-  - [x] Make text flexible with responsive font sizes
-  - [x] Add text animations
+  - [x] Change header background to solid blue (#1e40af)
+  - [x] Update main title to "ADITYA COLLEGE OF ENGINEERING" in golden color
+  - [x] Update subtitle to "Madanapalle" in white
+  - [x] Update tagline to "(UGC - Autonomous Institution)" in white
+  - [x] Add text animations and glow effects
   - [x] Ensure logo and at least 2 items visible on mobile
   - [x] Simplify header styling with inline CSS
-- [x] Step 2: Create Event Posters Section
+- [x] Step 2: Update Hero Section
+  - [x] Change main title to "FUSION 2K26" in large golden letters
+  - [x] Add black stroke effect to title (3px)
+  - [x] Update subtitle to "Integrate Modern Technology With Traditional Culture"
+  - [x] Style subtitle in white with text shadow
+  - [x] Increase button size and styling
+  - [x] Maintain smooth animations
+- [x] Step 3: Create Event Posters Section
   - [x] Create database table for event posters
   - [x] Build auto-scrolling carousel (left to right)
   - [x] Add API endpoints
   - [x] Position above Events section
   - [ ] Add admin management UI (pending)
-- [x] Step 3: Create Overall Coordinators Section
+- [x] Step 4: Create Overall Coordinators Section
   - [x] Create database table for overall coordinators
   - [x] Build UI component below Technical/Cultural buttons
   - [x] Add staff coordinators (name, position)
@@ -23,7 +31,7 @@
   - [x] Add optional photos (round/semi-circle shape)
   - [x] Add API endpoints
   - [ ] Create admin management interface (pending)
-- [x] Step 4: Add Event-Specific Coordinator Contact Section
+- [x] Step 5: Add Event-Specific Coordinator Contact Section
   - [x] Display all staff coordinators for selected event type
   - [x] Display all student coordinators for selected event type
   - [x] Position below event cards grid
@@ -31,37 +39,40 @@
   - [x] Add styled cards with hover effects
   - [x] Remove duplicate coordinators
   - [x] Add animations and transitions
-- [ ] Step 5: Enhance Event Descriptions
+- [ ] Step 6: Enhance Event Descriptions
   - [ ] Add rich text editor for descriptions
   - [ ] Support text justification
   - [ ] Support bullet points/lists
   - [ ] Add text color picker
   - [ ] Add bold text option
   - [ ] Store as HTML in database
-- [ ] Step 6: Add Event Coordinator Photos
+- [ ] Step 7: Add Event Coordinator Photos
   - [ ] Add photo fields to event coordinators
   - [ ] Display in round/semi-circle shape
   - [ ] Make display optional via admin toggle
   - [ ] Update admin event management
-- [ ] Step 7: Restructure Committee System
+- [ ] Step 8: Restructure Committee System
   - [ ] Rename to "Committees" (groups not persons)
   - [x] Update database schema (title, description, image, coordinators)
   - [ ] Rebuild Committee component for groups
   - [ ] Update admin management for committee groups
   - [ ] Add coordinator details to each committee
-- [x] Step 8: Switch to Supabase API
+- [x] Step 9: Switch to Supabase API
   - [x] Update API to use Supabase instead of MongoDB
   - [x] Fix import errors
   - [x] Run lint validation
   - [x] Verify all components work with Supabase
-- [ ] Step 9: Validate and Test
+- [ ] Step 10: Validate and Test
   - [ ] Test all new features
   - [ ] Verify responsive design
   - [ ] Complete admin UI for new features
 
 ## Notes
-- ✅ Header updated with golden animated text and enhanced glow effects
-- ✅ Header simplified with inline CSS styling (removed Framer Motion animations)
+- ✅ Header updated with solid blue background (#1e40af)
+- ✅ Header title changed to "ADITYA COLLEGE OF ENGINEERING" in golden color
+- ✅ Header subtitle and tagline styled in white
+- ✅ Hero section updated with "FUSION 2K26" in large golden letters with black stroke
+- ✅ Hero subtitle changed to "Integrate Modern Technology With Traditional Culture"
 - ✅ Event posters carousel created with auto-scroll animation
 - ✅ Overall coordinators section added with staff/student separation
 - ✅ Event-specific coordinator contact section added below event cards

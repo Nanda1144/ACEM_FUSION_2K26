@@ -36,69 +36,40 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center" style={{
-            color: '#D4AF37',
-            textShadow: '0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3)',
-            WebkitTextStroke: '2px #000000',
-            paintOrder: 'stroke fill',
-            letterSpacing: '0.05em'
-          }}>
-            ACEM FUSION 2k26
-          </h1>
-          <motion.p
-            className="text-lg md:text-xl mb-2 text-center font-semibold"
+          <h1 
+            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-6 text-center tracking-wider" 
             style={{
               color: '#D4AF37',
-              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-              WebkitTextStroke: '1px #000000',
+              textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)',
+              WebkitTextStroke: '3px #000000',
               paintOrder: 'stroke fill',
+              letterSpacing: '0.1em'
+            }}
+          >
+            FUSION 2K26
+          </h1>
+          <motion.p
+            className="text-xl sm:text-2xl md:text-3xl mb-8 text-center font-medium"
+            style={{
+              color: '#FFFFFF',
+              textShadow: '0 0 20px rgba(255, 255, 255, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8)',
               letterSpacing: '0.05em'
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            Aditya College of Engineering
-          </motion.p>
-          <motion.p
-            className="text-base md:text-lg mb-2 text-center font-semibold"
-            style={{
-              color: '#D4AF37',
-              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-              WebkitTextStroke: '0.8px #000000',
-              paintOrder: 'stroke fill',
-              letterSpacing: '0.1em'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 1 }}
-          >
-            Madanapalle
-          </motion.p>
-          <motion.p
-            className="text-sm md:text-base text-center font-medium mb-8"
-            style={{
-              color: '#D4AF37',
-              textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-              WebkitTextStroke: '0.5px #000000',
-              paintOrder: 'stroke fill',
-              letterSpacing: '0.05em'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            (UGC - Autonomous Institution)
+            Integrate Modern Technology With Traditional Culture
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
           >
             <Button
               size="lg"
               onClick={scrollToEvents}
-              className="glow-cyan hover:scale-105 transition-transform duration-300"
+              className="glow-cyan hover:scale-105 transition-transform duration-300 text-base md:text-lg px-8 py-6"
             >
               Explore Events
               <ArrowDown className="ml-2 h-5 w-5" />

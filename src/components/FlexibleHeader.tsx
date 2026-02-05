@@ -53,7 +53,7 @@ export default function FlexibleHeader() {
   const rightLogos = themeSettings?.logos?.filter(logo => logo.position === 'right').sort((a, b) => a.order - b.order) || [];
 
   const headerStyle = {
-    backgroundColor: themeSettings?.header_bg_color || 'transparent',
+    backgroundColor: themeSettings?.header_bg_color || '#1e40af', // Blue background
     backgroundImage: themeSettings?.header_bg_image ? `url(${themeSettings.header_bg_image})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -111,53 +111,37 @@ export default function FlexibleHeader() {
 
             {/* College Name with Subtitle and Tagline - Responsive Typography */}
             <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0">
-              {/* ACEM FUSION 2K26 - Cyan/Purple */}
-              <h1 
-                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" 
-                style={{
-                  color: '#00D9FF',
-                  textShadow: '0 0 20px rgba(0, 217, 255, 0.8), 0 0 40px rgba(138, 43, 226, 0.5)',
-                  WebkitTextStroke: '1.5px #000000',
-                  paintOrder: 'stroke fill',
-                }}
-              >
-                {themeSettings?.header_title || 'ACEM FUSION 2K26'}
-              </h1>
-              
               {/* ADITYA COLLEGE OF ENGINEERING - Gold */}
-              <p 
-                className="hidden sm:block text-[10px] sm:text-xs md:text-sm mt-0.5 sm:mt-1 font-bold truncate" 
-                style={{ 
+              <h1 
+                className="font-bold truncate text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl" 
+                style={{
                   color: '#D4AF37',
                   textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
                   WebkitTextStroke: '1.5px #000000',
                   paintOrder: 'stroke fill',
+                  letterSpacing: '0.05em'
                 }}
               >
-                {themeSettings?.header_subtitle || 'ADITYA COLLEGE OF ENGINEERING'}
-              </p>
+                {themeSettings?.header_title || 'ADITYA COLLEGE OF ENGINEERING'}
+              </h1>
               
-              {/* Madanapalle - Silver */}
+              {/* Madanapalle - White */}
               <p 
-                className="hidden md:block text-[9px] md:text-xs mt-0.5 font-semibold truncate" 
+                className="hidden sm:block text-xs sm:text-sm md:text-base mt-0.5 sm:mt-1 font-medium truncate" 
                 style={{ 
-                  color: '#C0C0C0',
-                  textShadow: '0 0 20px rgba(192, 192, 192, 0.5)',
-                  WebkitTextStroke: '1.5px #000000',
-                  paintOrder: 'stroke fill',
+                  color: '#FFFFFF',
+                  textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
                 }}
               >
-                Madanapalle
+                {themeSettings?.header_subtitle || 'Madanapalle'}
               </p>
               
-              {/* UGC Autonomous - Soft Gold */}
+              {/* UGC Autonomous - White */}
               <p 
-                className="hidden lg:block text-[8px] lg:text-xs mt-0.5 italic font-medium truncate" 
+                className="hidden md:block text-xs md:text-sm mt-0.5 italic font-normal truncate" 
                 style={{ 
-                  color: '#DAA520',
-                  textShadow: '0 0 20px rgba(218, 165, 32, 0.5)',
-                  WebkitTextStroke: '1.5px #000000',
-                  paintOrder: 'stroke fill',
+                  color: '#FFFFFF',
+                  textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
                 }}
               >
                 {themeSettings?.header_tagline || '(UGC - Autonomous Institution)'}
