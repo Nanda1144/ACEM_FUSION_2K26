@@ -1,11 +1,23 @@
 import { motion } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useState, useRef } from 'react';
 
 export default function Hero() {
+  const [isAnimationPaused, setIsAnimationPaused] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
   const scrollToEvents = () => {
     const eventsSection = document.getElementById('events');
     eventsSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleTouchStart = () => {
+    setIsAnimationPaused(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsAnimationPaused(false);
   };
 
   return (
@@ -72,11 +84,19 @@ export default function Hero() {
           transition={{ duration: 1 }}
         >
           <h1 
-            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-hidden animated-gradient-text px-2 sm:px-4" 
+            ref={titleRef}
+            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-hidden animated-gradient-text px-2 sm:px-4 cursor-pointer select-none" 
             style={{
               fontSize: 'clamp(2rem, 10vw, 10rem)',
               lineHeight: '1.2',
             }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseEnter={handleTouchStart}
+            onMouseLeave={handleTouchEnd}
+            onPointerDown={handleTouchStart}
+            onPointerUp={handleTouchEnd}
+            onPointerLeave={handleTouchEnd}
           >
             {'FUSION 2K26'.split('').map((char, index) => (
               <span
@@ -85,6 +105,7 @@ export default function Hero() {
                 style={{
                   animation: `colorWave 8s ease-in-out infinite`,
                   animationDelay: `${index * 0.15}s`,
+                  animationPlayState: isAnimationPaused ? 'paused' : 'running',
                   WebkitTextStroke: 'clamp(1px, 0.3vw, 3px) #000000',
                   paintOrder: 'stroke fill',
                 }}

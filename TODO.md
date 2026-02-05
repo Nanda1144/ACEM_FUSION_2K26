@@ -59,11 +59,14 @@
   - [x] Update EventDetailPage to render both formats
   - [x] Update Events component to display both formats
   - [x] Add helper text for list format input
+- [x] Step 8: Enhance Gallery Section
+  - [x] Add golden color border (3px solid #D4AF37) to each image
+  - [x] Add animated glow effect to images (pulsing animation)
   - [x] Create goldenGlow keyframe animation with 3s duration
   - [x] Optimize glow effect for smaller frame size
   - [x] Add hover effects with enhanced glow
   - [x] Maintain masonry layout
-- [x] Step 7: Add Mobile Logo Carousel
+- [x] Step 9: Add Mobile Logo Carousel
   - [x] Create sponsor_logos database table with RLS policies
   - [x] Add SponsorLogo type to types/index.ts
   - [x] Create sponsorLogosApi in db/api.ts
@@ -75,9 +78,18 @@
   - [x] Create SponsorLogoManagement admin component
   - [x] Add upload, delete, and order management features
   - [x] Add "Mobile Logos" tab to Admin Dashboard
-- [x] Step 8: Add Purple Glow Effect to Committee Cards
+- [x] Step 10: Add Purple Glow Effect to Committee Cards
   - [x] Create purpleClickGlow keyframe animation
   - [x] Add click handler to committee cards
+- [x] Step 11: Add Interactive Animation Freeze to FUSION 2K26 Title
+  - [x] Add touch/pointer event handlers to title
+  - [x] Implement animation pause on touch/hover
+  - [x] Resume animation when touch/hover ends
+  - [x] Support mouse, touch, and pointer events
+  - [x] Add cursor-pointer and select-none classes
+- [x] Step 12: Update Browser Tab Title
+  - [x] Change document.title from "ACEM-collegeFest 2026" to "ACEM-FUSION2K26"
+  - [x] Set title in App.tsx useEffect hook
   - [x] Apply purple-glow-active class on click
   - [x] Animation duration: 0.6s with ease-out timing
 - [x] Step 7: Update Event Cards Display
