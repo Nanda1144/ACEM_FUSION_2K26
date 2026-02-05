@@ -8,8 +8,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { Plus, Pencil, Trash2, User, Phone, Briefcase, Image as ImageIcon } from 'lucide-react';
-import { overallCoordinatorsApi } from '@/db/api';
+import { Plus, Pencil, Trash2, User, Phone, Briefcase, Image as ImageIcon, Upload } from 'lucide-react';
+import { overallCoordinatorsApi, uploadImage } from '@/db/api';
 import type { OverallCoordinator } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
 
@@ -18,6 +18,7 @@ export default function OverallCoordinatorManagement() {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingCoordinator, setEditingCoordinator] = useState<OverallCoordinator | null>(null);
+  const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -48,6 +49,40 @@ export default function OverallCoordinatorManagement() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (1MB limit)
+    if (file.size > 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'File size must be less than 1MB',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    try {
+      setUploading(true);
+      const url = await uploadImage(file, 'app-9dfi9jpj51xd_coordinator_images');
+      setFormData({ ...formData, image_url: url });
+      toast({
+        title: 'Success',
+        description: 'Image uploaded successfully'
+      });
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to upload image',
+        variant: 'destructive'
+      });
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -259,16 +294,40 @@ export default function OverallCoordinatorManagement() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="image_url">Photo URL (Optional)</Label>
-                    <div className="relative">
-                      <ImageIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="image_url"
-                        placeholder="Enter image URL"
-                        value={formData.image_url}
-                        onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                        className="pl-10"
+                    <Label htmlFor="image_url">Photo (Optional)</Label>
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        <Input
+                          id="image_url"
+                          placeholder="Enter image URL or upload"
+                          value={formData.image_url}
+                          onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                          className="flex-1"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => document.getElementById('coordinator-image-upload')?.click()}
+                          disabled={uploading}
+                        >
+                          <Upload className="h-4 w-4 mr-2" />
+                          {uploading ? 'Uploading...' : 'Upload'}
+                        </Button>
+                      </div>
+                      <input
+                        id="coordinator-image-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
                       />
+                      {formData.image_url && (
+                        <img
+                          src={formData.image_url}
+                          alt="Preview"
+                          className="w-24 h-24 object-cover rounded-md border"
+                        />
+                      )}
                     </div>
                   </div>
 

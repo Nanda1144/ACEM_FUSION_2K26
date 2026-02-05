@@ -56,7 +56,7 @@ export default function SponsorLogoManagement() {
       // Upload to Supabase Storage
       const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('app-9dfi9jpj51xd_gallery_images')
+        .from('app-9dfi9jpj51xd_theme_images')
         .upload(fileName, file, {
           cacheControl: '3600',
           upsert: false
@@ -65,7 +65,7 @@ export default function SponsorLogoManagement() {
       if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage
-        .from('app-9dfi9jpj51xd_gallery_images')
+        .from('app-9dfi9jpj51xd_theme_images')
         .getPublicUrl(uploadData.path);
 
       // Create logo entry

@@ -460,7 +460,7 @@ export const componentTemplatesApi = {
 // Image Upload Helper
 export const uploadImage = async (
   file: File,
-  bucket: 'app-9dfi9jpj51xd_events_images' | 'app-9dfi9jpj51xd_committee_images' | 'app-9dfi9jpj51xd_gallery_images'
+  bucket: 'app-9dfi9jpj51xd_events_images' | 'app-9dfi9jpj51xd_committee_images' | 'app-9dfi9jpj51xd_gallery_images' | 'app-9dfi9jpj51xd_coordinator_images' | 'app-9dfi9jpj51xd_theme_images' | 'app-9dfi9jpj51xd_poster_images'
 ): Promise<string> => {
   // Validate file name
   const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');

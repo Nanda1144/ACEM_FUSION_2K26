@@ -1,0 +1,204 @@
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Trash2, Upload, GripVertical } from 'lucide-react';
+import { eventPostersApi, uploadImage } from '@/db/api';
+import type { EventPoster } from '@/types/index';
+import { useToast } from '@/hooks/use-toast';
+
+export default function EventPosterManagement() {
+  const [posters, setPosters] = useState<EventPoster[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    loadPosters();
+  }, []);
+
+  const loadPosters = async () => {
+    try {
+      setLoading(true);
+      const data = await eventPostersApi.getAll();
+      setPosters(data);
+    } catch (error) {
+      console.error('Error loading posters:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to load event posters',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (1MB limit)
+    if (file.size > 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'File size must be less than 1MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    try {
+      setUploading(true);
+
+      // Upload image
+      const imageUrl = await uploadImage(file, 'app-9dfi9jpj51xd_poster_images');
+
+      // Create poster entry
+      const newPoster = await eventPostersApi.create({
+        image_url: imageUrl,
+        display_order: posters.length + 1
+      });
+
+      setPosters([...posters, newPoster]);
+      toast({
+        title: 'Success',
+        description: 'Event poster uploaded successfully',
+      });
+
+      // Reset file input
+      e.target.value = '';
+    } catch (error) {
+      console.error('Error uploading poster:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to upload event poster',
+        variant: 'destructive',
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this poster?')) return;
+
+    try {
+      await eventPostersApi.delete(id);
+      setPosters(posters.filter(p => p.id !== id));
+      toast({
+        title: 'Success',
+        description: 'Poster deleted successfully',
+      });
+    } catch (error) {
+      console.error('Error deleting poster:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to delete poster',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const updateDisplayOrder = async (id: string, newOrder: number) => {
+    try {
+      await eventPostersApi.update(id, { display_order: newOrder });
+      await loadPosters();
+      toast({
+        title: 'Success',
+        description: 'Display order updated',
+      });
+    } catch (error) {
+      console.error('Error updating order:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update display order',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Event Poster Management</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* Upload Section */}
+        <div className="space-y-4">
+          <Label htmlFor="poster-upload">Upload Event Poster</Label>
+          <div className="flex gap-4">
+            <Button
+              type="button"
+              onClick={() => document.getElementById('poster-upload')?.click()}
+              disabled={uploading}
+              className="w-full sm:w-auto"
+            >
+              <Upload className="h-4 w-4 mr-2" />
+              {uploading ? 'Uploading...' : 'Upload Poster'}
+            </Button>
+            <input
+              id="poster-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Upload event posters (max 1MB). Recommended size: 1920x1080px
+          </p>
+        </div>
+
+        {/* Posters Grid */}
+        {loading ? (
+          <div className="text-center py-8 text-muted-foreground">Loading posters...</div>
+        ) : posters.length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground">
+            No event posters uploaded yet. Upload your first poster above.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {posters.map((poster) => (
+              <Card key={poster.id} className="overflow-hidden">
+                <div className="relative aspect-video">
+                  <img
+                    src={poster.image_url}
+                    alt={`Event Poster ${poster.display_order}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardContent className="p-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <GripVertical className="h-4 w-4 text-muted-foreground" />
+                    <Label htmlFor={`order-${poster.id}`} className="text-sm">
+                      Display Order
+                    </Label>
+                  </div>
+                  <div className="flex gap-2">
+                    <Input
+                      id={`order-${poster.id}`}
+                      type="number"
+                      min="1"
+                      value={poster.display_order}
+                      onChange={(e) => updateDisplayOrder(poster.id, parseInt(e.target.value))}
+                      className="flex-1"
+                    />
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      onClick={() => handleDelete(poster.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}

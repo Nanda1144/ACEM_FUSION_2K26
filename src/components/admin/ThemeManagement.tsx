@@ -62,7 +62,7 @@ export default function ThemeManagement() {
     if (!file || !settings) return;
 
     try {
-      const url = await uploadImage(file, 'app-9dfi9jpj51xd_committee_images');
+      const url = await uploadImage(file, 'app-9dfi9jpj51xd_theme_images');
       const updatedLogos = settings.logos.map(logo =>
         logo.id === logoId ? { ...logo, url } : logo
       );
@@ -85,7 +85,7 @@ export default function ThemeManagement() {
     if (!file || !settings) return;
 
     try {
-      const url = await uploadImage(file, 'app-9dfi9jpj51xd_gallery_images');
+      const url = await uploadImage(file, 'app-9dfi9jpj51xd_theme_images');
       if (type === 'header') {
         setSettings({ ...settings, header_bg_image: url });
       } else {
