@@ -138,9 +138,19 @@ Web Application (College Fest Management Platform)
   - Member images
   - Names
   - Assigned roles
-  - Info section about each person
+  - Brief preview of info section
+- Clickable committee cards:
+  - Clicking on any committee member card opens detailed view
+  - Detailed view displays complete member information:
+    - Full-size member image
+    - Member name
+    - Assigned role
+    - Complete info section content
+  - Modal or dedicated detail page for committee member details
+  - Close/back button to return to Committee Section
 - Role-based grouping and display order
 - Cinematic layout with smooth transitions
+- Smooth animations for card click and detail view opening
 
 #### 2.1.8 Gallery Section
 - Cinematic grid/masonry layout displaying uploaded images
@@ -415,6 +425,8 @@ Web Application (College Fest Management Platform)
 - Fully responsive secondary header with flexible logo sizing and text scaling across all devices
 - Event descriptions displayed with justified text alignment and list formatting support
 - Committee section with role-based hierarchical display
+- Clickable committee cards with smooth animations opening detailed member view
+- Committee detail view with modal or dedicated page displaying complete member information
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
@@ -434,6 +446,7 @@ Web Application (College Fest Management Platform)
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
 - Event descriptions maintain justified alignment and list formatting across all screen sizes
+- Committee detail view responsive across all devices
 
 ### 3.3 Performance Optimization
 - Optimized animations and images
@@ -442,6 +455,7 @@ Web Application (College Fest Management Platform)
 - High performance rendering
 - Efficient live preview updates without page reload
 - Optimized background image loading with responsive image sizing
+- Efficient modal/detail view loading for committee member details
 
 ## 4. Technical Requirements
 
@@ -492,6 +506,7 @@ Web Application (College Fest Management Platform)
   - Footer management
   - Event detail page data (including staff and student coordinator management, description formatting)
   - Committee management (including member info section and hierarchical role assignment)
+  - Committee member detail retrieval for detailed view
   - Complete application editing
   - Chatbot information retrieval
   - Image upload to Supabase Storage (including FUSION 2k26 background images)
@@ -543,7 +558,24 @@ Web Application (College Fest Management Platform)
   - Backend API: Store formatted HTML content in events table description field
   - Public Event Detail Page component: Render formatted HTML with proper styling
 
-### 4.5 Code Quality
+### 4.5 Committee Detail View Implementation
+- Committee member detail view functionality:
+  - Implement clickable committee cards in Committee Section
+  - Create modal component or dedicated detail page for member details
+  - Display complete member information:
+    - Full-size member image
+    - Member name
+    - Assigned role
+    - Complete info section content
+  - Add close/back button functionality
+  - Implement smooth animations for opening and closing detail view
+- File update locations for committee detail view:
+  - Public Committee Section component: Add click event handlers to committee cards
+  - Committee Detail Modal/Page component: Create new component for detailed view
+  - Backend API: Create endpoint for retrieving individual committee member details (e.g., GET /api/committee/:id)
+  - CSS/Animation file: Add transition and animation styles for detail view
+
+### 4.6 Code Quality
 - Clean, modular, scalable codebase
 - Maintainable UI component structure
 - Optimized for production deployment
@@ -553,6 +585,7 @@ Web Application (College Fest Management Platform)
 - Responsive design implementation using CSS media queries and flexible layouts
 - Responsive image scaling implementation for background images
 - Rich text editor integration with proper sanitization
+- Modal/detail view component with proper state management
 
 ## 5. User Flow
 
@@ -575,11 +608,18 @@ Web Application (College Fest Management Platform)
 9. User views Staff and Student Coordinators Section below Technical and Cultural events
 10. When user selects Technical event: System displays staff coordinators and student coordinators associated with Technical events
 11. When user selects Cultural event: System displays staff coordinators and student coordinators associated with Cultural events
-12. User explores committee section and views members organized by hierarchical roles (Chief-Patron, Patron, Convener, Co-Convener, Others) with member details including personal info sections
-13. User explores gallery section and views images uploaded by admin
-14. User views improved footer section with contact details and social media links
-15. User can interact with chatbot to get website information and details
-16. User experiences optimal viewing on mobile devices with properly scaled logos, text, and FUSION 2k26 background image in secondary header
+12. User explores committee section and views members organized by hierarchical roles (Chief-Patron, Patron, Convener, Co-Convener, Others) with member cards displaying brief info preview
+13. User clicks on committee member card to view complete member details
+14. Detailed view opens (modal or dedicated page) displaying:
+    - Full-size member image
+    - Member name
+    - Assigned role
+    - Complete info section content
+15. User closes detail view and returns to Committee Section
+16. User explores gallery section and views images uploaded by admin
+17. User views improved footer section with contact details and social media links
+18. User can interact with chatbot to get website information and details
+19. User experiences optimal viewing on mobile devices with properly scaled logos, text, and FUSION 2k26 background image in secondary header
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -672,8 +712,11 @@ Web Application (College Fest Management Platform)
 14. Test staff and student coordinator editing within Events Section
 15. Test committee member info section display and editing
 16. Test committee member hierarchical role assignment and display
-17. Test event description rich text editor with justification and list formatting
-18. Test event description display with formatted content
+17. Test committee card click functionality and detail view opening
+18. Test committee detail view display with complete member information
+19. Test committee detail view close/back functionality
+20. Test event description rich text editor with justification and list formatting
+21. Test event description display with formatted content
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -721,8 +764,11 @@ Web Application (College Fest Management Platform)
 14. Test staff and student coordinator editing within Events Section
 15. Test committee member info section display and editing functionality
 16. Test committee member hierarchical role display
-17. Test event description rich text editor functionality
-18. Test event description display with justified and listified formatting
+17. Test committee card click functionality and detail view opening on actual devices
+18. Test committee detail view responsiveness across different screen sizes
+19. Test committee detail view close/back functionality
+20. Test event description rich text editor functionality
+21. Test event description display with justified and listified formatting
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -788,7 +834,8 @@ npm install @supabase/supabase-js
 9. Add staff and student coordinator management endpoints within Events Section
 10. Add committee member info section management endpoints
 11. Add committee member hierarchical role management endpoints
-12. Add event description formatting endpoints
+12. Add committee member detail retrieval endpoint
+13. Add event description formatting endpoints
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -811,7 +858,8 @@ npm install @supabase/supabase-js
 10. Test staff and student coordinator management and filtering within Events Section
 11. Test committee member info section management
 12. Test committee member hierarchical role assignment
-13. Test event description rich text editor and formatting
+13. Test committee card click and detail view functionality
+14. Test event description rich text editor and formatting
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -1042,10 +1090,24 @@ Files requiring updates for staff and student coordinator management:
      - Fetch committee member data including info sections and roles from API endpoints
      - Display members grouped by hierarchical roles
      - Display order: Chief-Patron, Patron, Convener, Co-Convener, Others
-     - Display member cards with image, name, role, and info section
+     - Display member cards with image, name, role, and brief info preview
+     - Add click event handlers to committee cards
      - Implement expandable/collapsible info section or modal view
      - Add smooth transitions and cinematic effects
      - Visual distinction for different role levels
+
+3. Committee Detail Modal/Page component:
+   - File location: frontend/components/public/CommitteeDetail.jsx or similar
+   - Implementation:
+     - Create modal or dedicated page component
+     - Display complete member information:
+       - Full-size member image
+       - Member name
+       - Assigned role
+       - Complete info section content
+     - Add close/back button functionality
+     - Implement smooth animations for opening and closing
+     - Ensure responsive design across all devices
 
 #### Database Schema Update
 - Committee members table structure:
@@ -1059,11 +1121,13 @@ Files requiring updates for staff and student coordinator management:
   - updated_at (timestamp)
 
 #### Code Update Summary
-Files requiring updates for committee member info section and hierarchical roles:
+Files requiring updates for committee member info section, hierarchical roles, and detail view:
 1. Backend API routes file (e.g., backend/routes/committee.js)
 2. Admin Dashboard Committee Management component (e.g., frontend/components/admin/CommitteeManagement.jsx)
 3. Public Committee Section component (e.g., frontend/components/public/Committee.jsx)
-4. Database schema file for committee_members table with info_section and role fields
+4. Committee Detail Modal/Page component (e.g., frontend/components/public/CommitteeDetail.jsx)
+5. Database schema file for committee_members table with info_section and role fields
+6. CSS/Animation file for committee detail view transitions (e.g., frontend/styles/committee-detail.css)
 
 ### 6.9 Event Description Rich Text Editor Implementation Guide
 
