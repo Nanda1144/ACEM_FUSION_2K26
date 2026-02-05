@@ -590,6 +590,268 @@ app.get('/api/component-templates', async (req, res) => {
   }
 });
 
+// ==================== EVENT POSTERS ROUTES ====================
+app.get('/api/event-posters', async (req, res) => {
+  try {
+    const posters = await db.collection('event_posters')
+      .find({})
+      .sort({ display_order: 1 })
+      .toArray();
+    res.json(posters.map(p => ({ ...p, id: p._id.toString(), _id: undefined })));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/event-posters', async (req, res) => {
+  try {
+    const { image_url, display_order } = req.body;
+    const result = await db.collection('event_posters').insertOne({
+      image_url,
+      display_order: display_order || 0,
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+    const poster = await db.collection('event_posters').findOne({ _id: result.insertedId });
+    res.json({ ...poster, id: poster._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/api/event-posters/:id', async (req, res) => {
+  try {
+    const { image_url, display_order } = req.body;
+    const updateData = { updated_at: new Date() };
+    if (image_url !== undefined) updateData.image_url = image_url;
+    if (display_order !== undefined) updateData.display_order = display_order;
+
+    await db.collection('event_posters').updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: updateData }
+    );
+    const poster = await db.collection('event_posters').findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ ...poster, id: poster._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/api/event-posters/:id', async (req, res) => {
+  try {
+    await db.collection('event_posters').deleteOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: 'Poster deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==================== OVERALL COORDINATORS ROUTES ====================
+app.get('/api/overall-coordinators', async (req, res) => {
+  try {
+    const { type } = req.query;
+    const query = type ? { type } : {};
+    const coordinators = await db.collection('overall_coordinators')
+      .find(query)
+      .sort({ display_order: 1 })
+      .toArray();
+    res.json(coordinators.map(c => ({ ...c, id: c._id.toString(), _id: undefined })));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/overall-coordinators', async (req, res) => {
+  try {
+    const { type, name, position, contact, image_url, display_order, show_photo } = req.body;
+    const result = await db.collection('overall_coordinators').insertOne({
+      type,
+      name,
+      position: position || null,
+      contact: contact || null,
+      image_url: image_url || null,
+      display_order: display_order || 0,
+      show_photo: show_photo || false,
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+    const coordinator = await db.collection('overall_coordinators').findOne({ _id: result.insertedId });
+    res.json({ ...coordinator, id: coordinator._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/api/overall-coordinators/:id', async (req, res) => {
+  try {
+    const { name, position, contact, image_url, display_order, show_photo } = req.body;
+    const updateData = { updated_at: new Date() };
+    if (name !== undefined) updateData.name = name;
+    if (position !== undefined) updateData.position = position;
+    if (contact !== undefined) updateData.contact = contact;
+    if (image_url !== undefined) updateData.image_url = image_url;
+    if (display_order !== undefined) updateData.display_order = display_order;
+    if (show_photo !== undefined) updateData.show_photo = show_photo;
+
+    await db.collection('overall_coordinators').updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: updateData }
+    );
+    const coordinator = await db.collection('overall_coordinators').findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ ...coordinator, id: coordinator._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/api/overall-coordinators/:id', async (req, res) => {
+  try {
+    await db.collection('overall_coordinators').deleteOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: 'Coordinator deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==================== COMMITTEES ROUTES (NEW GROUPS SYSTEM) ====================
+app.get('/api/committees', async (req, res) => {
+  try {
+    const committees = await db.collection('committees')
+      .find({})
+      .sort({ display_order: 1 })
+      .toArray();
+    res.json(committees.map(c => ({ ...c, id: c._id.toString(), _id: undefined })));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/committees/:id', async (req, res) => {
+  try {
+    const committee = await db.collection('committees').findOne({ _id: new ObjectId(req.params.id) });
+    if (!committee) {
+      return res.status(404).json({ error: 'Committee not found' });
+    }
+    res.json({ ...committee, id: committee._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/committees', async (req, res) => {
+  try {
+    const { title, description, image_url, display_order } = req.body;
+    const result = await db.collection('committees').insertOne({
+      title,
+      description: description || null,
+      image_url: image_url || null,
+      display_order: display_order || 0,
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+    const committee = await db.collection('committees').findOne({ _id: result.insertedId });
+    res.json({ ...committee, id: committee._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/api/committees/:id', async (req, res) => {
+  try {
+    const { title, description, image_url, display_order } = req.body;
+    const updateData = { updated_at: new Date() };
+    if (title !== undefined) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+    if (image_url !== undefined) updateData.image_url = image_url;
+    if (display_order !== undefined) updateData.display_order = display_order;
+
+    await db.collection('committees').updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: updateData }
+    );
+    const committee = await db.collection('committees').findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ ...committee, id: committee._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/api/committees/:id', async (req, res) => {
+  try {
+    // Delete committee and its coordinators
+    await db.collection('committee_coordinators').deleteMany({ committee_id: req.params.id });
+    await db.collection('committees').deleteOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: 'Committee deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==================== COMMITTEE COORDINATORS ROUTES ====================
+app.get('/api/committee-coordinators', async (req, res) => {
+  try {
+    const { committee_id } = req.query;
+    const query = committee_id ? { committee_id } : {};
+    const coordinators = await db.collection('committee_coordinators')
+      .find(query)
+      .sort({ display_order: 1 })
+      .toArray();
+    res.json(coordinators.map(c => ({ ...c, id: c._id.toString(), _id: undefined })));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/committee-coordinators', async (req, res) => {
+  try {
+    const { committee_id, name, position, contact, image_url, display_order } = req.body;
+    const result = await db.collection('committee_coordinators').insertOne({
+      committee_id,
+      name,
+      position: position || null,
+      contact: contact || null,
+      image_url: image_url || null,
+      display_order: display_order || 0,
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+    const coordinator = await db.collection('committee_coordinators').findOne({ _id: result.insertedId });
+    res.json({ ...coordinator, id: coordinator._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/api/committee-coordinators/:id', async (req, res) => {
+  try {
+    const { name, position, contact, image_url, display_order } = req.body;
+    const updateData = { updated_at: new Date() };
+    if (name !== undefined) updateData.name = name;
+    if (position !== undefined) updateData.position = position;
+    if (contact !== undefined) updateData.contact = contact;
+    if (image_url !== undefined) updateData.image_url = image_url;
+    if (display_order !== undefined) updateData.display_order = display_order;
+
+    await db.collection('committee_coordinators').updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: updateData }
+    );
+    const coordinator = await db.collection('committee_coordinators').findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ ...coordinator, id: coordinator._id.toString(), _id: undefined });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/api/committee-coordinators/:id', async (req, res) => {
+  try {
+    await db.collection('committee_coordinators').deleteOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: 'Coordinator deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Image Upload API
 app.post('/api/images/upload', async (req, res) => {
   try {

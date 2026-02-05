@@ -1,6 +1,10 @@
 import type { 
   Event, 
-  CommitteeMember, 
+  CommitteeMember,
+  Committee,
+  CommitteeCoordinator,
+  EventPoster,
+  OverallCoordinator,
   GalleryImage, 
   AboutUs, 
   Contact, 
@@ -252,6 +256,156 @@ export const componentTemplatesApi = {
 
   getByCategory: async (category: string): Promise<ComponentTemplate[]> => {
     return apiCall<ComponentTemplate[]>(`/component-templates?category=${category}`);
+  }
+};
+
+// Event Posters API
+export const eventPostersApi = {
+  getAll: async () => {
+    return apiCall('/event-posters');
+  },
+
+  create: async (poster: { image_url: string; display_order: number }) => {
+    return apiCall('/event-posters', {
+      method: 'POST',
+      body: JSON.stringify(poster),
+    });
+  },
+
+  update: async (id: string, poster: { image_url?: string; display_order?: number }) => {
+    return apiCall(`/event-posters/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(poster),
+    });
+  },
+
+  delete: async (id: string) => {
+    await apiCall(`/event-posters/${id}`, { method: 'DELETE' });
+  }
+};
+
+// Overall Coordinators API
+export const overallCoordinatorsApi = {
+  getAll: async () => {
+    return apiCall('/overall-coordinators');
+  },
+
+  getByType: async (type: 'staff' | 'student') => {
+    return apiCall(`/overall-coordinators?type=${type}`);
+  },
+
+  create: async (coordinator: {
+    type: 'staff' | 'student';
+    name: string;
+    position?: string;
+    contact?: string;
+    image_url?: string;
+    display_order: number;
+    show_photo: boolean;
+  }) => {
+    return apiCall('/overall-coordinators', {
+      method: 'POST',
+      body: JSON.stringify(coordinator),
+    });
+  },
+
+  update: async (id: string, coordinator: Partial<{
+    name: string;
+    position: string;
+    contact: string;
+    image_url: string;
+    display_order: number;
+    show_photo: boolean;
+  }>) => {
+    return apiCall(`/overall-coordinators/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(coordinator),
+    });
+  },
+
+  delete: async (id: string) => {
+    await apiCall(`/overall-coordinators/${id}`, { method: 'DELETE' });
+  }
+};
+
+// Committees API (new groups-based system)
+export const committeesApi = {
+  getAll: async () => {
+    return apiCall('/committees');
+  },
+
+  getById: async (id: string) => {
+    return apiCall(`/committees/${id}`);
+  },
+
+  create: async (committee: {
+    title: string;
+    description?: string;
+    image_url?: string;
+    display_order: number;
+  }) => {
+    return apiCall('/committees', {
+      method: 'POST',
+      body: JSON.stringify(committee),
+    });
+  },
+
+  update: async (id: string, committee: Partial<{
+    title: string;
+    description: string;
+    image_url: string;
+    display_order: number;
+  }>) => {
+    return apiCall(`/committees/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(committee),
+    });
+  },
+
+  delete: async (id: string) => {
+    await apiCall(`/committees/${id}`, { method: 'DELETE' });
+  }
+};
+
+// Committee Coordinators API
+export const committeeCoordinatorsApi = {
+  getAll: async () => {
+    return apiCall('/committee-coordinators');
+  },
+
+  getByCommittee: async (committeeId: string) => {
+    return apiCall(`/committee-coordinators?committee_id=${committeeId}`);
+  },
+
+  create: async (coordinator: {
+    committee_id: string;
+    name: string;
+    position?: string;
+    contact?: string;
+    image_url?: string;
+    display_order: number;
+  }) => {
+    return apiCall('/committee-coordinators', {
+      method: 'POST',
+      body: JSON.stringify(coordinator),
+    });
+  },
+
+  update: async (id: string, coordinator: Partial<{
+    name: string;
+    position: string;
+    contact: string;
+    image_url: string;
+    display_order: number;
+  }>) => {
+    return apiCall(`/committee-coordinators/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(coordinator),
+    });
+  },
+
+  delete: async (id: string) => {
+    await apiCall(`/committee-coordinators/${id}`, { method: 'DELETE' });
   }
 };
 

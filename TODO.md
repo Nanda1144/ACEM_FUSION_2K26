@@ -1,44 +1,55 @@
-# Task: Build Fusion26 College Fest Web Application
+# Task: Major Feature Enhancements for Fusion26
 
 ## Plan
-- [x] Step 1: Read configuration files and initialize project
-  - [x] Read index.css, tailwind.config.js, package.json
-  - [x] Initialize Supabase backend
-  - [x] Create database schema
-  - [x] Set up image storage buckets
-- [x] Step 2: Design cinematic theme system
-  - [x] Configure dark theme with neon/gradient accents
-  - [x] Add glow effects and animation utilities
-  - [x] Set up typography system
-- [x] Step 3: Build backend API layer
-  - [x] Create TypeScript types
-  - [x] Implement Supabase API functions
-- [x] Step 4: Build public UI components
-  - [x] Hero section with parallax
-  - [x] Events section (Technical/Cultural)
-  - [x] Committee section
-  - [x] Gallery section
-  - [x] About Us section
-  - [x] Contact section
-- [x] Step 5: Build admin authentication
-  - [x] Floating chatbot component
-  - [x] Passkey validation logic
-- [x] Step 6: Build admin dashboard
-  - [x] Event management
-  - [x] Committee management
-  - [x] Gallery management
-  - [x] About/Contact management
-  - [x] Passkey management
-- [x] Step 7: Finalize and validate
-  - [x] Set up routing
-  - [x] Add animations and transitions
-  - [x] Add sample data
-  - [x] Run lint validation
+- [x] Step 1: Update Header Section
+  - [x] Make header responsive for all screen sizes
+  - [x] Add golden color with black borders to FUSION2K26 text
+  - [x] Add glowing background effect
+  - [x] Make text flexible with responsive font sizes
+  - [x] Add text animations
+  - [x] Ensure logo and at least 2 items visible on mobile
+- [x] Step 2: Create Event Posters Section
+  - [x] Create database table for event posters
+  - [x] Build auto-scrolling carousel (left to right)
+  - [x] Add admin management for posters
+  - [x] Position above Events section
+- [x] Step 3: Create Overall Coordinators Section
+  - [x] Create database table for overall coordinators
+  - [x] Build UI component below Technical/Cultural buttons
+  - [x] Add staff coordinators (name, position)
+  - [x] Add student coordinators (name, contact)
+  - [x] Add optional photos (round/semi-circle shape)
+  - [x] Create admin management interface
+- [ ] Step 4: Enhance Event Descriptions
+  - [ ] Add rich text editor for descriptions
+  - [ ] Support text justification
+  - [ ] Support bullet points/lists
+  - [ ] Add text color picker
+  - [ ] Add bold text option
+  - [ ] Store as HTML in database
+- [ ] Step 5: Add Event Coordinator Photos
+  - [ ] Add photo fields to event coordinators
+  - [ ] Display in round/semi-circle shape
+  - [ ] Make display optional via admin toggle
+  - [ ] Update admin event management
+- [ ] Step 6: Restructure Committee System
+  - [ ] Rename to "Committees" (groups not persons)
+  - [ ] Update database schema (title, description, image, coordinators)
+  - [ ] Rebuild Committee component for groups
+  - [ ] Update admin management for committee groups
+  - [ ] Add coordinator details to each committee
+- [ ] Step 7: Validate and Test
+  - [ ] Run lint validation
+  - [ ] Test all new features
+  - [ ] Verify responsive design
 
 ## Notes
-- Using Supabase for backend storage
-- Image upload for events, committee members, and gallery
-- Default passkey: acemadmin@fusion
-- Cinematic design with dark theme, neon accents, parallax scrolling
-- All features implemented and tested
-- Lint validation passed successfully
+- Header updated with golden animated text and enhanced glow effects
+- Event posters carousel created with auto-scroll animation
+- Overall coordinators section added with staff/student separation
+- Backend API routes added for all new features
+- Database migrations applied successfully
+- Need to add admin management UI for new features
+- Need to enhance event descriptions with rich text editor
+- Need to restructure committee system to groups
+- react-quill already installed for rich text editing

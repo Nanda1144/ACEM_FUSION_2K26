@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import FlexibleHeader from '@/components/FlexibleHeader';
 import Hero from '@/components/Hero';
+import EventPosters from '@/components/EventPosters';
 import Events from '@/components/Events';
+import OverallCoordinators from '@/components/OverallCoordinators';
 import Committee from '@/components/Committee';
 import Gallery from '@/components/Gallery';
 import About from '@/components/About';
@@ -59,7 +61,9 @@ export default function HomePage() {
       <div className="min-h-screen" style={pageStyle}>
         <FlexibleHeader />
         <Hero />
+        <EventPosters />
         <Events />
+        <OverallCoordinators />
         <Committee />
         <Gallery />
         <About />

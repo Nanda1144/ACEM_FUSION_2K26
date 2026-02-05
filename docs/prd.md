@@ -37,8 +37,13 @@ Web Application (College Fest Management Platform)
 #### 2.1.2 Secondary Header Section (Logo and College Information Header)
 - Positioned below the primary header section
 - Fully responsive and flexible layout adapting to all screen sizes
+- Enhanced visibility requirements for mobile view:
+  - Minimum two logos must be visible on mobile screens
+  - One logo positioned on left side
+  - One logo positioned on right side
+  - Automatic logo arrangement adjustment for mobile view
 - Display college name: ADITYA College of Engineering Madanapalle
-  - Styling: Golden dark color with black border for attractiveness
+  - Styling: Golden color with black border and glowing background effect
   - Prominent display with enhanced visual appeal
   - Font size automatically adjusts based on screen size:
     - Desktop: Large font size for prominence
@@ -54,23 +59,38 @@ Web Application (College Fest Management Platform)
   - Logos automatically adjust size and positioning based on screen size
   - Desktop view: Logos display in optimal size with full spacing
   - Tablet view: Logos scale proportionally with adjusted spacing
-  - Mobile view: Logos resize to fit mobile screen width while maintaining aspect ratio and visibility
+  - Mobile view: Logos resize to fit mobile screen width while maintaining aspect ratio and visibility, with minimum two logos displayed (left and right positioning)
 - Support for multiple college logos with configurable shapes:
   - Circle shape option
   - Semi-square shape option
 - Responsive logo arrangement:
   - Logos reposition automatically for optimal display on different screen sizes
-  - Mobile view: Logos stack or arrange in mobile-friendly layout
+  - Mobile view: Minimum two logos displayed with left-right positioning
   - Maintains visual hierarchy across all devices
 - Admin-configurable logo arrangement and positioning
 - Static data display capabilities managed by admin
 - Header details fully updatable through admin dashboard
-- All text elements (college name, location, institution status) use responsive font sizing
+- All text elements (college name, location, institution status) use responsive font sizing with golden color, black border, and glowing background
 - Flexible layout ensures readability and visual appeal across all devices
 - Admin can add, edit, or delete logos
 - Admin can configure logo shapes individually
 
-#### 2.1.3 Homepage
+#### 2.1.3 FUSION 2k26 Text Section
+- Positioned within header area
+- Flexible text display with responsive behavior:
+  - Font size automatically adjusts based on screen size
+  - Desktop: Large font size for prominence
+  - Tablet: Medium font size for readability
+  - Mobile: Smaller font size optimized for mobile view
+- Text alignment automatically adjusts for different screen sizes
+- Animated text effects:
+  - Smooth entrance animations
+  - Continuous subtle motion effects
+  - Glow and fade animations
+  - Admin-configurable animation styles
+- Admin can customize FUSION 2k26 text styling and animation settings
+
+#### 2.1.4 Homepage
 - Cinematic hero section with parallax scrolling
 - Smooth transitions and motion-based micro-interactions
 - Dark theme with neon/gradient accents
@@ -82,9 +102,28 @@ Web Application (College Fest Management Platform)
 - Admin-configurable logo arrangement (add/delete logos with shape options)
 - Admin-editable body content with flexible text box placement
 - Background image removed, admin can update background settings
+- Display Overall Event Coordinators Section on homepage:
+  - Staff Coordinators display with name, position, photo (optional, round or semi-circle shape)
+  - Student Coordinators display with name, contact number, photo (optional, round or semi-circle shape)
+  - Admin can enable/disable photo display option
+  - When photo option disabled: Display only text details
+  - When photo option enabled: Display photos with details
 
-#### 2.1.4 Events Section
+#### 2.1.5 Event Poster Section
+- Positioned above Events Section on homepage
+- Automatic horizontal scrolling animation (left to right)
+- Display event poster images uploaded by admin
+- Continuous loop animation for poster display
+- Smooth transitions between posters
+- Admin can upload multiple event poster images
+- Admin can add, edit, or delete event posters
+- Cinematic layout with smooth animations
+
+#### 2.1.6 Events Section
 - Display events categorized by type (Technical/Cultural)
+- Category selection buttons:
+  - Technical button
+  - Cultural button
 - Each event card shows:
   - Event Name
   - Event Type
@@ -92,80 +131,109 @@ Web Application (College Fest Management Platform)
   - Brief description preview
 - Clicking on event card navigates to dedicated event detail page
 
-#### 2.1.5 Event Detail Page
+#### 2.1.7 Overall Event Coordinators Section
+- Positioned below Technical and Cultural selection buttons on homepage
+- Dynamic display based on event type selection:
+  - When Technical button is selected: Display overall staff coordinators and student coordinators for Technical events
+  - When Cultural button is selected: Display overall staff coordinators and student coordinators for Cultural events
+- Display overall staff coordinator details:
+  - Staff Name
+  - Staff Position
+  - Staff Photo (optional, round or semi-circle shape)
+  - Associated Event Type (Technical/Cultural)
+- Display overall student coordinator details:
+  - Student Name
+  - Student Contact Number
+  - Student Photo (optional, round or semi-circle shape)
+  - Associated Event Type (Technical/Cultural)
+- Photo display control:
+  - Admin can enable/disable photo display option
+  - When photo option enabled: Display coordinator photos in round or semi-circle shape
+  - When photo option disabled: Display only text details (name, position/contact)
+- Admin-editable overall coordinator information through Overall Coordinators Management
+- Admin can add, edit, delete overall staff coordinator details (name, position, photo, event type)
+- Admin can add, edit, delete overall student coordinator details (name, contact number, photo, event type)
+- Admin can configure photo shape (round or semi-circle)
+- Cinematic layout with smooth transitions
+
+#### 2.1.8 Event Detail Page
 - Display complete event information:
   - Event Name
   - Event Type
-  - Full Event Description with justified and listified formatting:
+  - Full Event Description with enhanced formatting:
     - Description text automatically justified for professional appearance
     - Support for bullet point lists within description
     - Support for numbered lists within description
     - Admin can select specific content and convert to list format
+    - Admin can change text color for selected content
+    - Admin can apply bold formatting to selected text
   - Event Rules
   - Event Instructions
   - Event Images (multiple images support)
-  - Staff Coordinators (Name, Contact)
-  - Student Coordinators (Name, Contact)
+  - Event-Specific Staff Coordinators:
+    - Staff Name
+    - Staff Position
+    - Staff Photo (optional, round or semi-circle shape)
+  - Event-Specific Student Coordinators:
+    - Student Name
+    - Student Contact Number
+    - Student Photo (optional, round or semi-circle shape)
   - Registration button linking to Google Form (admin-provided link)
+- Photo display control for event-specific coordinators:
+  - Admin can enable/disable photo display option per event
+  - When photo option enabled: Display coordinator photos in round or semi-circle shape
+  - When photo option disabled: Display only text details
 - Clicking registration button opens Google Form in new tab or embedded view
 - Cinematic layout with smooth transitions
 - Back navigation to Events Section
 
-#### 2.1.6 Staff and Student Coordinators Section
-- Positioned below Technical and Cultural events sections
-- Dynamic display based on event type selection:
-  - When Technical event is selected: Display staff coordinators and student coordinators associated with Technical events
-  - When Cultural event is selected: Display staff coordinators and student coordinators associated with Cultural events
-- Display staff coordinator details:
-  - Staff Name
-  - Staff Contact
-  - Associated Event Type (Technical/Cultural)
-- Display student coordinator details:
-  - Student Name
-  - Student Contact
-  - Associated Event Type (Technical/Cultural)
-- Admin-editable staff and student coordinator information through Events Section management
-- Cinematic layout with smooth transitions
-
-#### 2.1.7 Committee Section
-- Display committee members with hierarchical roles:
-  - Chief-Patron
-  - Patron
-  - Convener
-  - Co-Convener
-  - Other committee roles
-- Each member card displays:
-  - Member images
-  - Names
-  - Assigned roles
-  - Brief preview of info section
+#### 2.1.9 Committee Section
+- Display committee groups (not individual persons) with details:
+  - Technical Committee
+  - Cultural Committee
+  - Other committees
+- Each committee card displays:
+  - Committee Image (optional)
+  - Committee Title
+  - Committee Description
+  - Committee Coordinators Details:
+    - Coordinator Name
+    - Coordinator Position
+    - Coordinator Photo (optional, round or semi-circle shape)
+    - Coordinator Contact (optional)
 - Clickable committee cards:
-  - Clicking on any committee member card opens detailed view
-  - Detailed view displays complete member information:
-    - Full-size member image
-    - Member name
-    - Assigned role
-    - Complete info section content
-  - Modal or dedicated detail page for committee member details
+  - Clicking on any committee card opens detailed view
+  - Detailed view displays complete committee information:
+    - Full-size committee image (if provided)
+    - Committee title
+    - Complete committee description
+    - Complete coordinators details with photos (if enabled)
+  - Modal or dedicated detail page for committee details
   - Close/back button to return to Committee Section
-- Role-based grouping and display order
+- Photo display control for committee coordinators:
+  - Admin can enable/disable photo display option per committee
+  - When photo option enabled: Display coordinator photos in round or semi-circle shape
+  - When photo option disabled: Display only text details
+- Admin can add, edit, delete committees
+- Admin can configure committee image (optional)
+- Admin can add, edit, delete committee coordinator details
 - Cinematic layout with smooth transitions
 - Smooth animations for card click and detail view opening
 
-#### 2.1.8 Gallery Section
+#### 2.1.10 Gallery Section
 - Cinematic grid/masonry layout displaying uploaded images
 - Lazy loading implementation
 - Smooth transitions between images
 - Display images uploaded by admin through Gallery Management
 
-#### 2.1.9 About Us Section
+#### 2.1.11 About Us Section
 - Editable text content displaying fest information
 
-#### 2.1.10 Contact Us Section
+#### 2.1.12 Contact Us Section
 - Display contact details
 - Contact form or contact information display
 
-#### 2.1.11 Footer Section
+#### 2.1.13 Footer Section
 - Display contact details
 - Social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Admin-editable footer structure and content
@@ -233,7 +301,7 @@ Web Application (College Fest Management Platform)
 #### 2.3.3 Secondary Header (Logo and College Information Header) Management
 - Update college name (default: ADITYA College of Engineering Madanapalle)
 - Configure college name styling:
-  - Golden dark color with black border
+  - Golden color with black border and glowing background effect
   - Font selection
   - Responsive font size adjustment for different screen sizes
   - Enhanced visual styling for attractiveness
@@ -248,11 +316,11 @@ Web Application (College Fest Management Platform)
 - Configure responsive logo sizing:
   - Set logo sizes for desktop view
   - Set logo sizes for tablet view
-  - Set logo sizes for mobile view
+  - Set logo sizes for mobile view with minimum two logos visible (left-right positioning)
 - Configure responsive logo positioning:
   - Desktop layout configuration
   - Tablet layout configuration
-  - Mobile layout configuration (stacking or mobile-friendly arrangement)
+  - Mobile layout configuration with minimum two logos displayed (left and right positioning)
 - Add or delete logos dynamically
 - Configure logo positioning and arrangement for all screen sizes
 - Update static data displayed in logo header
@@ -261,10 +329,23 @@ Web Application (College Fest Management Platform)
   - Background color/image
   - Spacing and layout
   - Border and shadow effects
+  - Glowing background effect configuration
 - Configure responsive breakpoints for automatic font and logo adjustments
 - All changes update automatically in database and reflect in live preview across all screen sizes
 
-#### 2.3.4 Body Content Management
+#### 2.3.4 FUSION 2k26 Text Management
+- Configure FUSION 2k26 text styling:
+  - Font selection
+  - Responsive font size adjustment for different screen sizes
+  - Text color customization
+- Configure text alignment for different screen sizes
+- Configure animation settings:
+  - Animation type selection (fade, glow, slide, etc.)
+  - Animation speed adjustment
+  - Animation loop settings
+- All changes update automatically in database and reflect in live preview
+
+#### 2.3.5 Body Content Management
 - Add text boxes anywhere on the page with drag-and-drop functionality
 - Position text boxes freely according to admin preference
 - Edit text box content, styling, and positioning
@@ -273,7 +354,7 @@ Web Application (College Fest Management Platform)
 - Customize body layout structure
 - All changes update automatically in database and reflect in live preview
 
-#### 2.3.5 Footer Management
+#### 2.3.6 Footer Management
 - Edit footer structure and layout
 - Update contact details:
   - Phone numbers
@@ -289,60 +370,109 @@ Web Application (College Fest Management Platform)
 - Add or remove footer sections
 - Changes reflect instantly on public UI and live preview
 
-#### 2.3.6 Homepage Layout Management
+#### 2.3.7 Homepage Layout Management
 - Arrange primary header sections as desired
 - Configure FUSION 2k26 background image with responsive scaling
+- Configure FUSION 2k26 text with responsive sizing and animations
 - Configure secondary logo and college information header layout
 - Add or delete logos dynamically with shape configuration
 - Configure layout elements positioning
 - Drag-and-drop interface for section reordering
 - All customizations apply across multiple web pages
 
-#### 2.3.7 Event Management
+#### 2.3.8 Event Poster Management
+- Upload event poster images
+- Image upload interface with file selection
+- Uploaded poster images stored in Supabase Storage
+- Poster image URLs automatically generated and stored in event_posters table
+- Configure automatic scrolling animation settings:
+  - Scrolling speed adjustment
+  - Animation direction (left to right)
+  - Loop settings
+- Add, edit, or delete event posters
+- Rearrange poster display order
+- Changes visible in live preview immediately
+
+#### 2.3.9 Event Management
 - Add new events with fields:
   - Event Name
   - Event Type (Technical/Cultural)
-  - Event Description with rich text formatting:
+  - Event Description with enhanced rich text formatting:
     - Text justification enabled by default
-    - Toolbar with list formatting options:
+    - Toolbar with formatting options:
       - Bullet list button
       - Numbered list button
       - Text alignment options
+      - Text color picker for selected content
+      - Bold text button for selected content
     - Select content and convert to list format functionality
+    - Select content and change text color functionality
+    - Select content and apply bold formatting functionality
     - Preview of formatted description
   - Event Rules
   - Event Instructions
   - Event Images upload (multiple images support)
-  - Staff Coordinators (Name, Contact) - editable within Events Section
-  - Student Coordinators (Name, Contact) - editable within Events Section
+  - Event-Specific Staff Coordinators:
+    - Staff Name
+    - Staff Position
+    - Staff Photo upload (optional)
+    - Photo shape configuration (round or semi-circle)
+  - Event-Specific Student Coordinators:
+    - Student Name
+    - Student Contact Number
+    - Student Photo upload (optional)
+    - Photo shape configuration (round or semi-circle)
+  - Photo display enable/disable option per event
   - Google Form registration link
-- Edit existing events including staff and student coordinator details
+- Edit existing events including event-specific coordinator details
 - Delete events
-- Admin can add, edit, or delete staff coordinator details directly in Events Section
-- Admin can add, edit, or delete student coordinator details directly in Events Section
+- Admin can add, edit, or delete event-specific staff coordinator details directly in Events Section
+- Admin can add, edit, or delete event-specific student coordinator details directly in Events Section
+- Admin can upload coordinator photos and configure photo shapes
 - Events auto-display on public UI based on event type
 - Event cards link to dedicated event detail pages
-- Staff and student coordinators display dynamically below Technical and Cultural events based on event type selection
 - Changes visible in live preview immediately
 
-#### 2.3.8 Committee Management
-- Add committee members with hierarchical role assignment:
-  - Chief-Patron role option
-  - Patron role option
-  - Convener role option
-  - Co-Convener role option
-  - Other custom roles
-- Role selection dropdown in member creation form
-- Assign roles to members
-- Upload member images
-- Add info section about each person
-- Edit member information including personal info section and role
-- Delete committee members
-- Automatic role-based grouping in public display
-- Display order configuration based on role hierarchy
+#### 2.3.10 Overall Event Coordinators Management
+- Add overall staff coordinators with fields:
+  - Staff Name
+  - Staff Position
+  - Staff Photo upload (optional)
+  - Photo shape configuration (round or semi-circle)
+  - Associated Event Type (Technical/Cultural)
+- Add overall student coordinators with fields:
+  - Student Name
+  - Student Contact Number
+  - Student Photo upload (optional)
+  - Photo shape configuration (round or semi-circle)
+  - Associated Event Type (Technical/Cultural)
+- Photo display enable/disable option for overall coordinators
+- Edit existing overall coordinator details
+- Delete overall coordinators
+- Admin can upload coordinator photos and configure photo shapes
+- Overall coordinators display dynamically on homepage below Technical and Cultural selection buttons based on event type selection
+- Changes visible in live preview immediately
+
+#### 2.3.11 Committee Management
+- Add committees (groups) with fields:
+  - Committee Title
+  - Committee Description
+  - Committee Image upload (optional)
+  - Committee Coordinators:
+    - Coordinator Name
+    - Coordinator Position
+    - Coordinator Photo upload (optional)
+    - Photo shape configuration (round or semi-circle)
+    - Coordinator Contact (optional)
+  - Photo display enable/disable option per committee
+- Edit committee information including title, description, image, and coordinator details
+- Delete committees
+- Admin can upload committee images and coordinator photos
+- Admin can configure photo shapes for coordinators
+- Automatic display on public Committee Section
 - Changes display dynamically on website and live preview
 
-#### 2.3.9 Gallery Management
+#### 2.3.12 Gallery Management
 - Upload multiple images to gallery
 - Image upload interface with file selection
 - Uploaded images stored in Supabase Storage
@@ -352,16 +482,16 @@ Web Application (College Fest Management Platform)
 - Delete images from gallery
 - Rearrange image display order
 
-#### 2.3.10 About Us Management
+#### 2.3.13 About Us Management
 - Edit About Us section text content
 - Updates reflect immediately on public UI and live preview
 
-#### 2.3.11 Contact & Social Media Management
+#### 2.3.14 Contact & Social Media Management
 - Update contact details
 - Update social media links (Instagram, LinkedIn, WhatsApp, Email)
 - Changes reflect instantly on public UI and live preview
 
-#### 2.3.12 Passkey Management
+#### 2.3.15 Passkey Management
 - Change passkey functionality with validation:
   - Enter old passkey
   - Enter new passkey
@@ -371,21 +501,24 @@ Web Application (College Fest Management Platform)
   - New passkey and confirm passkey must match
 - Passkey update stored securely in Supabase
 
-#### 2.3.13 Complete Application Editing
+#### 2.3.16 Complete Application Editing
 - Admin has full control to edit entire application:
   - Primary header sections with FUSION 2k26 background image and responsive scaling
-  - Secondary logo and college information header sections with responsive configurations
+  - FUSION 2k26 text with responsive sizing and animations
+  - Secondary logo and college information header sections with responsive configurations and glowing background
+  - Event poster section with automatic scrolling animations
   - Footer sections
   - Body parts
   - All content areas
-  - Staff and student coordinator details through Events Section
-  - Committee member information including personal info sections and hierarchical roles
-  - Event descriptions with justified and listified formatting
+  - Overall event coordinator details with photo management
+  - Event-specific coordinator details with photo management
+  - Committee information including title, description, image, and coordinator details with photo management
+  - Event descriptions with justified text, list formatting, text color customization, and bold text formatting
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
 
-#### 2.3.14 Supabase Connection Management
+#### 2.3.17 Supabase Connection Management
 - Manual database connection configuration interface
 - Step-by-step connection setup guide displayed in chatbot:
   - Step 1: Create Supabase account at supabase.com
@@ -420,13 +553,17 @@ Web Application (College Fest Management Platform)
 - Background image removed by default, admin can upload and update background
 - Primary header with navigation menu positioned at top-right corner
 - Primary header with admin-configurable FUSION 2k26 background image that scales responsively across all screen sizes
-- Secondary header with golden dark college name styling and black border for enhanced attractiveness, positioned below primary header
-- Secondary header includes configurable logo shapes (circle/semi-square)
+- FUSION 2k26 text with responsive sizing and animated effects
+- Secondary header with golden color college name styling, black border, and glowing background effect for enhanced attractiveness, positioned below primary header
+- Secondary header includes configurable logo shapes (circle/semi-square) with minimum two logos visible on mobile (left-right positioning)
 - Fully responsive secondary header with flexible logo sizing and text scaling across all devices
-- Event descriptions displayed with justified text alignment and list formatting support
-- Committee section with role-based hierarchical display
-- Clickable committee cards with smooth animations opening detailed member view
-- Committee detail view with modal or dedicated page displaying complete member information
+- Event poster section with automatic horizontal scrolling animation (left to right)
+- Overall event coordinators section with photo display options (round or semi-circle shapes)
+- Event descriptions displayed with justified text alignment, list formatting support, text color customization, and bold text formatting
+- Committee section displaying committee groups with optional images, descriptions, and coordinator details
+- Committee coordinator photos with configurable shapes (round or semi-circle)
+- Clickable committee cards with smooth animations opening detailed committee view
+- Committee detail view with modal or dedicated page displaying complete committee information
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
@@ -437,16 +574,23 @@ Web Application (College Fest Management Platform)
   - Desktop: Full-size display with optimal aspect ratio
   - Tablet: Proportional scaling maintaining visual quality
   - Mobile: Responsive scaling ensuring proper fit and visibility
+- FUSION 2k26 text with responsive font sizing and alignment adjustment:
+  - Desktop: Large font size with optimal alignment
+  - Tablet: Medium font size with adjusted alignment
+  - Mobile: Smaller font size with mobile-optimized alignment
 - Secondary header with intelligent responsive behavior:
-  - College name, location, and institution status text automatically resize based on screen size
+  - College name, location, and institution status text automatically resize based on screen size with golden color, black border, and glowing background
   - Logos automatically adjust size and positioning for optimal display on all devices
-  - Mobile view: Logos and text scale appropriately for mobile screens
+  - Mobile view: Minimum two logos displayed (left and right positioning) with appropriate scaling
   - Tablet view: Proportional scaling for tablet displays
   - Desktop view: Full-size display with optimal spacing
+- Event poster section responsive across all screen sizes with automatic scrolling animation
+- Overall event coordinators section responsive with photo display options
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
-- Event descriptions maintain justified alignment and list formatting across all screen sizes
+- Event descriptions maintain justified alignment, list formatting, text color, and bold formatting across all screen sizes
 - Committee detail view responsive across all devices
+- Coordinator photos display responsively in round or semi-circle shapes
 
 ### 3.3 Performance Optimization
 - Optimized animations and images
@@ -455,7 +599,9 @@ Web Application (College Fest Management Platform)
 - High performance rendering
 - Efficient live preview updates without page reload
 - Optimized background image loading with responsive image sizing
-- Efficient modal/detail view loading for committee member details
+- Efficient modal/detail view loading for committee details
+- Optimized event poster scrolling animation
+- Efficient coordinator photo loading with lazy loading
 
 ## 4. Technical Requirements
 
@@ -464,14 +610,17 @@ Web Application (College Fest Management Platform)
 - Manual connection configuration support
 - Tables for:
   - Primary header content (navigation menu, positioning, styling configurations, background image URL, responsive scaling settings)
-  - Secondary header content (college name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, responsive sizing configurations, positioning data, static data, styling)
-  - Responsive configuration (breakpoints, font size mappings, logo size mappings for different screen sizes, background image scaling settings)
+  - FUSION 2k26 text content (text content, font settings, responsive sizing configurations, alignment settings, animation settings)
+  - Secondary header content (college name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, responsive sizing configurations, positioning data including mobile left-right positioning, static data, styling with golden color, black border, glowing background)
+  - Responsive configuration (breakpoints, font size mappings, logo size mappings for different screen sizes, background image scaling settings, text alignment mappings)
   - Text styling configurations (font, size, color)
   - Background settings (color, image, responsive scaling parameters)
   - Body content (text boxes with positioning data)
   - Footer content and styling
-  - Events (including rules, instructions, multiple images, staff coordinators, student coordinators, Google Form links, description formatting data)
-  - Committee members (including name, role with hierarchical options: Chief-Patron/Patron/Convener/Co-Convener/Others, image, info section, display order)
+  - Event posters (image URLs, display order, animation settings)
+  - Events (including rules, instructions, multiple images, event-specific staff coordinators with photos, event-specific student coordinators with photos, Google Form links, description formatting data with text color and bold formatting, photo display settings, photo shape configurations)
+  - Overall event coordinators (staff coordinators with name, position, photo, event type; student coordinators with name, contact number, photo, event type; photo display settings, photo shape configurations)
+  - Committees (committee title, description, image, coordinators with name, position, photo, contact, photo display settings, photo shape configurations)
   - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
   - Contact information
@@ -480,10 +629,11 @@ Web Application (College Fest Management Platform)
   - Chatbot information content
 - Automatic data updates on admin changes
 - Connection credentials stored securely
-- Supabase Storage for image uploads including FUSION 2k26 background images
-- Staff and student coordinator details stored within events table
-- Committee member info section and hierarchical role stored within committee_members table
-- Event description formatting metadata stored within events table
+- Supabase Storage for image uploads including FUSION 2k26 background images, event posters, coordinator photos, committee images
+- Event-specific coordinator details stored within events table
+- Overall coordinator details stored in separate overall_coordinators table
+- Committee details stored in committees table
+- Event description formatting metadata including text color and bold formatting stored within events table
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
@@ -498,18 +648,21 @@ Web Application (College Fest Management Platform)
 - API endpoints for:
   - Database connection management
   - Primary header management (navigation menu, positioning, FUSION 2k26 background image upload, responsive scaling configuration)
-  - Secondary header management (college name, location, institution status styling, logo upload, shape configuration, responsive sizing configuration, positioning)
-  - Responsive configuration management (breakpoints, font size mappings, logo size mappings, background image scaling settings)
+  - FUSION 2k26 text management (text content, font settings, responsive sizing, alignment, animation settings)
+  - Secondary header management (college name, location, institution status styling with golden color, black border, glowing background, logo upload, shape configuration, responsive sizing configuration, positioning including mobile left-right positioning)
+  - Responsive configuration management (breakpoints, font size mappings, logo size mappings, background image scaling settings, text alignment mappings)
   - Text styling updates
   - Background customization with responsive image scaling
   - Text box positioning and content
   - Footer management
-  - Event detail page data (including staff and student coordinator management, description formatting)
-  - Committee management (including member info section and hierarchical role assignment)
-  - Committee member detail retrieval for detailed view
+  - Event poster management (upload, retrieve, delete, animation settings)
+  - Event detail page data (including event-specific coordinator management with photo upload, description formatting with text color and bold formatting, photo display settings, photo shape configuration)
+  - Overall event coordinators management (add, edit, delete staff and student coordinators with photo upload, photo display settings, photo shape configuration)
+  - Committee management (add, edit, delete committees with title, description, image, coordinator details with photo upload, photo display settings, photo shape configuration)
+  - Committee detail retrieval for detailed view
   - Complete application editing
   - Chatbot information retrieval
-  - Image upload to Supabase Storage (including FUSION 2k26 background images)
+  - Image upload to Supabase Storage (including FUSION 2k26 background images, event posters, coordinator photos, committee images)
   - Gallery image management (upload, retrieve, delete)
 - Environment variable support for connection credentials storage
 - Error handling for database connection failures
@@ -531,6 +684,27 @@ Web Application (College Fest Management Platform)
   - Backend stores image URL and responsive scaling settings in primary_header_content table
   - Frontend retrieves background image URL and applies responsive scaling
   - Public UI displays background image with automatic scaling across all screen sizes
+- Event poster image upload flow:
+  - Admin uploads poster images through Event Poster Management interface
+  - Frontend sends image files to backend API endpoint
+  - Backend uploads images to Supabase Storage event_posters bucket
+  - Backend receives public URL from Supabase Storage
+  - Backend stores image URL and display order in event_posters table
+  - Frontend retrieves poster image URLs and displays with automatic scrolling animation
+- Coordinator photo upload flow:
+  - Admin uploads coordinator photos through Event Management or Overall Coordinators Management interface
+  - Frontend sends image files to backend API endpoint
+  - Backend uploads images to Supabase Storage coordinator_photos bucket
+  - Backend receives public URL from Supabase Storage
+  - Backend stores image URL in events table (event-specific) or overall_coordinators table (overall coordinators)
+  - Frontend retrieves photo URLs and displays in round or semi-circle shape based on configuration
+- Committee image and coordinator photo upload flow:
+  - Admin uploads committee images and coordinator photos through Committee Management interface
+  - Frontend sends image files to backend API endpoint
+  - Backend uploads images to Supabase Storage committees bucket
+  - Backend receives public URL from Supabase Storage
+  - Backend stores image URLs in committees table
+  - Frontend retrieves image URLs and displays committee images and coordinator photos
 - File update locations for gallery image upload:
   - Backend API file: Create/update gallery upload endpoint (e.g., /api/gallery/upload)
   - Admin Dashboard component: Add image upload interface in Gallery Management section
@@ -541,6 +715,21 @@ Web Application (College Fest Management Platform)
   - Admin Dashboard component: Add background image upload interface in Primary Header Management section
   - Public Header component: Fetch and display background image with responsive scaling
   - Supabase Storage configuration: Create backgrounds bucket with public access
+- File update locations for event poster image upload:
+  - Backend API file: Create/update event poster upload endpoint (e.g., /api/event-posters/upload)
+  - Admin Dashboard component: Add poster image upload interface in Event Poster Management section
+  - Public Event Poster Section component: Fetch and display posters with automatic scrolling animation
+  - Supabase Storage configuration: Create event_posters bucket with public access
+- File update locations for coordinator photo upload:
+  - Backend API file: Create/update coordinator photo upload endpoint (e.g., /api/coordinators/photo)
+  - Admin Dashboard component: Add photo upload interface in Event Management and Overall Coordinators Management sections
+  - Public Event Detail Page and Overall Coordinators Section components: Fetch and display coordinator photos
+  - Supabase Storage configuration: Create coordinator_photos bucket with public access
+- File update locations for committee image and coordinator photo upload:
+  - Backend API file: Create/update committee image upload endpoint (e.g., /api/committees/image)
+  - Admin Dashboard component: Add image upload interface in Committee Management section
+  - Public Committee Section component: Fetch and display committee images and coordinator photos
+  - Supabase Storage configuration: Create committees bucket with public access
 
 ### 4.4 Rich Text Editor Implementation
 - Event description rich text editor:
@@ -550,32 +739,73 @@ Web Application (College Fest Management Platform)
     - Bullet list button
     - Numbered list button
     - Text alignment options (left, center, right, justify)
+    - Text color picker for selected content
+    - Bold text button for selected content
   - Content selection and list conversion functionality
+  - Content selection and text color change functionality
+  - Content selection and bold formatting functionality
   - HTML output storage in events table
-  - Frontend rendering of formatted HTML content
+  - Frontend rendering of formatted HTML content with text colors and bold formatting
 - File update locations for rich text editor:
-  - Admin Dashboard Event Management component: Integrate rich text editor
-  - Backend API: Store formatted HTML content in events table description field
-  - Public Event Detail Page component: Render formatted HTML with proper styling
+  - Admin Dashboard Event Management component: Integrate rich text editor with text color and bold formatting options
+  - Backend API: Store formatted HTML content with text color and bold formatting in events table description field
+  - Public Event Detail Page component: Render formatted HTML with proper styling including text colors and bold formatting
 
 ### 4.5 Committee Detail View Implementation
-- Committee member detail view functionality:
+- Committee detail view functionality:
   - Implement clickable committee cards in Committee Section
-  - Create modal component or dedicated detail page for member details
-  - Display complete member information:
-    - Full-size member image
-    - Member name
-    - Assigned role
-    - Complete info section content
+  - Create modal component or dedicated detail page for committee details
+  - Display complete committee information:
+    - Full-size committee image (if provided)
+    - Committee title
+    - Complete committee description
+    - Complete coordinators details with photos (if enabled)
   - Add close/back button functionality
   - Implement smooth animations for opening and closing detail view
 - File update locations for committee detail view:
   - Public Committee Section component: Add click event handlers to committee cards
   - Committee Detail Modal/Page component: Create new component for detailed view
-  - Backend API: Create endpoint for retrieving individual committee member details (e.g., GET /api/committee/:id)
+  - Backend API: Create endpoint for retrieving individual committee details (e.g., GET /api/committees/:id)
   - CSS/Animation file: Add transition and animation styles for detail view
 
-### 4.6 Code Quality
+### 4.6 Event Poster Scrolling Animation Implementation
+- Event poster automatic scrolling:
+  - Implement horizontal scrolling animation (left to right)
+  - Continuous loop animation
+  - Smooth transitions between posters
+  - Configurable scrolling speed
+  - Responsive behavior across all screen sizes
+- File update locations for event poster scrolling:
+  - Public Event Poster Section component: Implement scrolling animation logic
+  - CSS/Animation file: Add scrolling animation styles and keyframes
+  - Admin Dashboard Event Poster Management component: Add animation speed configuration interface
+
+### 4.7 FUSION 2k26 Text Animation Implementation
+- FUSION 2k26 text animations:
+  - Implement entrance animations (fade, slide, etc.)
+  - Implement continuous motion effects
+  - Implement glow and fade animations
+  - Configurable animation types and speeds
+  - Responsive text sizing and alignment
+- File update locations for FUSION 2k26 text animation:
+  - Public FUSION 2k26 Text component: Implement animation logic
+  - CSS/Animation file: Add text animation styles and keyframes
+  - Admin Dashboard FUSION 2k26 Text Management component: Add animation configuration interface
+
+### 4.8 Coordinator Photo Display Implementation
+- Coordinator photo display functionality:
+  - Support round and semi-circle photo shapes
+  - Photo display enable/disable option
+  - Responsive photo sizing
+  - Lazy loading for performance
+- File update locations for coordinator photo display:
+  - Public Event Detail Page component: Implement photo display with shape configuration
+  - Public Overall Coordinators Section component: Implement photo display with shape configuration
+  - Public Committee Section component: Implement coordinator photo display with shape configuration
+  - CSS file: Add photo shape styles (round and semi-circle)
+  - Admin Dashboard components: Add photo upload and shape configuration interfaces
+
+### 4.9 Code Quality
 - Clean, modular, scalable codebase
 - Maintainable UI component structure
 - Optimized for production deployment
@@ -584,42 +814,48 @@ Web Application (College Fest Management Platform)
 - Secure connection credentials handling
 - Responsive design implementation using CSS media queries and flexible layouts
 - Responsive image scaling implementation for background images
-- Rich text editor integration with proper sanitization
+- Rich text editor integration with proper sanitization and text color/bold formatting support
 - Modal/detail view component with proper state management
+- Automatic scrolling animation implementation for event posters
+- Text animation implementation for FUSION 2k26 text
+- Photo display implementation with shape configuration and lazy loading
 
 ## 5. User Flow
 
 ### 5.1 Public User Flow
 1. User lands on cinematic homepage with dual header system:
    - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us) with FUSION 2k26 background image that automatically scales to fit screen size
-   - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden dark with black border, responsive font sizing), MADANAPALLE (responsive font 12/14), UGC - Autonomous Institution (responsive font 12/14), and college logos with configured shapes (circle/semi-square) that automatically adjust size based on screen size
+   - FUSION 2k26 text with responsive sizing and animated effects
+   - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden color with black border and glowing background, responsive font sizing), MADANAPALLE (responsive font 12/14), UGC - Autonomous Institution (responsive font 12/14), and college logos with configured shapes (circle/semi-square) that automatically adjust size based on screen size with minimum two logos visible on mobile (left-right positioning)
 2. User navigates through multiple web pages using top-right navigation menu
-3. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments and responsive FUSION 2k26 background image scaling
-4. User views events by category (Technical/Cultural) on Events page
-5. User clicks on event card to navigate to dedicated event detail page
-6. User views complete event information including:
-   - Full description with justified text alignment and list formatting
+3. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments, responsive FUSION 2k26 background image scaling, and animated FUSION 2k26 text
+4. User views Event Poster Section above Events Section with automatic horizontal scrolling animation (left to right)
+5. User views events by category (Technical/Cultural) on Events page
+6. User clicks Technical or Cultural selection button
+7. User views Overall Event Coordinators Section below selection buttons:
+   - When Technical button selected: System displays overall staff coordinators and student coordinators for Technical events with photos (if enabled)
+   - When Cultural button selected: System displays overall staff coordinators and student coordinators for Cultural events with photos (if enabled)
+8. User clicks on event card to navigate to dedicated event detail page
+9. User views complete event information including:
+   - Full description with justified text alignment, list formatting, text color customization, and bold text formatting
    - Rules and instructions
    - Event images
-   - Staff coordinator contact details
-   - Student coordinator contact details
-7. User clicks registration button on event detail page
-8. Google Form opens (link provided by admin)
-9. User views Staff and Student Coordinators Section below Technical and Cultural events
-10. When user selects Technical event: System displays staff coordinators and student coordinators associated with Technical events
-11. When user selects Cultural event: System displays staff coordinators and student coordinators associated with Cultural events
-12. User explores committee section and views members organized by hierarchical roles (Chief-Patron, Patron, Convener, Co-Convener, Others) with member cards displaying brief info preview
-13. User clicks on committee member card to view complete member details
+   - Event-specific staff coordinator details with photos (if enabled, round or semi-circle shape)
+   - Event-specific student coordinator details with photos (if enabled, round or semi-circle shape)
+10. User clicks registration button on event detail page
+11. Google Form opens (link provided by admin)
+12. User explores committee section and views committee groups (Technical Committee, Cultural Committee, etc.) with committee cards displaying title, description preview, and coordinator details
+13. User clicks on committee card to view complete committee details
 14. Detailed view opens (modal or dedicated page) displaying:
-    - Full-size member image
-    - Member name
-    - Assigned role
-    - Complete info section content
+    - Full-size committee image (if provided)
+    - Committee title
+    - Complete committee description
+    - Complete coordinators details with photos (if enabled, round or semi-circle shape)
 15. User closes detail view and returns to Committee Section
 16. User explores gallery section and views images uploaded by admin
 17. User views improved footer section with contact details and social media links
 18. User can interact with chatbot to get website information and details
-19. User experiences optimal viewing on mobile devices with properly scaled logos, text, and FUSION 2k26 background image in secondary header
+19. User experiences optimal viewing on mobile devices with properly scaled logos (minimum two visible with left-right positioning), text with golden color, black border, and glowing background, responsive FUSION 2k26 background image, and animated FUSION 2k26 text in secondary header
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -638,24 +874,29 @@ Web Application (College Fest Management Platform)
    - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
    - Primary Header: Position navigation menu at top-right, configure styling, upload FUSION 2k26 background image, configure responsive scaling for background image across different screen sizes
-   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden dark styling with black border, upload logos, configure logo shapes (circle/semi-square), configure responsive sizing for logos and text across different screen sizes, manage positioning, update static data
-   - Responsive Configuration: Set breakpoints, configure font size mappings for different screen sizes, configure logo size mappings for desktop/tablet/mobile views, configure background image scaling behavior
+   - FUSION 2k26 Text: Configure text content, font settings, responsive sizing, alignment, animation settings
+   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden color styling with black border and glowing background, upload logos, configure logo shapes (circle/semi-square), configure responsive sizing for logos and text across different screen sizes with minimum two logos visible on mobile (left-right positioning), manage positioning, update static data
+   - Responsive Configuration: Set breakpoints, configure font size mappings for different screen sizes, configure logo size mappings for desktop/tablet/mobile views with mobile left-right positioning, configure background image scaling behavior, configure text alignment mappings
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled) with responsive scaling configuration
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
-   - Events: Add event details including rules, instructions, multiple images, staff coordinator details (name, contact), student coordinator details (name, contact), Google Form link; Use rich text editor for event description with text justification and list formatting options; Edit staff and student coordinator details directly within Events Section
-   - Committee: Add members with name, hierarchical role selection (Chief-Patron, Patron, Convener, Co-Convener, Others), image, and info section; Edit member information including personal info sections and role assignment
+   - Event Posters: Upload event poster images, configure automatic scrolling animation settings, rearrange poster display order
+   - Events: Add event details including rules, instructions, multiple images, event-specific staff coordinator details (name, position, photo with shape configuration), event-specific student coordinator details (name, contact number, photo with shape configuration), Google Form link; Use rich text editor for event description with text justification, list formatting options, text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
+   - Overall Event Coordinators: Add overall staff coordinator details (name, position, photo with shape configuration, event type), add overall student coordinator details (name, contact number, photo with shape configuration, event type); Configure photo display enable/disable option for overall coordinators
+   - Committees: Add committees with title, description, image (optional), coordinator details (name, position, photo with shape configuration, contact); Edit committee information; Configure photo display enable/disable option per committee
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and dual header sections as desired
 11. Admin uploads and configures FUSION 2k26 background image with responsive scaling settings for different devices
-12. Admin configures responsive behavior for secondary header including logo sizing and text scaling for different devices
-13. Admin edits entire application including primary header with FUSION 2k26 background image, secondary header with responsive configurations, footer, body sections, staff/student coordinator details through Events Section, committee member info sections and hierarchical roles, and event descriptions with rich text formatting
-14. Admin can change passkey through Passkey Management
-15. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including background image scaling
-16. Admin can access and edit multiple web pages with consistent editing interface
+12. Admin configures FUSION 2k26 text with responsive sizing and animation settings
+13. Admin configures responsive behavior for secondary header including logo sizing (minimum two visible on mobile with left-right positioning) and text scaling with golden color, black border, and glowing background for different devices
+14. Admin uploads event poster images and configures automatic scrolling animation
+15. Admin edits entire application including primary header with FUSION 2k26 background image, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, event poster section with scrolling animation, footer, body sections, overall event coordinator details with photo management, event-specific coordinator details with photo management, committee information including title, description, image, and coordinator details with photo management, and event descriptions with rich text formatting including text color and bold formatting
+16. Admin can change passkey through Passkey Management
+17. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including background image scaling, text animations, poster scrolling, and photo display
+18. Admin can access and edit multiple web pages with consistent editing interface
 
 ## 6. Development and Deployment Guide
 
@@ -698,25 +939,32 @@ Web Application (College Fest Management Platform)
 #### Step 5: Testing
 1. Test public user interface with dual header system
 2. Test FUSION 2k26 background image display and responsive scaling across different screen sizes
-3. Test responsive behavior of secondary header across different screen sizes
-4. Verify logo sizing adjustments on mobile, tablet, and desktop views
-5. Verify text scaling for college name, location, and institution status across devices
-6. Test chatbot authentication
-7. Test admin dashboard functionality
-8. Test database connection
-9. Verify live preview updates
-10. Test gallery image upload and display
-11. Test FUSION 2k26 background image upload and responsive scaling configuration
-12. Test primary and secondary header management including responsive configurations
-13. Test staff and student coordinator details display and filtering
-14. Test staff and student coordinator editing within Events Section
-15. Test committee member info section display and editing
-16. Test committee member hierarchical role assignment and display
-17. Test committee card click functionality and detail view opening
-18. Test committee detail view display with complete member information
-19. Test committee detail view close/back functionality
-20. Test event description rich text editor with justification and list formatting
-21. Test event description display with formatted content
+3. Test FUSION 2k26 text display with responsive sizing and animations
+4. Test responsive behavior of secondary header across different screen sizes with golden color, black border, and glowing background
+5. Verify logo sizing adjustments on mobile, tablet, and desktop views with minimum two logos visible on mobile (left-right positioning)
+6. Verify text scaling for college name, location, and institution status across devices
+7. Test event poster section display and automatic scrolling animation
+8. Test overall event coordinators section display and filtering based on event type selection
+9. Test coordinator photo display with round and semi-circle shapes
+10. Test chatbot authentication
+11. Test admin dashboard functionality
+12. Test database connection
+13. Verify live preview updates
+14. Test gallery image upload and display
+15. Test FUSION 2k26 background image upload and responsive scaling configuration
+16. Test FUSION 2k26 text configuration with responsive sizing and animation settings
+17. Test event poster image upload and scrolling animation configuration
+18. Test primary and secondary header management including responsive configurations with glowing background
+19. Test overall event coordinator details display, filtering, and photo management
+20. Test overall event coordinator editing with photo upload and shape configuration
+21. Test event-specific coordinator details display and photo management
+22. Test event-specific coordinator editing within Events Section with photo upload and shape configuration
+23. Test committee management with title, description, image, and coordinator details
+24. Test committee card click functionality and detail view opening
+25. Test committee detail view display with complete committee information
+26. Test committee detail view close/back functionality
+27. Test event description rich text editor with justification, list formatting, text color picker, and bold text button
+28. Test event description display with formatted content including text colors and bold formatting
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -751,24 +999,31 @@ Web Application (College Fest Management Platform)
 1. Access deployed website URL
 2. Test all public user features including dual header system
 3. Test FUSION 2k26 background image display and responsive scaling on actual devices
-4. Test responsive behavior of secondary header on actual mobile devices
-5. Verify logo and text scaling across different screen sizes
-6. Test admin authentication and dashboard
-7. Verify database connectivity
-8. Test live preview functionality
-9. Verify image uploads to Supabase Storage
-10. Test gallery image display on public UI
-11. Test FUSION 2k26 background image upload and responsive scaling configuration
-12. Test primary and secondary header display and management with responsive configurations
-13. Test staff and student coordinator details display and filtering functionality
-14. Test staff and student coordinator editing within Events Section
-15. Test committee member info section display and editing functionality
-16. Test committee member hierarchical role display
-17. Test committee card click functionality and detail view opening on actual devices
-18. Test committee detail view responsiveness across different screen sizes
-19. Test committee detail view close/back functionality
-20. Test event description rich text editor functionality
-21. Test event description display with justified and listified formatting
+4. Test FUSION 2k26 text display with responsive sizing and animations on actual devices
+5. Test responsive behavior of secondary header on actual mobile devices with golden color, black border, and glowing background
+6. Verify logo and text scaling across different screen sizes with minimum two logos visible on mobile (left-right positioning)
+7. Test event poster section display and automatic scrolling animation on actual devices
+8. Test overall event coordinators section display, filtering, and photo display on actual devices
+9. Test coordinator photo display with round and semi-circle shapes on actual devices
+10. Test admin authentication and dashboard
+11. Verify database connectivity
+12. Test live preview functionality
+13. Verify image uploads to Supabase Storage
+14. Test gallery image display on public UI
+15. Test FUSION 2k26 background image upload and responsive scaling configuration
+16. Test FUSION 2k26 text configuration with responsive sizing and animation settings
+17. Test event poster image upload and scrolling animation configuration
+18. Test primary and secondary header display and management with responsive configurations and glowing background
+19. Test overall event coordinator details display, filtering, and photo management functionality
+20. Test overall event coordinator editing with photo upload and shape configuration
+21. Test event-specific coordinator details display and photo management functionality
+22. Test event-specific coordinator editing within Events Section with photo upload and shape configuration
+23. Test committee management with title, description, image, and coordinator details functionality
+24. Test committee card click functionality and detail view opening on actual devices
+25. Test committee detail view responsiveness across different screen sizes
+26. Test committee detail view close/back functionality
+27. Test event description rich text editor functionality with text color and bold formatting
+28. Test event description display with justified and listified formatting including text colors and bold formatting
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -829,13 +1084,15 @@ npm install @supabase/supabase-js
 4. Update API endpoints
 5. Add gallery image upload endpoint
 6. Add FUSION 2k26 background image upload endpoint
-7. Add primary and secondary header management endpoints
-8. Add responsive configuration management endpoints
-9. Add staff and student coordinator management endpoints within Events Section
-10. Add committee member info section management endpoints
-11. Add committee member hierarchical role management endpoints
-12. Add committee member detail retrieval endpoint
-13. Add event description formatting endpoints
+7. Add FUSION 2k26 text management endpoint
+8. Add event poster image upload endpoint
+9. Add primary and secondary header management endpoints
+10. Add responsive configuration management endpoints
+11. Add overall event coordinator management endpoints with photo upload
+12. Add event-specific coordinator management endpoints with photo upload within Events Section
+13. Add committee management endpoints with image and coordinator photo upload
+14. Add committee detail retrieval endpoint
+15. Add event description formatting endpoints with text color and bold formatting
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -853,13 +1110,15 @@ npm install @supabase/supabase-js
 5. Verify live preview updates
 6. Test gallery image upload and display
 7. Test FUSION 2k26 background image upload and responsive scaling
-8. Test dual header system management
-9. Test responsive configuration management for secondary header
-10. Test staff and student coordinator management and filtering within Events Section
-11. Test committee member info section management
-12. Test committee member hierarchical role assignment
-13. Test committee card click and detail view functionality
-14. Test event description rich text editor and formatting
+8. Test FUSION 2k26 text configuration with responsive sizing and animations
+9. Test event poster image upload and scrolling animation
+10. Test dual header system management
+11. Test responsive configuration management for secondary header with glowing background
+12. Test overall event coordinator management, filtering, and photo upload with shape configuration
+13. Test event-specific coordinator management and photo upload with shape configuration within Events Section
+14. Test committee management with title, description, image, and coordinator photo upload
+15. Test committee card click and detail view functionality
+16. Test event description rich text editor with text color and bold formatting
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -998,149 +1257,348 @@ Files requiring updates for FUSION 2k26 background image:
 5. Supabase client configuration file (e.g., backend/config/supabase.js)
 6. Database schema file for primary_header_content table with background image fields
 
-### 6.7 Staff and Student Coordinator Management Implementation Guide
+### 6.7 FUSION 2k26 Text Animation Implementation Guide
 
 #### Backend Implementation
-1. Update event management API endpoints to include staff and student coordinator fields:
-   - POST /api/events - Add new event with staff and student coordinators
-   - GET /api/events - Retrieve all events with coordinator details
-   - GET /api/events/:id - Retrieve specific event with coordinator details
-   - GET /api/events/type/:eventType - Retrieve events by type (Technical/Cultural) with coordinators
-   - PUT /api/events/:id - Update event including staff and student coordinator details
+1. Create FUSION 2k26 text management API endpoints:
+   - POST /api/fusion-text - Create FUSION 2k26 text configuration
+   - GET /api/fusion-text - Retrieve FUSION 2k26 text configuration
+   - PUT /api/fusion-text/:id - Update FUSION 2k26 text configuration including text content, font settings, responsive sizing, alignment, animation settings
+
+#### Frontend Implementation
+1. Admin Dashboard FUSION 2k26 Text Management component:
+   - File location: frontend/components/admin/FusionTextManagement.jsx or similar
+   - Add text configuration interface:
+     - Text content input field
+     - Font selection dropdown
+     - Responsive font size configuration for desktop/tablet/mobile
+     - Text alignment configuration for different screen sizes
+     - Animation type selection (fade, glow, slide, etc.)
+     - Animation speed slider
+     - Animation loop settings
+     - Preview panel showing text with animations
+
+2. Public FUSION 2k26 Text component:
+   - File location: frontend/components/public/FusionText.jsx or similar
+   - Implementation:
+     - Fetch text configuration from /api/fusion-text endpoint
+     - Apply responsive font sizing using CSS media queries
+     - Apply text alignment based on screen size
+     - Implement animations using CSS animations or JavaScript libraries
+     - Ensure smooth transitions between breakpoints
+
+#### CSS Implementation
+1. Create FUSION 2k26 text animation styles:
+   - File location: frontend/styles/fusion-text-animation.css or similar
+   - Implementation:
+     - Define media queries for responsive font sizing
+     - Define media queries for responsive text alignment
+     - Create animation keyframes for different animation types (fade, glow, slide, etc.)
+     - Implement smooth transitions
+     - Add glow effects using text-shadow or box-shadow
+
+#### Code Update Summary
+Files requiring updates for FUSION 2k26 text animation:
+1. Backend API routes file (e.g., backend/routes/fusion-text.js)
+2. Admin Dashboard FUSION 2k26 Text Management component (e.g., frontend/components/admin/FusionTextManagement.jsx)
+3. Public FUSION 2k26 Text component (e.g., frontend/components/public/FusionText.jsx)
+4. FUSION 2k26 text animation styles file (e.g., frontend/styles/fusion-text-animation.css)
+5. Database schema file for fusion_text_content table
+
+### 6.8 Event Poster Scrolling Animation Implementation Guide
+
+#### Backend Implementation
+1. Create event poster management API endpoints:
+   - POST /api/event-posters/upload - Upload event poster images
+   - GET /api/event-posters - Retrieve all event poster images with display order and animation settings
+   - PUT /api/event-posters/:id - Update event poster display order or animation settings
+   - DELETE /api/event-posters/:id - Delete event poster
+
+#### Frontend Implementation
+1. Admin Dashboard Event Poster Management component:
+   - File location: frontend/components/admin/EventPosterManagement.jsx or similar
+   - Add poster upload interface:
+     - File input for selecting multiple poster images
+     - Upload button triggering API call to /api/event-posters/upload
+     - Display uploaded posters with delete option
+     - Drag-and-drop interface for reordering posters
+     - Animation speed configuration slider
+     - Preview panel showing scrolling animation
+
+2. Public Event Poster Section component:
+   - File location: frontend/components/public/EventPosterSection.jsx or similar
+   - Implementation:
+     - Fetch poster image URLs and animation settings from /api/event-posters endpoint
+     - Implement horizontal scrolling animation (left to right)
+     - Create continuous loop animation
+     - Apply configurable scrolling speed
+     - Ensure responsive behavior across all screen sizes
+     - Add smooth transitions between posters
+
+#### CSS Implementation
+1. Create event poster scrolling animation styles:
+   - File location: frontend/styles/event-poster-animation.css or similar
+   - Implementation:
+     - Define scrolling animation keyframes
+     - Create continuous loop animation
+     - Implement smooth transitions
+     - Add responsive styles for different screen sizes
+     - Ensure proper poster sizing and spacing
+
+#### Supabase Storage Configuration
+1. Create event_posters storage bucket:
+   - Bucket name: event_posters
+   - Public access: enabled
+   - File size limit: configure as needed
+
+2. Set bucket policies:
+   - Allow public read access
+   - Restrict write access to authenticated admin users
+
+#### Code Update Summary
+Files requiring updates for event poster scrolling animation:
+1. Backend API routes file (e.g., backend/routes/event-posters.js)
+2. Admin Dashboard Event Poster Management component (e.g., frontend/components/admin/EventPosterManagement.jsx)
+3. Public Event Poster Section component (e.g., frontend/components/public/EventPosterSection.jsx)
+4. Event poster animation styles file (e.g., frontend/styles/event-poster-animation.css)
+5. Supabase client configuration file (e.g., backend/config/supabase.js)
+6. Database schema file for event_posters table
+
+### 6.9 Overall Event Coordinators Management Implementation Guide
+
+#### Backend Implementation
+1. Create overall event coordinators management API endpoints:
+   - POST /api/overall-coordinators/staff - Add overall staff coordinator with photo upload
+   - POST /api/overall-coordinators/student - Add overall student coordinator with photo upload
+   - GET /api/overall-coordinators/staff/:eventType - Retrieve overall staff coordinators by event type (Technical/Cultural)
+   - GET /api/overall-coordinators/student/:eventType - Retrieve overall student coordinators by event type (Technical/Cultural)
+   - PUT /api/overall-coordinators/staff/:id - Update overall staff coordinator including photo
+   - PUT /api/overall-coordinators/student/:id - Update overall student coordinator including photo
+   - DELETE /api/overall-coordinators/staff/:id - Delete overall staff coordinator
+   - DELETE /api/overall-coordinators/student/:id - Delete overall student coordinator
+
+2. API endpoint structure for overall coordinator data:
+   - Staff coordinator object: name, position, photo_url, photo_shape (round/semi-circle), event_type (Technical/Cultural), photo_display_enabled
+   - Student coordinator object: name, contact_number, photo_url, photo_shape (round/semi-circle), event_type (Technical/Cultural), photo_display_enabled
+
+#### Frontend Implementation
+1. Admin Dashboard Overall Coordinators Management component:
+   - File location: frontend/components/admin/OverallCoordinatorsManagement.jsx or similar
+   - Add staff coordinator management interface:
+     - Input fields for staff name, position
+     - Event type selection (Technical/Cultural)
+     - Photo upload interface
+     - Photo shape selection (round/semi-circle)
+     - Photo display enable/disable toggle
+     - Add/Edit/Delete functionality
+   - Add student coordinator management interface:
+     - Input fields for student name, contact number
+     - Event type selection (Technical/Cultural)
+     - Photo upload interface
+     - Photo shape selection (round/semi-circle)
+     - Photo display enable/disable toggle
+     - Add/Edit/Delete functionality
+
+2. Public Overall Event Coordinators Section component:
+   - File location: frontend/components/public/OverallCoordinatorsSection.jsx or similar
+   - Implementation:
+     - Fetch overall coordinator data from API endpoints based on selected event type
+     - Display staff coordinators with name, position, photo (if enabled)
+     - Display student coordinators with name, contact number, photo (if enabled)
+     - Implement filtering logic based on Technical/Cultural button selection
+     - Apply photo shapes (round or semi-circle) based on configuration
+     - Responsive display across all screen sizes
+
+#### CSS Implementation
+1. Create coordinator photo styles:
+   - File location: frontend/styles/coordinator-photos.css or similar
+   - Implementation:
+     - Define round photo shape styles (border-radius: 50%)
+     - Define semi-circle photo shape styles (border-radius: 50% 50% 0 0)
+     - Add responsive sizing for photos
+     - Implement hover effects
+     - Add smooth transitions
+
+#### Supabase Storage Configuration
+1. Create coordinator_photos storage bucket:
+   - Bucket name: coordinator_photos
+   - Public access: enabled
+   - File size limit: configure as needed
+
+2. Set bucket policies:
+   - Allow public read access
+   - Restrict write access to authenticated admin users
+
+#### Code Update Summary
+Files requiring updates for overall event coordinators management:
+1. Backend API routes file (e.g., backend/routes/overall-coordinators.js)
+2. Admin Dashboard Overall Coordinators Management component (e.g., frontend/components/admin/OverallCoordinatorsManagement.jsx)
+3. Public Overall Event Coordinators Section component (e.g., frontend/components/public/OverallCoordinatorsSection.jsx)
+4. Coordinator photo styles file (e.g., frontend/styles/coordinator-photos.css)
+5. Supabase client configuration file (e.g., backend/config/supabase.js)
+6. Database schema file for overall_coordinators table
+
+### 6.10 Event-Specific Coordinators Management Implementation Guide
+
+#### Backend Implementation
+1. Update event management API endpoints to include event-specific coordinator fields with photo upload:
+   - POST /api/events - Add new event with event-specific staff and student coordinators including photos
+   - GET /api/events - Retrieve all events with event-specific coordinator details including photos
+   - GET /api/events/:id - Retrieve specific event with event-specific coordinator details including photos
+   - PUT /api/events/:id - Update event including event-specific staff and student coordinator details with photos
    - DELETE /api/events/:id - Delete event
 
-2. API endpoint structure for coordinator data:
-   - Staff coordinators stored as array within event record
-   - Student coordinators stored as array within event record
-   - Each coordinator object contains: name, contact, event_type
+2. API endpoint structure for event-specific coordinator data:
+   - Event-specific staff coordinators stored as array within event record
+   - Event-specific student coordinators stored as array within event record
+   - Each coordinator object contains: name, position/contact_number, photo_url, photo_shape (round/semi-circle), photo_display_enabled
 
 #### Frontend Implementation
 1. Admin Dashboard Event Management component:
    - File location: frontend/components/admin/EventManagement.jsx or similar
-   - Add staff coordinator management interface within event form:
-     - Input fields for staff name, contact
+   - Add event-specific staff coordinator management interface within event form:
+     - Input fields for staff name, position
+     - Photo upload interface
+     - Photo shape selection (round/semi-circle)
+     - Photo display enable/disable toggle per event
      - Add/Edit/Delete functionality for staff coordinators
-     - Associate staff with event type automatically
-   - Add student coordinator management interface within event form:
-     - Input fields for student name, contact
+   - Add event-specific student coordinator management interface within event form:
+     - Input fields for student name, contact number
+     - Photo upload interface
+     - Photo shape selection (round/semi-circle)
+     - Photo display enable/disable toggle per event
      - Add/Edit/Delete functionality for student coordinators
-     - Associate students with event type automatically
 
-2. Public Staff and Student Coordinators Section component:
-   - File location: frontend/components/public/StaffStudentCoordinators.jsx or similar
+2. Public Event Detail Page component:
+   - File location: frontend/components/public/EventDetailPage.jsx or similar
    - Implementation:
-     - Fetch event data including coordinator details from API endpoints
-     - Display staff and student coordinators below Technical and Cultural events
-     - Implement filtering logic based on selected event type
-     - When Technical event selected: Display staff coordinators and student coordinators for Technical events
-     - When Cultural event selected: Display staff coordinators and student coordinators for Cultural events
+     - Fetch event data including event-specific coordinator details with photos from API endpoints
+     - Display event-specific staff coordinators with name, position, photo (if enabled)
+     - Display event-specific student coordinators with name, contact number, photo (if enabled)
+     - Apply photo shapes (round or semi-circle) based on configuration
+     - Responsive display across all screen sizes
 
 #### Database Schema Update
 - Events table structure:
   - id (primary key)
   - name (text)
   - type (text: Technical/Cultural)
-  - description (text with HTML formatting)
+  - description (text with HTML formatting including text color and bold formatting)
   - rules (text)
   - instructions (text)
   - images (array)
-  - staff_coordinators (jsonb array: [{name, contact}])
-  - student_coordinators (jsonb array: [{name, contact}])
+  - event_specific_staff_coordinators (jsonb array: [{name, position, photo_url, photo_shape, photo_display_enabled}])
+  - event_specific_student_coordinators (jsonb array: [{name, contact_number, photo_url, photo_shape, photo_display_enabled}])
   - registration_link (text)
   - created_at (timestamp)
   - updated_at (timestamp)
 
 #### Code Update Summary
-Files requiring updates for staff and student coordinator management:
+Files requiring updates for event-specific coordinators management:
 1. Backend API routes file (e.g., backend/routes/events.js)
 2. Admin Dashboard Event Management component (e.g., frontend/components/admin/EventManagement.jsx)
-3. Public Staff and Student Coordinators Section component (e.g., frontend/components/public/StaffStudentCoordinators.jsx)
-4. Database schema file for events table with coordinator fields
+3. Public Event Detail Page component (e.g., frontend/components/public/EventDetailPage.jsx)
+4. Coordinator photo styles file (e.g., frontend/styles/coordinator-photos.css)
+5. Database schema file for events table with event-specific coordinator fields
 
-### 6.8 Committee Member Info Section and Hierarchical Roles Implementation Guide
+### 6.11 Committee Management Implementation Guide
 
 #### Backend Implementation
-1. Update committee management API endpoints to include info section and hierarchical role fields:
-   - POST /api/committee - Add new committee member with info section and role
-   - GET /api/committee - Retrieve all committee members with info sections and roles, sorted by role hierarchy
-   - GET /api/committee/:id - Retrieve specific committee member with info section and role
-   - PUT /api/committee/:id - Update committee member including info section and role
-   - DELETE /api/committee/:id - Delete committee member
+1. Update committee management API endpoints to include committee group fields:
+   - POST /api/committees - Add new committee group with title, description, image, coordinator details with photos
+   - GET /api/committees - Retrieve all committee groups with details
+   - GET /api/committees/:id - Retrieve specific committee group with complete details
+   - PUT /api/committees/:id - Update committee group including title, description, image, coordinator details with photos
+   - DELETE /api/committees/:id - Delete committee group
 
-2. API endpoint structure for committee member data:
-   - Each committee member object contains: name, role (Chief-Patron/Patron/Convener/Co-Convener/Others), image_url, info_section, display_order
-   - Role hierarchy for sorting: Chief-Patron > Patron > Convener > Co-Convener > Others
+2. API endpoint structure for committee data:
+   - Each committee object contains: title, description, image_url, coordinators (array), photo_display_enabled
+   - Each coordinator object contains: name, position, photo_url, photo_shape (round/semi-circle), contact (optional)
 
 #### Frontend Implementation
 1. Admin Dashboard Committee Management component:
    - File location: frontend/components/admin/CommitteeManagement.jsx or similar
-   - Add info section input field within committee member form:
-     - Text area or rich text editor for info section content
-     - Character limit indicator (optional)
-     - Preview functionality
-   - Add hierarchical role selection dropdown:
-     - Options: Chief-Patron, Patron, Convener, Co-Convener, Others
-     - Default selection: Others
-   - Edit functionality for existing member info sections and roles
-   - Automatic display order assignment based on role hierarchy
+   - Add committee group management interface:
+     - Input field for committee title
+     - Text area for committee description
+     - Image upload interface for committee image (optional)
+     - Coordinator management section:
+       - Input fields for coordinator name, position, contact (optional)
+       - Photo upload interface
+       - Photo shape selection (round/semi-circle)
+       - Add/Edit/Delete functionality for coordinators
+     - Photo display enable/disable toggle per committee
+   - Edit functionality for existing committee groups
+   - Delete functionality for committee groups
 
 2. Public Committee Section component:
    - File location: frontend/components/public/Committee.jsx or similar
    - Implementation:
-     - Fetch committee member data including info sections and roles from API endpoints
-     - Display members grouped by hierarchical roles
-     - Display order: Chief-Patron, Patron, Convener, Co-Convener, Others
-     - Display member cards with image, name, role, and brief info preview
+     - Fetch committee group data from API endpoints
+     - Display committee cards with title, description preview, coordinator details
      - Add click event handlers to committee cards
-     - Implement expandable/collapsible info section or modal view
+     - Implement expandable/collapsible view or modal for complete committee details
+     - Display committee image (if provided)
+     - Display coordinator photos (if enabled) in round or semi-circle shape
      - Add smooth transitions and cinematic effects
-     - Visual distinction for different role levels
 
 3. Committee Detail Modal/Page component:
    - File location: frontend/components/public/CommitteeDetail.jsx or similar
    - Implementation:
      - Create modal or dedicated page component
-     - Display complete member information:
-       - Full-size member image
-       - Member name
-       - Assigned role
-       - Complete info section content
+     - Display complete committee information:
+       - Full-size committee image (if provided)
+       - Committee title
+       - Complete committee description
+       - Complete coordinators details with photos (if enabled)
      - Add close/back button functionality
      - Implement smooth animations for opening and closing
      - Ensure responsive design across all devices
 
 #### Database Schema Update
-- Committee members table structure:
+- Committees table structure:
   - id (primary key)
-  - name (text)
-  - role (text: Chief-Patron/Patron/Convener/Co-Convener/Others)
-  - image_url (text)
-  - info_section (text)
-  - display_order (integer, auto-assigned based on role hierarchy)
+  - title (text)
+  - description (text)
+  - image_url (text, optional)
+  - coordinators (jsonb array: [{name, position, photo_url, photo_shape, contact}])
+  - photo_display_enabled (boolean)
   - created_at (timestamp)
   - updated_at (timestamp)
 
+#### Supabase Storage Configuration
+1. Create committees storage bucket:
+   - Bucket name: committees
+   - Public access: enabled
+   - File size limit: configure as needed
+
+2. Set bucket policies:
+   - Allow public read access
+   - Restrict write access to authenticated admin users
+
 #### Code Update Summary
-Files requiring updates for committee member info section, hierarchical roles, and detail view:
-1. Backend API routes file (e.g., backend/routes/committee.js)
+Files requiring updates for committee management:
+1. Backend API routes file (e.g., backend/routes/committees.js)
 2. Admin Dashboard Committee Management component (e.g., frontend/components/admin/CommitteeManagement.jsx)
 3. Public Committee Section component (e.g., frontend/components/public/Committee.jsx)
 4. Committee Detail Modal/Page component (e.g., frontend/components/public/CommitteeDetail.jsx)
-5. Database schema file for committee_members table with info_section and role fields
+5. Coordinator photo styles file (e.g., frontend/styles/coordinator-photos.css)
 6. CSS/Animation file for committee detail view transitions (e.g., frontend/styles/committee-detail.css)
+7. Database schema file for committees table
 
-### 6.9 Event Description Rich Text Editor Implementation Guide
+### 6.12 Event Description Rich Text Editor with Text Color and Bold Formatting Implementation Guide
 
 #### Backend Implementation
-1. Update event management API endpoints to support HTML formatted descriptions:
-   - POST /api/events - Accept HTML formatted description
-   - PUT /api/events/:id - Update event with HTML formatted description
-   - GET /api/events/:id - Retrieve event with HTML formatted description
+1. Update event management API endpoints to support HTML formatted descriptions with text color and bold formatting:
+   - POST /api/events - Accept HTML formatted description with text color and bold formatting
+   - PUT /api/events/:id - Update event with HTML formatted description with text color and bold formatting
+   - GET /api/events/:id - Retrieve event with HTML formatted description with text color and bold formatting
 
 2. Add HTML sanitization middleware:
    - Install sanitization library (e.g., DOMPurify or sanitize-html)
    - Sanitize HTML content before storing in database
-   - Allow safe HTML tags: p, ul, ol, li, strong, em, br
+   - Allow safe HTML tags: p, ul, ol, li, strong, em, br, span (with style attribute for text color)
+   - Allow style attribute for text color (color property only)
    - Remove potentially harmful scripts and attributes
 
 #### Frontend Implementation
@@ -1161,21 +1619,26 @@ Files requiring updates for committee member info section, hierarchical roles, a
        - Text alignment (left, center, right, justify)
        - Bullet list button
        - Numbered list button
-       - Bold, italic formatting
+       - Bold formatting button
+       - Text color picker
      - Set default text alignment to justify
      - Add content selection and list conversion functionality
+     - Add content selection and text color change functionality
+     - Add content selection and bold formatting functionality
      - Implement preview panel showing formatted output
      - Store HTML output in event description field
 
 3. Public Event Detail Page component:
    - File location: frontend/components/public/EventDetailPage.jsx or similar
    - Implementation:
-     - Fetch event data including HTML formatted description
+     - Fetch event data including HTML formatted description with text color and bold formatting
      - Render HTML content using dangerouslySetInnerHTML or safe HTML renderer
-     - Apply CSS styling to maintain justified alignment and list formatting:
+     - Apply CSS styling to maintain justified alignment, list formatting, text colors, and bold formatting:
        - Paragraph justification
        - Bullet list styling
        - Numbered list styling
+       - Text color preservation
+       - Bold text styling
        - Proper spacing and indentation
      - Ensure responsive display across all screen sizes
 
@@ -1186,6 +1649,8 @@ Files requiring updates for committee member info section, hierarchical roles, a
      - Define styles for justified text
      - Define styles for bullet lists (ul, li)
      - Define styles for numbered lists (ol, li)
+     - Define styles for bold text (strong, b)
+     - Preserve inline text color styles
      - Add proper spacing and indentation
      - Ensure responsive behavior
      - Example styles:
@@ -1201,10 +1666,14 @@ Files requiring updates for committee member info section, hierarchical roles, a
        .event-description li {
          margin-bottom: 5px;
        }
+       .event-description strong,
+       .event-description b {
+         font-weight: bold;
+       }
        ```
 
 #### Code Update Summary
-Files requiring updates for event description rich text editor:
+Files requiring updates for event description rich text editor with text color and bold formatting:
 1. Backend API routes file (e.g., backend/routes/events.js)
 2. Backend HTML sanitization middleware (e.g., backend/middleware/sanitize.js)
 3. Admin Dashboard Event Management component (e.g., frontend/components/admin/EventManagement.jsx)
@@ -1212,85 +1681,90 @@ Files requiring updates for event description rich text editor:
 5. Event description styles file (e.g., frontend/styles/event-description.css)
 6. Package.json (add rich text editor dependency)
 
-### 6.10 Responsive Secondary Header Implementation Guide
+### 6.13 Responsive Secondary Header with Glowing Background Implementation Guide
 
 #### Backend Implementation
-1. Create responsive configuration API endpoints:
-   - POST /api/responsive-config - Create responsive configuration
-   - GET /api/responsive-config - Retrieve responsive configuration
-   - PUT /api/responsive-config/:id - Update responsive configuration
-   - Implementation includes:
-     - Breakpoint definitions (mobile, tablet, desktop)
-     - Font size mappings for college name, location, institution status
-     - Logo size mappings for different screen sizes
-     - Logo positioning configurations
+1. Update secondary header management API endpoints to include glowing background configuration:
+   - PUT /api/secondary-header/styling - Update secondary header styling including golden color, black border, glowing background effect
+   - GET /api/secondary-header/styling - Retrieve secondary header styling configuration
 
-2. Update secondary header management API endpoints:
-   - PUT /api/secondary-header/responsive - Update responsive settings
-   - GET /api/secondary-header/responsive - Retrieve responsive settings
+2. Update responsive configuration API endpoints:
+   - PUT /api/responsive-config/secondary-header - Update responsive configuration for secondary header including minimum two logos visible on mobile with left-right positioning
+   - GET /api/responsive-config/secondary-header - Retrieve responsive configuration for secondary header
 
 #### Frontend Implementation
-1. Admin Dashboard Responsive Configuration component:
-   - File location: frontend/components/admin/ResponsiveConfig.jsx or similar
-   - Add responsive configuration interface:
-     - Breakpoint configuration inputs
-     - Font size sliders/inputs for different screen sizes
-     - Logo size configuration for mobile/tablet/desktop
-     - Logo positioning controls for different devices
-     - Preview panel showing changes across screen sizes
+1. Admin Dashboard Secondary Header Management component:
+   - File location: frontend/components/admin/SecondaryHeaderManagement.jsx or similar
+   - Add styling configuration interface:
+     - Golden color picker for college name text
+     - Black border width configuration
+     - Glowing background effect configuration:
+       - Glow color picker
+       - Glow intensity slider
+       - Glow spread slider
+     - Responsive font size configuration for college name, location, institution status
+     - Responsive logo sizing configuration with minimum two logos visible on mobile
+     - Mobile logo positioning configuration (left-right positioning)
 
 2. Public Secondary Header component:
    - File location: frontend/components/public/SecondaryHeader.jsx or similar
    - Implementation:
-     - Fetch responsive configuration from API
-     - Apply CSS media queries based on breakpoints
-     - Dynamically adjust font sizes based on screen size
-     - Dynamically adjust logo sizes based on screen size
-     - Implement flexible logo positioning for mobile view
-     - Use CSS flexbox or grid for responsive layout
+     - Fetch styling configuration from API
+     - Apply golden color to college name text
+     - Apply black border to college name text
+     - Apply glowing background effect using CSS box-shadow or text-shadow
+     - Implement responsive font sizing using CSS media queries
+     - Implement responsive logo sizing with minimum two logos visible on mobile
+     - Implement mobile logo positioning (left-right positioning)
+     - Ensure smooth transitions between breakpoints
 
 #### CSS Implementation
-1. Create responsive styles file:
-   - File location: frontend/styles/responsive-header.css or similar
+1. Create secondary header glowing background styles:
+   - File location: frontend/styles/secondary-header-glow.css or similar
    - Implementation:
-     - Define media queries for mobile, tablet, desktop
-     - Create font size classes for different screen sizes
-     - Create logo size classes for different screen sizes
-     - Implement flexible layout using flexbox/grid
-     - Add smooth transitions for size changes
-
-#### Database Schema Update
-- Responsive configuration table structure:
-  - id (primary key)
-  - breakpoints (jsonb: {mobile, tablet, desktop})
-  - font_size_mappings (jsonb: {college_name: {mobile, tablet, desktop}, location: {mobile, tablet, desktop}, institution_status: {mobile, tablet, desktop}})
-  - logo_size_mappings (jsonb: {mobile, tablet, desktop})
-  - logo_positioning (jsonb: {mobile, tablet, desktop})
-  - created_at (timestamp)
-  - updated_at (timestamp)
+     - Define golden color for college name text
+     - Define black border styles
+     - Define glowing background effect using box-shadow:
+       ```css
+       .college-name {
+         color: #D4AF37; /* Golden color */
+         text-shadow: 0 0 2px #000; /* Black border */
+         background: rgba(212, 175, 55, 0.1);
+         box-shadow: 0 0 20px rgba(212, 175, 55, 0.5),
+                     0 0 40px rgba(212, 175, 55, 0.3),
+                     0 0 60px rgba(212, 175, 55, 0.2);
+       }
+       ```
+     - Define responsive font sizes using media queries
+     - Define responsive logo sizing with minimum two logos visible on mobile
+     - Define mobile logo positioning (left-right positioning)
+     - Add smooth transitions
 
 #### Code Update Summary
-Files requiring updates for responsive secondary header:
-1. Backend API routes file (e.g., backend/routes/responsive-config.js)
-2. Backend secondary header routes file (e.g., backend/routes/secondary-header.js)
-3. Admin Dashboard Responsive Configuration component (e.g., frontend/components/admin/ResponsiveConfig.jsx)
+Files requiring updates for responsive secondary header with glowing background:
+1. Backend API routes file (e.g., backend/routes/secondary-header.js)
+2. Backend responsive configuration routes file (e.g., backend/routes/responsive-config.js)
+3. Admin Dashboard Secondary Header Management component (e.g., frontend/components/admin/SecondaryHeaderManagement.jsx)
 4. Public Secondary Header component (e.g., frontend/components/public/SecondaryHeader.jsx)
-5. Responsive styles file (e.g., frontend/styles/responsive-header.css)
-6. Database schema file for responsive_configuration table
+5. Secondary header glowing background styles file (e.g., frontend/styles/secondary-header-glow.css)
+6. Database schema file for secondary_header_content table with glowing background fields
 
 ## 7. Other Requirements
 
 ### 7.1 Supabase Table Schema
 System will automatically create the following tables on first connection:
 - primary_header_content (id, navigation_menu, navigation_position, styling, background_image_url, responsive_scaling_settings, created_at, updated_at)
-- secondary_header_content (id, college_name, location, institution_status, logos, logo_shapes, static_data, styling, created_at, updated_at)
-- responsive_configuration (id, breakpoints, font_size_mappings, logo_size_mappings, logo_positioning, background_scaling_mappings, created_at, updated_at)
+- fusion_text_content (id, text_content, font_settings, responsive_sizing_settings, alignment_settings, animation_settings, created_at, updated_at)
+- secondary_header_content (id, college_name, location, institution_status, logos, logo_shapes, static_data, styling_with_golden_color_black_border_glowing_background, mobile_logo_positioning, created_at, updated_at)
+- responsive_configuration (id, breakpoints, font_size_mappings, logo_size_mappings_with_mobile_left_right_positioning, logo_positioning, background_scaling_mappings, text_alignment_mappings, created_at, updated_at)
 - text_styling (id, font_family, font_size, text_color, created_at, updated_at)
 - background_settings (id, background_color, background_image_url, responsive_scaling_settings, created_at, updated_at)
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
-- events (id, name, type, description_html, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
-- committee_members (id, name, role, image_url, info_section, display_order, created_at, updated_at)
+- event_posters (id, image_url, display_order, animation_settings, created_at, updated_at)
+- events (id, name, type, description_html_with_text_color_and_bold_formatting, rules, instructions, images, event_specific_staff_coordinators_with_photos, event_specific_student_coordinators_with_photos, registration_link, photo_display_enabled, created_at, updated_at)
+- overall_coordinators (id, coordinator_type (staff/student), name, position_or_contact, photo_url, photo_shape, event_type, photo_display_enabled, created_at, updated_at)
+- committees (id, title, description, image_url, coordinators_with_photos, photo_display_enabled, created_at, updated_at)
 - gallery_images (id, image_url, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)
 - contact_info (id, details, created_at, updated_at)
@@ -1301,13 +1775,18 @@ System will automatically create the following tables on first connection:
 - All uploaded images stored in Supabase Storage
 - Separate storage buckets for:
   - Backgrounds (including FUSION 2k26 header background images with responsive scaling support)
-  - Logos (including secondary header logos with shape configurations and responsive sizing)
+  - Logos (including secondary header logos with shape configurations, responsive sizing, and mobile left-right positioning)
+  - Event posters (for Event Poster Section with automatic scrolling animation)
   - Event images
-  - Committee member images
+  - Coordinator photos (for overall coordinators and event-specific coordinators with round and semi-circle shape support)
+  - Committee images and coordinator photos (for committee groups with round and semi-circle shape support)
   - Gallery images (for Gallery Section display)
   - Background images
 - Public access configured for image buckets
 - Automatic URL generation for uploaded images
 - Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section
 - Backgrounds bucket specifically configured for FUSION 2k26 header background images with responsive scaling capabilities
-- Logo bucket supports circle and semi-square shape configurations with responsive sizing capabilities
+- Event_posters bucket specifically configured for event poster images with automatic scrolling animation
+- Coordinator_photos bucket specifically configured for coordinator photos with round and semi-circle shape configurations
+- Committees bucket specifically configured for committee images and coordinator photos with round and semi-circle shape configurations
+- Logo bucket supports circle and semi-square shape configurations with responsive sizing capabilities and mobile left-right positioning

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
+import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { themeSettingsApi, pagesApi } from '@/db/api';
@@ -109,56 +110,88 @@ export default function FlexibleHeader() {
               </div>
             )}
 
-            {/* College Name with Subtitle and Tagline - Responsive Typography */}
-            <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0">
-              <h1 
-                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl" 
+            {/* College Name with Subtitle and Tagline - Responsive Typography with Animations */}
+            <motion.div 
+              className="flex-1 px-2 sm:px-4 md:px-6 min-w-0"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <motion.h1 
+                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" 
                 style={{
                   ...titleStyle,
-                  color: themeSettings?.header_text_color || '#D4AF37',
-                  textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
-                  WebkitTextStroke: '0.5px #000000',
-                  paintOrder: 'stroke fill'
+                  color: '#D4AF37',
+                  textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5), 0 0 90px rgba(212, 175, 55, 0.3)',
+                  WebkitTextStroke: '1px #000000',
+                  paintOrder: 'stroke fill',
+                  letterSpacing: '0.08em',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))'
+                }}
+                animate={{
+                  textShadow: [
+                    '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)',
+                    '0 0 40px rgba(212, 175, 55, 1), 0 0 80px rgba(212, 175, 55, 0.7)',
+                    '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)'
+                  ]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut"
                 }}
               >
-                {themeSettings?.header_title || 'ACEM FUSION 2k26'}
-              </h1>
-              <p 
+                {themeSettings?.header_title || 'FUSION 2K26'}
+              </motion.h1>
+              <motion.p 
                 className="hidden sm:block text-[10px] sm:text-xs md:text-sm mt-0.5 sm:mt-1 opacity-90 font-semibold truncate" 
                 style={{ 
-                  color: themeSettings?.header_text_color || '#D4AF37',
-                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.3px #000000',
+                  color: '#D4AF37',
+                  textShadow: '0 0 15px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.4)',
+                  WebkitTextStroke: '0.5px #000000',
                   paintOrder: 'stroke fill',
                   letterSpacing: '0.05em'
                 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.9 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
               >
                 {themeSettings?.header_subtitle || 'Aditya College of Engineering'}
-              </p>
-              <p 
+              </motion.p>
+              <motion.p 
                 className="hidden md:block text-[9px] md:text-xs mt-0.5 opacity-85 font-medium truncate" 
                 style={{ 
-                  color: themeSettings?.header_text_color || '#D4AF37',
-                  textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
-                  WebkitTextStroke: '0.3px #000000',
+                  color: '#D4AF37',
+                  textShadow: '0 0 10px rgba(212, 175, 55, 0.5)',
+                  WebkitTextStroke: '0.4px #000000',
                   paintOrder: 'stroke fill',
                   letterSpacing: '0.1em'
                 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.85 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
               >
                 Madanapalle
-              </p>
-              <p 
+              </motion.p>
+              <motion.p 
                 className="hidden lg:block text-[8px] lg:text-xs mt-0.5 opacity-75 italic font-medium truncate" 
                 style={{ 
-                  color: themeSettings?.header_text_color || '#D4AF37',
+                  color: '#D4AF37',
                   textShadow: '0 0 10px rgba(212, 175, 55, 0.4)',
                   WebkitTextStroke: '0.3px #000000',
                   paintOrder: 'stroke fill'
                 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.75 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
               >
                 {themeSettings?.header_tagline || '(UGC - Autonomous Institution)'}
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             {/* Right: Navigation + Right Logos */}
             <div className="flex items-center gap-2 sm:gap-4 md:gap-6 ml-auto shrink-0">

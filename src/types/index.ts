@@ -9,6 +9,7 @@ export interface Option {
 export interface Coordinator {
   name: string;
   contact: string;
+  photo_url?: string;
 }
 
 export interface Event {
@@ -16,9 +17,13 @@ export interface Event {
   name: string;
   type: 'Technical' | 'Cultural';
   description: string;
+  description_html?: string;
   image_url: string | null;
   staff_coordinators: Coordinator[];
   student_coordinators: Coordinator[];
+  staff_coordinator_photos?: { name: string; photo_url: string }[];
+  student_coordinator_photos?: { name: string; photo_url: string }[];
+  show_coordinator_photos?: boolean;
   registration_link: string | null;
   rules: string | null;
   instructions: string | null;
@@ -32,6 +37,50 @@ export interface Event {
   updated_at: string;
 }
 
+export interface EventPoster {
+  id: string;
+  image_url: string;
+  display_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OverallCoordinator {
+  id: string;
+  type: 'staff' | 'student';
+  name: string;
+  position?: string;
+  contact?: string;
+  image_url?: string;
+  display_order: number;
+  show_photo: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Committee {
+  id: string;
+  title: string;
+  description?: string;
+  image_url?: string;
+  display_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CommitteeCoordinator {
+  id: string;
+  committee_id: string;
+  name: string;
+  position?: string;
+  contact?: string;
+  image_url?: string;
+  display_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+// Legacy type for backward compatibility
 export interface CommitteeMember {
   id: string;
   name: string;
