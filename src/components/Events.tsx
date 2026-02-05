@@ -6,18 +6,24 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, User, Phone } from 'lucide-react';
-import { eventsApi } from '@/db/api';
-import type { Event } from '@/types/index';
+import { eventsApi, overallCoordinatorsApi } from '@/db/api';
+import type { Event, OverallCoordinator } from '@/types/index';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'Technical' | 'Cultural'>('Technical');
+  const [overallCoordinators, setOverallCoordinators] = useState<OverallCoordinator[]>([]);
+  const [coordinatorsLoading, setCoordinatorsLoading] = useState(true);
 
   useEffect(() => {
     loadEvents();
   }, []);
+
+  useEffect(() => {
+    loadOverallCoordinators();
+  }, [activeTab]);
 
   const loadEvents = async () => {
     try {
@@ -27,6 +33,18 @@ export default function Events() {
       console.error('Error loading events:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadOverallCoordinators = async () => {
+    setCoordinatorsLoading(true);
+    try {
+      const data = await overallCoordinatorsApi.getByEventType(activeTab);
+      setOverallCoordinators(data);
+    } catch (error) {
+      console.error('Error loading overall coordinators:', error);
+    } finally {
+      setCoordinatorsLoading(false);
     }
   };
 
@@ -46,7 +64,7 @@ export default function Events() {
             Events
           </h2>
           <p className="text-muted-foreground text-lg">
-            Discover amazing technical and cultural events
+            Explore our exciting lineup of technical and cultural events
           </p>
         </motion.div>
 
@@ -69,8 +87,8 @@ export default function Events() {
           </TabsContent>
         </Tabs>
 
-        {/* Coordinator Contact Details Section */}
-        {!loading && filteredEvents.length > 0 && (
+        {/* Overall Coordinator Contact Details Section */}
+        {!coordinatorsLoading && overallCoordinators.length > 0 && (
           <motion.div
             key={activeTab} // Re-animate when tab changes
             initial={{ opacity: 0, y: 20 }}
@@ -94,7 +112,7 @@ export default function Events() {
                 Get in touch with our coordinators for any queries
               </p>
             </div>
-            <CoordinatorDetails events={filteredEvents} eventType={activeTab} />
+            <OverallCoordinatorDetails coordinators={overallCoordinators} eventType={activeTab} />
           </motion.div>
         )}
       </div>
@@ -350,6 +368,161 @@ function CoordinatorDetails({ events, eventType }: { events: Event[]; eventType:
                   >
                     {coordinator.contact}
                   </a>
+                </div>
+              </motion.div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+function OverallCoordinatorDetails({ coordinators, eventType }: { coordinators: OverallCoordinator[]; eventType: 'Technical' | 'Cultural' }) {
+  const staffCoordinators = coordinators.filter(c => c.type === 'staff');
+  const studentCoordinators = coordinators.filter(c => c.type === 'student');
+
+  if (staffCoordinators.length === 0 && studentCoordinators.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-muted-foreground">No coordinators assigned yet</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {/* Staff Coordinators */}
+      {staffCoordinators.length > 0 && (
+        <Card className="backdrop-blur-glass border-primary/30 hover:border-primary/50 transition-all duration-300 hover:glow-cyan">
+          <CardHeader className="border-b border-primary/20 pb-4">
+            <CardTitle 
+              className="text-2xl md:text-3xl flex items-center gap-3"
+              style={{
+                color: '#00D9FF',
+                textShadow: '0 0 20px rgba(0, 217, 255, 0.5)',
+                WebkitTextStroke: '1px #000000',
+                paintOrder: 'stroke fill',
+              }}
+            >
+              <User className="h-7 w-7" />
+              Staff Coordinator{staffCoordinators.length > 1 ? 's' : ''}
+            </CardTitle>
+            <CardDescription className="text-base">
+              {eventType === 'Technical' 
+                ? 'Contact persons for technical events' 
+                : 'Contact persons for cultural events'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-3">
+            {staffCoordinators.map((coordinator, index) => (
+              <motion.div 
+                key={coordinator.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="p-4 bg-primary/5 rounded-lg border border-primary/20 hover:border-primary/40 hover:bg-primary/10 transition-all duration-300 group"
+              >
+                <div className="flex items-start gap-4">
+                  {coordinator.show_photo && coordinator.image_url && (
+                    <div className="shrink-0">
+                      <img 
+                        src={coordinator.image_url} 
+                        alt={coordinator.name}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-primary/30 group-hover:border-primary/60 transition-all"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-lg mb-1 text-primary group-hover:text-primary/90">
+                      {coordinator.name}
+                    </h4>
+                    {coordinator.position && (
+                      <p className="text-sm text-muted-foreground mb-2 italic">
+                        {coordinator.position}
+                      </p>
+                    )}
+                    {coordinator.contact && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <Phone className="h-4 w-4 text-primary" />
+                        <a 
+                          href={`tel:${coordinator.contact}`} 
+                          className="text-muted-foreground hover:text-primary transition-colors font-medium"
+                        >
+                          {coordinator.contact}
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Student Coordinators */}
+      {studentCoordinators.length > 0 && (
+        <Card className="backdrop-blur-glass border-secondary/30 hover:border-secondary/50 transition-all duration-300 hover:glow-purple">
+          <CardHeader className="border-b border-secondary/20 pb-4">
+            <CardTitle 
+              className="text-2xl md:text-3xl flex items-center gap-3"
+              style={{
+                color: '#D4AF37',
+                textShadow: '0 0 20px rgba(212, 175, 55, 0.5)',
+                WebkitTextStroke: '1px #000000',
+                paintOrder: 'stroke fill',
+              }}
+            >
+              <User className="h-7 w-7" />
+              Student Coordinator{studentCoordinators.length > 1 ? 's' : ''}
+            </CardTitle>
+            <CardDescription className="text-base">
+              {eventType === 'Technical'
+                ? 'Student contacts for technical events'
+                : 'Student contacts for cultural events'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-3">
+            {studentCoordinators.map((coordinator, index) => (
+              <motion.div 
+                key={coordinator.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="p-4 bg-secondary/5 rounded-lg border border-secondary/20 hover:border-secondary/40 hover:bg-secondary/10 transition-all duration-300 group"
+              >
+                <div className="flex items-start gap-4">
+                  {coordinator.show_photo && coordinator.image_url && (
+                    <div className="shrink-0">
+                      <img 
+                        src={coordinator.image_url} 
+                        alt={coordinator.name}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-secondary/30 group-hover:border-secondary/60 transition-all"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-lg mb-1 text-secondary group-hover:text-secondary/90">
+                      {coordinator.name}
+                    </h4>
+                    {coordinator.position && (
+                      <p className="text-sm text-muted-foreground mb-2 italic">
+                        {coordinator.position}
+                      </p>
+                    )}
+                    {coordinator.contact && (
+                      <div className="flex items-center gap-2 text-sm">
+                        <Phone className="h-4 w-4 text-secondary" />
+                        <a 
+                          href={`tel:${coordinator.contact}`} 
+                          className="text-muted-foreground hover:text-secondary transition-colors font-medium"
+                        >
+                          {coordinator.contact}
+                        </a>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -556,12 +556,25 @@ export const overallCoordinatorsApi = {
     return Array.isArray(data) ? data : [];
   },
 
+  getByEventType: async (eventType: 'Technical' | 'Cultural') => {
+    const { data, error } = await supabase
+      .from('overall_coordinators')
+      .select('*')
+      .or(`event_type.eq.${eventType},event_type.eq.Both`)
+      .order('type', { ascending: true })
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
+  },
+
   create: async (coordinator: {
     type: 'staff' | 'student';
     name: string;
     position?: string;
     contact?: string;
     image_url?: string;
+    event_type?: 'Technical' | 'Cultural' | 'Both';
     display_order: number;
     show_photo: boolean;
   }) => {
@@ -580,6 +593,7 @@ export const overallCoordinatorsApi = {
     position: string;
     contact: string;
     image_url: string;
+    event_type: 'Technical' | 'Cultural' | 'Both';
     display_order: number;
     show_photo: boolean;
   }>) => {

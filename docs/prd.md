@@ -132,22 +132,23 @@ Web Application (College Fest Management Platform)
   - When Cultural button is selected: Display staff coordinators and student coordinators for Cultural events
 - Display staff coordinator details:
   - Staff Name
-  - Staff Position
+  - Staff Role
   - Staff Photo (optional, round or semi-circle shape)
-  - Associated Event Type (Technical/Cultural)
+  - Associated Event Type (Technical/Cultural) - optional display
 - Display student coordinator details:
   - Student Name
   - Student Contact Number
   - Student Photo (optional, round or semi-circle shape)
-  - Associated Event Type (Technical/Cultural)
+  - Associated Event Type (Technical/Cultural) - optional display
 - Photo display control:
   - Admin can enable/disable photo display option
   - When photo option enabled: Display coordinator photos in round or semi-circle shape
-  - When photo option disabled: Display only text details (name, position/contact)
+  - When photo option disabled: Display only text details (name, role/contact)
 - Admin-editable coordinator information through Event Type Coordinators Management
-- Admin can add, edit, delete staff coordinator details (name, position, photo, event type)
+- Admin can add, edit, delete staff coordinator details (name, role, photo, event type)
 - Admin can add, edit, delete student coordinator details (name, contact number, photo, event type)
 - Admin can configure photo shape (round or semi-circle)
+- Admin can configure whether to display event type field
 - Cinematic layout with smooth transitions
 
 #### 2.1.8 Event Detail Page
@@ -166,7 +167,7 @@ Web Application (College Fest Management Platform)
   - Event Images (multiple images support)
   - Event-Specific Staff Coordinators:
     - Staff Name
-    - Staff Position
+    - Staff Role
     - Staff Photo (optional, round or semi-circle shape)
   - Event-Specific Student Coordinators:
     - Student Name
@@ -192,7 +193,7 @@ Web Application (College Fest Management Platform)
   - Committee Description
   - Committee Coordinators Details:
     - Coordinator Name
-    - Coordinator Position
+    - Coordinator Role
     - Coordinator Photo (optional, round or semi-circle shape)
     - Coordinator Contact (optional)
 - Clickable committee cards:
@@ -408,7 +409,7 @@ Web Application (College Fest Management Platform)
   - Event Images upload (multiple images support)
   - Event-Specific Staff Coordinators:
     - Staff Name
-    - Staff Position
+    - Staff Role
     - Staff Photo upload (optional)
     - Photo shape configuration (round or semi-circle)
   - Event-Specific Student Coordinators:
@@ -430,20 +431,23 @@ Web Application (College Fest Management Platform)
 #### 2.3.10 Event Type Coordinators Management
 - Add staff coordinators with fields:
   - Staff Name
-  - Staff Position
+  - Staff Role
   - Staff Photo upload (optional)
   - Photo shape configuration (round or semi-circle)
   - Associated Event Type (Technical/Cultural)
+  - Event Type display toggle (optional display on public UI)
 - Add student coordinators with fields:
   - Student Name
   - Student Contact Number
   - Student Photo upload (optional)
   - Photo shape configuration (round or semi-circle)
   - Associated Event Type (Technical/Cultural)
+  - Event Type display toggle (optional display on public UI)
 - Photo display enable/disable option for coordinators
-- Edit existing coordinator details
+- Edit existing coordinator details including name, role/contact, photo, event type
 - Delete coordinators
 - Admin can upload coordinator photos and configure photo shapes
+- Admin can configure whether event type field is displayed on public UI
 - Coordinators display dynamically on homepage below Technical and Cultural selection buttons based on event type selection
 - Changes visible in live preview immediately
 
@@ -454,7 +458,7 @@ Web Application (College Fest Management Platform)
   - Committee Image upload (optional)
   - Committee Coordinators:
     - Coordinator Name
-    - Coordinator Position
+    - Coordinator Role
     - Coordinator Photo upload (optional)
     - Photo shape configuration (round or semi-circle)
     - Coordinator Contact (optional)
@@ -504,9 +508,9 @@ Web Application (College Fest Management Platform)
   - Footer sections
   - Body parts
   - All content areas
-  - Event type coordinator details with photo management
-  - Event-specific coordinator details with photo management
-  - Committee information including title, description, image, and coordinator details with photo management
+  - Event type coordinator details with photo management and role field
+  - Event-specific coordinator details with photo management and role field
+  - Committee information including title, description, image, and coordinator details with photo management and role field
   - Event descriptions with justified text, list formatting, text color customization, and bold text formatting
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
@@ -552,9 +556,9 @@ Web Application (College Fest Management Platform)
 - Secondary header includes configurable logo shapes (circle/semi-square) with minimum two logos visible on mobile (left-right positioning)
 - Fully responsive secondary header with flexible logo sizing and text scaling across all devices
 - Event poster section with automatic horizontal scrolling animation (left to right)
-- Event type coordinators section with photo display options (round or semi-circle shapes)
+- Event type coordinators section with photo display options (round or semi-circle shapes) and optional event type display
 - Event descriptions displayed with justified text alignment, list formatting support, text color customization, and bold text formatting
-- Committee section displaying committee groups with optional images, descriptions, and coordinator details
+- Committee section displaying committee groups with optional images, descriptions, and coordinator details with role field
 - Committee coordinator photos with configurable shapes (round or semi-circle)
 - Clickable committee cards with smooth animations opening detailed committee view
 - Committee detail view with modal or dedicated page displaying complete committee information
@@ -579,10 +583,10 @@ Web Application (College Fest Management Platform)
   - Tablet view: Proportional scaling for tablet displays
   - Desktop view: Full-size display with optimal spacing
 - Event poster section responsive across all screen sizes with automatic scrolling animation
-- Event type coordinators section responsive with photo display options
+- Event type coordinators section responsive with photo display options and optional event type display
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
-- Event descriptions maintain justified alignment, list formatting, text color, and bold formatting across all screen sizes
+- Event descriptions maintain justified alignment, list formatting, text colors, and bold formatting across all screen sizes
 - Committee detail view responsive across all devices
 - Coordinator photos display responsively in round or semi-circle shapes
 
@@ -612,9 +616,9 @@ Web Application (College Fest Management Platform)
   - Body content (text boxes with positioning data)
   - Footer content and styling
   - Event posters (image URLs, display order, animation settings)
-  - Events (including rules, instructions, multiple images, event-specific staff coordinators with photos, event-specific student coordinators with photos, Google Form links, description formatting data with text color and bold formatting, photo display settings, photo shape configurations)
-  - Event type coordinators (staff coordinators with name, position, photo, event type; student coordinators with name, contact number, photo, event type; photo display settings, photo shape configurations)
-  - Committees (committee title, description, image, coordinators with name, position, photo, contact, photo display settings, photo shape configurations)
+  - Events (including rules, instructions, multiple images, event-specific staff coordinators with photos and role field, event-specific student coordinators with photos, Google Form links, description formatting data with text color and bold formatting, photo display settings, photo shape configurations)
+  - Event type coordinators (staff coordinators with name, role, photo, event type, event type display toggle; student coordinators with name, contact number, photo, event type, event type display toggle; photo display settings, photo shape configurations)
+  - Committees (committee title, description, image, coordinators with name, role, photo, contact, photo display settings, photo shape configurations)
   - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
   - Contact information
@@ -625,8 +629,8 @@ Web Application (College Fest Management Platform)
 - Connection credentials stored securely
 - Supabase Storage for image uploads including FUSION 2k26 background images, event posters, coordinator photos, committee images
 - Event-specific coordinator details stored within events table
-- Event type coordinator details stored in separate event_type_coordinators table
-- Committee details stored in committees table
+- Event type coordinator details stored in separate event_type_coordinators table with role field and event type display toggle
+- Committee details stored in committees table with coordinator role field
 - Event description formatting metadata including text color and bold formatting stored within events table
 
 ### 4.2 Backend Architecture
@@ -650,9 +654,9 @@ Web Application (College Fest Management Platform)
   - Text box positioning and content
   - Footer management
   - Event poster management (upload, retrieve, delete, animation settings)
-  - Event detail page data (including event-specific coordinator management with photo upload, description formatting with text color and bold formatting, photo display settings, photo shape configuration)
-  - Event type coordinators management (add, edit, delete staff and student coordinators with photo upload, photo display settings, photo shape configuration)
-  - Committee management (add, edit, delete committees with title, description, image, coordinator details with photo upload, photo display settings, photo shape configuration)
+  - Event detail page data (including event-specific coordinator management with photo upload and role field, description formatting with text color and bold formatting, photo display settings, photo shape configuration)
+  - Event type coordinators management (add, edit, delete staff and student coordinators with photo upload, role field, event type display toggle, photo display settings, photo shape configuration)
+  - Committee management (add, edit, delete committees with title, description, image, coordinator details with photo upload and role field, photo display settings, photo shape configuration)
   - Committee detail retrieval for detailed view
   - Complete application editing
   - Chatbot information retrieval
@@ -753,7 +757,7 @@ Web Application (College Fest Management Platform)
     - Full-size committee image (if provided)
     - Committee title
     - Complete committee description
-    - Complete coordinators details with photos (if enabled)
+    - Complete coordinators details with photos (if enabled) and role field
   - Add close/back button functionality
   - Implement smooth animations for opening and closing detail view
 - File update locations for committee detail view:
@@ -827,24 +831,25 @@ Web Application (College Fest Management Platform)
 5. User views events by category (Technical/Cultural) on Events page
 6. User clicks Technical or Cultural selection button
 7. User views Event Type Coordinators Section below selection buttons:
-   - When Technical button selected: System displays staff coordinators and student coordinators for Technical events with photos (if enabled)
-   - When Cultural button selected: System displays staff coordinators and student coordinators for Cultural events with photos (if enabled)
+   - When Technical button selected: System displays staff coordinators (name, role, photo if enabled) and student coordinators (name, contact number, photo if enabled) for Technical events
+   - When Cultural button selected: System displays staff coordinators (name, role, photo if enabled) and student coordinators (name, contact number, photo if enabled) for Cultural events
+   - Event type field displayed optionally based on admin configuration
 8. User clicks on event card to navigate to dedicated event detail page
 9. User views complete event information including:
    - Full description with justified text alignment, list formatting, text color customization, and bold text formatting
    - Rules and instructions
    - Event images
-   - Event-specific staff coordinator details with photos (if enabled, round or semi-circle shape)
-   - Event-specific student coordinator details with photos (if enabled, round or semi-circle shape)
+   - Event-specific staff coordinator details (name, role, photo if enabled in round or semi-circle shape)
+   - Event-specific student coordinator details (name, contact number, photo if enabled in round or semi-circle shape)
 10. User clicks registration button on event detail page
 11. Google Form opens (link provided by admin)
-12. User explores committee section and views committee groups (Technical Committee, Cultural Committee, etc.) with committee cards displaying title, description preview, and coordinator details
+12. User explores committee section and views committee groups (Technical Committee, Cultural Committee, etc.) with committee cards displaying title, description preview, and coordinator details (name, role, photo if enabled, contact)
 13. User clicks on committee card to view complete committee details
 14. Detailed view opens (modal or dedicated page) displaying:
     - Full-size committee image (if provided)
     - Committee title
     - Complete committee description
-    - Complete coordinators details with photos (if enabled, round or semi-circle shape)
+    - Complete coordinators details with photos (if enabled, round or semi-circle shape) and role field
 15. User closes detail view and returns to Committee Section
 16. User explores gallery section and views images uploaded by admin
 17. User views improved footer section with contact details and social media links
@@ -876,9 +881,9 @@ Web Application (College Fest Management Platform)
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
    - Event Posters: Upload event poster images, configure automatic scrolling animation settings, rearrange poster display order
-   - Events: Add event details including rules, instructions, multiple images, event-specific staff coordinator details (name, position, photo with shape configuration), event-specific student coordinator details (name, contact number, photo with shape configuration), Google Form link; Use rich text editor for event description with text justification, list formatting options, text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
-   - Event Type Coordinators: Add staff coordinator details (name, position, photo with shape configuration, event type), add student coordinator details (name, contact number, photo with shape configuration, event type); Configure photo display enable/disable option for coordinators
-   - Committees: Add committees with title, description, image (optional), coordinator details (name, position, photo with shape configuration, contact); Edit committee information; Configure photo display enable/disable option per committee
+   - Events: Add event details including rules, instructions, multiple images, event-specific staff coordinator details (name, role, photo with shape configuration), event-specific student coordinator details (name, contact number, photo with shape configuration), Google Form link; Use rich text editor for event description with text justification, list formatting options, text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
+   - Event Type Coordinators: Add staff coordinator details (name, role, photo with shape configuration, event type, event type display toggle), add student coordinator details (name, contact number, photo with shape configuration, event type, event type display toggle); Configure photo display enable/disable option for coordinators; Edit coordinator details including name, role/contact, photo, event type
+   - Committees: Add committees with title, description, image (optional), coordinator details (name, role, photo with shape configuration, contact); Edit committee information; Configure photo display enable/disable option per committee
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
    - Chatbot information content management
@@ -887,7 +892,7 @@ Web Application (College Fest Management Platform)
 12. Admin configures FUSION 2k26 text with responsive sizing and animation settings
 13. Admin configures responsive behavior for secondary header including logo sizing (minimum two visible on mobile with left-right positioning) and text scaling with golden color, black border, and glowing background for different devices
 14. Admin uploads event poster images and configures automatic scrolling animation
-15. Admin edits entire application including primary header with FUSION 2k26 background image, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, event poster section with scrolling animation, footer, body sections, event type coordinator details with photo management, event-specific coordinator details with photo management, committee information including title, description, image, and coordinator details with photo management, and event descriptions with rich text formatting including text color and bold formatting
+15. Admin edits entire application including primary header with FUSION 2k26 background image, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, event poster section with scrolling animation, footer, body sections, event type coordinator details with photo management and role field, event-specific coordinator details with photo management and role field, committee information including title, description, image, and coordinator details with photo management and role field, and event descriptions with rich text formatting including text color and bold formatting
 16. Admin can change passkey through Passkey Management
 17. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including background image scaling, text animations, poster scrolling, and photo display
 18. Admin can access and edit multiple web pages with consistent editing interface
@@ -940,25 +945,27 @@ Web Application (College Fest Management Platform)
 7. Test event poster section display and automatic scrolling animation
 8. Test event type coordinators section display and filtering based on event type selection
 9. Test coordinator photo display with round and semi-circle shapes
-10. Test chatbot authentication
-11. Test admin dashboard functionality
-12. Test database connection
-13. Verify live preview updates
-14. Test gallery image upload and display
-15. Test FUSION 2k26 background image upload and responsive scaling configuration
-16. Test FUSION 2k26 text configuration with responsive sizing and animation settings
-17. Test event poster image upload and scrolling animation configuration
-18. Test primary and secondary header management including responsive configurations with glowing background
-19. Test event type coordinator details display, filtering, and photo management
-20. Test event type coordinator editing with photo upload and shape configuration
-21. Test event-specific coordinator details display and photo management
-22. Test event-specific coordinator editing within Events Section with photo upload and shape configuration
-23. Test committee management with title, description, image, and coordinator details
-24. Test committee card click functionality and detail view opening
-25. Test committee detail view display with complete committee information
-26. Test committee detail view close/back functionality
-27. Test event description rich text editor with justification, list formatting, text color picker, and bold text button
-28. Test event description display with formatted content including text colors and bold formatting
+10. Test coordinator role field display for staff coordinators
+11. Test event type display toggle functionality
+12. Test chatbot authentication
+13. Test admin dashboard functionality
+14. Test database connection
+15. Verify live preview updates
+16. Test gallery image upload and display
+17. Test FUSION 2k26 background image upload and responsive scaling configuration
+18. Test FUSION 2k26 text configuration with responsive sizing and animation settings
+19. Test event poster image upload and scrolling animation configuration
+20. Test primary and secondary header management including responsive configurations with glowing background
+21. Test event type coordinator details display, filtering, and photo management
+22. Test event type coordinator editing with photo upload, shape configuration, role field, and event type display toggle
+23. Test event-specific coordinator details display and photo management
+24. Test event-specific coordinator editing within Events Section with photo upload, shape configuration, and role field
+25. Test committee management with title, description, image, and coordinator details including role field
+26. Test committee card click functionality and detail view opening
+27. Test committee detail view display with complete committee information including coordinator role field
+28. Test committee detail view close/back functionality
+29. Test event description rich text editor with justification, list formatting, text color picker, and bold text button
+30. Test event description display with formatted content including text colors and bold formatting
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -999,25 +1006,27 @@ Web Application (College Fest Management Platform)
 7. Test event poster section display and automatic scrolling animation on actual devices
 8. Test event type coordinators section display, filtering, and photo display on actual devices
 9. Test coordinator photo display with round and semi-circle shapes on actual devices
-10. Test admin authentication and dashboard
-11. Verify database connectivity
-12. Test live preview functionality
-13. Verify image uploads to Supabase Storage
-14. Test gallery image display on public UI
-15. Test FUSION 2k26 background image upload and responsive scaling configuration
-16. Test FUSION 2k26 text configuration with responsive sizing and animation settings
-17. Test event poster image upload and scrolling animation configuration
-18. Test primary and secondary header display and management with responsive configurations and glowing background
-19. Test event type coordinator details display, filtering, and photo management functionality
-20. Test event type coordinator editing with photo upload and shape configuration
-21. Test event-specific coordinator details display and photo management functionality
-22. Test event-specific coordinator editing within Events Section with photo upload and shape configuration
-23. Test committee management with title, description, image, and coordinator details functionality
-24. Test committee card click functionality and detail view opening on actual devices
-25. Test committee detail view responsiveness across different screen sizes
-26. Test committee detail view close/back functionality
-27. Test event description rich text editor functionality with text color and bold formatting
-28. Test event description display with justified and listified formatting including text colors and bold formatting
+10. Test coordinator role field display for staff coordinators
+11. Test event type display toggle functionality
+12. Test admin authentication and dashboard
+13. Verify database connectivity
+14. Test live preview functionality
+15. Verify image uploads to Supabase Storage
+16. Test gallery image display on public UI
+17. Test FUSION 2k26 background image upload and responsive scaling configuration
+18. Test FUSION 2k26 text configuration with responsive sizing and animation settings
+19. Test event poster image upload and scrolling animation configuration
+20. Test primary and secondary header display and management with responsive configurations and glowing background
+21. Test event type coordinator details display, filtering, and photo management functionality
+22. Test event type coordinator editing with photo upload, shape configuration, role field, and event type display toggle
+23. Test event-specific coordinator details display and photo management functionality
+24. Test event-specific coordinator editing within Events Section with photo upload, shape configuration, and role field
+25. Test committee management with title, description, image, and coordinator details functionality including role field
+26. Test committee card click functionality and detail view opening on actual devices
+27. Test committee detail view responsiveness across different screen sizes
+28. Test committee detail view close/back functionality
+29. Test event description rich text editor functionality with text color and bold formatting
+30. Test event description display with justified and listified formatting including text colors and bold formatting
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -1082,9 +1091,9 @@ npm install @supabase/supabase-js
 8. Add event poster image upload endpoint
 9. Add primary and secondary header management endpoints
 10. Add responsive configuration management endpoints
-11. Add event type coordinator management endpoints with photo upload
-12. Add event-specific coordinator management endpoints with photo upload within Events Section
-13. Add committee management endpoints with image and coordinator photo upload
+11. Add event type coordinator management endpoints with photo upload, role field, and event type display toggle
+12. Add event-specific coordinator management endpoints with photo upload and role field within Events Section
+13. Add committee management endpoints with image and coordinator photo upload including role field
 14. Add committee detail retrieval endpoint
 15. Add event description formatting endpoints with text color and bold formatting
 
@@ -1108,9 +1117,9 @@ npm install @supabase/supabase-js
 9. Test event poster image upload and scrolling animation
 10. Test dual header system management
 11. Test responsive configuration management for secondary header with glowing background
-12. Test event type coordinator management, filtering, and photo upload with shape configuration
-13. Test event-specific coordinator management and photo upload with shape configuration within Events Section
-14. Test committee management with title, description, image, and coordinator photo upload
+12. Test event type coordinator management, filtering, and photo upload with shape configuration, role field, and event type display toggle
+13. Test event-specific coordinator management and photo upload with shape configuration and role field within Events Section
+14. Test committee management with title, description, image, and coordinator photo upload including role field
 15. Test committee card click and detail view functionality
 16. Test event description rich text editor with text color and bold formatting
 
@@ -1362,28 +1371,29 @@ Files requiring updates for event poster scrolling animation:
 
 #### Backend Implementation
 1. Create event type coordinators management API endpoints:
-   - POST /api/event-type-coordinators/staff - Add staff coordinator with photo upload
+   - POST /api/event-type-coordinators/staff - Add staff coordinator with photo upload and role field
    - POST /api/event-type-coordinators/student - Add student coordinator with photo upload
    - GET /api/event-type-coordinators/staff/:eventType - Retrieve staff coordinators by event type (Technical/Cultural)
    - GET /api/event-type-coordinators/student/:eventType - Retrieve student coordinators by event type (Technical/Cultural)
-   - PUT /api/event-type-coordinators/staff/:id - Update staff coordinator including photo
+   - PUT /api/event-type-coordinators/staff/:id - Update staff coordinator including photo and role field
    - PUT /api/event-type-coordinators/student/:id - Update student coordinator including photo
    - DELETE /api/event-type-coordinators/staff/:id - Delete staff coordinator
    - DELETE /api/event-type-coordinators/student/:id - Delete student coordinator
 
 2. API endpoint structure for event type coordinator data:
-   - Staff coordinator object: name, position, photo_url, photo_shape (round/semi-circle), event_type (Technical/Cultural), photo_display_enabled
-   - Student coordinator object: name, contact_number, photo_url, photo_shape (round/semi-circle), event_type (Technical/Cultural), photo_display_enabled
+   - Staff coordinator object: name, role, photo_url, photo_shape (round/semi-circle), event_type (Technical/Cultural), photo_display_enabled, event_type_display_enabled
+   - Student coordinator object: name, contact_number, photo_url, photo_shape (round/semi-circle), event_type (Technical/Cultural), photo_display_enabled, event_type_display_enabled
 
 #### Frontend Implementation
 1. Admin Dashboard Event Type Coordinators Management component:
    - File location: frontend/components/admin/EventTypeCoordinatorsManagement.jsx or similar
    - Add staff coordinator management interface:
-     - Input fields for staff name, position
+     - Input fields for staff name, role
      - Event type selection (Technical/Cultural)
      - Photo upload interface
      - Photo shape selection (round/semi-circle)
      - Photo display enable/disable toggle
+     - Event type display enable/disable toggle
      - Add/Edit/Delete functionality
    - Add student coordinator management interface:
      - Input fields for student name, contact number
@@ -1391,14 +1401,16 @@ Files requiring updates for event poster scrolling animation:
      - Photo upload interface
      - Photo shape selection (round/semi-circle)
      - Photo display enable/disable toggle
+     - Event type display enable/disable toggle
      - Add/Edit/Delete functionality
 
 2. Public Event Type Coordinators Section component:
    - File location: frontend/components/public/EventTypeCoordinatorsSection.jsx or similar
    - Implementation:
      - Fetch coordinator data from API endpoints based on selected event type
-     - Display staff coordinators with name, position, photo (if enabled)
+     - Display staff coordinators with name, role, photo (if enabled)
      - Display student coordinators with name, contact number, photo (if enabled)
+     - Display event type field optionally based on event_type_display_enabled setting
      - Implement filtering logic based on Technical/Cultural button selection
      - Apply photo shapes (round or semi-circle) based on configuration
      - Responsive display across all screen sizes
@@ -1430,28 +1442,29 @@ Files requiring updates for event type coordinators management:
 3. Public Event Type Coordinators Section component (e.g., frontend/components/public/EventTypeCoordinatorsSection.jsx)
 4. Coordinator photo styles file (e.g., frontend/styles/coordinator-photos.css)
 5. Supabase client configuration file (e.g., backend/config/supabase.js)
-6. Database schema file for event_type_coordinators table
+6. Database schema file for event_type_coordinators table with role field and event_type_display_enabled field
 
 ### 6.10 Event-Specific Coordinators Management Implementation Guide
 
 #### Backend Implementation
-1. Update event management API endpoints to include event-specific coordinator fields with photo upload:
-   - POST /api/events - Add new event with event-specific staff and student coordinators including photos
-   - GET /api/events - Retrieve all events with event-specific coordinator details including photos
-   - GET /api/events/:id - Retrieve specific event with event-specific coordinator details including photos
-   - PUT /api/events/:id - Update event including event-specific staff and student coordinator details with photos
+1. Update event management API endpoints to include event-specific coordinator fields with photo upload and role field:
+   - POST /api/events - Add new event with event-specific staff and student coordinators including photos and role field
+   - GET /api/events - Retrieve all events with event-specific coordinator details including photos and role field
+   - GET /api/events/:id - Retrieve specific event with event-specific coordinator details including photos and role field
+   - PUT /api/events/:id - Update event including event-specific staff and student coordinator details with photos and role field
    - DELETE /api/events/:id - Delete event
 
 2. API endpoint structure for event-specific coordinator data:
    - Event-specific staff coordinators stored as array within event record
    - Event-specific student coordinators stored as array within event record
-   - Each coordinator object contains: name, position/contact_number, photo_url, photo_shape (round/semi-circle), photo_display_enabled
+   - Each staff coordinator object contains: name, role, photo_url, photo_shape (round/semi-circle), photo_display_enabled
+   - Each student coordinator object contains: name, contact_number, photo_url, photo_shape (round/semi-circle), photo_display_enabled
 
 #### Frontend Implementation
 1. Admin Dashboard Event Management component:
    - File location: frontend/components/admin/EventManagement.jsx or similar
    - Add event-specific staff coordinator management interface within event form:
-     - Input fields for staff name, position
+     - Input fields for staff name, role
      - Photo upload interface
      - Photo shape selection (round/semi-circle)
      - Photo display enable/disable toggle per event
@@ -1466,8 +1479,8 @@ Files requiring updates for event type coordinators management:
 2. Public Event Detail Page component:
    - File location: frontend/components/public/EventDetailPage.jsx or similar
    - Implementation:
-     - Fetch event data including event-specific coordinator details with photos from API endpoints
-     - Display event-specific staff coordinators with name, position, photo (if enabled)
+     - Fetch event data including event-specific coordinator details with photos and role field from API endpoints
+     - Display event-specific staff coordinators with name, role, photo (if enabled)
      - Display event-specific student coordinators with name, contact number, photo (if enabled)
      - Apply photo shapes (round or semi-circle) based on configuration
      - Responsive display across all screen sizes
@@ -1481,7 +1494,7 @@ Files requiring updates for event type coordinators management:
   - rules (text)
   - instructions (text)
   - images (array)
-  - event_specific_staff_coordinators (jsonb array: [{name, position, photo_url, photo_shape, photo_display_enabled}])
+  - event_specific_staff_coordinators (jsonb array: [{name, role, photo_url, photo_shape, photo_display_enabled}])
   - event_specific_student_coordinators (jsonb array: [{name, contact_number, photo_url, photo_shape, photo_display_enabled}])
   - registration_link (text)
   - created_at (timestamp)
@@ -1493,21 +1506,21 @@ Files requiring updates for event-specific coordinators management:
 2. Admin Dashboard Event Management component (e.g., frontend/components/admin/EventManagement.jsx)
 3. Public Event Detail Page component (e.g., frontend/components/public/EventDetailPage.jsx)
 4. Coordinator photo styles file (e.g., frontend/styles/coordinator-photos.css)
-5. Database schema file for events table with event-specific coordinator fields
+5. Database schema file for events table with event-specific coordinator fields including role field
 
 ### 6.11 Committee Management Implementation Guide
 
 #### Backend Implementation
 1. Update committee management API endpoints to include committee group fields:
-   - POST /api/committees - Add new committee group with title, description, image, coordinator details with photos
+   - POST /api/committees - Add new committee group with title, description, image, coordinator details with photos and role field
    - GET /api/committees - Retrieve all committee groups with details
    - GET /api/committees/:id - Retrieve specific committee group with complete details
-   - PUT /api/committees/:id - Update committee group including title, description, image, coordinator details with photos
+   - PUT /api/committees/:id - Update committee group including title, description, image, coordinator details with photos and role field
    - DELETE /api/committees/:id - Delete committee group
 
 2. API endpoint structure for committee data:
    - Each committee object contains: title, description, image_url, coordinators (array), photo_display_enabled
-   - Each coordinator object contains: name, position, photo_url, photo_shape (round/semi-circle), contact (optional)
+   - Each coordinator object contains: name, role, photo_url, photo_shape (round/semi-circle), contact (optional)
 
 #### Frontend Implementation
 1. Admin Dashboard Committee Management component:
@@ -1517,7 +1530,7 @@ Files requiring updates for event-specific coordinators management:
      - Text area for committee description
      - Image upload interface for committee image (optional)
      - Coordinator management section:
-       - Input fields for coordinator name, position, contact (optional)
+       - Input fields for coordinator name, role, contact (optional)
        - Photo upload interface
        - Photo shape selection (round/semi-circle)
        - Add/Edit/Delete functionality for coordinators
@@ -1529,7 +1542,7 @@ Files requiring updates for event-specific coordinators management:
    - File location: frontend/components/public/Committee.jsx or similar
    - Implementation:
      - Fetch committee group data from API endpoints
-     - Display committee cards with title, description preview, coordinator details
+     - Display committee cards with title, description preview, coordinator details including role field
      - Add click event handlers to committee cards
      - Implement expandable/collapsible view or modal for complete committee details
      - Display committee image (if provided)
@@ -1544,7 +1557,7 @@ Files requiring updates for event-specific coordinators management:
        - Full-size committee image (if provided)
        - Committee title
        - Complete committee description
-       - Complete coordinators details with photos (if enabled)
+       - Complete coordinators details with photos (if enabled) and role field
      - Add close/back button functionality
      - Implement smooth animations for opening and closing
      - Ensure responsive design across all devices
@@ -1555,7 +1568,7 @@ Files requiring updates for event-specific coordinators management:
   - title (text)
   - description (text)
   - image_url (text, optional)
-  - coordinators (jsonb array: [{name, position, photo_url, photo_shape, contact}])
+  - coordinators (jsonb array: [{name, role, photo_url, photo_shape, contact}])
   - photo_display_enabled (boolean)
   - created_at (timestamp)
   - updated_at (timestamp)
@@ -1578,7 +1591,7 @@ Files requiring updates for committee management:
 4. Committee Detail Modal/Page component (e.g., frontend/components/public/CommitteeDetail.jsx)
 5. Coordinator photo styles file (e.g., frontend/styles/coordinator-photos.css)
 6. CSS/Animation file for committee detail view transitions (e.g., frontend/styles/committee-detail.css)
-7. Database schema file for committees table
+7. Database schema file for committees table with coordinator role field
 
 ### 6.12 Event Description Rich Text Editor with Text Color and Bold Formatting Implementation Guide
 
@@ -1756,9 +1769,9 @@ System will automatically create the following tables on first connection:
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
 - event_posters (id, image_url, display_order, animation_settings, created_at, updated_at)
-- events (id, name, type, description_html_with_text_color_and_bold_formatting, rules, instructions, images, event_specific_staff_coordinators_with_photos, event_specific_student_coordinators_with_photos, registration_link, photo_display_enabled, created_at, updated_at)
-- event_type_coordinators (id, coordinator_type (staff/student), name, position_or_contact, photo_url, photo_shape, event_type, photo_display_enabled, created_at, updated_at)
-- committees (id, title, description, image_url, coordinators_with_photos, photo_display_enabled, created_at, updated_at)
+- events (id, name, type, description_html_with_text_color_and_bold_formatting, rules, instructions, images, event_specific_staff_coordinators_with_photos_and_role, event_specific_student_coordinators_with_photos, registration_link, photo_display_enabled, created_at, updated_at)
+- event_type_coordinators (id, coordinator_type (staff/student), name, role_or_contact, photo_url, photo_shape, event_type, photo_display_enabled, event_type_display_enabled, created_at, updated_at)
+- committees (id, title, description, image_url, coordinators_with_photos_and_role, photo_display_enabled, created_at, updated_at)
 - gallery_images (id, image_url, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)
 - contact_info (id, details, created_at, updated_at)

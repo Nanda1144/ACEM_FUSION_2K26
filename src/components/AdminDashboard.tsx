@@ -11,6 +11,7 @@ import PageManagement from './admin/PageManagement';
 import PageBuilder from './admin/PageBuilder';
 import FooterManagement from './admin/FooterManagement';
 import HeaderSettings from './admin/HeaderSettings';
+import OverallCoordinatorManagement from './admin/OverallCoordinatorManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
@@ -37,13 +38,14 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:grid-cols-11 mb-8">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 mb-8">
             <TabsTrigger value="builder">Page Builder</TabsTrigger>
             <TabsTrigger value="header">Header</TabsTrigger>
             <TabsTrigger value="theme">Theme</TabsTrigger>
             <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="footer">Footer</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
+            <TabsTrigger value="coordinators">Coordinators</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
@@ -73,6 +75,10 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
           <TabsContent value="events">
             <EventManagement />
+          </TabsContent>
+
+          <TabsContent value="coordinators">
+            <OverallCoordinatorManagement />
           </TabsContent>
 
           <TabsContent value="committee">

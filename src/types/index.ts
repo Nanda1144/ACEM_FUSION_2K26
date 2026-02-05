@@ -52,6 +52,7 @@ export interface OverallCoordinator {
   position?: string;
   contact?: string;
   image_url?: string;
+  event_type?: 'Technical' | 'Cultural' | 'Both';
   display_order: number;
   show_photo: boolean;
   created_at: string;

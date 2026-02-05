@@ -30,7 +30,10 @@
   - [x] Add student coordinators (name, contact)
   - [x] Add optional photos (round/semi-circle shape)
   - [x] Add API endpoints
-  - [ ] Create admin management interface (pending)
+  - [x] Add event_type field (Technical/Cultural/Both)
+  - [x] Create admin management interface
+  - [x] Display coordinators based on selected event type
+  - [x] Update dynamically when switching tabs
 - [x] Step 5: Add Event-Specific Coordinator Contact Section
   - [x] Display all staff coordinators for selected event type
   - [x] Display all student coordinators for selected event type
@@ -75,6 +78,11 @@
 - ✅ Hero subtitle changed to "Integrate Modern Technology With Traditional Culture"
 - ✅ Event posters carousel created with auto-scroll animation
 - ✅ Overall coordinators section added with staff/student separation
+- ✅ Added event_type field to overall_coordinators table (Technical/Cultural/Both)
+- ✅ Created OverallCoordinatorManagement admin component
+- ✅ Admin can now manage coordinators with name, role, event type, contact, and photo
+- ✅ Coordinators display dynamically based on selected event type (Technical/Cultural)
+- ✅ Photos display in round shape when show_photo is enabled
 - ✅ Event-specific coordinator contact section added below event cards
 - ✅ Coordinator section updates dynamically when switching between Technical/Cultural tabs
 - ✅ All coordinators displayed with styled cards, hover effects, and animations
@@ -84,7 +92,8 @@
 - ✅ Switched from MongoDB to Supabase API
 - ✅ All lint errors fixed
 - ✅ Application ready to run with `npm run client`
-- ⏳ Need to add admin management UI for new features
+- ✅ Admin dashboard updated with new "Coordinators" tab
+- ⏳ Need to add admin management UI for event posters
 - ⏳ Need to enhance event descriptions with rich text editor
 - ⏳ Need to restructure committee system to groups
 - react-quill already installed for rich text editing
