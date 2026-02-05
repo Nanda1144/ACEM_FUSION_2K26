@@ -217,6 +217,35 @@ All colors MUST be HSL.
     }
   }
 
+  /* 彩色波浪动画 - 从字母到字母传播颜色 */
+  @keyframes colorWave {
+    0% {
+      color: #D4AF37; /* 金色 */
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5);
+    }
+    25% {
+      color: #00BFFF; /* 蓝色 */
+      text-shadow: 0 0 30px rgba(0, 191, 255, 0.8), 0 0 60px rgba(0, 191, 255, 0.5);
+    }
+    50% {
+      color: #9D4EDD; /* 紫色 */
+      text-shadow: 0 0 30px rgba(157, 78, 221, 0.8), 0 0 60px rgba(157, 78, 221, 0.5);
+    }
+    75% {
+      color: #FFB6D9; /* 浅粉色 */
+      text-shadow: 0 0 30px rgba(255, 182, 217, 0.8), 0 0 60px rgba(255, 182, 217, 0.5);
+    }
+    100% {
+      color: #D4AF37; /* 金色 */
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5);
+    }
+  }
+
+  .animated-gradient-text span {
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+
   .backdrop-blur-glass {
     backdrop-filter: blur(10px);
     background: hsl(var(--card) / 0.8);

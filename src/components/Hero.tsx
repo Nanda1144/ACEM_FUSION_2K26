@@ -49,17 +49,26 @@ export default function Hero() {
           transition={{ duration: 1 }}
         >
           <h1 
-            className="font-bold mb-6 text-center tracking-wider whitespace-nowrap overflow-hidden" 
+            className="font-bold mb-6 text-center tracking-wider whitespace-nowrap overflow-hidden animated-gradient-text" 
             style={{
-              color: '#D4AF37',
-              textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5)',
               WebkitTextStroke: '3px #000000',
               paintOrder: 'stroke fill',
               letterSpacing: '0.1em',
               fontSize: 'clamp(2.5rem, 12vw, 10rem)',
             }}
           >
-            FUSION 2K26
+            {'FUSION 2K26'.split('').map((char, index) => (
+              <span
+                key={index}
+                className="inline-block"
+                style={{
+                  animation: `colorWave 8s ease-in-out infinite`,
+                  animationDelay: `${index * 0.15}s`,
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
           </h1>
           <motion.p
             className="text-xl sm:text-2xl md:text-3xl mb-8 text-center font-medium"
