@@ -309,13 +309,17 @@ All colors MUST be HSL.
     transform: translateZ(0);
   }
 
-  /* Cinematic Roman Serif Font */
+  /* Cinematic Roman Serif Font - Classic Golden Style */
   .cinematic-serif {
-    font-family: 'Cinzel', 'Playfair Display', 'Georgia', 'Times New Roman', serif;
-    font-weight: 900;
+    font-family: 'Cinzel', 'Trajan Pro', 'Georgia', 'Times New Roman', serif;
+    font-weight: 700;
     font-style: normal;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
+    text-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(212, 175, 55, 0.6),
+      0 0 30px rgba(212, 175, 55, 0.4);
   }
 
   .backdrop-blur-glass {
