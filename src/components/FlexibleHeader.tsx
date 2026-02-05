@@ -110,7 +110,7 @@ export default function FlexibleHeader() {
             )}
 
             {/* College Name with Subtitle and Tagline - Responsive Typography */}
-            <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0">
+            <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0 text-center sm:text-left">
               {/* ADITYA COLLEGE OF ENGINEERING - Gold */}
               <h1 
                 className="font-bold truncate text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl" 
@@ -125,9 +125,9 @@ export default function FlexibleHeader() {
                 {themeSettings?.header_title || 'ADITYA COLLEGE OF ENGINEERING'}
               </h1>
               
-              {/* Madanapalle - White */}
+              {/* Madanapalle - White - 显示在所有屏幕尺寸 */}
               <p 
-                className="hidden sm:block text-xs sm:text-sm md:text-base mt-0.5 sm:mt-1 font-medium truncate" 
+                className="text-xs sm:text-sm md:text-base lg:text-lg mt-0.5 sm:mt-1 font-medium truncate" 
                 style={{ 
                   color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
@@ -136,9 +136,9 @@ export default function FlexibleHeader() {
                 {themeSettings?.header_subtitle || 'Madanapalle'}
               </p>
               
-              {/* UGC Autonomous - White */}
+              {/* UGC Autonomous - White - 显示在所有屏幕尺寸 */}
               <p 
-                className="hidden md:block text-xs md:text-sm mt-0.5 italic font-normal truncate" 
+                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 italic font-normal truncate" 
                 style={{ 
                   color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
