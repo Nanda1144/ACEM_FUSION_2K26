@@ -153,9 +153,10 @@ function EventGrid({ events, loading }: { events: Event[]; loading: boolean }) {
                   {event.type}
                 </Badge>
               </div>
-              <CardDescription className="line-clamp-3">
-                {event.description}
-              </CardDescription>
+              <CardDescription 
+                className="line-clamp-3 prose prose-sm dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: event.description }}
+              />
             </CardHeader>
             <CardContent className="flex-1 space-y-4">
               {/* Staff Coordinators - Always show 1 */}

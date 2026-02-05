@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including dual header system, footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including dual header system with FUSION 2k26 background image, footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -27,6 +27,12 @@ Web Application (College Fest Management Platform)
 - Responsive menu for mobile devices
 - Fully responsive across all screen sizes for easy access
 - Admin-editable header structure and content
+- Admin-configurable background image for FUSION 2k26
+- Background image automatically adjusts and scales to fit all screen sizes:
+  - Desktop: Full-size display with optimal positioning
+  - Tablet: Proportional scaling maintaining aspect ratio
+  - Mobile: Responsive scaling ensuring visibility and proper fit
+- Flexible background image positioning adapting to different screen dimensions
 
 #### 2.1.2 Secondary Header Section (Logo and College Information Header)
 - Positioned below the primary header section
@@ -72,6 +78,7 @@ Web Application (College Fest Management Platform)
 - Glow effects, animated cards, hover transitions
 - Animated loading states
 - Admin-configurable layout for header sections
+- Admin-configurable FUSION 2k26 background image with responsive scaling
 - Admin-configurable logo arrangement (add/delete logos with shape options)
 - Admin-editable body content with flexible text box placement
 - Background image removed, admin can update background settings
@@ -89,7 +96,11 @@ Web Application (College Fest Management Platform)
 - Display complete event information:
   - Event Name
   - Event Type
-  - Full Event Description
+  - Full Event Description with justified and listified formatting:
+    - Description text automatically justified for professional appearance
+    - Support for bullet point lists within description
+    - Support for numbered lists within description
+    - Admin can select specific content and convert to list format
   - Event Rules
   - Event Instructions
   - Event Images (multiple images support)
@@ -117,11 +128,18 @@ Web Application (College Fest Management Platform)
 - Cinematic layout with smooth transitions
 
 #### 2.1.7 Committee Section
-- Display committee members with:
+- Display committee members with hierarchical roles:
+  - Chief-Patron
+  - Patron
+  - Convener
+  - Co-Convener
+  - Other committee roles
+- Each member card displays:
   - Member images
   - Names
   - Assigned roles
   - Info section about each person
+- Role-based grouping and display order
 - Cinematic layout with smooth transitions
 
 #### 2.1.8 Gallery Section
@@ -192,10 +210,15 @@ Web Application (College Fest Management Platform)
   - Text color customization
 - Background customization:
   - Background color changing
-  - Background image upload and changing (admin-controlled)
+  - Background image upload and changing for FUSION 2k26
+  - Responsive background image scaling configuration:
+    - Set image scaling behavior for desktop view
+    - Set image scaling behavior for tablet view
+    - Set image scaling behavior for mobile view
+  - Background image positioning controls for different screen sizes
   - Default background color configuration
 - Edit header structure and layout
-- Changes reflect immediately on public UI header and live preview
+- Changes reflect immediately on public UI header and live preview with responsive background image scaling
 
 #### 2.3.3 Secondary Header (Logo and College Information Header) Management
 - Update college name (default: ADITYA College of Engineering Madanapalle)
@@ -258,6 +281,7 @@ Web Application (College Fest Management Platform)
 
 #### 2.3.6 Homepage Layout Management
 - Arrange primary header sections as desired
+- Configure FUSION 2k26 background image with responsive scaling
 - Configure secondary logo and college information header layout
 - Add or delete logos dynamically with shape configuration
 - Configure layout elements positioning
@@ -268,7 +292,14 @@ Web Application (College Fest Management Platform)
 - Add new events with fields:
   - Event Name
   - Event Type (Technical/Cultural)
-  - Event Description
+  - Event Description with rich text formatting:
+    - Text justification enabled by default
+    - Toolbar with list formatting options:
+      - Bullet list button
+      - Numbered list button
+      - Text alignment options
+    - Select content and convert to list format functionality
+    - Preview of formatted description
   - Event Rules
   - Event Instructions
   - Event Images upload (multiple images support)
@@ -285,12 +316,20 @@ Web Application (College Fest Management Platform)
 - Changes visible in live preview immediately
 
 #### 2.3.8 Committee Management
-- Add committee members
+- Add committee members with hierarchical role assignment:
+  - Chief-Patron role option
+  - Patron role option
+  - Convener role option
+  - Co-Convener role option
+  - Other custom roles
+- Role selection dropdown in member creation form
 - Assign roles to members
 - Upload member images
 - Add info section about each person
-- Edit member information including personal info section
+- Edit member information including personal info section and role
 - Delete committee members
+- Automatic role-based grouping in public display
+- Display order configuration based on role hierarchy
 - Changes display dynamically on website and live preview
 
 #### 2.3.9 Gallery Management
@@ -324,13 +363,14 @@ Web Application (College Fest Management Platform)
 
 #### 2.3.13 Complete Application Editing
 - Admin has full control to edit entire application:
-  - Primary header sections
+  - Primary header sections with FUSION 2k26 background image and responsive scaling
   - Secondary logo and college information header sections with responsive configurations
   - Footer sections
   - Body parts
   - All content areas
   - Staff and student coordinator details through Events Section
-  - Committee member information including personal info sections
+  - Committee member information including personal info sections and hierarchical roles
+  - Event descriptions with justified and listified formatting
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
@@ -369,15 +409,22 @@ Web Application (College Fest Management Platform)
 - Enhanced footer design with improved visual hierarchy
 - Background image removed by default, admin can upload and update background
 - Primary header with navigation menu positioned at top-right corner
+- Primary header with admin-configurable FUSION 2k26 background image that scales responsively across all screen sizes
 - Secondary header with golden dark college name styling and black border for enhanced attractiveness, positioned below primary header
 - Secondary header includes configurable logo shapes (circle/semi-square)
 - Fully responsive secondary header with flexible logo sizing and text scaling across all devices
+- Event descriptions displayed with justified text alignment and list formatting support
+- Committee section with role-based hierarchical display
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
 - Flexible layout adapting to all screen sizes for easy access
 - Smooth page transitions and animated loading states
 - Responsive dual header system with mobile-friendly navigation menu positioned at top-right
+- FUSION 2k26 background image automatically scales and adjusts to fit all screen sizes:
+  - Desktop: Full-size display with optimal aspect ratio
+  - Tablet: Proportional scaling maintaining visual quality
+  - Mobile: Responsive scaling ensuring proper fit and visibility
 - Secondary header with intelligent responsive behavior:
   - College name, location, and institution status text automatically resize based on screen size
   - Logos automatically adjust size and positioning for optimal display on all devices
@@ -386,6 +433,7 @@ Web Application (College Fest Management Platform)
   - Desktop view: Full-size display with optimal spacing
 - Multiple web pages with consistent responsive behavior
 - Admin dashboard optimized for desktop editing experience
+- Event descriptions maintain justified alignment and list formatting across all screen sizes
 
 ### 3.3 Performance Optimization
 - Optimized animations and images
@@ -393,6 +441,7 @@ Web Application (College Fest Management Platform)
 - Lazy loading for gallery images
 - High performance rendering
 - Efficient live preview updates without page reload
+- Optimized background image loading with responsive image sizing
 
 ## 4. Technical Requirements
 
@@ -400,15 +449,15 @@ Web Application (College Fest Management Platform)
 - Supabase cloud database for data storage
 - Manual connection configuration support
 - Tables for:
-  - Primary header content (navigation menu, positioning, styling configurations)
+  - Primary header content (navigation menu, positioning, styling configurations, background image URL, responsive scaling settings)
   - Secondary header content (college name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, responsive sizing configurations, positioning data, static data, styling)
-  - Responsive configuration (breakpoints, font size mappings, logo size mappings for different screen sizes)
+  - Responsive configuration (breakpoints, font size mappings, logo size mappings for different screen sizes, background image scaling settings)
   - Text styling configurations (font, size, color)
-  - Background settings (color, image)
+  - Background settings (color, image, responsive scaling parameters)
   - Body content (text boxes with positioning data)
   - Footer content and styling
-  - Events (including rules, instructions, multiple images, staff coordinators, student coordinators, Google Form links)
-  - Committee members (including name, role, image, info section)
+  - Events (including rules, instructions, multiple images, staff coordinators, student coordinators, Google Form links, description formatting data)
+  - Committee members (including name, role with hierarchical options: Chief-Patron/Patron/Convener/Co-Convener/Others, image, info section, display order)
   - Gallery images (storing image URLs from Supabase Storage)
   - About Us content
   - Contact information
@@ -417,9 +466,10 @@ Web Application (College Fest Management Platform)
   - Chatbot information content
 - Automatic data updates on admin changes
 - Connection credentials stored securely
-- Supabase Storage for image uploads
+- Supabase Storage for image uploads including FUSION 2k26 background images
 - Staff and student coordinator details stored within events table
-- Committee member info section stored within committee_members table
+- Committee member info section and hierarchical role stored within committee_members table
+- Event description formatting metadata stored within events table
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
@@ -433,18 +483,18 @@ Web Application (College Fest Management Platform)
   - Update live preview in real-time
 - API endpoints for:
   - Database connection management
-  - Primary header management (navigation menu, positioning)
+  - Primary header management (navigation menu, positioning, FUSION 2k26 background image upload, responsive scaling configuration)
   - Secondary header management (college name, location, institution status styling, logo upload, shape configuration, responsive sizing configuration, positioning)
-  - Responsive configuration management (breakpoints, font size mappings, logo size mappings)
+  - Responsive configuration management (breakpoints, font size mappings, logo size mappings, background image scaling settings)
   - Text styling updates
-  - Background customization
+  - Background customization with responsive image scaling
   - Text box positioning and content
   - Footer management
-  - Event detail page data (including staff and student coordinator management)
-  - Committee management (including member info section)
+  - Event detail page data (including staff and student coordinator management, description formatting)
+  - Committee management (including member info section and hierarchical role assignment)
   - Complete application editing
   - Chatbot information retrieval
-  - Image upload to Supabase Storage
+  - Image upload to Supabase Storage (including FUSION 2k26 background images)
   - Gallery image management (upload, retrieve, delete)
 - Environment variable support for connection credentials storage
 - Error handling for database connection failures
@@ -458,13 +508,42 @@ Web Application (College Fest Management Platform)
   - Backend stores image URL in gallery_images table
   - Frontend retrieves image URLs from gallery_images table
   - Public UI Gallery Section displays images using stored URLs
+- FUSION 2k26 background image upload flow:
+  - Admin uploads background image through Primary Header Management interface
+  - Frontend sends image file to backend API endpoint
+  - Backend uploads image to Supabase Storage backgrounds bucket
+  - Backend receives public URL from Supabase Storage
+  - Backend stores image URL and responsive scaling settings in primary_header_content table
+  - Frontend retrieves background image URL and applies responsive scaling
+  - Public UI displays background image with automatic scaling across all screen sizes
 - File update locations for gallery image upload:
   - Backend API file: Create/update gallery upload endpoint (e.g., /api/gallery/upload)
   - Admin Dashboard component: Add image upload interface in Gallery Management section
   - Public Gallery component: Fetch and display images from gallery_images table
   - Supabase Storage configuration: Create gallery bucket with public access
+- File update locations for FUSION 2k26 background image upload:
+  - Backend API file: Create/update background upload endpoint (e.g., /api/header/background)
+  - Admin Dashboard component: Add background image upload interface in Primary Header Management section
+  - Public Header component: Fetch and display background image with responsive scaling
+  - Supabase Storage configuration: Create backgrounds bucket with public access
 
-### 4.4 Code Quality
+### 4.4 Rich Text Editor Implementation
+- Event description rich text editor:
+  - Implement rich text editor component (e.g., Quill, TinyMCE, or Draft.js)
+  - Toolbar features:
+    - Text justification button (default enabled)
+    - Bullet list button
+    - Numbered list button
+    - Text alignment options (left, center, right, justify)
+  - Content selection and list conversion functionality
+  - HTML output storage in events table
+  - Frontend rendering of formatted HTML content
+- File update locations for rich text editor:
+  - Admin Dashboard Event Management component: Integrate rich text editor
+  - Backend API: Store formatted HTML content in events table description field
+  - Public Event Detail Page component: Render formatted HTML with proper styling
+
+### 4.5 Code Quality
 - Clean, modular, scalable codebase
 - Maintainable UI component structure
 - Optimized for production deployment
@@ -472,19 +551,21 @@ Web Application (College Fest Management Platform)
 - Efficient real-time update mechanism
 - Secure connection credentials handling
 - Responsive design implementation using CSS media queries and flexible layouts
+- Responsive image scaling implementation for background images
+- Rich text editor integration with proper sanitization
 
 ## 5. User Flow
 
 ### 5.1 Public User Flow
 1. User lands on cinematic homepage with dual header system:
-   - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us)
+   - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us) with FUSION 2k26 background image that automatically scales to fit screen size
    - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden dark with black border, responsive font sizing), MADANAPALLE (responsive font 12/14), UGC - Autonomous Institution (responsive font 12/14), and college logos with configured shapes (circle/semi-square) that automatically adjust size based on screen size
 2. User navigates through multiple web pages using top-right navigation menu
-3. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments
+3. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments and responsive FUSION 2k26 background image scaling
 4. User views events by category (Technical/Cultural) on Events page
 5. User clicks on event card to navigate to dedicated event detail page
 6. User views complete event information including:
-   - Full description
+   - Full description with justified text alignment and list formatting
    - Rules and instructions
    - Event images
    - Staff coordinator contact details
@@ -494,11 +575,11 @@ Web Application (College Fest Management Platform)
 9. User views Staff and Student Coordinators Section below Technical and Cultural events
 10. When user selects Technical event: System displays staff coordinators and student coordinators associated with Technical events
 11. When user selects Cultural event: System displays staff coordinators and student coordinators associated with Cultural events
-12. User explores committee section and views member details including personal info sections
+12. User explores committee section and views members organized by hierarchical roles (Chief-Patron, Patron, Convener, Co-Convener, Others) with member details including personal info sections
 13. User explores gallery section and views images uploaded by admin
 14. User views improved footer section with contact details and social media links
 15. User can interact with chatbot to get website information and details
-16. User experiences optimal viewing on mobile devices with properly scaled logos and text in secondary header
+16. User experiences optimal viewing on mobile devices with properly scaled logos, text, and FUSION 2k26 background image in secondary header
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -516,24 +597,25 @@ Web Application (College Fest Management Platform)
    - Confirms successful connection
    - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
-   - Primary Header: Position navigation menu at top-right, configure styling
+   - Primary Header: Position navigation menu at top-right, configure styling, upload FUSION 2k26 background image, configure responsive scaling for background image across different screen sizes
    - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden dark styling with black border, upload logos, configure logo shapes (circle/semi-square), configure responsive sizing for logos and text across different screen sizes, manage positioning, update static data
-   - Responsive Configuration: Set breakpoints, configure font size mappings for different screen sizes, configure logo size mappings for desktop/tablet/mobile views
+   - Responsive Configuration: Set breakpoints, configure font size mappings for different screen sizes, configure logo size mappings for desktop/tablet/mobile views, configure background image scaling behavior
    - Text Styling: Adjust font, size, color
-   - Background: Change color or upload background image (admin-controlled)
+   - Background: Change color or upload background image (admin-controlled) with responsive scaling configuration
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
-   - Events: Add event details including rules, instructions, multiple images, staff coordinator details (name, contact), student coordinator details (name, contact), Google Form link; Edit staff and student coordinator details directly within Events Section
-   - Committee: Add members with name, role, image, and info section; Edit member information including personal info sections
+   - Events: Add event details including rules, instructions, multiple images, staff coordinator details (name, contact), student coordinator details (name, contact), Google Form link; Use rich text editor for event description with text justification and list formatting options; Edit staff and student coordinator details directly within Events Section
+   - Committee: Add members with name, hierarchical role selection (Chief-Patron, Patron, Convener, Co-Convener, Others), image, and info section; Edit member information including personal info sections and role assignment
    - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section
    - About Us, Contact management
    - Chatbot information content management
 10. Admin arranges homepage layout and dual header sections as desired
-11. Admin configures responsive behavior for secondary header including logo sizing and text scaling for different devices
-12. Admin edits entire application including primary header, secondary header with responsive configurations, footer, body sections, staff/student coordinator details through Events Section, and committee member info sections
-13. Admin can change passkey through Passkey Management
-14. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior
-15. Admin can access and edit multiple web pages with consistent editing interface
+11. Admin uploads and configures FUSION 2k26 background image with responsive scaling settings for different devices
+12. Admin configures responsive behavior for secondary header including logo sizing and text scaling for different devices
+13. Admin edits entire application including primary header with FUSION 2k26 background image, secondary header with responsive configurations, footer, body sections, staff/student coordinator details through Events Section, committee member info sections and hierarchical roles, and event descriptions with rich text formatting
+14. Admin can change passkey through Passkey Management
+15. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including background image scaling
+16. Admin can access and edit multiple web pages with consistent editing interface
 
 ## 6. Development and Deployment Guide
 
@@ -575,18 +657,23 @@ Web Application (College Fest Management Platform)
 
 #### Step 5: Testing
 1. Test public user interface with dual header system
-2. Test responsive behavior of secondary header across different screen sizes
-3. Verify logo sizing adjustments on mobile, tablet, and desktop views
-4. Verify text scaling for college name, location, and institution status across devices
-5. Test chatbot authentication
-6. Test admin dashboard functionality
-7. Test database connection
-8. Verify live preview updates
-9. Test gallery image upload and display
-10. Test primary and secondary header management including responsive configurations
-11. Test staff and student coordinator details display and filtering
-12. Test staff and student coordinator editing within Events Section
-13. Test committee member info section display and editing
+2. Test FUSION 2k26 background image display and responsive scaling across different screen sizes
+3. Test responsive behavior of secondary header across different screen sizes
+4. Verify logo sizing adjustments on mobile, tablet, and desktop views
+5. Verify text scaling for college name, location, and institution status across devices
+6. Test chatbot authentication
+7. Test admin dashboard functionality
+8. Test database connection
+9. Verify live preview updates
+10. Test gallery image upload and display
+11. Test FUSION 2k26 background image upload and responsive scaling configuration
+12. Test primary and secondary header management including responsive configurations
+13. Test staff and student coordinator details display and filtering
+14. Test staff and student coordinator editing within Events Section
+15. Test committee member info section display and editing
+16. Test committee member hierarchical role assignment and display
+17. Test event description rich text editor with justification and list formatting
+18. Test event description display with formatted content
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -620,17 +707,22 @@ Web Application (College Fest Management Platform)
 #### Step 4: Verification
 1. Access deployed website URL
 2. Test all public user features including dual header system
-3. Test responsive behavior of secondary header on actual mobile devices
-4. Verify logo and text scaling across different screen sizes
-5. Test admin authentication and dashboard
-6. Verify database connectivity
-7. Test live preview functionality
-8. Verify image uploads to Supabase Storage
-9. Test gallery image display on public UI
-10. Test primary and secondary header display and management with responsive configurations
-11. Test staff and student coordinator details display and filtering functionality
-12. Test staff and student coordinator editing within Events Section
-13. Test committee member info section display and editing functionality
+3. Test FUSION 2k26 background image display and responsive scaling on actual devices
+4. Test responsive behavior of secondary header on actual mobile devices
+5. Verify logo and text scaling across different screen sizes
+6. Test admin authentication and dashboard
+7. Verify database connectivity
+8. Test live preview functionality
+9. Verify image uploads to Supabase Storage
+10. Test gallery image display on public UI
+11. Test FUSION 2k26 background image upload and responsive scaling configuration
+12. Test primary and secondary header display and management with responsive configurations
+13. Test staff and student coordinator details display and filtering functionality
+14. Test staff and student coordinator editing within Events Section
+15. Test committee member info section display and editing functionality
+16. Test committee member hierarchical role display
+17. Test event description rich text editor functionality
+18. Test event description display with justified and listified formatting
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -690,10 +782,13 @@ npm install @supabase/supabase-js
 3. Replace MongoDB queries with Supabase queries
 4. Update API endpoints
 5. Add gallery image upload endpoint
-6. Add primary and secondary header management endpoints
-7. Add responsive configuration management endpoints
-8. Add staff and student coordinator management endpoints within Events Section
-9. Add committee member info section management endpoints
+6. Add FUSION 2k26 background image upload endpoint
+7. Add primary and secondary header management endpoints
+8. Add responsive configuration management endpoints
+9. Add staff and student coordinator management endpoints within Events Section
+10. Add committee member info section management endpoints
+11. Add committee member hierarchical role management endpoints
+12. Add event description formatting endpoints
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -710,10 +805,13 @@ npm install @supabase/supabase-js
 4. Test admin dashboard functionality
 5. Verify live preview updates
 6. Test gallery image upload and display
-7. Test dual header system management
-8. Test responsive configuration management for secondary header
-9. Test staff and student coordinator management and filtering within Events Section
-10. Test committee member info section management
+7. Test FUSION 2k26 background image upload and responsive scaling
+8. Test dual header system management
+9. Test responsive configuration management for secondary header
+10. Test staff and student coordinator management and filtering within Events Section
+11. Test committee member info section management
+12. Test committee member hierarchical role assignment
+13. Test event description rich text editor and formatting
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
@@ -777,7 +875,82 @@ Files requiring updates for gallery image upload:
 4. Supabase client configuration file (e.g., backend/config/supabase.js)
 5. Environment configuration file (.env)
 
-### 6.6 Staff and Student Coordinator Management Implementation Guide
+### 6.6 FUSION 2k26 Background Image Implementation Guide
+
+#### Backend Implementation
+1. Create background image upload API endpoint:
+   - File location: backend/routes/header.js or backend/api/header.js
+   - Endpoint: POST /api/header/background
+   - Implementation steps:
+     - Accept multipart/form-data image file
+     - Validate image file type (jpg, png, gif, webp)
+     - Upload image to Supabase Storage backgrounds bucket
+     - Retrieve public URL from Supabase Storage
+     - Update primary_header_content table with image URL and responsive scaling settings
+     - Return success response with image URL
+
+2. Create background image retrieval API endpoint:
+   - Endpoint: GET /api/header/background
+   - Implementation: Fetch background image URL and responsive scaling settings from primary_header_content table
+
+3. Create responsive scaling configuration API endpoint:
+   - Endpoint: PUT /api/header/background/scaling
+   - Implementation: Update responsive scaling settings for background image
+
+#### Frontend Implementation
+1. Admin Dashboard Primary Header Management component:
+   - File location: frontend/components/admin/PrimaryHeaderManagement.jsx or similar
+   - Add background image upload interface:
+     - File input for selecting background image
+     - Upload button triggering API call to /api/header/background
+     - Preview of uploaded background image
+     - Responsive scaling configuration controls:
+       - Desktop scaling settings
+       - Tablet scaling settings
+       - Mobile scaling settings
+     - Background positioning controls
+
+2. Public Primary Header component:
+   - File location: frontend/components/public/PrimaryHeader.jsx or similar
+   - Implementation:
+     - Fetch background image URL and scaling settings from /api/header/background endpoint
+     - Apply background image with CSS
+     - Implement responsive scaling using CSS media queries:
+       - Desktop: background-size and background-position for desktop view
+       - Tablet: background-size and background-position for tablet view
+       - Mobile: background-size and background-position for mobile view
+     - Ensure smooth transitions between breakpoints
+
+#### CSS Implementation
+1. Create responsive background styles:
+   - File location: frontend/styles/header-background.css or similar
+   - Implementation:
+     - Define media queries for mobile, tablet, desktop
+     - Create background-size classes for different screen sizes
+     - Create background-position classes for different screen sizes
+     - Implement smooth transitions for background scaling
+     - Ensure background covers header area properly on all devices
+
+#### Supabase Storage Configuration
+1. Create backgrounds storage bucket:
+   - Bucket name: backgrounds
+   - Public access: enabled
+   - File size limit: configure as needed
+
+2. Set bucket policies:
+   - Allow public read access
+   - Restrict write access to authenticated admin users
+
+#### Code Update Summary
+Files requiring updates for FUSION 2k26 background image:
+1. Backend API routes file (e.g., backend/routes/header.js)
+2. Admin Dashboard Primary Header Management component (e.g., frontend/components/admin/PrimaryHeaderManagement.jsx)
+3. Public Primary Header component (e.g., frontend/components/public/PrimaryHeader.jsx)
+4. Responsive background styles file (e.g., frontend/styles/header-background.css)
+5. Supabase client configuration file (e.g., backend/config/supabase.js)
+6. Database schema file for primary_header_content table with background image fields
+
+### 6.7 Staff and Student Coordinator Management Implementation Guide
 
 #### Backend Implementation
 1. Update event management API endpoints to include staff and student coordinator fields:
@@ -819,7 +992,7 @@ Files requiring updates for gallery image upload:
   - id (primary key)
   - name (text)
   - type (text: Technical/Cultural)
-  - description (text)
+  - description (text with HTML formatting)
   - rules (text)
   - instructions (text)
   - images (array)
@@ -836,18 +1009,19 @@ Files requiring updates for staff and student coordinator management:
 3. Public Staff and Student Coordinators Section component (e.g., frontend/components/public/StaffStudentCoordinators.jsx)
 4. Database schema file for events table with coordinator fields
 
-### 6.7 Committee Member Info Section Implementation Guide
+### 6.8 Committee Member Info Section and Hierarchical Roles Implementation Guide
 
 #### Backend Implementation
-1. Update committee management API endpoints to include info section field:
-   - POST /api/committee - Add new committee member with info section
-   - GET /api/committee - Retrieve all committee members with info sections
-   - GET /api/committee/:id - Retrieve specific committee member with info section
-   - PUT /api/committee/:id - Update committee member including info section
+1. Update committee management API endpoints to include info section and hierarchical role fields:
+   - POST /api/committee - Add new committee member with info section and role
+   - GET /api/committee - Retrieve all committee members with info sections and roles, sorted by role hierarchy
+   - GET /api/committee/:id - Retrieve specific committee member with info section and role
+   - PUT /api/committee/:id - Update committee member including info section and role
    - DELETE /api/committee/:id - Delete committee member
 
 2. API endpoint structure for committee member data:
-   - Each committee member object contains: name, role, image_url, info_section
+   - Each committee member object contains: name, role (Chief-Patron/Patron/Convener/Co-Convener/Others), image_url, info_section, display_order
+   - Role hierarchy for sorting: Chief-Patron > Patron > Convener > Co-Convener > Others
 
 #### Frontend Implementation
 1. Admin Dashboard Committee Management component:
@@ -856,34 +1030,125 @@ Files requiring updates for staff and student coordinator management:
      - Text area or rich text editor for info section content
      - Character limit indicator (optional)
      - Preview functionality
-   - Edit functionality for existing member info sections
+   - Add hierarchical role selection dropdown:
+     - Options: Chief-Patron, Patron, Convener, Co-Convener, Others
+     - Default selection: Others
+   - Edit functionality for existing member info sections and roles
+   - Automatic display order assignment based on role hierarchy
 
 2. Public Committee Section component:
    - File location: frontend/components/public/Committee.jsx or similar
    - Implementation:
-     - Fetch committee member data including info sections from API endpoints
+     - Fetch committee member data including info sections and roles from API endpoints
+     - Display members grouped by hierarchical roles
+     - Display order: Chief-Patron, Patron, Convener, Co-Convener, Others
      - Display member cards with image, name, role, and info section
      - Implement expandable/collapsible info section or modal view
      - Add smooth transitions and cinematic effects
+     - Visual distinction for different role levels
 
 #### Database Schema Update
 - Committee members table structure:
   - id (primary key)
   - name (text)
-  - role (text)
+  - role (text: Chief-Patron/Patron/Convener/Co-Convener/Others)
   - image_url (text)
   - info_section (text)
+  - display_order (integer, auto-assigned based on role hierarchy)
   - created_at (timestamp)
   - updated_at (timestamp)
 
 #### Code Update Summary
-Files requiring updates for committee member info section:
+Files requiring updates for committee member info section and hierarchical roles:
 1. Backend API routes file (e.g., backend/routes/committee.js)
 2. Admin Dashboard Committee Management component (e.g., frontend/components/admin/CommitteeManagement.jsx)
 3. Public Committee Section component (e.g., frontend/components/public/Committee.jsx)
-4. Database schema file for committee_members table with info_section field
+4. Database schema file for committee_members table with info_section and role fields
 
-### 6.8 Responsive Secondary Header Implementation Guide
+### 6.9 Event Description Rich Text Editor Implementation Guide
+
+#### Backend Implementation
+1. Update event management API endpoints to support HTML formatted descriptions:
+   - POST /api/events - Accept HTML formatted description
+   - PUT /api/events/:id - Update event with HTML formatted description
+   - GET /api/events/:id - Retrieve event with HTML formatted description
+
+2. Add HTML sanitization middleware:
+   - Install sanitization library (e.g., DOMPurify or sanitize-html)
+   - Sanitize HTML content before storing in database
+   - Allow safe HTML tags: p, ul, ol, li, strong, em, br
+   - Remove potentially harmful scripts and attributes
+
+#### Frontend Implementation
+1. Install rich text editor library:
+   - Options: Quill, TinyMCE, Draft.js, or React-Quill
+   - Recommended: React-Quill for React applications
+   - Installation command:
+     ```
+     npm install react-quill
+     ```
+
+2. Admin Dashboard Event Management component:
+   - File location: frontend/components/admin/EventManagement.jsx or similar
+   - Integrate rich text editor:
+     - Import rich text editor component
+     - Replace plain text area with rich text editor
+     - Configure toolbar with options:
+       - Text alignment (left, center, right, justify)
+       - Bullet list button
+       - Numbered list button
+       - Bold, italic formatting
+     - Set default text alignment to justify
+     - Add content selection and list conversion functionality
+     - Implement preview panel showing formatted output
+     - Store HTML output in event description field
+
+3. Public Event Detail Page component:
+   - File location: frontend/components/public/EventDetailPage.jsx or similar
+   - Implementation:
+     - Fetch event data including HTML formatted description
+     - Render HTML content using dangerouslySetInnerHTML or safe HTML renderer
+     - Apply CSS styling to maintain justified alignment and list formatting:
+       - Paragraph justification
+       - Bullet list styling
+       - Numbered list styling
+       - Proper spacing and indentation
+     - Ensure responsive display across all screen sizes
+
+#### CSS Implementation
+1. Create event description styles:
+   - File location: frontend/styles/event-description.css or similar
+   - Implementation:
+     - Define styles for justified text
+     - Define styles for bullet lists (ul, li)
+     - Define styles for numbered lists (ol, li)
+     - Add proper spacing and indentation
+     - Ensure responsive behavior
+     - Example styles:
+       ```css
+       .event-description {
+         text-align: justify;
+       }
+       .event-description ul,
+       .event-description ol {
+         margin-left: 20px;
+         margin-bottom: 10px;
+       }
+       .event-description li {
+         margin-bottom: 5px;
+       }
+       ```
+
+#### Code Update Summary
+Files requiring updates for event description rich text editor:
+1. Backend API routes file (e.g., backend/routes/events.js)
+2. Backend HTML sanitization middleware (e.g., backend/middleware/sanitize.js)
+3. Admin Dashboard Event Management component (e.g., frontend/components/admin/EventManagement.jsx)
+4. Public Event Detail Page component (e.g., frontend/components/public/EventDetailPage.jsx)
+5. Event description styles file (e.g., frontend/styles/event-description.css)
+6. Package.json (add rich text editor dependency)
+
+### 6.10 Responsive Secondary Header Implementation Guide
 
 #### Backend Implementation
 1. Create responsive configuration API endpoints:
@@ -953,15 +1218,15 @@ Files requiring updates for responsive secondary header:
 
 ### 7.1 Supabase Table Schema
 System will automatically create the following tables on first connection:
-- primary_header_content (id, navigation_menu, navigation_position, styling, created_at, updated_at)
+- primary_header_content (id, navigation_menu, navigation_position, styling, background_image_url, responsive_scaling_settings, created_at, updated_at)
 - secondary_header_content (id, college_name, location, institution_status, logos, logo_shapes, static_data, styling, created_at, updated_at)
-- responsive_configuration (id, breakpoints, font_size_mappings, logo_size_mappings, logo_positioning, created_at, updated_at)
+- responsive_configuration (id, breakpoints, font_size_mappings, logo_size_mappings, logo_positioning, background_scaling_mappings, created_at, updated_at)
 - text_styling (id, font_family, font_size, text_color, created_at, updated_at)
-- background_settings (id, background_color, background_image_url, created_at, updated_at)
+- background_settings (id, background_color, background_image_url, responsive_scaling_settings, created_at, updated_at)
 - body_content (id, text_boxes, created_at, updated_at)
 - footer_content (id, structure, contact_details, social_links, styling, created_at, updated_at)
-- events (id, name, type, description, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
-- committee_members (id, name, role, image_url, info_section, created_at, updated_at)
+- events (id, name, type, description_html, rules, instructions, images, staff_coordinators, student_coordinators, registration_link, created_at, updated_at)
+- committee_members (id, name, role, image_url, info_section, display_order, created_at, updated_at)
 - gallery_images (id, image_url, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)
 - contact_info (id, details, created_at, updated_at)
@@ -971,6 +1236,7 @@ System will automatically create the following tables on first connection:
 ### 7.2 Image Storage
 - All uploaded images stored in Supabase Storage
 - Separate storage buckets for:
+  - Backgrounds (including FUSION 2k26 header background images with responsive scaling support)
   - Logos (including secondary header logos with shape configurations and responsive sizing)
   - Event images
   - Committee member images
@@ -979,4 +1245,5 @@ System will automatically create the following tables on first connection:
 - Public access configured for image buckets
 - Automatic URL generation for uploaded images
 - Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section
+- Backgrounds bucket specifically configured for FUSION 2k26 header background images with responsive scaling capabilities
 - Logo bucket supports circle and semi-square shape configurations with responsive sizing capabilities

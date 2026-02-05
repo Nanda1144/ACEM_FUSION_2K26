@@ -36,6 +36,7 @@ export interface CommitteeMember {
   id: string;
   name: string;
   role: string;
+  special_role: 'Chief Patron' | 'Patron' | 'Convener' | 'Co-Convener' | null;
   image_url: string | null;
   info: string | null;
   display_order: number;

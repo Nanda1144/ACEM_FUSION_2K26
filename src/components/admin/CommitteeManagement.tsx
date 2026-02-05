@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -24,6 +25,7 @@ export default function CommitteeManagement() {
     defaultValues: {
       name: '',
       role: '',
+      special_role: null as 'Chief Patron' | 'Patron' | 'Convener' | 'Co-Convener' | null,
       info: '',
       image_url: '',
       display_order: 0
@@ -102,6 +104,7 @@ export default function CommitteeManagement() {
     form.reset({
       name: member.name,
       role: member.role,
+      special_role: member.special_role || null,
       info: member.info || '',
       image_url: member.image_url || '',
       display_order: member.display_order
@@ -177,6 +180,34 @@ export default function CommitteeManagement() {
                       <FormControl>
                         <Input {...field} placeholder="Enter member role" />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="special_role"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Special Role (Optional)</FormLabel>
+                      <Select
+                        value={field.value || ''}
+                        onValueChange={(value) => field.onChange(value === 'none' ? null : value)}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select special role (optional)" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="none">None</SelectItem>
+                          <SelectItem value="Chief Patron">Chief Patron</SelectItem>
+                          <SelectItem value="Patron">Patron</SelectItem>
+                          <SelectItem value="Convener">Convener</SelectItem>
+                          <SelectItem value="Co-Convener">Co-Convener</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}

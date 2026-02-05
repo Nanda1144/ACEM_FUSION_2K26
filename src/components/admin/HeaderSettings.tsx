@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { themeSettingsApi } from '@/db/api';
+import { themeSettingsApi, uploadImage } from '@/db/api';
 import type { ThemeSettings, Logo } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
 
@@ -34,6 +34,37 @@ export default function HeaderSettings() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleBackgroundImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !settings) return;
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'Image size must be less than 5MB',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    try {
+      const imageUrl = await uploadImage(file, 'header-backgrounds');
+      setSettings({ ...settings, header_bg_image: imageUrl });
+      toast({
+        title: 'Success',
+        description: 'Background image uploaded successfully'
+      });
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to upload background image',
+        variant: 'destructive'
+      });
     }
   };
 
@@ -241,13 +272,39 @@ export default function HeaderSettings() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="header_bg_image">Background Image URL</Label>
-            <Input
-              id="header_bg_image"
-              value={settings.header_bg_image || ''}
-              onChange={(e) => setSettings({ ...settings, header_bg_image: e.target.value })}
-              placeholder="https://example.com/header-bg.jpg"
-            />
+            <Label htmlFor="header_bg_image">Background Image</Label>
+            <div className="space-y-2">
+              <div className="flex items-center gap-4">
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleBackgroundImageUpload}
+                  className="flex-1"
+                />
+                {settings.header_bg_image && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSettings({ ...settings, header_bg_image: null })}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </div>
+              {settings.header_bg_image && (
+                <div className="relative w-full h-32 rounded-lg overflow-hidden border border-border">
+                  <img
+                    src={settings.header_bg_image}
+                    alt="Header Background Preview"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Upload a background image for the header. Recommended size: 1920x200px
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

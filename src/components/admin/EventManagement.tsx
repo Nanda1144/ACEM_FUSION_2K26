@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import RichTextEditor from '@/components/ui/RichTextEditor';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -215,7 +216,11 @@ export default function EventManagement() {
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea {...field} placeholder="Enter event description" rows={4} />
+                        <RichTextEditor 
+                          value={field.value} 
+                          onChange={field.onChange}
+                          placeholder="Enter event description with formatting..."
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

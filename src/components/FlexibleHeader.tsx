@@ -56,7 +56,9 @@ export default function FlexibleHeader() {
     backgroundColor: themeSettings?.header_bg_color || 'transparent',
     backgroundImage: themeSettings?.header_bg_image ? `url(${themeSettings.header_bg_image})` : 'none',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'scroll'
   };
 
   const titleStyle = {
@@ -73,14 +75,18 @@ export default function FlexibleHeader() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative ${
           isScrolled && !themeSettings?.header_bg_color
             ? 'backdrop-blur-glass border-b border-primary/20 shadow-lg'
             : ''
         }`}
         style={headerStyle}
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6">
+        {/* Overlay for better text readability when background image is present */}
+        {themeSettings?.header_bg_image && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        )}
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 relative z-10">
           {/* Responsive Row: Logos + College Name + Navigation */}
           <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 gap-2 sm:gap-4 md:gap-6">
             {/* Left Logos - Responsive Size */}
