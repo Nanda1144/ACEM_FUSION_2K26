@@ -502,7 +502,7 @@ export const eventPostersApi = {
     return Array.isArray(data) ? data : [];
   },
 
-  create: async (poster: { image_url: string; display_order: number }) => {
+  create: async (poster: { image_url: string; display_order: number; scroll_duration?: number }) => {
     const { data, error } = await supabase
       .from('event_posters')
       .insert([poster])
@@ -513,7 +513,7 @@ export const eventPostersApi = {
     return data;
   },
 
-  update: async (id: string, poster: { image_url?: string; display_order?: number }) => {
+  update: async (id: string, poster: { image_url?: string; display_order?: number; scroll_duration?: number }) => {
     const { data, error } = await supabase
       .from('event_posters')
       .update(poster)

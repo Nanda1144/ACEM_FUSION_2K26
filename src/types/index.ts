@@ -42,6 +42,7 @@ export interface EventPoster {
   id: string;
   image_url: string;
   display_order: number;
+  scroll_duration: number;
   created_at: string;
   updated_at: string;
 }
@@ -60,11 +61,20 @@ export interface OverallCoordinator {
   updated_at: string;
 }
 
+export interface CommitteePersonDetail {
+  name: string;
+  contact?: string;
+  role?: string;
+}
+
 export interface Committee {
   id: string;
   title: string;
   description?: string;
+  role?: string;
   image_url?: string;
+  staff_details: CommitteePersonDetail[];
+  student_details: CommitteePersonDetail[];
   display_order: number;
   created_at: string;
   updated_at: string;

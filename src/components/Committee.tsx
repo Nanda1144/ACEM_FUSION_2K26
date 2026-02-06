@@ -1,133 +1,37 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { committeeApi } from '@/db/api';
-import type { CommitteeMember } from '@/types/index';
+import { committeesApi } from '@/db/api';
+import type { Committee, CommitteePersonDetail } from '@/types/index';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Mail, Phone, User, Briefcase } from 'lucide-react';
+import { Users, Briefcase, Phone, User } from 'lucide-react';
 
-// Separate component for member card to properly use hooks
-function MemberCard({ 
-  member, 
-  index, 
-  onMemberClick 
-}: { 
-  member: CommitteeMember; 
-  index: number; 
-  onMemberClick: (member: CommitteeMember) => void;
-}) {
-  const [isGlowing, setIsGlowing] = useState(false);
-
-  const handleClick = () => {
-    setIsGlowing(true);
-    setTimeout(() => setIsGlowing(false), 600);
-    onMemberClick(member);
-  };
-
-  return (
-    <motion.div
-      key={member.id}
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      onClick={handleClick}
-      className="cursor-pointer"
-    >
-      <Card className={`overflow-hidden backdrop-blur-glass border-primary/20 hover:border-primary/50 transition-all duration-300 hover:glow-cyan group h-full ${isGlowing ? 'purple-glow-active' : ''}`}>
-        <div className="relative h-64 overflow-hidden">
-          {member.image_url ? (
-            <img
-              src={member.image_url}
-              alt={member.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-              <span className="text-6xl font-bold text-primary/50">
-                {member.name.charAt(0)}
-              </span>
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-        <CardContent className="p-4 text-center">
-          {member.special_role && (
-            <p className="text-xs font-bold text-primary mb-1 uppercase tracking-wider">
-              {member.special_role}
-            </p>
-          )}
-          <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-          <p className="text-sm text-primary mb-2">{member.role}</p>
-          {member.info && (
-            <p className="text-xs text-muted-foreground line-clamp-3">
-              {member.info}
-            </p>
-          )}
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
-}
-
-export default function Committee() {
-  const [members, setMembers] = useState<CommitteeMember[]>([]);
+export default function CommitteeComponent() {
+  const [committees, setCommittees] = useState<Committee[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedMember, setSelectedMember] = useState<CommitteeMember | null>(null);
+  const [selectedCommittee, setSelectedCommittee] = useState<Committee | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
-    loadMembers();
+    loadCommittees();
   }, []);
 
-  const loadMembers = async () => {
+  const loadCommittees = async () => {
     try {
-      const data = await committeeApi.getAll();
-      setMembers(data);
+      const data = await committeesApi.getAll();
+      setCommittees(data);
     } catch (error) {
-      console.error('Error loading committee members:', error);
+      console.error('Error loading committees:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  // Separate members by special roles
-  const specialRoleMembers = members.filter(m => m.special_role);
-  const regularMembers = members.filter(m => !m.special_role);
-
-  // Group special role members by role
-  const chiefPatrons = specialRoleMembers.filter(m => m.special_role === 'Chief Patron');
-  const patrons = specialRoleMembers.filter(m => m.special_role === 'Patron');
-  const conveners = specialRoleMembers.filter(m => m.special_role === 'Convener');
-  const coConveners = specialRoleMembers.filter(m => m.special_role === 'Co-Convener');
-
-  const handleMemberClick = (member: CommitteeMember) => {
-    setSelectedMember(member);
+  const handleCommitteeClick = (committee: Committee) => {
+    setSelectedCommittee(committee);
     setDialogOpen(true);
-  };
-
-  const renderSpecialRoleSection = (title: string, members: CommitteeMember[]) => {
-    if (members.length === 0) return null;
-    
-    return (
-      <div className="mb-12">
-        <h3 className="text-2xl md:text-3xl font-bold text-center mb-6 text-primary">
-          {title}
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {members.map((member, index) => (
-            <MemberCard 
-              key={member.id}
-              member={member} 
-              index={index} 
-              onMemberClick={handleMemberClick}
-            />
-          ))}
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -141,18 +45,18 @@ export default function Committee() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            Our Committee
+            Our Committees
           </h2>
           <p className="text-muted-foreground text-lg">
-            Meet the team behind Fusion26
+            Meet the teams behind Fusion26
           </p>
         </motion.div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
               <Card key={i} className="overflow-hidden">
-                <Skeleton className="h-64 w-full bg-muted" />
+                <Skeleton className="h-48 w-full bg-muted" />
                 <CardContent className="p-4">
                   <Skeleton className="h-6 w-3/4 mb-2 bg-muted" />
                   <Skeleton className="h-4 w-1/2 bg-muted" />
@@ -160,130 +64,166 @@ export default function Committee() {
               </Card>
             ))}
           </div>
-        ) : members.length === 0 ? (
+        ) : committees.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No committee members added yet</p>
+            <p className="text-muted-foreground text-lg">No committees added yet</p>
           </div>
         ) : (
-          <>
-            {/* Special Role Sections */}
-            {renderSpecialRoleSection('Chief Patrons', chiefPatrons)}
-            {renderSpecialRoleSection('Patrons', patrons)}
-            {renderSpecialRoleSection('Conveners', conveners)}
-            {renderSpecialRoleSection('Co-Conveners', coConveners)}
-
-            {/* Regular Committee Members */}
-            {regularMembers.length > 0 && (
-              <div>
-                {specialRoleMembers.length > 0 && (
-                  <h3 className="text-2xl md:text-3xl font-bold text-center mb-6 text-primary">
-                    Committee Members
-                  </h3>
-                )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {regularMembers.map((member, index) => (
-                    <MemberCard 
-                      key={member.id}
-                      member={member} 
-                      index={index} 
-                      onMemberClick={handleMemberClick}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {committees.map((committee, index) => (
+              <motion.div
+                key={committee.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                onClick={() => handleCommitteeClick(committee)}
+                className="cursor-pointer"
+              >
+                <Card className="overflow-hidden backdrop-blur-glass border-primary/20 hover:border-primary/50 transition-all duration-300 hover:glow-cyan group h-full">
+                  {committee.image_url && (
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={committee.image_url}
+                        alt={committee.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-2 gradient-text">{committee.title}</h3>
+                    {committee.role && (
+                      <p className="text-sm text-primary mb-2 font-medium">{committee.role}</p>
+                    )}
+                    {committee.description && (
+                      <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                        {committee.description}
+                      </p>
+                    )}
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Users className="w-4 h-4" />
+                        <span>{committee.staff_details?.length || 0} Staff</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Users className="w-4 h-4" />
+                        <span>{committee.student_details?.length || 0} Students</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         )}
       </div>
 
-      {/* Member Details Dialog */}
+      {/* Committee Details Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          {selectedMember && (
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          {selectedCommittee && (
             <>
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold gradient-text">
-                  {selectedMember.name}
+                  {selectedCommittee.title}
                 </DialogTitle>
               </DialogHeader>
               
               <div className="space-y-6">
-                {/* Member Image */}
-                <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden">
-                  {selectedMember.image_url ? (
+                {/* Committee Image */}
+                {selectedCommittee.image_url && (
+                  <div className="relative w-full h-48 rounded-lg overflow-hidden">
                     <img
-                      src={selectedMember.image_url}
-                      alt={selectedMember.name}
+                      src={selectedCommittee.image_url}
+                      alt={selectedCommittee.title}
                       className="w-full h-full object-cover"
                     />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                      <span className="text-9xl font-bold text-primary/50">
-                        {selectedMember.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
 
-                {/* Special Role Badge */}
-                {selectedMember.special_role && (
+                {/* Role Badge */}
+                {selectedCommittee.role && (
                   <div className="flex justify-center">
                     <Badge variant="outline" className="border-primary text-primary text-sm px-4 py-2">
-                      {selectedMember.special_role}
+                      <Briefcase className="w-4 h-4 mr-2" />
+                      {selectedCommittee.role}
                     </Badge>
                   </div>
                 )}
 
-                {/* Member Details */}
-                <div className="space-y-4">
-                  {/* Name */}
-                  <div className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border">
-                    <User className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-                      <p className="text-base font-semibold">{selectedMember.name}</p>
-                    </div>
-                  </div>
-
-                  {/* Role */}
-                  <div className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border">
-                    <Briefcase className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground mb-1">Role / Position</p>
-                      <p className="text-base font-semibold">{selectedMember.role}</p>
-                    </div>
-                  </div>
-
-                  {/* Info / Bio */}
-                  {selectedMember.info && (
-                    <div className="p-4 rounded-lg bg-card/50 border border-border">
-                      <p className="text-sm text-muted-foreground mb-2">About</p>
-                      <p className="text-base leading-relaxed whitespace-pre-wrap">
-                        {selectedMember.info}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Display Order (for admin reference) */}
-                  <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-border">
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground mb-1">Display Order</p>
-                      <p className="text-base font-semibold">{selectedMember.display_order}</p>
-                    </div>
-                  </div>
-
-                  {/* Member Since */}
+                {/* Description */}
+                {selectedCommittee.description && (
                   <div className="p-4 rounded-lg bg-card/50 border border-border">
-                    <p className="text-sm text-muted-foreground mb-1">Member Since</p>
-                    <p className="text-base font-semibold">
-                      {new Date(selectedMember.created_at).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </p>
+                    <p className="text-base leading-relaxed">{selectedCommittee.description}</p>
                   </div>
-                </div>
+                )}
+
+                {/* Staff Details */}
+                {selectedCommittee.staff_details && selectedCommittee.staff_details.length > 0 && (
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Users className="w-5 h-5 text-primary" />
+                      Staff Members
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {selectedCommittee.staff_details.map((staff: CommitteePersonDetail, idx: number) => (
+                        <Card key={idx} className="p-4 bg-card/50 border-primary/20">
+                          <div className="space-y-2">
+                            <div className="flex items-start gap-2">
+                              <User className="w-4 h-4 text-primary mt-1 shrink-0" />
+                              <div>
+                                <p className="font-semibold">{staff.name}</p>
+                                {staff.role && (
+                                  <p className="text-xs text-muted-foreground">{staff.role}</p>
+                                )}
+                              </div>
+                            </div>
+                            {staff.contact && (
+                              <div className="flex items-center gap-2 text-sm">
+                                <Phone className="w-3 h-3 text-muted-foreground" />
+                                <span className="text-muted-foreground">{staff.contact}</span>
+                              </div>
+                            )}
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Student Details */}
+                {selectedCommittee.student_details && selectedCommittee.student_details.length > 0 && (
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Users className="w-5 h-5 text-primary" />
+                      Student Members
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {selectedCommittee.student_details.map((student: CommitteePersonDetail, idx: number) => (
+                        <Card key={idx} className="p-4 bg-card/50 border-primary/20">
+                          <div className="space-y-2">
+                            <div className="flex items-start gap-2">
+                              <User className="w-4 h-4 text-primary mt-1 shrink-0" />
+                              <div>
+                                <p className="font-semibold">{student.name}</p>
+                                {student.role && (
+                                  <p className="text-xs text-muted-foreground">{student.role}</p>
+                                )}
+                              </div>
+                            </div>
+                            {student.contact && (
+                              <div className="flex items-center gap-2 text-sm">
+                                <Phone className="w-3 h-3 text-muted-foreground" />
+                                <span className="text-muted-foreground">{student.contact}</span>
+                              </div>
+                            )}
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )}

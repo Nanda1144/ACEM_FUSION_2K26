@@ -69,11 +69,11 @@ export default function HomePage() {
         <FlexibleHeader />
         <Hero onExploreEvents={handleClosePopup} />
         <LogoCarousel />
-        <EventPosters />
         <Events />
         <OverallCoordinators />
         <Committee />
         <Gallery />
+        <EventPosters />
         <About />
         <Contact />
         <EnhancedFooter />

@@ -58,7 +58,8 @@ export default function EventPosterManagement() {
       // Create poster entry
       const newPoster = await eventPostersApi.create({
         image_url: imageUrl,
-        display_order: posters.length + 1
+        display_order: posters.length + 1,
+        scroll_duration: 30000
       });
 
       setPosters([...posters, newPoster]);
@@ -119,6 +120,24 @@ export default function EventPosterManagement() {
     }
   };
 
+  const updateScrollDuration = async (id: string, duration: number) => {
+    try {
+      await eventPostersApi.update(id, { scroll_duration: duration });
+      setPosters(posters.map(p => p.id === id ? { ...p, scroll_duration: duration } : p));
+      toast({
+        title: 'Success',
+        description: 'Scroll duration updated',
+      });
+    } catch (error) {
+      console.error('Error updating duration:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update scroll duration',
+        variant: 'destructive',
+      });
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -169,30 +188,49 @@ export default function EventPosterManagement() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <CardContent className="p-4 space-y-2">
-                  <div className="flex items-center gap-2">
-                    <GripVertical className="h-4 w-4 text-muted-foreground" />
-                    <Label htmlFor={`order-${poster.id}`} className="text-sm">
-                      Display Order
-                    </Label>
-                  </div>
-                  <div className="flex gap-2">
+                <CardContent className="p-4 space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <GripVertical className="h-4 w-4 text-muted-foreground" />
+                      <Label htmlFor={`order-${poster.id}`} className="text-sm">
+                        Display Order
+                      </Label>
+                    </div>
                     <Input
                       id={`order-${poster.id}`}
                       type="number"
                       min="1"
                       value={poster.display_order}
                       onChange={(e) => updateDisplayOrder(poster.id, parseInt(e.target.value))}
-                      className="flex-1"
                     />
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      onClick={() => handleDelete(poster.id)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
                   </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor={`duration-${poster.id}`} className="text-sm">
+                      Scroll Duration (ms)
+                    </Label>
+                    <Input
+                      id={`duration-${poster.id}`}
+                      type="number"
+                      min="5000"
+                      step="1000"
+                      value={poster.scroll_duration || 30000}
+                      onChange={(e) => updateScrollDuration(poster.id, parseInt(e.target.value))}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Time for full scroll cycle (30000ms = 30 seconds)
+                    </p>
+                  </div>
+
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => handleDelete(poster.id)}
+                    className="w-full"
+                  >
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Delete Poster
+                  </Button>
                 </CardContent>
               </Card>
             ))}
