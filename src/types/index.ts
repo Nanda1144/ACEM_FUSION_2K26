@@ -263,3 +263,12 @@ export interface PopupSettings {
   updated_at: string;
 }
 
+export interface PopupImage {
+  id: string;
+  image_url: string;
+  duration: number;
+  is_enabled: boolean;
+  created_at: string;
+  updated_at: string;
+}
+

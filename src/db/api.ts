@@ -18,7 +18,8 @@ import type {
   FooterSettings, 
   ComponentTemplate,
   SponsorLogo,
-  PopupSettings
+  PopupSettings,
+  PopupImage
 } from '@/types/index';
 
 // Events API
@@ -929,5 +930,68 @@ export const popupSettingsApi = {
     
     if (error) throw error;
     return data;
+  }
+};
+
+// Popup Image API
+export const popupImageApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('popup_image')
+      .select('*')
+      .eq('is_enabled', true)
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  getForAdmin: async () => {
+    const { data, error } = await supabase
+      .from('popup_image')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  upsert: async (popup: { image_url: string; duration: number; is_enabled: boolean }) => {
+    // First, get existing popup
+    const existing = await popupImageApi.getForAdmin();
+    
+    if (existing) {
+      // Update existing
+      const { data, error } = await supabase
+        .from('popup_image')
+        .update({ ...popup, updated_at: new Date().toISOString() })
+        .eq('id', existing.id)
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return data;
+    } else {
+      // Insert new
+      const { data, error } = await supabase
+        .from('popup_image')
+        .insert([popup])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return data;
+    }
+  },
+
+  delete: async () => {
+    const { error } = await supabase
+      .from('popup_image')
+      .delete()
+      .neq('id', '00000000-0000-0000-0000-000000000000'); // Delete all
+    
+    if (error) throw error;
   }
 };

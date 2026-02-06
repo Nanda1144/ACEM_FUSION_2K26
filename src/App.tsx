@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import SplashScreen from '@/components/SplashScreen';
+import PopupImage from '@/components/PopupImage';
 
 import routes from './routes';
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <SplashScreen />
+      <PopupImage />
       <IntersectObserver />
       <Routes>
         {routes.map((route, index) => (
