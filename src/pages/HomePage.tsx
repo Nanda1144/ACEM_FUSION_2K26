@@ -20,6 +20,7 @@ import type { ThemeSettings } from '@/types/index';
 export default function HomePage() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [themeSettings, setThemeSettings] = useState<ThemeSettings | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     loadThemeSettings();
@@ -32,6 +33,10 @@ export default function HomePage() {
     } catch (error) {
       console.error('Error loading theme settings:', error);
     }
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   const pageStyle = {
@@ -62,7 +67,7 @@ export default function HomePage() {
       </Helmet>
       <div className="min-h-screen" style={pageStyle}>
         <FlexibleHeader />
-        <Hero />
+        <Hero onExploreEvents={handleClosePopup} />
         <LogoCarousel />
         <EventPosters />
         <Events />
@@ -73,7 +78,7 @@ export default function HomePage() {
         <Contact />
         <EnhancedFooter />
         <Chatbot onAuthenticated={() => setShowAdmin(true)} />
-        <WelcomePopup />
+        <WelcomePopup open={showPopup} onOpenChange={setShowPopup} />
       </div>
     </>
   );

@@ -3,11 +3,21 @@ import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useRef } from 'react';
 
-export default function Hero() {
+interface HeroProps {
+  onExploreEvents?: () => void;
+}
+
+export default function Hero({ onExploreEvents }: HeroProps) {
   const [isAnimationPaused, setIsAnimationPaused] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   const scrollToEvents = () => {
+    // Close popup if callback provided
+    if (onExploreEvents) {
+      onExploreEvents();
+    }
+    
+    // Scroll to events section
     const eventsSection = document.getElementById('events');
     eventsSection?.scrollIntoView({ behavior: 'smooth' });
   };

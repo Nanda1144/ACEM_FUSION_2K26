@@ -5,8 +5,12 @@ import { Button } from '@/components/ui/button';
 import { popupSettingsApi } from '@/db/api';
 import type { PopupSettings } from '@/types/index';
 
-export default function WelcomePopup() {
-  const [open, setOpen] = useState(false);
+interface WelcomePopupProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) {
   const [settings, setSettings] = useState<PopupSettings | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +30,7 @@ export default function WelcomePopup() {
         if (!data.show_once_per_session || !hasSeenPopup) {
           // Show popup after delay
           setTimeout(() => {
-            setOpen(true);
+            onOpenChange(true);
             sessionStorage.setItem('hasSeenWelcomePopup', 'true');
           }, data.display_delay || 1000);
         }
@@ -39,7 +43,7 @@ export default function WelcomePopup() {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    onOpenChange(false);
   };
 
   const handleImageClick = () => {
@@ -53,7 +57,7 @@ export default function WelcomePopup() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl p-0 overflow-hidden border-2 border-primary/50 bg-background/95 backdrop-blur-sm">
         <Button
           variant="ghost"
