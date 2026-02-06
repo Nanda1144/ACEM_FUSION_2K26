@@ -140,8 +140,8 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Button - Positioned at bottom (old position) */}
-      <div className="relative z-10 container mx-auto px-4 text-center mt-auto mb-16">
+      {/* Button - Fixed at bottom */}
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
