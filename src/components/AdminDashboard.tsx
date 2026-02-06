@@ -13,6 +13,7 @@ import HeaderSettings from './admin/HeaderSettings';
 import SponsorLogoManagement from './admin/SponsorLogoManagement';
 import EventPosterManagement from './admin/EventPosterManagement';
 import PopupManagement from './admin/PopupManagement';
+import BackgroundImageManagement from './admin/BackgroundImageManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 
@@ -39,9 +40,10 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-13 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-14 mb-8">
             <TabsTrigger value="header">Header</TabsTrigger>
             <TabsTrigger value="theme">Theme</TabsTrigger>
+            <TabsTrigger value="background">Background</TabsTrigger>
             <TabsTrigger value="popup">Popup</TabsTrigger>
             <TabsTrigger value="pages">Pages</TabsTrigger>
             <TabsTrigger value="footer">Footer</TabsTrigger>
@@ -61,6 +63,10 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
           <TabsContent value="theme">
             <ThemeManagement />
+          </TabsContent>
+
+          <TabsContent value="background">
+            <BackgroundImageManagement />
           </TabsContent>
 
           <TabsContent value="popup">

@@ -47,6 +47,15 @@ export interface EventPoster {
   updated_at: string;
 }
 
+export interface BackgroundImage {
+  id: string;
+  image_url: string;
+  display_order: number;
+  display_duration: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface OverallCoordinator {
   id: string;
   type: 'staff' | 'student';

@@ -198,11 +198,11 @@ export default function FlexibleHeader() {
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="icon"
-                    className="lg:hidden border-primary/50 hover:border-primary"
+                    className="lg:hidden hover:bg-transparent"
                   >
-                    <Menu className="h-5 w-5" />
+                    <Menu className="h-5 w-5" style={{ color: themeSettings?.nav_text_color || '#FFFFFF' }} />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="backdrop-blur-glass border-primary/20">

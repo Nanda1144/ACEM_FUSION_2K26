@@ -6,7 +6,7 @@
 Fusion26
 
 ### 1.2 Application Description
-A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including dual header system with FUSION 2k26 background image, footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support. The application includes a splash screen that displays for 2 seconds on initial load before automatically opening the main application. A pop-up image feature displays on initial page load with configurable display duration and interactive hold-to-freeze functionality, automatically disappearing based on admin-set duration or when user releases the image.
+A cinematic, immersive multi-page web application for a college fest that delivers a premium, dramatic, and visually powerful experience inspired by modern event websites like ashv2k.in. The platform features a public user interface for event browsing and registration, alongside a secure admin dashboard with real-time live preview functionality accessible via enhanced chatbot authentication for comprehensive content management. The application supports multiple web pages with flexible responsive design across all screen sizes, and provides admins with complete control over all sections including dual header system with animated FUSION 2k26 background image slideshow (up to 5 images with 5-second dissolve transitions), footer, and body content with drag-and-drop text box placement capabilities. The system connects to Supabase cloud database with manual configuration support. The application includes a splash screen that displays for 2 seconds on initial load before automatically opening the main application. A pop-up image feature displays on initial page load with configurable display duration and interactive hold-to-freeze functionality, automatically disappearing based on admin-set duration or when user releases the image. All image uploads support up to 50MB file size limit.
 
 ### 1.3 Application Type
 Web Application (College Fest Management Platform)
@@ -27,7 +27,7 @@ Web Application (College Fest Management Platform)
   - Mobile: Responsive scaling ensuring visibility and proper fit
 - Smooth fade-in animation for splash screen appearance
 - Smooth fade-out animation for splash screen disappearance
-- Admin-configurable splash screen image upload
+- Admin-configurable splash screen image upload (up to 50MB)
 - Admin can enable/disable splash screen functionality
 
 ### 2.2 Pop-up Image Feature
@@ -40,7 +40,7 @@ Web Application (College Fest Management Platform)
   - Desktop: Optimal size with centered positioning
   - Tablet: Proportional scaling maintaining aspect ratio
   - Mobile: Responsive scaling ensuring visibility and proper fit
-- Admin-configurable pop-up image upload and storage in database
+- Admin-configurable pop-up image upload and storage in database (up to 50MB)
 - Admin can add/delete pop-up images through admin dashboard
 - Pop-up images stored in Supabase database with proper image URL storage
 - Admin can enable/disable pop-up image functionality
@@ -73,7 +73,7 @@ Web Application (College Fest Management Platform)
   - Tablet: Proportional scaling maintaining aspect ratio
   - Mobile: Responsive scaling ensuring visibility and proper fit
 - Flexible background image positioning adapting to different screen dimensions
-- Admin-configurable total body background image upload
+- Admin-configurable total body background image upload (up to 50MB)
 - Admin-configurable background image responsive scaling settings:
   - Desktop scaling configuration
   - Tablet scaling configuration
@@ -89,12 +89,22 @@ Web Application (College Fest Management Platform)
   - Events
   - Contact Us
   - About Us
+- Mobile view navigation menu enhancement:
+  - Remove background from menu icon lines only
+  - Menu icon lines display without background
+  - Transparent background for menu icon in mobile view
 - Sticky header with smooth scroll behavior
 - Responsive menu for mobile devices
 - Fully responsive across all screen sizes for easy access
 - Admin-editable header structure and content
-- Admin-configurable background image for FUSION 2k26
-- Background image automatically adjusts and scales to fit all screen sizes:
+- Admin-configurable animated background image slideshow for FUSION 2k26:
+  - Support up to 5 background images (each up to 50MB)
+  - Automatic slideshow with dissolve transition effect
+  - Display duration: 5 seconds per image
+  - Smooth dissolve animation between images
+  - Continuous loop through all uploaded images
+  - Admin can upload, delete, and reorder slideshow images
+- Background images automatically adjust and scale to fit all screen sizes:
   - Desktop: Full-size display with optimal positioning
   - Tablet: Proportional scaling maintaining aspect ratio
   - Mobile: Responsive scaling ensuring visibility and proper fit
@@ -153,7 +163,7 @@ Web Application (College Fest Management Platform)
   - Glow effect automatically applied around each logo
 - Continuous loop animation for logo display
 - Smooth transitions between logos
-- Admin can add or remove mobile scrolling logos through admin dashboard
+- Admin can add or remove mobile scrolling logos through admin dashboard (up to 50MB per logo)
 - Mobile scrolling logos stored in Supabase database with proper image URL storage
 - Admin can delete mobile scrolling logos from database
 - System retrieves and displays mobile scrolling logos from database to users
@@ -189,7 +199,7 @@ Web Application (College Fest Management Platform)
 - Glow effects, animated cards, hover transitions
 - Animated loading states
 - Admin-configurable layout for header sections
-- Admin-configurable FUSION 2k26 background image with responsive scaling
+- Admin-configurable animated FUSION 2k26 background image slideshow (up to 5 images, 5-second dissolve transitions) with responsive scaling
 - Admin-configurable total body background image with responsive scaling
 - Admin-configurable FUSION 2k26 text with responsive sizing and animations
 - Admin-configurable logo arrangement (add/delete logos with shape options)
@@ -200,7 +210,7 @@ Web Application (College Fest Management Platform)
 #### 2.3.7 Event Poster Section
 - Positioned after Gallery Section and before About Us Section
 - Automatic horizontal scrolling animation (left to right)
-- Display event poster images uploaded by admin
+- Display event poster images uploaded by admin (up to 50MB per poster)
 - Event posters stored in Supabase database with proper image URL storage
 - Admin can add or remove event posters through admin dashboard
 - Admin can delete event posters from database
@@ -255,15 +265,15 @@ Web Application (College Fest Management Platform)
     - Admin can select specific content and convert to list format (bullet or numbered)
     - Admin can change text color for selected content
     - Admin can apply bold formatting to selected text
-  - Event Images (multiple images support)
+  - Event Images (multiple images support, up to 50MB per image)
   - Event-Specific Staff Coordinators:
     - Staff Name
     - Staff Role
-    - Staff Photo (optional, round or semi-circle shape)
+    - Staff Photo (optional, round or semi-circle shape, up to 50MB)
   - Event-Specific Student Coordinators:
     - Student Name
     - Student Contact Number
-    - Student Photo (optional, round or semi-circle shape)
+    - Student Photo (optional, round or semi-circle shape, up to 50MB)
   - Registration button linking to Google Form (admin-provided link)
 - Photo display control for event-specific coordinators:
   - Admin can enable/disable photo display option per event
@@ -280,7 +290,7 @@ Web Application (College Fest Management Platform)
   - Other committees
 - Each committee card displays:
   - Committee Name
-  - Committee Image (optional)
+  - Committee Image (optional, up to 50MB)
   - Committee Description preview
 - Clickable committee cards:
   - Clicking on any committee card opens detailed view
@@ -293,12 +303,12 @@ Web Application (College Fest Management Platform)
     - Staff details:
       - Staff Name
       - Staff Role
-      - Staff Photo (optional, round or semi-circle shape)
+      - Staff Photo (optional, round or semi-circle shape, up to 50MB)
       - Staff Contact (optional)
     - Student details:
       - Student Name
       - Student Role
-      - Student Photo (optional, round or semi-circle shape)
+      - Student Photo (optional, round or semi-circle shape, up to 50MB)
       - Student Contact (optional)
   - Modal or dedicated detail page for committee details
   - Close/back button to return to Committee Section
@@ -314,13 +324,12 @@ Web Application (College Fest Management Platform)
 - Purple glow effect on card click for enhanced visual feedback
 
 #### 2.3.11 Gallery Section
-- Cinematic grid/masonry layout displaying uploaded images
-- Enhanced frame styling with animated color effects:
-  - Frame colors: Gold, Blue, Sky Blue, Purple, Pink
-  - Animated glow effect moving diagonally from left-top corner to right-bottom corner
-  - Color glow moves in wave form across all frame colors
-  - Glow animation applies automatically to all frames
-  - Smooth color transitions creating dynamic visual effect
+- Cinematic grid/masonry layout displaying uploaded images (up to 50MB per image)
+- Enhanced frame styling with gold color and glow effect:
+  - Frame color: Gold (unified color for all frames)
+  - Glow effect applied to all frames for enhanced attractiveness
+  - Consistent gold glow effect creating cohesive visual presentation
+  - Smooth glow transitions for dynamic visual appeal
 - Image frame width increased by 1-2px for enhanced visual presentation
 - Lazy loading implementation
 - Smooth transitions between images
@@ -381,7 +390,7 @@ Web Application (College Fest Management Platform)
 - Preview shows exact appearance of public website across multiple web pages
 
 #### 2.5.2 Splash Screen Management
-- Upload splash screen image
+- Upload splash screen image (up to 50MB)
 - Configure splash screen display duration (default: 2 seconds)
 - Enable/disable splash screen functionality
 - Preview splash screen appearance and animation
@@ -393,7 +402,7 @@ Web Application (College Fest Management Platform)
 - All changes update automatically in database and reflect in live preview
 
 #### 2.5.3 Pop-up Image Management
-- Upload pop-up image with proper database storage
+- Upload pop-up image with proper database storage (up to 50MB)
 - Add multiple pop-up images through admin interface
 - Delete pop-up images from database
 - Pop-up images stored in Supabase Storage with URLs saved in database
@@ -411,7 +420,7 @@ Web Application (College Fest Management Platform)
 - Proper image recognition implementation ensuring pop-up images display correctly to users
 
 #### 2.5.4 Total Body Background Management
-- Upload total body background image
+- Upload total body background image (up to 50MB)
 - Configure background image responsive scaling:
   - Desktop scaling settings
   - Tablet scaling settings
@@ -424,13 +433,23 @@ Web Application (College Fest Management Platform)
 #### 2.5.5 Primary Header Management
 - Configure navigation menu positioning (top-right corner)
 - Edit navigation menu items
+- Mobile view menu icon enhancement:
+  - Configure transparent background for menu icon lines
+  - Remove background from menu icon lines only in mobile view
+  - Menu icon lines display without background
 - Text styling controls:
   - Font selection
   - Font size adjustment
   - Text color customization
 - Background customization:
   - Background color changing
-  - Background image upload and changing for FUSION 2k26
+  - Animated background image slideshow upload and management for FUSION 2k26:
+    - Upload up to 5 background images (each up to 50MB)
+    - Configure dissolve transition effect between images
+    - Set display duration: 5 seconds per image
+    - Reorder slideshow images with drag-and-drop interface
+    - Delete individual slideshow images
+    - Preview slideshow animation in live preview
   - Responsive background image scaling configuration:
     - Set image scaling behavior for desktop view
     - Set image scaling behavior for tablet view
@@ -438,7 +457,7 @@ Web Application (College Fest Management Platform)
   - Background image positioning controls for different screen sizes
   - Default background color configuration
 - Edit header structure and layout
-- Changes reflect immediately on public UI header and live preview with responsive background image scaling
+- Changes reflect immediately on public UI header and live preview with responsive background image scaling and animated slideshow
 
 #### 2.5.6 Secondary Header (Logo and College Information Header) Management
 - Update college name (default: ADITYA College of Engineering Madanapalle)
@@ -451,7 +470,7 @@ Web Application (College Fest Management Platform)
   - Responsive font size configuration (12px-14px range)
 - Update institution status (default: UGC - Autonomous Institution)
   - Responsive font size configuration (12px-14px range)
-- Upload multiple college logos
+- Upload multiple college logos (up to 50MB per logo)
 - Configure individual logo shapes:
   - Circle shape option
   - Semi-square shape option
@@ -476,7 +495,7 @@ Web Application (College Fest Management Platform)
 - All changes update automatically in database and reflect in live preview across all screen sizes
 
 #### 2.5.7 Mobile Logo Scrolling Management (Homepage Only)
-- Add or remove logos for mobile scrolling section with proper database storage
+- Add or remove logos for mobile scrolling section with proper database storage (up to 50MB per logo)
 - Upload mobile scrolling logo images through admin interface
 - Delete mobile scrolling logos from database
 - Mobile scrolling logos stored in Supabase Storage with URLs saved in database
@@ -538,7 +557,7 @@ Web Application (College Fest Management Platform)
 
 #### 2.5.11 Homepage Layout Management
 - Arrange primary header sections as desired
-- Configure FUSION 2k26 background image with responsive scaling
+- Configure animated FUSION 2k26 background image slideshow (up to 5 images, 5-second dissolve transitions) with responsive scaling
 - Configure total body background image with responsive scaling
 - Configure FUSION 2k26 text with responsive sizing and animations
 - Configure secondary logo and college information header layout
@@ -549,7 +568,7 @@ Web Application (College Fest Management Platform)
 - All customizations apply across multiple web pages
 
 #### 2.5.12 Event Poster Management
-- Upload event poster images with proper database storage
+- Upload event poster images with proper database storage (up to 50MB per poster)
 - Add multiple event poster images through admin interface
 - Delete event posters from database
 - Event poster images stored in Supabase Storage with URLs saved in database
@@ -609,16 +628,16 @@ Web Application (College Fest Management Platform)
     - Select content and change text color functionality
     - Select content and apply bold formatting functionality
     - Preview of formatted instructions
-  - Event Images upload (multiple images support)
+  - Event Images upload (multiple images support, up to 50MB per image)
   - Event-Specific Staff Coordinators:
     - Staff Name
     - Staff Role
-    - Staff Photo upload (optional)
+    - Staff Photo upload (optional, up to 50MB)
     - Photo shape configuration (round or semi-circle)
   - Event-Specific Student Coordinators:
     - Student Name
     - Student Contact Number
-    - Student Photo upload (optional)
+    - Student Photo upload (optional, up to 50MB)
     - Photo shape configuration (round or semi-circle)
   - Photo display enable/disable option per event
   - Google Form registration link
@@ -636,18 +655,18 @@ Web Application (College Fest Management Platform)
 - Add committees (groups) with fields:
   - Committee Name
   - Committee Description
-  - Committee Image upload (optional)
+  - Committee Image upload (optional, up to 50MB)
   - Committee Role details
   - Staff details:
     - Staff Name
     - Staff Role
-    - Staff Photo upload (optional)
+    - Staff Photo upload (optional, up to 50MB)
     - Photo shape configuration (round or semi-circle)
     - Staff Contact (optional)
   - Student details:
     - Student Name
     - Student Role
-    - Student Photo upload (optional)
+    - Student Photo upload (optional, up to 50MB)
     - Photo shape configuration (round or semi-circle)
     - Student Contact (optional)
   - Photo display enable/disable option per committee
@@ -659,7 +678,7 @@ Web Application (College Fest Management Platform)
 - Changes display dynamically on website and live preview
 
 #### 2.5.15 Gallery Management
-- Upload multiple images to gallery
+- Upload multiple images to gallery (up to 50MB per image)
 - Image upload interface with file selection
 - Uploaded images stored in Supabase Storage
 - Image URLs automatically generated and stored in gallery_images table
@@ -668,12 +687,11 @@ Web Application (College Fest Management Platform)
 - Delete images from gallery
 - Rearrange image display order
 - Configure image frame width (increased by 1-2px for enhanced visual presentation)
-- Configure animated frame color effects:
-  - Select frame colors: Gold, Blue, Sky Blue, Purple, Pink
-  - Configure diagonal glow animation (left-top to right-bottom)
-  - Configure wave form color transitions
-  - Enable/disable automatic glow animation for all frames
-  - Preview animated frame effects in live preview
+- Configure gold frame color with glow effect:
+  - Unified gold color for all frames
+  - Glow effect applied to all frames for enhanced attractiveness
+  - Configure glow intensity and spread
+  - Preview gold glow effect in live preview
 
 #### 2.5.16 About Us Management
 - Edit About Us section text content
@@ -699,7 +717,8 @@ Web Application (College Fest Management Platform)
   - Splash screen configuration with responsive scaling
   - Pop-up image configuration with responsive scaling, display duration settings, and hold-to-freeze functionality
   - Total body background image with responsive scaling
-  - Primary header sections with FUSION 2k26 background image and responsive scaling
+  - Primary header sections with animated FUSION 2k26 background image slideshow (up to 5 images, 5-second dissolve transitions) and responsive scaling
+  - Mobile view navigation menu icon with transparent background (no background on menu lines)
   - FUSION 2k26 text with responsive sizing and animations
   - Secondary logo and college information header sections with responsive configurations and glowing background
   - Mobile logo scrolling section (homepage only) with logo order settings, glow effect configuration, and transparent background
@@ -710,11 +729,12 @@ Web Application (College Fest Management Platform)
   - Event-specific coordinator details with photo management and role field
   - Committee information including name, description, image, role details, and staff/student details with photo management and role field
   - Event descriptions, rules, and instructions with justified text, list formatting (bullet and numbered), text color customization, and bold text formatting for all events
-  - Gallery image frame width configuration and animated frame color effects with diagonal glow animation
+  - Gallery image frame width configuration and gold frame color with glow effect for enhanced attractiveness
   - Committee card purple glow effect on click
 - Flexible editing interface allowing customization of any component
 - All edits automatically update database
 - All changes reflect instantly on public website and live preview
+- Image upload size limit: 50MB for all image types
 
 #### 2.5.20 Supabase Connection Management
 - Manual database connection configuration interface
@@ -752,7 +772,8 @@ Web Application (College Fest Management Platform)
 - Default background color with admin override capability
 - Enhanced footer design with improved visual hierarchy
 - Primary header with navigation menu positioned at top-right corner
-- Primary header with admin-configurable FUSION 2k26 background image that scales responsively across all screen sizes
+- Primary header with admin-configurable animated FUSION 2k26 background image slideshow (up to 5 images with 5-second dissolve transitions) that scales responsively across all screen sizes
+- Mobile view navigation menu icon with transparent background (no background on menu lines only)
 - FUSION 2k26 text with responsive sizing and animated effects
 - Secondary header with golden color college name styling, black border, and glowing background effect for enhanced attractiveness, positioned below primary header
 - Secondary header includes configurable logo shapes (circle/semi-square) with minimum two logos visible on mobile (left-right positioning)
@@ -765,12 +786,12 @@ Web Application (College Fest Management Platform)
 - Clickable committee cards with smooth animations opening detailed committee view
 - Committee cards with purple glow effect on click for enhanced visual feedback
 - Committee detail view with modal or dedicated page displaying complete committee information including role details and staff/student details
-- Gallery section with animated frame color effects:
-  - Frame colors: Gold, Blue, Sky Blue, Purple, Pink
-  - Diagonal glow animation moving from left-top corner to right-bottom corner
-  - Wave form color transitions across all frame colors
-  - Automatic glow animation applied to all frames
+- Gallery section with unified gold frame color and glow effect:
+  - All frames display in gold color for cohesive visual presentation
+  - Glow effect applied to all frames for enhanced attractiveness
+  - Consistent gold glow creating elegant and premium appearance
 - Gallery section with increased image frame width (1-2px more) for enhanced visual presentation
+- Image upload size limit: 50MB for all image types (splash screen, pop-up, backgrounds, logos, event posters, event images, coordinator photos, committee images, gallery images, mobile scrolling logos)
 
 ### 3.2 Responsive Design
 - Fully responsive across mobile, tablet, and desktop devices
@@ -783,10 +804,12 @@ Web Application (College Fest Management Platform)
   - Tablet: Proportional scaling maintaining visual quality
   - Mobile: Responsive scaling ensuring proper fit and visibility
 - Responsive dual header system with mobile-friendly navigation menu positioned at top-right
-- FUSION 2k26 background image automatically scales and adjusts to fit all screen sizes:
+- Mobile view navigation menu icon with transparent background (no background on menu lines only)
+- Animated FUSION 2k26 background image slideshow automatically scales and adjusts to fit all screen sizes:
   - Desktop: Full-size display with optimal aspect ratio
   - Tablet: Proportional scaling maintaining visual quality
   - Mobile: Responsive scaling ensuring proper fit and visibility
+  - Dissolve transition effect maintains smooth animation across all screen sizes
 - FUSION 2k26 text with responsive font sizing and alignment adjustment:
   - Desktop: Large font size with optimal alignment
   - Tablet: Medium font size with adjusted alignment
@@ -811,7 +834,7 @@ Web Application (College Fest Management Platform)
 - Committee detail view responsive across all devices
 - Committee cards with purple glow effect on click responsive across all devices
 - Staff and student photos display responsively in round or semi-circle shapes
-- Gallery images with animated frame color effects and increased frame width (1-2px more) responsive across all screen sizes
+- Gallery images with unified gold frame color and glow effect responsive across all screen sizes
 
 ### 3.3 Performance Optimization
 - Optimized animations and images
@@ -822,14 +845,15 @@ Web Application (College Fest Management Platform)
 - Optimized splash screen loading with minimal delay
 - Optimized pop-up image loading with responsive image sizing and efficient hold-to-freeze interaction handling
 - Optimized total body background image loading with responsive image sizing
-- Optimized FUSION 2k26 background image loading with responsive image sizing
+- Optimized animated FUSION 2k26 background image slideshow loading with efficient dissolve transitions
 - Efficient modal/detail view loading for committee details
 - Optimized event poster scrolling animation with hold-to-freeze functionality
 - Efficient staff and student photo loading with lazy loading
 - Optimized mobile logo scrolling animation (homepage only) with glow effect rendering
 - Efficient purple glow effect rendering on committee card click
 - Efficient database queries for retrieving pop-up images, event posters, and mobile logos
-- Optimized animated frame color effects rendering for gallery images
+- Optimized gold glow effect rendering for gallery frames
+- Image compression and optimization for 50MB file size limit support
 
 ## 4. Technical Requirements
 
@@ -840,7 +864,7 @@ Web Application (College Fest Management Platform)
   - Splash screen content (id, image_url, display_duration, enabled, responsive_scaling_settings, animation_settings, created_at, updated_at)
   - Pop-up image content (id, image_url, enabled, responsive_scaling_settings, positioning_settings, default_display_duration, hold_to_freeze_enabled, created_at, updated_at)
   - Total body background content (background_image_url, responsive_scaling_settings, positioning_settings, fixed_scroll_behavior, created_at, updated_at)
-  - Primary header content (navigation_menu, navigation_position, styling configurations, background_image_url, responsive_scaling_settings, created_at, updated_at)
+  - Primary header content (navigation_menu, navigation_position, mobile_menu_icon_transparent_background, styling configurations, background_slideshow_images (array of up to 5 image URLs), slideshow_display_duration (5 seconds), slideshow_transition_effect (dissolve), responsive_scaling_settings, created_at, updated_at)
   - FUSION 2k26 text content (text_content, font_settings, responsive_sizing_configurations, alignment_settings, animation_settings, created_at, updated_at)
   - Secondary header content (college_name: ADITYA College of Engineering Madanapalle, location: MADANAPALLE, institution_status: UGC - Autonomous Institution, logos with shape configurations: circle/semi-square, responsive_sizing_configurations, positioning_data including mobile left-right positioning, static_data, styling with golden color, black border, glowing background)
   - Mobile logo scrolling content (homepage only: logo_urls, logo_order, scrolling_animation_settings, semi-square shape, 20px height, glow_effect_settings, transparent_background_enabled)
@@ -852,7 +876,7 @@ Web Application (College Fest Management Platform)
   - Event posters (image_urls, display_order, animation_settings, animation_duration, hold_to_freeze_enabled)
   - Events (including rules with formatting, instructions with formatting, multiple images, event-specific staff coordinators with photos and role field, event-specific student coordinators with photos, Google Form links, description formatting data with text color and bold formatting, rules formatting data with text color and bold formatting, instructions formatting data with text color and bold formatting, photo display settings, photo shape configurations)
   - Committees (committee_name, description, image, role_details, staff_details with name, role, photo, contact, student_details with name, role, photo, contact, photo_display_settings, photo_shape_configurations, purple_glow_effect_settings)
-  - Gallery images (storing image URLs from Supabase Storage, frame_width_configuration, frame_color_settings, diagonal_glow_animation_settings, wave_form_color_transition_settings)
+  - Gallery images (storing image URLs from Supabase Storage, frame_width_configuration, frame_color (gold), glow_effect_settings)
   - About Us content
   - Contact information
   - Admin passkey
@@ -860,7 +884,7 @@ Web Application (College Fest Management Platform)
   - Chatbot information content
 - Automatic data updates on admin changes
 - Connection credentials stored securely
-- Supabase Storage for image uploads including splash screen images, pop-up images, total body background images, FUSION 2k26 background images, event posters, staff/student photos, committee images, mobile scrolling logos
+- Supabase Storage for image uploads including splash screen images, pop-up images, total body background images, animated FUSION 2k26 background slideshow images (up to 5 images), event posters, staff/student photos, committee images, mobile scrolling logos
 - Event-specific coordinator details stored within events table
 - Committee details stored in committees table with role field, staff details, student details, and purple glow effect settings
 - Event description, rules, and instructions formatting metadata including text color, bold formatting, and list formatting (bullet and numbered) stored within events table for all events
@@ -868,9 +892,11 @@ Web Application (College Fest Management Platform)
 - Splash screen data stored in splash_screen_content table
 - Pop-up image data stored in popup_image_content table with default_display_duration and hold_to_freeze_enabled fields
 - Total body background data stored in total_body_background_content table
+- Animated FUSION 2k26 background slideshow data stored in primary_header_content table with background_slideshow_images array (up to 5 image URLs), slideshow_display_duration (5 seconds), and slideshow_transition_effect (dissolve)
 - Event poster data stored in event_posters table with proper image URL storage, animation duration, and hold_to_freeze_enabled fields
 - Mobile logo data stored in mobile_logo_scrolling table with proper image URL storage, glow effect settings, and transparent background configuration
-- Gallery frame color and animation data stored in gallery_images table
+- Gallery frame color and glow effect data stored in gallery_images table with frame_color (gold) and glow_effect_settings
+- Image size limit: 50MB for all image uploads
 
 ### 4.2 Backend Architecture
 - Backend: Node.js + Express
@@ -887,7 +913,7 @@ Web Application (College Fest Management Platform)
   - Pop-up image management (upload, retrieve, update settings, responsive scaling configuration, display duration configuration, hold-to-freeze functionality, add/delete images with database storage)
   - Total body background management (upload, retrieve, update settings, responsive scaling configuration)
   - Database connection management
-  - Primary header management (navigation menu, positioning, FUSION 2k26 background image upload, responsive scaling configuration)
+  - Primary header management (navigation menu, positioning, mobile menu icon transparent background configuration, animated FUSION 2k26 background slideshow upload with up to 5 images, slideshow image reordering, slideshow image deletion, dissolve transition configuration, 5-second display duration, responsive scaling configuration)
   - FUSION 2k26 text management (text content, font settings, responsive sizing, alignment, animation settings)
   - Secondary header management (college name, location, institution status styling with golden color, black border, glowing background, logo upload, shape configuration, responsive sizing configuration, positioning including mobile left-right positioning)
   - Mobile logo scrolling management (homepage only: logo upload, logo order configuration, scrolling animation settings, semi-square shape, 20px height, glow effect configuration, transparent background configuration, add/delete logos with database storage)
@@ -900,19 +926,20 @@ Web Application (College Fest Management Platform)
   - Event detail page data (including event-specific coordinator management with photo upload and role field, description formatting with text color, bold formatting, and list formatting for bullet and numbered lists, rules formatting with text color, bold formatting, and list formatting, instructions formatting with text color, bold formatting, and list formatting, photo display settings, photo shape configuration)
   - Committee management (add, edit, delete committees with name, description, image, role details, staff details with photo upload and role field, student details with photo upload and role field, photo display settings, photo shape configuration, purple glow effect settings)
   - Committee detail retrieval for detailed view
-  - Gallery image management (upload, retrieve, delete, frame width configuration, frame color configuration, diagonal glow animation configuration, wave form color transition configuration)
+  - Gallery image management (upload, retrieve, delete, frame width configuration, gold frame color configuration, glow effect configuration)
   - Complete application editing
   - Chatbot information retrieval (excluding admin passkey information)
-  - Image upload to Supabase Storage (including splash screen images, pop-up images, total body background images, FUSION 2k26 background images, event posters, staff/student photos, committee images, mobile scrolling logos)
+  - Image upload to Supabase Storage (including splash screen images, pop-up images, total body background images, animated FUSION 2k26 background slideshow images, event posters, staff/student photos, committee images, mobile scrolling logos) with 50MB size limit support
 - Environment variable support for connection credentials storage
 - Error handling for database connection failures
 - Automatic passkey recognition logic without explicit admin access option
-- Proper image URL storage and retrieval for pop-up images, event posters, and mobile logos
+- Proper image URL storage and retrieval for pop-up images, event posters, mobile logos, and animated background slideshow images
 - Database query optimization for efficient image retrieval and display
+- Image upload validation for 50MB file size limit
 
 ### 4.3 Image Upload Implementation
 - Splash screen image upload flow:
-  - Admin uploads splash screen image through Splash Screen Management interface
+  - Admin uploads splash screen image through Splash Screen Management interface (up to 50MB)
   - Frontend sends image file to backend API endpoint
   - Backend uploads image to Supabase Storage splash_screens bucket
   - Backend receives public URL from Supabase Storage
@@ -920,7 +947,7 @@ Web Application (College Fest Management Platform)
   - Frontend retrieves splash screen image URL and displays for 2 seconds on initial load
   - Public UI displays splash screen with automatic transition to main application
 - Pop-up image upload flow:
-  - Admin uploads pop-up image through Pop-up Image Management interface
+  - Admin uploads pop-up image through Pop-up Image Management interface (up to 50MB)
   - Frontend sends image file to backend API endpoint
   - Backend uploads image to Supabase Storage popup_images bucket
   - Backend receives public URL from Supabase Storage
@@ -930,7 +957,7 @@ Web Application (College Fest Management Platform)
   - Frontend retrieves pop-up image URL and displays on initial page load with configurable duration and hold-to-freeze functionality
   - Public UI displays pop-up image with proper image recognition ensuring visibility to users
 - Total body background image upload flow:
-  - Admin uploads total body background image through Total Body Background Management interface
+  - Admin uploads total body background image through Total Body Background Management interface (up to 50MB)
   - Frontend sends image file to backend API endpoint
   - Backend uploads image to Supabase Storage total_backgrounds bucket
   - Backend receives public URL from Supabase Storage
@@ -938,23 +965,25 @@ Web Application (College Fest Management Platform)
   - Frontend retrieves background image URL and applies responsive scaling
   - Public UI displays background image across entire application body with automatic scaling across all screen sizes
 - Gallery image upload flow:
-  - Admin selects images through Gallery Management interface
+  - Admin selects images through Gallery Management interface (up to 50MB per image)
   - Frontend sends image files to backend API endpoint
   - Backend uploads images to Supabase Storage gallery bucket
   - Backend receives public URL from Supabase Storage
-  - Backend stores image URL, frame width, frame color settings, and animation settings in gallery_images table
+  - Backend stores image URL, frame width, gold frame color, and glow effect settings in gallery_images table
   - Frontend retrieves image URLs from gallery_images table
-  - Public UI Gallery Section displays images using stored URLs with increased frame width (1-2px more) and animated frame color effects
-- FUSION 2k26 background image upload flow:
-  - Admin uploads background image through Primary Header Management interface
-  - Frontend sends image file to backend API endpoint
-  - Backend uploads image to Supabase Storage backgrounds bucket
-  - Backend receives public URL from Supabase Storage
-  - Backend stores image URL and responsive scaling settings in primary_header_content table
-  - Frontend retrieves background image URL and applies responsive scaling
-  - Public UI displays background image with automatic scaling across all screen sizes
+  - Public UI Gallery Section displays images using stored URLs with increased frame width (1-2px more) and unified gold frame color with glow effect
+- Animated FUSION 2k26 background slideshow image upload flow:
+  - Admin uploads background slideshow images through Primary Header Management interface (up to 5 images, each up to 50MB)
+  - Frontend sends image files to backend API endpoint
+  - Backend uploads images to Supabase Storage backgrounds bucket
+  - Backend receives public URLs from Supabase Storage
+  - Backend stores image URLs array (up to 5 URLs), slideshow display duration (5 seconds), and dissolve transition effect in primary_header_content table
+  - Admin can reorder slideshow images with drag-and-drop interface
+  - Admin can delete individual slideshow images
+  - Frontend retrieves background slideshow image URLs and applies animated slideshow with dissolve transitions
+  - Public UI displays animated background slideshow with 5-second display duration per image and smooth dissolve transitions
 - Event poster image upload flow:
-  - Admin uploads poster images through Event Poster Management interface
+  - Admin uploads poster images through Event Poster Management interface (up to 50MB per poster)
   - Frontend sends image files to backend API endpoint
   - Backend uploads images to Supabase Storage event_posters bucket
   - Backend receives public URL from Supabase Storage
@@ -964,21 +993,21 @@ Web Application (College Fest Management Platform)
   - Frontend retrieves poster image URLs and displays with automatic scrolling animation and hold-to-freeze functionality
   - Public UI displays event posters with proper image recognition ensuring visibility to users
 - Staff/Student photo upload flow:
-  - Admin uploads staff/student photos through Event Management interface
+  - Admin uploads staff/student photos through Event Management interface (up to 50MB per photo)
   - Frontend sends image files to backend API endpoint
   - Backend uploads images to Supabase Storage coordinator_photos bucket
   - Backend receives public URL from Supabase Storage
   - Backend stores image URL in events table (event-specific)
   - Frontend retrieves photo URLs and displays in round or semi-circle shape based on configuration
 - Committee image and staff/student photo upload flow:
-  - Admin uploads committee images and staff/student photos through Committee Management interface
+  - Admin uploads committee images and staff/student photos through Committee Management interface (up to 50MB per image)
   - Frontend sends image files to backend API endpoint
   - Backend uploads images to Supabase Storage committees bucket
   - Backend receives public URL from Supabase Storage
   - Backend stores image URLs in committees table
   - Frontend retrieves image URLs and displays committee images and staff/student photos
 - Mobile logo scrolling image upload flow (homepage only):
-  - Admin uploads logo images through Mobile Logo Scrolling Management interface
+  - Admin uploads logo images through Mobile Logo Scrolling Management interface (up to 50MB per logo)
   - Frontend sends image files to backend API endpoint
   - Backend uploads images to Supabase Storage mobile_logos bucket
   - Backend receives public URL from Supabase Storage
@@ -988,52 +1017,53 @@ Web Application (College Fest Management Platform)
   - Frontend retrieves logo image URLs and displays with automatic left-to-right scrolling animation, glow effect, and transparent background on mobile homepage only
   - Public UI displays mobile logos with proper image recognition ensuring visibility to users
 - File update locations for splash screen image upload:
-  - Backend API file: Create/update splash screen upload endpoint (e.g., /api/splash-screen/upload)
+  - Backend API file: Create/update splash screen upload endpoint (e.g., /api/splash-screen/upload) with 50MB size limit validation
   - Admin Dashboard component: Add splash screen image upload interface in Splash Screen Management section
   - Public Splash Screen component: Fetch and display splash screen image with 2-second duration and automatic transition
-  - Supabase Storage configuration: Create splash_screens bucket with public access
+  - Supabase Storage configuration: Create splash_screens bucket with public access and 50MB size limit
 - File update locations for pop-up image upload:
-  - Backend API file: Create/update pop-up image upload endpoint (e.g., /api/popup-image/upload)
+  - Backend API file: Create/update pop-up image upload endpoint (e.g., /api/popup-image/upload) with 50MB size limit validation
   - Admin Dashboard component: Add pop-up image upload interface in Pop-up Image Management section with add/delete functionality
   - Public Pop-up Image component: Fetch and display pop-up image with configurable display duration and hold-to-freeze functionality
-  - Supabase Storage configuration: Create popup_images bucket with public access
+  - Supabase Storage configuration: Create popup_images bucket with public access and 50MB size limit
   - Database schema: Update popup_image_content table with default_display_duration and hold_to_freeze_enabled fields
 - File update locations for total body background image upload:
-  - Backend API file: Create/update total body background upload endpoint (e.g., /api/total-background/upload)
+  - Backend API file: Create/update total body background upload endpoint (e.g., /api/total-background/upload) with 50MB size limit validation
   - Admin Dashboard component: Add total body background image upload interface in Total Body Background Management section
   - Public Body component: Fetch and display total body background image with responsive scaling
-  - Supabase Storage configuration: Create total_backgrounds bucket with public access
+  - Supabase Storage configuration: Create total_backgrounds bucket with public access and 50MB size limit
 - File update locations for gallery image upload:
-  - Backend API file: Create/update gallery upload endpoint (e.g., /api/gallery/upload)
-  - Admin Dashboard component: Add image upload interface in Gallery Management section with frame color and animation configuration
-  - Public Gallery component: Fetch and display images from gallery_images table with increased frame width and animated frame color effects
-  - Supabase Storage configuration: Create gallery bucket with public access
-- File update locations for FUSION 2k26 background image upload:
-  - Backend API file: Create/update background upload endpoint (e.g., /api/header/background)
-  - Admin Dashboard component: Add background image upload interface in Primary Header Management section
-  - Public Header component: Fetch and display background image with responsive scaling
-  - Supabase Storage configuration: Create backgrounds bucket with public access
+  - Backend API file: Create/update gallery upload endpoint (e.g., /api/gallery/upload) with 50MB size limit validation
+  - Admin Dashboard component: Add image upload interface in Gallery Management section with gold frame color and glow effect configuration
+  - Public Gallery component: Fetch and display images from gallery_images table with increased frame width and unified gold frame color with glow effect
+  - Supabase Storage configuration: Create gallery bucket with public access and 50MB size limit
+- File update locations for animated FUSION 2k26 background slideshow image upload:
+  - Backend API file: Create/update background slideshow upload endpoint (e.g., /api/header/background-slideshow) with 50MB size limit validation and support for up to 5 images
+  - Admin Dashboard component: Add background slideshow image upload interface in Primary Header Management section with drag-and-drop reordering, individual image deletion, and dissolve transition preview
+  - Public Header component: Fetch and display animated background slideshow with 5-second display duration per image and dissolve transitions
+  - Supabase Storage configuration: Create backgrounds bucket with public access and 50MB size limit
+  - Database schema: Update primary_header_content table with background_slideshow_images array (up to 5 URLs), slideshow_display_duration (5 seconds), and slideshow_transition_effect (dissolve)
 - File update locations for event poster image upload:
-  - Backend API file: Create/update event poster upload endpoint (e.g., /api/event-posters/upload)
+  - Backend API file: Create/update event poster upload endpoint (e.g., /api/event-posters/upload) with 50MB size limit validation
   - Admin Dashboard component: Add poster image upload interface in Event Poster Management section with add/delete functionality and hold-to-freeze configuration
   - Public Event Poster Section component: Fetch and display posters with automatic scrolling animation and hold-to-freeze functionality
-  - Supabase Storage configuration: Create event_posters bucket with public access
+  - Supabase Storage configuration: Create event_posters bucket with public access and 50MB size limit
   - Database schema: Update event_posters table with proper image URL storage, animation_duration, and hold_to_freeze_enabled fields
 - File update locations for staff/student photo upload:
-  - Backend API file: Create/update staff/student photo upload endpoint (e.g., /api/coordinators/photo)
+  - Backend API file: Create/update staff/student photo upload endpoint (e.g., /api/coordinators/photo) with 50MB size limit validation
   - Admin Dashboard component: Add photo upload interface in Event Management sections
   - Public Event Detail Page components: Fetch and display staff/student photos
-  - Supabase Storage configuration: Create coordinator_photos bucket with public access
+  - Supabase Storage configuration: Create coordinator_photos bucket with public access and 50MB size limit
 - File update locations for committee image and staff/student photo upload:
-  - Backend API file: Create/update committee image upload endpoint (e.g., /api/committees/image)
+  - Backend API file: Create/update committee image upload endpoint (e.g., /api/committees/image) with 50MB size limit validation
   - Admin Dashboard component: Add image upload interface in Committee Management section
   - Public Committee Section component: Fetch and display committee images and staff/student photos
-  - Supabase Storage configuration: Create committees bucket with public access
+  - Supabase Storage configuration: Create committees bucket with public access and 50MB size limit
 - File update locations for mobile logo scrolling image upload (homepage only):
-  - Backend API file: Create/update mobile logo upload endpoint (e.g., /api/mobile-logos/upload)
+  - Backend API file: Create/update mobile logo upload endpoint (e.g., /api/mobile-logos/upload) with 50MB size limit validation
   - Admin Dashboard component: Add logo upload interface in Mobile Logo Scrolling Management section with add/delete functionality, glow effect configuration, and transparent background configuration
   - Public Mobile Logo Scrolling Section component: Fetch and display logos with automatic left-to-right scrolling animation, glow effect, and transparent background on mobile homepage only
-  - Supabase Storage configuration: Create mobile_logos bucket with public access
+  - Supabase Storage configuration: Create mobile_logos bucket with public access and 50MB size limit
   - Database schema: Update mobile_logo_scrolling table with proper image URL storage, glow_effect_settings, and transparent_background_enabled fields
 
 ### 4.4 Rich Text Editor Implementation
@@ -1122,7 +1152,23 @@ Web Application (College Fest Management Platform)
   - Admin Dashboard Event Poster Management component: Add animation speed configuration interface and animation duration configuration
   - Backend API: Implement proper image URL retrieval from event_posters table with animation_duration and hold_to_freeze_enabled fields
 
-### 4.7 FUSION 2k26 Text Animation Implementation
+### 4.7 FUSION 2k26 Animated Background Slideshow Implementation
+- Animated background slideshow functionality:
+  - Support up to 5 background images
+  - Automatic slideshow with dissolve transition effect
+  - Display duration: 5 seconds per image
+  - Continuous loop through all uploaded images
+  - Smooth dissolve animation between images
+  - Responsive scaling across all screen sizes
+  - Admin can upload, delete, and reorder slideshow images
+- File update locations for animated background slideshow:
+  - Public Header component: Implement slideshow animation logic with dissolve transitions
+  - CSS/Animation file: Add dissolve transition styles and keyframes
+  - Admin Dashboard Primary Header Management component: Add slideshow image upload interface with drag-and-drop reordering and individual image deletion
+  - Backend API: Implement slideshow image upload, deletion, and reordering endpoints with proper image URL array storage (up to 5 URLs)
+  - Database schema: Update primary_header_content table with background_slideshow_images array, slideshow_display_duration (5 seconds), and slideshow_transition_effect (dissolve)
+
+### 4.8 FUSION 2k26 Text Animation Implementation
 - FUSION 2k26 text animations:
   - Implement entrance animations (fade, slide, etc.)
   - Implement continuous motion effects
@@ -1134,7 +1180,7 @@ Web Application (College Fest Management Platform)
   - CSS/Animation file: Add text animation styles and keyframes
   - Admin Dashboard FUSION 2k26 Text Management component: Add animation configuration interface
 
-### 4.8 Staff/Student Photo Display Implementation
+### 4.9 Staff/Student Photo Display Implementation
 - Staff/Student photo display functionality:
   - Support round and semi-circle photo shapes
   - Photo display enable/disable option
@@ -1146,7 +1192,7 @@ Web Application (College Fest Management Platform)
   - CSS file: Add photo shape styles (round and semi-circle)
   - Admin Dashboard components: Add photo upload and shape configuration interfaces
 
-### 4.9 Mobile Logo Scrolling Implementation (Homepage Only)
+### 4.10 Mobile Logo Scrolling Implementation (Homepage Only)
 - Mobile logo scrolling functionality:
   - Implement horizontal scrolling animation (left to right)
   - Continuous loop animation
@@ -1165,7 +1211,7 @@ Web Application (College Fest Management Platform)
   - Admin Dashboard Mobile Logo Scrolling Management component: Add logo upload, order configuration, glow effect configuration, transparent background configuration, and animation settings interface with add/delete functionality
   - Backend API: Create endpoints for mobile logo management (upload, retrieve, delete, order configuration, glow effect configuration, transparent background configuration) with proper image URL storage
 
-### 4.10 Committee Card Purple Glow Effect Implementation
+### 4.11 Committee Card Purple Glow Effect Implementation
 - Committee card purple glow effect functionality:
   - Implement purple glow effect on card click
   - Smooth transition for glow effect
@@ -1184,38 +1230,64 @@ Web Application (College Fest Management Platform)
     }
     ```
 
-### 4.11 Gallery Frame Color Animation Implementation
-- Gallery frame color animation functionality:
-  - Implement animated frame color effects with colors: Gold, Blue, Sky Blue, Purple, Pink
-  - Implement diagonal glow animation moving from left-top corner to right-bottom corner
-  - Implement wave form color transitions across all frame colors
-  - Automatic glow animation applied to all frames
-  - Smooth color transitions creating dynamic visual effect
-  - Admin can configure frame colors and animation settings
-  - Responsive frame color animation across all screen sizes
-- File update locations for gallery frame color animation:
-  - Admin Dashboard Gallery Management component: Add frame color configuration interface and diagonal glow animation configuration
-  - Public Gallery Section component: Apply configured frame colors and animated glow effects to images
-  - CSS/Animation file: Add frame color styles, diagonal glow animation keyframes, and wave form color transition styles
-  - Backend API: Store frame color configuration and animation settings in gallery_images table or separate configuration table
+### 4.12 Gallery Gold Frame with Glow Effect Implementation
+- Gallery gold frame with glow effect functionality:
+  - Implement unified gold frame color for all gallery images
+  - Implement glow effect applied to all frames
+  - Configurable glow intensity and spread
+  - Consistent gold glow creating elegant and premium appearance
+  - Admin can configure glow effect settings
+  - Responsive gold glow effect across all screen sizes
+- File update locations for gallery gold frame with glow effect:
+  - Admin Dashboard Gallery Management component: Add gold frame color configuration and glow effect configuration interface
+  - Public Gallery Section component: Apply gold frame color and glow effect to all images
+  - CSS/Animation file: Add gold frame color styles and glow effect styles using box-shadow or similar CSS properties
+  - Backend API: Store gold frame color and glow effect configuration in gallery_images table
+  - Example CSS:
+    ```css
+    .gallery-frame {
+      border: 2px solid gold;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.8),
+                  0 0 30px rgba(255, 215, 0, 0.6),
+                  0 0 45px rgba(255, 215, 0, 0.4);
+    }
+    ```
 
-### 4.12 Splash Screen Implementation
+### 4.13 Mobile View Navigation Menu Icon Transparent Background Implementation
+- Mobile view navigation menu icon enhancement:
+  - Remove background from menu icon lines only in mobile view
+  - Menu icon lines display without background
+  - Transparent background for menu icon in mobile view
+  - Desktop and tablet views remain unchanged
+- File update locations for mobile view navigation menu icon:
+  - Public Header component: Add mobile-specific CSS for menu icon transparent background
+  - CSS/Animation file: Add mobile view media query for menu icon transparent background
+  - Example CSS:
+    ```css
+    @media (max-width: 768px) {
+      .menu-icon-lines {
+        background: transparent;
+      }
+    }
+    ```
+
+### 4.14 Splash Screen Implementation
 - Splash screen functionality:
   - Display splash screen image on initial application load
   - 2-second display duration (fixed)
   - Automatic transition to main application after 2 seconds
   - Smooth fade-in and fade-out animations
   - Responsive image scaling across all screen sizes
-  - Admin can upload and configure splash screen image
+  - Admin can upload and configure splash screen image (up to 50MB)
   - Admin can enable/disable splash screen functionality
 - File update locations for splash screen:
   - Public Splash Screen component: Create new component for splash screen display
   - Main App component: Add splash screen logic to initial load sequence
   - Admin Dashboard Splash Screen Management component: Add splash screen configuration interface
   - CSS/Animation file: Add fade-in and fade-out animation styles
-  - Backend API: Create endpoints for splash screen management (upload, retrieve, update settings)
+  - Backend API: Create endpoints for splash screen management (upload, retrieve, update settings) with 50MB size limit validation
 
-### 4.13 Pop-up Image Implementation
+### 4.15 Pop-up Image Implementation
 - Pop-up image functionality:
   - Display pop-up image on initial page load after splash screen
   - Pop-up image overlays main content
@@ -1227,7 +1299,7 @@ Web Application (College Fest Management Platform)
   - If user does not interact: Image disappears after admin-configured default duration
   - Smooth fade-out animation for dismissal
   - Pop-up does not reappear during same session after dismissal
-  - Admin can upload and configure pop-up image with database storage
+  - Admin can upload and configure pop-up image with database storage (up to 50MB)
   - Admin can add/delete pop-up images
   - Admin can enable/disable pop-up image functionality
   - Admin can configure default display duration
@@ -1236,23 +1308,23 @@ Web Application (College Fest Management Platform)
   - Main App component: Add pop-up image logic to initial load sequence
   - Admin Dashboard Pop-up Image Management component: Add pop-up image configuration interface with display duration settings and add/delete functionality
   - CSS/Animation file: Add fade-out animation styles and overlay styles
-  - Backend API: Create endpoints for pop-up image management (upload, retrieve, update settings, add/delete images) with proper image URL storage
+  - Backend API: Create endpoints for pop-up image management (upload, retrieve, update settings, add/delete images) with proper image URL storage and 50MB size limit validation
   - Database schema: Update popup_image_content table with default_display_duration and hold_to_freeze_enabled fields
 
-### 4.14 Total Body Background Implementation
+### 4.16 Total Body Background Implementation
 - Total body background functionality:
   - Display background image across entire application body
   - Responsive image scaling across all screen sizes
   - Configurable background positioning
   - Configurable fixed/scroll behavior
-  - Admin can upload and configure total body background image
+  - Admin can upload and configure total body background image (up to 50MB)
 - File update locations for total body background:
   - Public Body component: Apply total body background image with responsive scaling
   - Admin Dashboard Total Body Background Management component: Add background configuration interface
   - CSS file: Add total body background styles with responsive scaling
-  - Backend API: Create endpoints for total body background management (upload, retrieve, update settings)
+  - Backend API: Create endpoints for total body background management (upload, retrieve, update settings) with 50MB size limit validation
 
-### 4.15 Chatbot Authentication Enhancement
+### 4.17 Chatbot Authentication Enhancement
 - Enhanced chatbot authentication functionality:
   - Remove admin access option from chatbot interface
   - Remove admin passkey information display from chatbot
@@ -1265,7 +1337,7 @@ Web Application (College Fest Management Platform)
   - Backend authentication API: Implement automatic passkey recognition logic
   - Admin Dashboard component: Update authentication flow to support automatic passkey recognition
 
-### 4.16 Code Quality
+### 4.18 Code Quality
 - Clean, modular, scalable codebase
 - Maintainable UI component structure
 - Optimized for production deployment
@@ -1273,21 +1345,24 @@ Web Application (College Fest Management Platform)
 - Efficient real-time update mechanism
 - Secure connection credentials handling
 - Responsive design implementation using CSS media queries and flexible layouts
-- Responsive image scaling implementation for splash screen, pop-up image, total body background, and FUSION 2k26 background images
+- Responsive image scaling implementation for splash screen, pop-up image, total body background, and animated FUSION 2k26 background slideshow images
 - Rich text editor integration with proper sanitization and text color/bold formatting support for description, rules, and instructions
 - Modal/detail view component with proper state management
 - Automatic scrolling animation implementation for event posters with hold-to-freeze functionality
+- Animated background slideshow implementation with dissolve transitions for FUSION 2k26 header
 - Text animation implementation for FUSION 2k26 text
 - Photo display implementation with shape configuration and lazy loading
 - Mobile logo scrolling implementation (homepage only) with semi-square shape, 20px height, glow effect, and transparent background
 - Committee card purple glow effect implementation
-- Gallery frame color animation implementation with diagonal glow and wave form color transitions
+- Gallery gold frame with glow effect implementation
+- Mobile view navigation menu icon transparent background implementation
 - Splash screen implementation with 2-second duration and automatic transition
 - Pop-up image implementation with configurable display duration, hold-to-freeze functionality, and database storage
 - Total body background implementation with responsive scaling
 - Enhanced chatbot authentication with automatic passkey recognition
-- Proper database integration for pop-up images, event posters, and mobile logos with image URL storage and retrieval
+- Proper database integration for pop-up images, event posters, mobile logos, and animated background slideshow images with image URL storage and retrieval
 - Image recognition implementation ensuring all admin-uploaded images display correctly to users
+- Image upload validation and handling for 50MB file size limit across all image types
 
 ## 5. User Flow
 
@@ -1301,13 +1376,14 @@ Web Application (College Fest Management Platform)
    - No interaction: Image disappears after admin-configured default duration
 5. User lands on cinematic homepage with total body background image and dual header system:
    - Total body background image automatically scales to fit screen size
-   - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us) with FUSION 2k26 background image that automatically scales to fit screen size
+   - Primary header displaying navigation menu at top-right corner (Home, Events, Committee, Gallery, About Us, Contact Us) with animated FUSION 2k26 background slideshow (up to 5 images with 5-second dissolve transitions) that automatically scales to fit screen size
+   - Mobile view: Navigation menu icon displays with transparent background (no background on menu lines only)
    - FUSION 2k26 text with responsive sizing and animated effects
    - Secondary header positioned below primary header displaying ADITYA College of Engineering Madanapalle (golden color with black border and glowing background, responsive font sizing), MADANAPALLE (responsive font 12/14), UGC - Autonomous Institution (responsive font 12/14), and college logos with configured shapes (circle/semi-square) that automatically adjust size based on screen size with minimum two logos visible on mobile (left-right positioning)
    - Mobile logo scrolling section (mobile view only, homepage only) displaying semi-square logos (20px height) with automatic left-to-right scrolling animation, glow effect around logos, and transparent background
 6. User navigates through multiple web pages using top-right navigation menu
-7. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments, responsive total body background image scaling, responsive FUSION 2k26 background image scaling, and animated FUSION 2k26 text
-8. User views Gallery Section with animated frame color effects (Gold, Blue, Sky Blue, Purple, Pink) featuring diagonal glow animation moving from left-top to right-bottom corner in wave form across all frames
+7. User experiences consistent responsive design across all screen sizes with automatic font and logo adjustments, responsive total body background image scaling, responsive animated FUSION 2k26 background slideshow scaling with dissolve transitions, and animated FUSION 2k26 text
+8. User views Gallery Section with unified gold frame color and glow effect for all frames creating elegant and premium appearance
 9. User views Event Poster Section positioned after Gallery and before About Us with automatic horizontal scrolling animation (left to right)
 10. User can interact with event posters:
    - Hold/touch poster: Animation freezes, poster displays as pop-up
@@ -1336,7 +1412,7 @@ Web Application (College Fest Management Platform)
 20. User closes detail view and returns to Committee Section
 21. User views improved footer section with contact details and social media links
 22. User can interact with chatbot to get website information and details (no admin passkey information displayed)
-23. User experiences optimal viewing on mobile devices with properly scaled logos (minimum two visible with left-right positioning), text with golden color, black border, and glowing background, responsive total body background image, responsive FUSION 2k26 background image, animated FUSION 2k26 text in secondary header, mobile logo scrolling section (homepage only) with semi-square logos (20px height), automatic left-to-right scrolling animation, glow effect around logos, and transparent background
+23. User experiences optimal viewing on mobile devices with properly scaled logos (minimum two visible with left-right positioning), text with golden color, black border, and glowing background, responsive total body background image, responsive animated FUSION 2k26 background slideshow with dissolve transitions, animated FUSION 2k26 text in secondary header, mobile logo scrolling section (homepage only) with semi-square logos (20px height), automatic left-to-right scrolling animation, glow effect around logos, transparent background, and navigation menu icon with transparent background (no background on menu lines only)
 
 ### 5.2 Admin Flow
 1. Admin clicks floating chatbot at bottom-right corner
@@ -1354,38 +1430,40 @@ Web Application (College Fest Management Platform)
    - Confirms successful connection
    - System automatically creates required tables and storage buckets
 9. Admin manages content with instant live preview updates:
-   - Splash Screen: Upload splash screen image, configure display duration, enable/disable functionality, configure responsive scaling
-   - Pop-up Image: Upload pop-up image with database storage, add/delete images, enable/disable functionality, configure responsive scaling, configure default display duration, preview hold-to-freeze functionality
-   - Total Body Background: Upload total body background image, configure responsive scaling for different screen sizes, configure positioning, configure fixed/scroll behavior
-   - Primary Header: Position navigation menu at top-right, configure styling, upload FUSION 2k26 background image, configure responsive scaling for background image across different screen sizes
+   - Splash Screen: Upload splash screen image (up to 50MB), configure display duration, enable/disable functionality, configure responsive scaling
+   - Pop-up Image: Upload pop-up image with database storage (up to 50MB), add/delete images, enable/disable functionality, configure responsive scaling, configure default display duration, preview hold-to-freeze functionality
+   - Total Body Background: Upload total body background image (up to 50MB), configure responsive scaling for different screen sizes, configure positioning, configure fixed/scroll behavior
+   - Primary Header: Position navigation menu at top-right, configure mobile menu icon transparent background (no background on menu lines only), configure styling, upload animated FUSION 2k26 background slideshow images (up to 5 images, each up to 50MB), reorder slideshow images with drag-and-drop, delete individual slideshow images, configure 5-second display duration and dissolve transition effect, configure responsive scaling for background slideshow across different screen sizes
    - FUSION 2k26 Text: Configure text content, font settings, responsive sizing, alignment, animation settings
-   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden color styling with black border and glowing background, upload logos, configure logo shapes (circle/semi-square), configure responsive sizing for logos and text across different screen sizes with minimum two logos visible on mobile (left-right positioning), manage positioning, update static data
-   - Mobile Logo Scrolling (homepage only): Add/remove logos with database storage, configure logo display order, configure scrolling animation settings (semi-square shape, 20px height, left-to-right animation), configure glow effect settings, configure transparent background
+   - Secondary Header: Update college name (ADITYA College of Engineering Madanapalle), location (MADANAPALLE), institution status (UGC - Autonomous Institution), configure golden color styling with black border and glowing background, upload logos (up to 50MB per logo), configure logo shapes (circle/semi-square), configure responsive sizing for logos and text across different screen sizes with minimum two logos visible on mobile (left-right positioning), manage positioning, update static data
+   - Mobile Logo Scrolling (homepage only): Add/remove logos with database storage (up to 50MB per logo), configure logo display order, configure scrolling animation settings (semi-square shape, 20px height, left-to-right animation), configure glow effect settings, configure transparent background
    - Responsive Configuration: Set breakpoints, configure font size mappings for different screen sizes, configure logo size mappings for desktop/tablet/mobile views with mobile left-right positioning, configure background image scaling behavior, configure text alignment mappings
    - Text Styling: Adjust font, size, color
    - Background: Change color or upload background image (admin-controlled) with responsive scaling configuration
    - Body Content: Add text boxes anywhere with drag-and-drop, edit positioning and content
    - Footer: Edit structure, update contact details, customize styling
-   - Event Posters: Upload event poster images with database storage, add/delete posters, configure automatic scrolling animation settings, configure animation duration, configure hold-to-freeze functionality, rearrange poster display order
-   - Events: Add event details including rules with rich text formatting, instructions with rich text formatting, multiple images, event-specific staff coordinator details (name, role, photo with shape configuration), event-specific student coordinator details (name, contact number, photo with shape configuration), Google Form link; Use rich text editor for event description, rules, and instructions with text justification, list formatting options (bullet and numbered), text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
-   - Committees: Add committees with name, description, image (optional), role details, staff details (name, role, photo with shape configuration, contact), student details (name, role, photo with shape configuration, contact); Edit committee information; Configure photo display enable/disable option per committee; Configure purple glow effect settings
-   - Gallery: Upload images through Gallery Management interface, images stored in Supabase Storage and displayed in public Gallery Section; Configure image frame width (increased by 1-2px for enhanced visual presentation); Configure frame colors (Gold, Blue, Sky Blue, Purple, Pink); Configure diagonal glow animation (left-top to right-bottom); Configure wave form color transitions
+   - Event Posters: Upload event poster images with database storage (up to 50MB per poster), add/delete posters, configure automatic scrolling animation settings, configure animation duration, configure hold-to-freeze functionality, rearrange poster display order
+   - Events: Add event details including rules with rich text formatting, instructions with rich text formatting, multiple images (up to 50MB per image), event-specific staff coordinator details (name, role, photo with shape configuration up to 50MB), event-specific student coordinator details (name, contact number, photo with shape configuration up to 50MB), Google Form link; Use rich text editor for event description, rules, and instructions with text justification, list formatting options (bullet and numbered), text color picker, and bold text button; Edit event-specific coordinator details directly within Events Section; Configure photo display enable/disable option per event
+   - Committees: Add committees with name, description, image (optional, up to 50MB), role details, staff details (name, role, photo with shape configuration up to 50MB, contact), student details (name, role, photo with shape configuration up to 50MB, contact); Edit committee information; Configure photo display enable/disable option per committee; Configure purple glow effect settings
+   - Gallery: Upload images through Gallery Management interface (up to 50MB per image), images stored in Supabase Storage and displayed in public Gallery Section; Configure image frame width (increased by 1-2px for enhanced visual presentation); Configure unified gold frame color; Configure glow effect intensity and spread for all frames
    - About Us, Contact management
    - Chatbot information content management (excluding admin passkey information)
 10. Admin arranges homepage layout and dual header sections as desired
-11. Admin uploads and configures splash screen image with responsive scaling settings
-12. Admin uploads and configures pop-up image with responsive scaling settings, display duration configuration, and hold-to-freeze functionality
-13. Admin uploads and configures total body background image with responsive scaling settings for different devices
-14. Admin uploads and configures FUSION 2k26 background image with responsive scaling settings for different devices
-15. Admin configures FUSION 2k26 text with responsive sizing and animation settings
-16. Admin configures responsive behavior for secondary header including logo sizing (minimum two visible on mobile with left-right positioning) and text scaling with golden color, black border, and glowing background for different devices
-17. Admin configures mobile logo scrolling section (homepage only) with logo upload, order settings, animation configuration (semi-square shape, 20px height, left-to-right animation), glow effect configuration, and transparent background configuration
-18. Admin uploads event poster images, configures automatic scrolling animation, configures animation duration, and configures hold-to-freeze functionality
-19. Admin configures gallery frame colors and diagonal glow animation with wave form color transitions
-20. Admin edits entire application including splash screen, pop-up image with display duration settings, total body background, primary header with FUSION 2k26 background image, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, mobile logo scrolling section (homepage only) with glow effect and transparent background, event poster section with scrolling animation and hold-to-freeze functionality, footer, body sections, event-specific coordinator details with photo management and role field, committee information including name, description, image, role details, and staff/student details with photo management and role field, event descriptions, rules, and instructions with rich text formatting including justified text, list formatting (bullet and numbered), text color customization, and bold text formatting for all events, gallery frame color animation with diagonal glow and wave form color transitions, and committee card purple glow effect settings
-21. Admin can change passkey through Passkey Management
-22. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including splash screen display, pop-up image display with configurable duration and hold-to-freeze functionality, total body background image scaling, FUSION 2k26 background image scaling, text animations, poster scrolling with hold-to-freeze functionality, photo display, mobile logo scrolling (homepage only) with glow effect and transparent background, committee card purple glow effect, gallery frame color animation with diagonal glow and wave form color transitions, and event content formatting with justified text, lists (bullet and numbered), text colors, and bold formatting
-23. Admin can access and edit multiple web pages with consistent editing interface
+11. Admin uploads and configures splash screen image with responsive scaling settings (up to 50MB)
+12. Admin uploads and configures pop-up image with responsive scaling settings, display duration configuration, and hold-to-freeze functionality (up to 50MB)
+13. Admin uploads and configures total body background image with responsive scaling settings for different devices (up to 50MB)
+14. Admin uploads and configures animated FUSION 2k26 background slideshow images (up to 5 images, each up to 50MB) with 5-second display duration, dissolve transition effect, drag-and-drop reordering, and individual image deletion
+15. Admin configures mobile view navigation menu icon with transparent background (no background on menu lines only)
+16. Admin configures FUSION 2k26 text with responsive sizing and animation settings
+17. Admin configures responsive behavior for secondary header including logo sizing (minimum two visible on mobile with left-right positioning) and text scaling with golden color, black border, and glowing background for different devices
+18. Admin configures mobile logo scrolling section (homepage only) with logo upload (up to 50MB per logo), order settings, animation configuration (semi-square shape, 20px height, left-to-right animation), glow effect configuration, and transparent background configuration
+19. Admin uploads event poster images (up to 50MB per poster), configures automatic scrolling animation, configures animation duration, and configures hold-to-freeze functionality
+20. Admin configures gallery with unified gold frame color and glow effect for all frames
+21. Admin edits entire application including splash screen, pop-up image with display duration settings, total body background, primary header with animated FUSION 2k26 background slideshow (up to 5 images with dissolve transitions), mobile menu icon transparent background, FUSION 2k26 text with animations, secondary header with responsive configurations and glowing background, mobile logo scrolling section (homepage only) with glow effect and transparent background, event poster section with scrolling animation and hold-to-freeze functionality, footer, body sections, event-specific coordinator details with photo management and role field, committee information including name, description, image, role details, and staff/student details with photo management and role field, event descriptions, rules, and instructions with rich text formatting including justified text, list formatting (bullet and numbered), text color customization, and bold text formatting for all events, gallery with unified gold frame color and glow effect, and committee card purple glow effect settings
+22. Admin can change passkey through Passkey Management
+23. All changes save to Supabase automatically and reflect immediately across all web pages on public UI and live preview with proper responsive behavior including splash screen display, pop-up image display with configurable duration and hold-to-freeze functionality, total body background image scaling, animated FUSION 2k26 background slideshow scaling with dissolve transitions, mobile menu icon transparent background, text animations, poster scrolling with hold-to-freeze functionality, photo display, mobile logo scrolling (homepage only) with glow effect and transparent background, committee card purple glow effect, gallery unified gold frame color with glow effect, and event content formatting with justified text, lists (bullet and numbered), text colors, and bold formatting
+24. Admin can access and edit multiple web pages with consistent editing interface
+25. All image uploads support up to 50MB file size limit
 
 ## 6. Development and Deployment Guide
 
@@ -1430,44 +1508,47 @@ Web Application (College Fest Management Platform)
 2. Test pop-up image display on initial page load with configurable display duration and hold-to-freeze functionality
 3. Test total body background image display and responsive scaling across different screen sizes
 4. Test public user interface with dual header system
-5. Test FUSION 2k26 background image display and responsive scaling across different screen sizes
-6. Test FUSION 2k26 text display with responsive sizing and animations
-7. Test responsive behavior of secondary header across different screen sizes with golden color, black border, and glowing background
-8. Verify logo sizing adjustments on mobile, tablet, and desktop views with minimum two logos visible on mobile (left-right positioning)
-9. Verify text scaling for college name, location, and institution status across devices
-10. Test mobile logo scrolling section (homepage only) with semi-square logos (20px height), automatic left-to-right scrolling animation, glow effect around logos, and transparent background on mobile devices
-11. Verify mobile logo scrolling section does not display on desktop or tablet views
-12. Verify mobile logo scrolling section displays only on homepage, not on other pages
-13. Test gallery section display with animated frame color effects (Gold, Blue, Sky Blue, Purple, Pink) featuring diagonal glow animation and wave form color transitions
-14. Test event poster section display positioned after Gallery and before About Us with automatic scrolling animation and hold-to-freeze functionality
-15. Test chatbot functionality (verify no admin access option or passkey information displayed)
-16. Test admin authentication with automatic passkey recognition
-17. Test admin dashboard functionality
-18. Test database connection
-19. Verify live preview updates
-20. Test gallery image upload and display with increased frame width (1-2px more) and animated frame color effects
-21. Test splash screen image upload and responsive scaling configuration
-22. Test pop-up image upload, add/delete functionality, responsive scaling configuration, and display duration configuration
-23. Test pop-up image hold-to-freeze functionality
-24. Test total body background image upload and responsive scaling configuration
-25. Test FUSION 2k26 background image upload and responsive scaling configuration
-26. Test FUSION 2k26 text configuration with responsive sizing and animation settings
-27. Test event poster image upload, add/delete functionality, scrolling animation configuration, animation duration configuration, and hold-to-freeze functionality configuration
-28. Test primary and secondary header management including responsive configurations with glowing background
-29. Test mobile logo scrolling management (homepage only) with logo upload, add/delete functionality, order configuration, animation settings, glow effect configuration, and transparent background configuration
-30. Test event-specific coordinator details display and photo management
-31. Test event-specific coordinator editing within Events Section with photo upload, shape configuration, and role field
-32. Test committee management with name, description, image, role details, and staff/student details including role field
-33. Test committee card click functionality and detail view opening
-34. Test committee card purple glow effect on click
-35. Test committee detail view display with complete committee information including role details and staff/student details with role field
-36. Test committee detail view close/back functionality
-37. Test event description rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
-38. Test event rules rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
-39. Test event instructions rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
-40. Test event description, rules, and instructions display with formatted content including text colors, bold formatting, and list formatting (bullet and numbered) for all events
-41. Test gallery frame color animation configuration with diagonal glow and wave form color transitions
-42. Verify proper image recognition and display for pop-up images, event posters, and mobile logos
+5. Test animated FUSION 2k26 background slideshow display (up to 5 images with 5-second dissolve transitions) and responsive scaling across different screen sizes
+6. Test mobile view navigation menu icon with transparent background (no background on menu lines only)
+7. Test FUSION 2k26 text display with responsive sizing and animations
+8. Test responsive behavior of secondary header across different screen sizes with golden color, black border, and glowing background
+9. Verify logo sizing adjustments on mobile, tablet, and desktop views with minimum two logos visible on mobile (left-right positioning)
+10. Verify text scaling for college name, location, and institution status across devices
+11. Test mobile logo scrolling section (homepage only) with semi-square logos (20px height), automatic left-to-right scrolling animation, glow effect around logos, and transparent background on mobile devices
+12. Verify mobile logo scrolling section does not display on desktop or tablet views
+13. Verify mobile logo scrolling section displays only on homepage, not on other pages
+14. Test gallery section display with unified gold frame color and glow effect for all frames
+15. Test event poster section display positioned after Gallery and before About Us with automatic scrolling animation and hold-to-freeze functionality
+16. Test chatbot functionality (verify no admin access option or passkey information displayed)
+17. Test admin authentication with automatic passkey recognition
+18. Test admin dashboard functionality
+19. Test database connection
+20. Verify live preview updates
+21. Test gallery image upload and display with increased frame width (1-2px more) and unified gold frame color with glow effect
+22. Test splash screen image upload and responsive scaling configuration (up to 50MB)
+23. Test pop-up image upload, add/delete functionality, responsive scaling configuration, and display duration configuration (up to 50MB)
+24. Test pop-up image hold-to-freeze functionality
+25. Test total body background image upload and responsive scaling configuration (up to 50MB)
+26. Test animated FUSION 2k26 background slideshow image upload (up to 5 images, each up to 50MB), reordering with drag-and-drop, individual image deletion, dissolve transition configuration, and responsive scaling configuration
+27. Test mobile view navigation menu icon transparent background configuration
+28. Test FUSION 2k26 text configuration with responsive sizing and animation settings
+29. Test event poster image upload, add/delete functionality, scrolling animation configuration, animation duration configuration, and hold-to-freeze functionality configuration (up to 50MB per poster)
+30. Test primary and secondary header management including responsive configurations with glowing background
+31. Test mobile logo scrolling management (homepage only) with logo upload (up to 50MB per logo), add/delete functionality, order configuration, animation settings, glow effect configuration, and transparent background configuration
+32. Test event-specific coordinator details display and photo management (up to 50MB per photo)
+33. Test event-specific coordinator editing within Events Section with photo upload, shape configuration, and role field
+34. Test committee management with name, description, image (up to 50MB), role details, and staff/student details including role field
+35. Test committee card click functionality and detail view opening
+36. Test committee card purple glow effect on click
+37. Test committee detail view display with complete committee information including role details and staff/student details with role field
+38. Test committee detail view close/back functionality
+39. Test event description rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
+40. Test event rules rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
+41. Test event instructions rich text editor with justification, list formatting (bullet and numbered), text color picker, and bold text button
+42. Test event description, rules, and instructions display with formatted content including text colors, bold formatting, and list formatting (bullet and numbered) for all events
+43. Test gallery unified gold frame color and glow effect configuration
+44. Verify proper image recognition and display for pop-up images, event posters, mobile logos, and animated background slideshow images
+45. Test image upload validation for 50MB file size limit across all image types
 
 ### 6.2 Publishing on MeDo Platform
 
@@ -1504,44 +1585,47 @@ Web Application (College Fest Management Platform)
 3. Test pop-up image display on initial page load with configurable display duration and hold-to-freeze functionality on actual devices
 4. Test total body background image display and responsive scaling on actual devices
 5. Test all public user features including dual header system
-6. Test FUSION 2k26 background image display and responsive scaling on actual devices
-7. Test FUSION 2k26 text display with responsive sizing and animations on actual devices
-8. Test responsive behavior of secondary header on actual mobile devices with golden color, black border, and glowing background
-9. Verify logo and text scaling across different screen sizes with minimum two logos visible on mobile (left-right positioning)
-10. Test mobile logo scrolling section (homepage only) on actual mobile devices with semi-square logos (20px height), automatic left-to-right scrolling animation, glow effect around logos, and transparent background
-11. Verify mobile logo scrolling section does not display on desktop or tablet devices
-12. Verify mobile logo scrolling section displays only on homepage, not on other pages
-13. Test gallery section display with animated frame color effects (Gold, Blue, Sky Blue, Purple, Pink) featuring diagonal glow animation and wave form color transitions on actual devices
-14. Test event poster section display positioned after Gallery and before About Us with automatic scrolling animation and hold-to-freeze functionality on actual devices
-15. Test chatbot functionality (verify no admin access option or passkey information displayed)
-16. Test admin authentication with automatic passkey recognition
-17. Test admin dashboard
-18. Verify database connectivity
-19. Test live preview functionality
-20. Verify image uploads to Supabase Storage
-21. Test gallery image display on public UI with increased frame width (1-2px more) and animated frame color effects
-22. Test splash screen image upload and responsive scaling configuration
-23. Test pop-up image upload, add/delete functionality, responsive scaling configuration, and display duration configuration
-24. Test pop-up image hold-to-freeze functionality on actual devices
-25. Test total body background image upload and responsive scaling configuration
-26. Test FUSION 2k26 background image upload and responsive scaling configuration
-27. Test FUSION 2k26 text configuration with responsive sizing and animation settings
-28. Test event poster image upload, add/delete functionality, scrolling animation configuration, animation duration configuration, and hold-to-freeze functionality configuration
-29. Test primary and secondary header display and management with responsive configurations and glowing background
-30. Test mobile logo scrolling management (homepage only) with logo upload, add/delete functionality, order configuration, animation settings, glow effect configuration, and transparent background configuration
-31. Test event-specific coordinator details display and photo management functionality
-32. Test event-specific coordinator editing within Events Section with photo upload, shape configuration, and role field
-33. Test committee management with name, description, image, role details, and staff/student details functionality including role field
-34. Test committee card click functionality and detail view opening on actual devices
-35. Test committee card purple glow effect on click on actual devices
-36. Test committee detail view responsiveness across different screen sizes
-37. Test committee detail view close/back functionality
-38. Test event description rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
-39. Test event rules rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
-40. Test event instructions rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
-41. Test event description, rules, and instructions display with justified and listified formatting including text colors, bold formatting, and list formatting (bullet and numbered) for all events
-42. Test gallery frame color animation with diagonal glow and wave form color transitions on actual devices
-43. Verify proper image recognition and display for pop-up images, event posters, and mobile logos on actual devices
+6. Test animated FUSION 2k26 background slideshow display (up to 5 images with 5-second dissolve transitions) and responsive scaling on actual devices
+7. Test mobile view navigation menu icon with transparent background (no background on menu lines only) on actual mobile devices
+8. Test FUSION 2k26 text display with responsive sizing and animations on actual devices
+9. Test responsive behavior of secondary header on actual mobile devices with golden color, black border, and glowing background
+10. Verify logo and text scaling across different screen sizes with minimum two logos visible on mobile (left-right positioning)
+11. Test mobile logo scrolling section (homepage only) on actual mobile devices with semi-square logos (20px height), automatic left-to-right scrolling animation, glow effect around logos, and transparent background
+12. Verify mobile logo scrolling section does not display on desktop or tablet devices
+13. Verify mobile logo scrolling section displays only on homepage, not on other pages
+14. Test gallery section display with unified gold frame color and glow effect for all frames on actual devices
+15. Test event poster section display positioned after Gallery and before About Us with automatic scrolling animation and hold-to-freeze functionality on actual devices
+16. Test chatbot functionality (verify no admin access option or passkey information displayed)
+17. Test admin authentication with automatic passkey recognition
+18. Test admin dashboard
+19. Verify database connectivity
+20. Test live preview functionality
+21. Verify image uploads to Supabase Storage
+22. Test gallery image display on public UI with increased frame width (1-2px more) and unified gold frame color with glow effect
+23. Test splash screen image upload and responsive scaling configuration (up to 50MB)
+24. Test pop-up image upload, add/delete functionality, responsive scaling configuration, and display duration configuration (up to 50MB)
+25. Test pop-up image hold-to-freeze functionality on actual devices
+26. Test total body background image upload and responsive scaling configuration (up to 50MB)
+27. Test animated FUSION 2k26 background slideshow image upload (up to 5 images, each up to 50MB), reordering, deletion, dissolve transition, and responsive scaling configuration
+28. Test mobile view navigation menu icon transparent background on actual mobile devices
+29. Test FUSION 2k26 text configuration with responsive sizing and animation settings
+30. Test event poster image upload, add/delete functionality, scrolling animation configuration, animation duration configuration, and hold-to-freeze functionality configuration (up to 50MB per poster)
+31. Test primary and secondary header display and management with responsive configurations and glowing background
+32. Test mobile logo scrolling management (homepage only) with logo upload (up to 50MB per logo), add/delete functionality, order configuration, animation settings, glow effect configuration, and transparent background configuration
+33. Test event-specific coordinator details display and photo management functionality (up to 50MB per photo)
+34. Test event-specific coordinator editing within Events Section with photo upload, shape configuration, and role field
+35. Test committee management with name, description, image (up to 50MB), role details, and staff/student details functionality including role field
+36. Test committee card click functionality and detail view opening on actual devices
+37. Test committee card purple glow effect on click on actual devices
+38. Test committee detail view responsiveness across different screen sizes
+39. Test committee detail view close/back functionality
+40. Test event description rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
+41. Test event rules rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
+42. Test event instructions rich text editor functionality with text color, bold formatting, and list formatting (bullet and numbered)
+43. Test event description, rules, and instructions display with justified and listified formatting including text colors, bold formatting, and list formatting (bullet and numbered) for all events
+44. Test gallery unified gold frame color and glow effect on actual devices
+45. Verify proper image recognition and display for pop-up images, event posters, mobile logos, and animated background slideshow images on actual devices
+46. Test image upload validation for 50MB file size limit across all image types
 
 #### Step 5: Monitoring and Maintenance
 1. Monitor application performance
@@ -1603,20 +1687,22 @@ npm install @supabase/supabase-js
 5. Add splash screen management endpoint
 6. Add pop-up image management endpoint with add/delete functionality and display duration configuration
 7. Add total body background management endpoint
-8. Add gallery image upload endpoint with frame color and animation configuration
-9. Add FUSION 2k26 background image upload endpoint
-10. Add FUSION 2k26 text management endpoint
-11. Add event poster image upload endpoint with add/delete functionality, animation duration configuration, and hold-to-freeze functionality configuration
-12. Add primary and secondary header management endpoints
-13. Add responsive configuration management endpoints
-14. Add mobile logo scrolling management endpoints (homepage only) with add/delete functionality, glow effect configuration, and transparent background configuration
-15. Add event-specific coordinator management endpoints with photo upload and role field within Events Section
-16. Add committee management endpoints with image and staff/student photo upload including role field and purple glow effect settings
-17. Add committee detail retrieval endpoint
-18. Add event description, rules, and instructions formatting endpoints with text color, bold formatting, and list formatting (bullet and numbered)
-19. Add gallery frame color and animation configuration endpoints
-20. Update chatbot endpoints to remove admin passkey information display
-21. Add proper image URL storage and retrieval endpoints for pop-up images, event posters, and mobile logos
+8. Add gallery image upload endpoint with gold frame color and glow effect configuration
+9. Add animated FUSION 2k26 background slideshow upload endpoint with support for up to 5 images, reordering, deletion, and dissolve transition configuration
+10. Add mobile view navigation menu icon transparent background configuration endpoint
+11. Add FUSION 2k26 text management endpoint
+12. Add event poster image upload endpoint with add/delete functionality, animation duration configuration, and hold-to-freeze functionality configuration
+13. Add primary and secondary header management endpoints
+14. Add responsive configuration management endpoints
+15. Add mobile logo scrolling management endpoints (homepage only) with add/delete functionality, glow effect configuration, and transparent background configuration
+16. Add event-specific coordinator management endpoints with photo upload and role field within Events Section
+17. Add committee management endpoints with image and staff/student photo upload including role field and purple glow effect settings
+18. Add committee detail retrieval endpoint
+19. Add event description, rules, and instructions formatting endpoints with text color, bold formatting, and list formatting (bullet and numbered)
+20. Add gallery gold frame color and glow effect configuration endpoints
+21. Update chatbot endpoints to remove admin passkey information display
+22. Add proper image URL storage and retrieval endpoints for pop-up images, event posters, mobile logos, and animated background slideshow images
+23. Add image upload validation for 50MB file size limit
 
 #### Step 3: Update Environment Variables
 1. Remove MongoDB connection string
@@ -1635,441 +1721,28 @@ npm install @supabase/supabase-js
 6. Test splash screen display and configuration
 7. Test pop-up image display, add/delete functionality, display duration configuration, and hold-to-freeze functionality
 8. Test total body background image upload and responsive scaling
-9. Test gallery image upload and display with increased frame width and animated frame color effects
-10. Test FUSION 2k26 background image upload and responsive scaling
-11. Test FUSION 2k26 text configuration with responsive sizing and animations
-12. Test event poster image upload, add/delete functionality, scrolling animation, animation duration configuration, and hold-to-freeze functionality
-13. Test dual header system management
-14. Test responsive configuration management for secondary header with glowing background
-15. Test mobile logo scrolling management (homepage only) with logo upload, add/delete functionality, order configuration, animation settings, glow effect configuration, and transparent background configuration
-16. Test event-specific coordinator management and photo upload with shape configuration and role field within Events Section
-17. Test committee management with name, description, image, role details, and staff/student photo upload including role field and purple glow effect settings
-18. Test committee card click and detail view functionality with purple glow effect
-19. Test event description, rules, and instructions rich text editor with text color, bold formatting, and list formatting (bullet and numbered)
-20. Test gallery frame color animation configuration with diagonal glow and wave form color transitions
-21. Test chatbot functionality (verify no admin access option or passkey information displayed)
-22. Test admin authentication with automatic passkey recognition
-23. Verify proper image recognition and display for pop-up images, event posters, and mobile logos
+9. Test gallery image upload and display with increased frame width and unified gold frame color with glow effect
+10. Test animated FUSION 2k26 background slideshow image upload (up to 5 images), reordering, deletion, dissolve transition, and responsive scaling
+11. Test mobile view navigation menu icon transparent background configuration
+12. Test FUSION 2k26 text configuration with responsive sizing and animations
+13. Test event poster image upload, add/delete functionality, scrolling animation, animation duration configuration, and hold-to-freeze functionality
+14. Test dual header system management
+15. Test responsive configuration management for secondary header with glowing background
+16. Test mobile logo scrolling management (homepage only) with logo upload, add/delete functionality, order configuration, animation settings, glow effect configuration, and transparent background configuration
+17. Test event-specific coordinator management and photo upload with shape configuration and role field within Events Section
+18. Test committee management with name, description, image, role details, and staff/student photo upload including role field and purple glow effect settings
+19. Test committee card click and detail view functionality with purple glow effect
+20. Test event description, rules, and instructions rich text editor with text color, bold formatting, and list formatting (bullet and numbered)
+21. Test gallery unified gold frame color and glow effect configuration
+22. Test chatbot functionality (verify no admin access option or passkey information displayed)
+23. Test admin authentication with automatic passkey recognition
+24. Verify proper image recognition and display for pop-up images, event posters, mobile logos, and animated background slideshow images
+25. Test image upload validation for 50MB file size limit across all image types
 
 #### Step 5: Deploy Migrated Version
 1. Commit changes to version control
 2. Follow MeDo deployment steps (Section 6.2)
 3. Verify deployed application
-
-### 6.5 Splash Screen Implementation Guide
-
-#### Backend Implementation
-1. Create splash screen management API endpoints:
-   - POST /api/splash-screen - Create splash screen configuration
-   - GET /api/splash-screen - Retrieve splash screen configuration
-   - PUT /api/splash-screen/:id - Update splash screen configuration including image URL, display duration, enabled status, responsive scaling settings
-   - POST /api/splash-screen/upload - Upload splash screen image
-
-#### Frontend Implementation
-1. Create Splash Screen component:
-   - File location: frontend/components/public/SplashScreen.jsx or similar
-   - Implementation:
-     - Fetch splash screen configuration from /api/splash-screen endpoint
-     - Display splash screen image for 2 seconds on initial load
-     - Apply responsive scaling using CSS media queries
-     - Implement fade-in animation on appearance
-     - Implement fade-out animation on disappearance
-     - Automatically transition to main application after 2 seconds
-     - No user interaction required
-
-2. Update Main App component:
-   - File location: frontend/App.jsx or similar
-   - Implementation:
-     - Add splash screen display logic to initial load sequence
-     - Show splash screen first, then main application
-     - Ensure smooth transition between splash screen and main application
-
-3. Admin Dashboard Splash Screen Management component:
-   - File location: frontend/components/admin/SplashScreenManagement.jsx or similar
-   - Add splash screen configuration interface:
-     - Image upload interface
-     - Display duration configuration (default: 2 seconds)
-     - Enable/disable splash screen toggle
-     - Responsive scaling configuration for desktop/tablet/mobile
-     - Preview panel showing splash screen appearance
-
-#### CSS Implementation
-1. Create splash screen styles:
-   - File location: frontend/styles/splash-screen.css or similar
-   - Implementation:
-     - Define full-screen splash screen container
-     - Define responsive image scaling using media queries
-     - Create fade-in animation keyframes
-     - Create fade-out animation keyframes
-     - Ensure proper z-index for splash screen overlay
-
-#### Supabase Storage Configuration
-1. Create splash_screens storage bucket:
-   - Bucket name: splash_screens
-   - Public access: enabled
-   - File size limit: configure as needed
-
-2. Set bucket policies:
-   - Allow public read access
-   - Restrict write access to authenticated admin users
-
-#### Code Update Summary
-Files requiring updates for splash screen:
-1. Backend API routes file (e.g., backend/routes/splash-screen.js)
-2. Public Splash Screen component (e.g., frontend/components/public/SplashScreen.jsx)
-3. Main App component (e.g., frontend/App.jsx)
-4. Admin Dashboard Splash Screen Management component (e.g., frontend/components/admin/SplashScreenManagement.jsx)
-5. Splash screen styles file (e.g., frontend/styles/splash-screen.css)
-6. Supabase client configuration file (e.g., backend/config/supabase.js)
-7. Database schema file for splash_screen_content table
-
-### 6.6 Pop-up Image Implementation Guide
-
-#### Backend Implementation
-1. Create pop-up image management API endpoints:
-   - POST /api/popup-image - Create pop-up image configuration
-   - GET /api/popup-image - Retrieve pop-up image configuration
-   - PUT /api/popup-image/:id - Update pop-up image configuration including image URL, enabled status, responsive scaling settings, default display duration, hold-to-freeze functionality
-   - POST /api/popup-image/upload - Upload pop-up image with database storage
-   - DELETE /api/popup-image/:id - Delete pop-up image from database
-
-#### Frontend Implementation
-1. Create Pop-up Image component:
-   - File location: frontend/components/public/PopupImage.jsx or similar
-   - Implementation:
-     - Fetch pop-up image configuration from /api/popup-image endpoint
-     - Display pop-up image on initial page load after splash screen
-     - Apply responsive scaling using CSS media queries
-     - Implement configurable display duration based on admin settings
-     - Implement hold-to-freeze functionality:
-       - Detect user touch/hold on image
-       - Freeze timer when user holds image
-       - Resume timer and dismiss image when user releases
-     - If no user interaction: Dismiss after admin-configured default duration
-     - Implement fade-out animation on dismissal
-     - Track dismissal state to prevent reappearance during same session
-     - Retrieve image URLs from database for display
-
-2. Update Main App component:
-   - File location: frontend/App.jsx or similar
-   - Implementation:
-     - Add pop-up image display logic to initial load sequence
-     - Show pop-up image after splash screen
-     - Manage pop-up dismissal state
-
-3. Admin Dashboard Pop-up Image Management component:
-   - File location: frontend/components/admin/PopupImageManagement.jsx or similar
-   - Add pop-up image configuration interface:
-     - Image upload interface with add/delete functionality
-     - Enable/disable pop-up image toggle
-     - Responsive scaling configuration for desktop/tablet/mobile
-     - Default display duration configuration (in seconds)
-     - Hold-to-freeze functionality toggle
-     - Preview panel showing pop-up image appearance and interaction behavior
-
-#### CSS Implementation
-1. Create pop-up image styles:
-   - File location: frontend/styles/popup-image.css or similar
-   - Implementation:
-     - Define pop-up overlay container
-     - Define responsive image scaling using media queries
-     - Create fade-out animation keyframes
-     - Ensure proper z-index for pop-up overlay
-     - Center pop-up image on screen
-     - Add touch/hold interaction styles
-
-#### Supabase Storage Configuration
-1. Create popup_images storage bucket:
-   - Bucket name: popup_images
-   - Public access: enabled
-   - File size limit: configure as needed
-
-2. Set bucket policies:
-   - Allow public read access
-   - Restrict write access to authenticated admin users
-
-#### Code Update Summary
-Files requiring updates for pop-up image:
-1. Backend API routes file (e.g., backend/routes/popup-image.js) with add/delete endpoints and proper image URL storage
-2. Public Pop-up Image component (e.g., frontend/components/public/PopupImage.jsx) with hold-to-freeze functionality and database image retrieval
-3. Main App component (e.g., frontend/App.jsx)
-4. Admin Dashboard Pop-up Image Management component (e.g., frontend/components/admin/PopupImageManagement.jsx) with display duration configuration and add/delete functionality
-5. Pop-up image styles file (e.g., frontend/styles/popup-image.css)
-6. Supabase client configuration file (e.g., backend/config/supabase.js)
-7. Database schema file for popup_image_content table with default_display_duration and hold_to_freeze_enabled fields
-
-### 6.7 Total Body Background Implementation Guide
-
-#### Backend Implementation
-1. Create total body background management API endpoints:
-   - POST /api/total-background - Create total body background configuration
-   - GET /api/total-background - Retrieve total body background configuration
-   - PUT /api/total-background/:id - Update total body background configuration including image URL, responsive scaling settings, positioning settings
-   - POST /api/total-background/upload - Upload total body background image
-
-#### Frontend Implementation
-1. Update Body component:
-   - File location: frontend/components/public/Body.jsx or similar
-   - Implementation:
-     - Fetch total body background configuration from /api/total-background endpoint
-     - Apply background image to entire application body
-     - Implement responsive scaling using CSS media queries
-     - Apply configurable positioning
-     - Apply configurable fixed/scroll behavior
-
-2. Admin Dashboard Total Body Background Management component:
-   - File location: frontend/components/admin/TotalBodyBackgroundManagement.jsx or similar
-   - Add background configuration interface:
-     - Image upload interface
-     - Responsive scaling configuration for desktop/tablet/mobile
-     - Background positioning controls
-     - Fixed/scroll behavior toggle
-     - Preview panel showing background appearance
-
-#### CSS Implementation
-1. Create total body background styles:
-   - File location: frontend/styles/total-body-background.css or similar
-   - Implementation:
-     - Define body background styles
-     - Define responsive image scaling using media queries
-     - Create background positioning classes
-     - Implement fixed/scroll behavior
-     - Ensure background covers entire application body
-
-#### Supabase Storage Configuration
-1. Create total_backgrounds storage bucket:
-   - Bucket name: total_backgrounds
-   - Public access: enabled
-   - File size limit: configure as needed
-
-2. Set bucket policies:
-   - Allow public read access
-   - Restrict write access to authenticated admin users
-
-#### Code Update Summary
-Files requiring updates for total body background:
-1. Backend API routes file (e.g., backend/routes/total-background.js)
-2. Public Body component (e.g., frontend/components/public/Body.jsx)
-3. Admin Dashboard Total Body Background Management component (e.g., frontend/components/admin/TotalBodyBackgroundManagement.jsx)
-4. Total body background styles file (e.g., frontend/styles/total-body-background.css)
-5. Supabase client configuration file (e.g., backend/config/supabase.js)
-6. Database schema file for total_body_background_content table
-
-### 6.8 Chatbot Authentication Enhancement Guide
-
-#### Backend Implementation
-1. Update authentication API endpoints:
-   - POST /api/auth/validate-passkey - Validate passkey and automatically open admin dashboard
-   - Remove explicit admin access endpoints
-
-2. Implement automatic passkey recognition logic:
-   - Detect passkey format in chatbot input
-   - Automatically validate passkey against database
-   - Return authentication token on successful validation
-   - No explicit admin mode selection required
-
-#### Frontend Implementation
-1. Update Chatbot component:
-   - File location: frontend/components/public/Chatbot.jsx or similar
-   - Implementation:
-     - Remove admin access option from chatbot interface
-     - Remove admin passkey information display
-     - Implement automatic passkey recognition in input handler
-     - Automatically call authentication API when passkey detected
-     - Automatically open admin dashboard on successful authentication
-     - No explicit admin mode selection UI
-
-2. Update Admin Dashboard component:
-   - File location: frontend/components/admin/AdminDashboard.jsx or similar
-   - Implementation:
-     - Update authentication flow to support automatic passkey recognition
-     - Remove explicit admin access button or option
-     - Seamless authentication experience
-
-#### Code Update Summary
-Files requiring updates for chatbot authentication enhancement:
-1. Backend authentication API routes file (e.g., backend/routes/auth.js)
-2. Chatbot component (e.g., frontend/components/public/Chatbot.jsx)
-3. Admin Dashboard component (e.g., frontend/components/admin/AdminDashboard.jsx)
-4. Authentication logic file (e.g., backend/middleware/auth.js)
-
-### 6.9 Event Poster Hold-to-Freeze Implementation Guide
-
-#### Backend Implementation
-1. Update event poster management API endpoints:
-   - PUT /api/event-posters/:id - Update event poster configuration including animation_duration and hold_to_freeze_enabled fields
-
-#### Frontend Implementation
-1. Update Event Poster Section component:
-   - File location: frontend/components/public/EventPosterSection.jsx or similar
-   - Implementation:
-     - Implement hold-to-freeze functionality:
-       - Detect user touch/hold on poster
-       - Freeze scrolling animation when user holds poster
-       - Display poster as pop-up overlay
-       - Resume animation when user releases poster
-     - Implement configurable animation duration based on admin settings
-     - Apply smooth transitions for pop-up display and dismissal
-
-2. Admin Dashboard Event Poster Management component:
-   - File location: frontend/components/admin/EventPosterManagement.jsx or similar
-   - Add hold-to-freeze configuration interface:
-     - Animation duration configuration (in seconds)
-     - Hold-to-freeze functionality toggle
-     - Preview panel showing hold-to-freeze behavior
-
-#### CSS Implementation
-1. Update event poster styles:
-   - File location: frontend/styles/event-poster.css or similar
-   - Implementation:
-     - Add pop-up overlay styles for poster display
-     - Add touch/hold interaction styles
-     - Ensure proper z-index for pop-up overlay
-
-#### Code Update Summary
-Files requiring updates for event poster hold-to-freeze:
-1. Backend API routes file (e.g., backend/routes/event-posters.js)
-2. Public Event Poster Section component (e.g., frontend/components/public/EventPosterSection.jsx)
-3. Admin Dashboard Event Poster Management component (e.g., frontend/components/admin/EventPosterManagement.jsx)
-4. Event poster styles file (e.g., frontend/styles/event-poster.css)
-5. Database schema file for event_posters table with animation_duration and hold_to_freeze_enabled fields
-
-### 6.10 Gallery Frame Color Animation Implementation Guide
-
-#### Backend Implementation
-1. Update gallery management API endpoints:
-   - PUT /api/gallery/:id - Update gallery image configuration including frame_color_settings and diagonal_glow_animation_settings
-
-#### Frontend Implementation
-1. Update Gallery Section component:
-   - File location: frontend/components/public/GallerySection.jsx or similar
-   - Implementation:
-     - Apply frame colors: Gold, Blue, Sky Blue, Purple, Pink
-     - Implement diagonal glow animation moving from left-top to right-bottom corner
-     - Implement wave form color transitions across all frame colors
-     - Apply automatic glow animation to all frames
-     - Use CSS animations for smooth color transitions
-
-2. Admin Dashboard Gallery Management component:
-   - File location: frontend/components/admin/GalleryManagement.jsx or similar
-   - Add frame color animation configuration interface:
-     - Frame color selection (Gold, Blue, Sky Blue, Purple, Pink)
-     - Diagonal glow animation toggle
-     - Wave form color transition toggle
-     - Animation speed configuration
-     - Preview panel showing animated frame effects
-
-#### CSS Implementation
-1. Update gallery styles:
-   - File location: frontend/styles/gallery.css or similar
-   - Implementation:
-     - Define frame color classes for Gold, Blue, Sky Blue, Purple, Pink
-     - Create diagonal glow animation keyframes (left-top to right-bottom)
-     - Create wave form color transition keyframes
-     - Apply animations to all gallery frames
-     - Ensure smooth color transitions
-
-#### Code Update Summary
-Files requiring updates for gallery frame color animation:
-1. Backend API routes file (e.g., backend/routes/gallery.js)
-2. Public Gallery Section component (e.g., frontend/components/public/GallerySection.jsx)
-3. Admin Dashboard Gallery Management component (e.g., frontend/components/admin/GalleryManagement.jsx)
-4. Gallery styles file (e.g., frontend/styles/gallery.css)
-5. Database schema file for gallery_images table with frame_color_settings and diagonal_glow_animation_settings fields
-
-### 6.11 Mobile Logo Scrolling Glow Effect Implementation Guide
-
-#### Backend Implementation
-1. Update mobile logo scrolling management API endpoints:
-   - PUT /api/mobile-logos/:id - Update mobile logo configuration including glow_effect_settings and transparent_background_enabled fields
-
-#### Frontend Implementation
-1. Update Mobile Logo Scrolling Section component:
-   - File location: frontend/components/public/MobileLogoScrollingSection.jsx or similar
-   - Implementation:
-     - Apply glow effect around each logo
-     - Apply transparent background to mobile logo section
-     - Implement configurable glow color and intensity based on admin settings
-     - Use CSS box-shadow or similar for glow effect
-
-2. Admin Dashboard Mobile Logo Scrolling Management component:
-   - File location: frontend/components/admin/MobileLogoScrollingManagement.jsx or similar
-   - Add glow effect configuration interface:
-     - Glow color picker
-     - Glow intensity slider
-     - Transparent background toggle
-     - Preview panel showing glow effect and transparent background
-
-#### CSS Implementation
-1. Update mobile logo scrolling styles:
-   - File location: frontend/styles/mobile-logo-scrolling.css or similar
-   - Implementation:
-     - Define glow effect styles using box-shadow
-     - Define transparent background styles
-     - Apply glow effect to all mobile logos
-     - Ensure glow effect is visible on transparent background
-
-#### Code Update Summary
-Files requiring updates for mobile logo scrolling glow effect:
-1. Backend API routes file (e.g., backend/routes/mobile-logos.js)
-2. Public Mobile Logo Scrolling Section component (e.g., frontend/components/public/MobileLogoScrollingSection.jsx)
-3. Admin Dashboard Mobile Logo Scrolling Management component (e.g., frontend/components/admin/MobileLogoScrollingManagement.jsx)
-4. Mobile logo scrolling styles file (e.g., frontend/styles/mobile-logo-scrolling.css)
-5. Database schema file for mobile_logo_scrolling table with glow_effect_settings and transparent_background_enabled fields
-
-### 6.12 Committee Management Update Guide
-
-#### Backend Implementation
-1. Update committee management API endpoints:
-   - POST /api/committees - Create committee with name, description, image, role_details, staff_details, student_details
-   - PUT /api/committees/:id - Update committee information including name, description, image, role_details, staff_details, student_details
-   - DELETE /api/committees/:id - Delete committee
-
-#### Frontend Implementation
-1. Update Committee Management component:
-   - File location: frontend/components/admin/CommitteeManagement.jsx or similar
-   - Implementation:
-     - Add committee name input field
-     - Add committee description input field
-     - Add committee image upload interface (optional)
-     - Add role details input section
-     - Add staff details input section:
-       - Staff name input
-       - Staff role input
-       - Staff photo upload (optional)
-       - Staff contact input (optional)
-       - Photo shape configuration (round or semi-circle)
-     - Add student details input section:
-       - Student name input
-       - Student role input
-       - Student photo upload (optional)
-       - Student contact input (optional)
-       - Photo shape configuration (round or semi-circle)
-     - Add photo display enable/disable toggle per committee
-
-2. Update Committee Section component:
-   - File location: frontend/components/public/CommitteeSection.jsx or similar
-   - Implementation:
-     - Display committee name on committee cards
-     - Display committee description preview on committee cards
-     - Display committee image on committee cards (if provided)
-
-3. Update Committee Detail View component:
-   - File location: frontend/components/public/CommitteeDetailView.jsx or similar
-   - Implementation:
-     - Display complete committee name
-     - Display complete committee description
-     - Display committee role details
-     - Display staff details with photos (if enabled), role field, and contact
-     - Display student details with photos (if enabled), role field, and contact
-
-#### Code Update Summary
-Files requiring updates for committee management:
-1. Backend API routes file (e.g., backend/routes/committees.js)
-2. Admin Dashboard Committee Management component (e.g., frontend/components/admin/CommitteeManagement.jsx)
-3. Public Committee Section component (e.g., frontend/components/public/CommitteeSection.jsx)
-4. Public Committee Detail View component (e.g., frontend/components/public/CommitteeDetailView.jsx)
-5. Database schema file for committees table with committee_name, description, image, role_details, staff_details, student_details fields
 
 ## 7. Other Requirements
 
@@ -2078,7 +1751,7 @@ System will automatically create the following tables on first connection:
 - splash_screen_content (id, image_url, display_duration, enabled, responsive_scaling_settings, animation_settings, created_at, updated_at)
 - popup_image_content (id, image_url, enabled, responsive_scaling_settings, positioning_settings, default_display_duration, hold_to_freeze_enabled, created_at, updated_at)
 - total_body_background_content (id, background_image_url, responsive_scaling_settings, positioning_settings, fixed_scroll_behavior, created_at, updated_at)
-- primary_header_content (id, navigation_menu, navigation_position, styling, background_image_url, responsive_scaling_settings, created_at, updated_at)
+- primary_header_content (id, navigation_menu, navigation_position, mobile_menu_icon_transparent_background, styling, background_slideshow_images (array of up to 5 image URLs), slideshow_display_duration (5 seconds), slideshow_transition_effect (dissolve), responsive_scaling_settings, created_at, updated_at)
 - fusion_text_content (id, text_content, font_settings, responsive_sizing_settings, alignment_settings, animation_settings, created_at, updated_at)
 - secondary_header_content (id, college_name, location, institution_status, logos, logo_shapes, static_data, styling_with_golden_color_black_border_glowing_background, mobile_logo_positioning, created_at, updated_at)
 - mobile_logo_scrolling (id, logo_url, display_order, logo_shape (semi-square, fixed), logo_height (20px, fixed), scrolling_speed, animation_direction (left to right, fixed), loop_enabled, glow_effect_settings, transparent_background_enabled, created_at, updated_at)
@@ -2090,7 +1763,7 @@ System will automatically create the following tables on first connection:
 - event_posters (id, image_url, display_order, animation_settings, animation_duration, hold_to_freeze_enabled, created_at, updated_at)
 - events (id, name, type, description_html_with_text_color_bold_formatting_and_list_formatting, rules_html_with_text_color_bold_formatting_and_list_formatting, instructions_html_with_text_color_bold_formatting_and_list_formatting, images, event_specific_staff_coordinators_with_photos_and_role, event_specific_student_coordinators_with_photos, registration_link, photo_display_enabled, created_at, updated_at)
 - committees (id, committee_name, description, image_url, role_details, staff_details_with_photos_and_role, student_details_with_photos_and_role, photo_display_enabled, purple_glow_enabled, created_at, updated_at)
-- gallery_images (id, image_url, frame_width, frame_color_settings, diagonal_glow_animation_settings, wave_form_color_transition_settings, created_at, updated_at)
+- gallery_images (id, image_url, frame_width, frame_color (gold), glow_effect_settings, created_at, updated_at)
 - about_us (id, content, created_at, updated_at)
 - contact_info (id, details, created_at, updated_at)
 - admin_config (id, passkey, created_at, updated_at)
@@ -2098,30 +1771,32 @@ System will automatically create the following tables on first connection:
 
 ### 7.2 Image Storage
 - All uploaded images stored in Supabase Storage
+- Image upload size limit: 50MB for all image types
 - Separate storage buckets for:
-  - Splash_screens (for splash screen images with responsive scaling support)
-  - Popup_images (for pop-up images with responsive scaling support, display duration configuration, and hold-to-freeze functionality)
-  - Total_backgrounds (for total body background images with responsive scaling support)
-  - Backgrounds (including FUSION 2k26 header background images with responsive scaling support)
-  - Logos (including secondary header logos with shape configurations, responsive sizing, and mobile left-right positioning)
-  - Mobile_logos (for mobile logo scrolling section, homepage only, semi-square shape, 20px height, glow effect, transparent background)
-  - Event posters (for Event Poster Section with automatic scrolling animation, hold-to-freeze functionality, and animation duration configuration)
-  - Event images
-  - Coordinator photos (for event-specific staff and student coordinators with round and semi-circle shape support)
-  - Committee images and staff/student photos (for committee groups with round and semi-circle shape support)
-  - Gallery images (for Gallery Section display with configurable frame width and animated frame color effects)
-  - Background images
+  - Splash_screens (for splash screen images with responsive scaling support, 50MB limit)
+  - Popup_images (for pop-up images with responsive scaling support, display duration configuration, and hold-to-freeze functionality, 50MB limit)
+  - Total_backgrounds (for total body background images with responsive scaling support, 50MB limit)
+  - Backgrounds (including animated FUSION 2k26 header background slideshow images with up to 5 images, dissolve transitions, and responsive scaling support, 50MB limit per image)
+  - Logos (including secondary header logos with shape configurations, responsive sizing, and mobile left-right positioning, 50MB limit per logo)
+  - Mobile_logos (for mobile logo scrolling section, homepage only, semi-square shape, 20px height, glow effect, transparent background, 50MB limit per logo)
+  - Event posters (for Event Poster Section with automatic scrolling animation, hold-to-freeze functionality, and animation duration configuration, 50MB limit per poster)
+  - Event images (50MB limit per image)
+  - Coordinator photos (for event-specific staff and student coordinators with round and semi-circle shape support, 50MB limit per photo)
+  - Committee images and staff/student photos (for committee groups with round and semi-circle shape support, 50MB limit per image)
+  - Gallery images (for Gallery Section display with configurable frame width and unified gold frame color with glow effect, 50MB limit per image)
+  - Background images (50MB limit per image)
 - Public access configured for image buckets
 - Automatic URL generation for uploaded images
-- Splash_screens bucket specifically configured for splash screen images with responsive scaling capabilities
-- Popup_images bucket specifically configured for pop-up images with responsive scaling capabilities, display duration configuration, and hold-to-freeze functionality
-- Total_backgrounds bucket specifically configured for total body background images with responsive scaling capabilities
-- Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section with increased frame width (1-2px more) and animated frame color effects (Gold, Blue, Sky Blue, Purple, Pink) with diagonal glow animation and wave form color transitions
-- Backgrounds bucket specifically configured for FUSION 2k26 header background images with responsive scaling capabilities
-- Event_posters bucket specifically configured for event poster images with automatic scrolling animation, hold-to-freeze functionality, and animation duration configuration
-- Coordinator_photos bucket specifically configured for staff and student photos with round and semi-circle shape configurations
-- Committees bucket specifically configured for committee images and staff/student photos with round and semi-circle shape configurations
-- Mobile_logos bucket specifically configured for mobile logo scrolling section (homepage only) with semi-square shape, 20px height, glow effect, and transparent background
-- Logo bucket supports circle and semi-square shape configurations with responsive sizing capabilities and mobile left-right positioning
-- Proper image URL storage in database tables for pop-up images, event posters, and mobile logos
+- Splash_screens bucket specifically configured for splash screen images with responsive scaling capabilities and 50MB size limit
+- Popup_images bucket specifically configured for pop-up images with responsive scaling capabilities, display duration configuration, hold-to-freeze functionality, and 50MB size limit
+- Total_backgrounds bucket specifically configured for total body background images with responsive scaling capabilities and 50MB size limit
+- Gallery bucket specifically configured for admin-uploaded gallery images that display in public Gallery Section with increased frame width (1-2px more) and unified gold frame color with glow effect, 50MB size limit per image
+- Backgrounds bucket specifically configured for animated FUSION 2k26 header background slideshow images (up to 5 images) with dissolve transitions and responsive scaling capabilities, 50MB size limit per image
+- Event_posters bucket specifically configured for event poster images with automatic scrolling animation, hold-to-freeze functionality, animation duration configuration, and 50MB size limit per poster
+- Coordinator_photos bucket specifically configured for staff and student photos with round and semi-circle shape configurations and 50MB size limit per photo
+- Committees bucket specifically configured for committee images and staff/student photos with round and semi-circle shape configurations and 50MB size limit per image
+- Mobile_logos bucket specifically configured for mobile logo scrolling section (homepage only) with semi-square shape, 20px height, glow effect, transparent background, and 50MB size limit per logo
+- Logo bucket supports circle and semi-square shape configurations with responsive sizing capabilities, mobile left-right positioning, and 50MB size limit per logo
+- Proper image URL storage in database tables for pop-up images, event posters, mobile logos, and animated background slideshow images
 - Image recognition implementation ensuring all admin-uploaded images display correctly to users
+- Image upload validation for 50MB file size limit across all image types

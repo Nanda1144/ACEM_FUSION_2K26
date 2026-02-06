@@ -5,6 +5,7 @@ import type {
   Committee,
   CommitteeCoordinator,
   EventPoster,
+  BackgroundImage,
   OverallCoordinator,
   GalleryImage, 
   AboutUs, 
@@ -461,16 +462,16 @@ export const componentTemplatesApi = {
 // Image Upload Helper
 export const uploadImage = async (
   file: File,
-  bucket: 'app-9dfi9jpj51xd_events_images' | 'app-9dfi9jpj51xd_committee_images' | 'app-9dfi9jpj51xd_gallery_images' | 'app-9dfi9jpj51xd_coordinator_images' | 'app-9dfi9jpj51xd_theme_images' | 'app-9dfi9jpj51xd_poster_images'
+  bucket: 'app-9dfi9jpj51xd_events_images' | 'app-9dfi9jpj51xd_committee_images' | 'app-9dfi9jpj51xd_gallery_images' | 'app-9dfi9jpj51xd_coordinator_images' | 'app-9dfi9jpj51xd_theme_images' | 'app-9dfi9jpj51xd_poster_images' | 'app-9dfi9jpj51xd_background_images'
 ): Promise<string> => {
   // Validate file name
   const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
   const fileName = `${Date.now()}_${sanitizedFileName}`;
 
-  // Check file size and compress if needed
+  // Check file size and compress if needed (skip compression for background images)
   let fileToUpload = file;
-  if (file.size > 1024 * 1024) {
-    // File is larger than 1MB, compress it
+  if (bucket !== 'app-9dfi9jpj51xd_background_images' && file.size > 1024 * 1024) {
+    // File is larger than 1MB, compress it (except for background images)
     fileToUpload = await compressImage(file);
   }
 
@@ -528,6 +529,51 @@ export const eventPostersApi = {
   delete: async (id: string) => {
     const { error } = await supabase
       .from('event_posters')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
+};
+
+// Background Images API
+export const backgroundImagesApi = {
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('background_images')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return Array.isArray(data) ? data : [];
+  },
+
+  create: async (image: { image_url: string; display_order: number; display_duration?: number }) => {
+    const { data, error } = await supabase
+      .from('background_images')
+      .insert([image])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, image: { image_url?: string; display_order?: number; display_duration?: number }) => {
+    const { data, error } = await supabase
+      .from('background_images')
+      .update(image)
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  delete: async (id: string) => {
+    const { error } = await supabase
+      .from('background_images')
       .delete()
       .eq('id', id);
     
