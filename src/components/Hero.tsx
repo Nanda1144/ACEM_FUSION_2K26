@@ -76,8 +76,14 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Content - Positioned at Bottom */}
-      <div className="relative z-10 container mx-auto px-4 text-center" style={{ transform: 'translateY(-40px)' }}>
+      {/* Content - Positioned at Bottom with 40px upward offset */}
+      <div 
+        className="relative z-10 container mx-auto px-4 text-center" 
+        style={{ 
+          transform: 'translateY(-40px)',
+          marginTop: '-40px'
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,12 +91,18 @@ export default function Hero() {
         >
           <h1 
             ref={titleRef}
-            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-visible animated-gradient-text px-2 sm:px-4 cursor-pointer select-none whitespace-nowrap" 
+            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-visible animated-gradient-text px-2 sm:px-4 cursor-pointer select-none" 
             style={{
               fontSize: 'clamp(2rem, 10vw, 10rem)',
               lineHeight: '1.2',
-              display: 'inline-block',
-              width: '100%',
+              display: 'block',
+              whiteSpace: 'nowrap',
+              overflowX: 'auto',
+              overflowY: 'visible',
+              textOverflow: 'clip',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
             }}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}

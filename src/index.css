@@ -378,4 +378,14 @@ All colors MUST be HSL.
   .purple-glow-active {
     animation: purpleClickGlow 0.6s ease-out;
   }
+
+  /* Hide scrollbar for title element while maintaining single-line behavior */
+  .cinematic-serif::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cinematic-serif {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
