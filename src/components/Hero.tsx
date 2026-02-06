@@ -76,7 +76,7 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Content - Positioned 20px from header padding-top */}
+      {/* Title Content - Positioned 20px from header padding-top */}
       <div 
         className="relative z-10 container mx-auto px-4 text-center pt-5" 
       >
@@ -125,7 +125,7 @@ export default function Hero() {
             ))}
           </h1>
           <motion.p
-            className="text-xl sm:text-2xl md:text-3xl mb-8 text-center font-medium"
+            className="text-xl sm:text-2xl md:text-3xl text-center font-medium"
             style={{
               color: '#FFFFFF',
               textShadow: '0 0 20px rgba(255, 255, 255, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.8)',
@@ -137,20 +137,24 @@ export default function Hero() {
           >
             Integrate Modern Technology With Traditional Culture
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+        </motion.div>
+      </div>
+
+      {/* Button - Positioned at bottom (old position) */}
+      <div className="relative z-10 container mx-auto px-4 text-center mt-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+        >
+          <Button
+            size="lg"
+            onClick={scrollToEvents}
+            className="glow-cyan hover:scale-105 transition-transform duration-300 text-base md:text-lg px-8 py-6"
           >
-            <Button
-              size="lg"
-              onClick={scrollToEvents}
-              className="glow-cyan hover:scale-105 transition-transform duration-300 text-base md:text-lg px-8 py-6"
-            >
-              Explore Events
-              <ArrowDown className="ml-2 h-5 w-5" />
-            </Button>
-          </motion.div>
+            Explore Events
+            <ArrowDown className="ml-2 h-5 w-5" />
+          </Button>
         </motion.div>
       </div>
       
