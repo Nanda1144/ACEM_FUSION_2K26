@@ -232,3 +232,14 @@ export interface SponsorLogo {
   created_at: string;
 }
 
+export interface PopupSettings {
+  id: string;
+  enabled: boolean;
+  image_url: string | null;
+  link_url: string | null;
+  show_once_per_session: boolean;
+  display_delay: number;
+  created_at: string;
+  updated_at: string;
+}
+

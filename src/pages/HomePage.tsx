@@ -13,6 +13,7 @@ import Contact from '@/components/Contact';
 import EnhancedFooter from '@/components/EnhancedFooter';
 import Chatbot from '@/components/Chatbot';
 import AdminDashboard from '@/components/AdminDashboard';
+import WelcomePopup from '@/components/WelcomePopup';
 import { themeSettingsApi } from '@/db/api';
 import type { ThemeSettings } from '@/types/index';
 
@@ -72,6 +73,7 @@ export default function HomePage() {
         <Contact />
         <EnhancedFooter />
         <Chatbot onAuthenticated={() => setShowAdmin(true)} />
+        <WelcomePopup />
       </div>
     </>
   );

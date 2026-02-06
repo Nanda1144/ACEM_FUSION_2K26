@@ -16,7 +16,8 @@ import type {
   PageSection, 
   FooterSettings, 
   ComponentTemplate,
-  SponsorLogo
+  SponsorLogo,
+  PopupSettings
 } from '@/types/index';
 
 // Events API
@@ -856,5 +857,31 @@ export const sponsorLogosApi = {
       .eq('id', id);
     
     if (error) throw error;
+  }
+};
+
+// Popup Settings API
+export const popupSettingsApi = {
+  get: async () => {
+    const { data, error } = await supabase
+      .from('popup_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  update: async (id: string, settings: Partial<PopupSettings>) => {
+    const { data, error } = await supabase
+      .from('popup_settings')
+      .update({ ...settings, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 };
