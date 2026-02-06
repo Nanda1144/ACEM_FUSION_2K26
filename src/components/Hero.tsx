@@ -21,7 +21,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-end overflow-hidden pt-20 pb-32">
+    <section id="home" className="relative min-h-screen flex flex-col justify-start overflow-hidden pt-20 pb-32">
       {/* Animated Background Image - Responsive with Pop Animation */}
       <div className="absolute inset-0">
         <motion.img 
@@ -64,8 +64,8 @@ export default function Hero() {
             }}
           />
         </motion.div>
-        {/* Gradient overlay from transparent to dark at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
+        {/* Gradient overlay from dark at top to transparent */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent" />
       </div>
       
       {/* Animated gradient overlay */}
@@ -76,13 +76,9 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Content - Positioned at Bottom with 40px upward offset */}
+      {/* Content - Positioned 20px from header padding-top */}
       <div 
-        className="relative z-10 container mx-auto px-4 text-center" 
-        style={{ 
-          transform: 'translateY(-40px)',
-          marginTop: '-40px'
-        }}
+        className="relative z-10 container mx-auto px-4 text-center pt-5" 
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
