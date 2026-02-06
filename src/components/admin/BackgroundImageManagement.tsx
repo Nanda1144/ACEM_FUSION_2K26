@@ -158,7 +158,7 @@ export default function BackgroundImageManagement() {
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Upload up to 5 background images for the homepage carousel. Images will dissolve/fade between each other with configurable display duration (default 5 seconds).
+            Upload up to 5 background images for FUSION2k26. Images will animate with smooth dissolve transitions, displaying each image for the configured duration (default 5 seconds) before fading to the next.
           </AlertDescription>
         </Alert>
 
@@ -227,18 +227,19 @@ export default function BackgroundImageManagement() {
                   
                   <div className="space-y-2">
                     <Label htmlFor={`duration-${image.id}`} className="text-sm">
-                      Display Duration (ms)
+                      Display Duration (seconds)
                     </Label>
                     <Input
                       id={`duration-${image.id}`}
                       type="number"
-                      min="3000"
-                      step="1000"
-                      value={image.display_duration || 5000}
-                      onChange={(e) => updateDisplayDuration(image.id, parseInt(e.target.value))}
+                      min="3"
+                      max="30"
+                      step="1"
+                      value={(image.display_duration || 5000) / 1000}
+                      onChange={(e) => updateDisplayDuration(image.id, parseInt(e.target.value) * 1000)}
                     />
                     <p className="text-xs text-muted-foreground">
-                      Time to display before dissolving to next (5000ms = 5 seconds)
+                      Time to display before dissolving to next image (default: 5 seconds)
                     </p>
                   </div>
 

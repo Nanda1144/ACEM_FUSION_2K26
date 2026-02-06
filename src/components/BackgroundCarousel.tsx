@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { backgroundImagesApi } from '@/db/api';
 import type { BackgroundImage } from '@/types/index';
 
 export default function BackgroundCarousel() {
   const [images, setImages] = useState<BackgroundImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     loadImages();
@@ -29,7 +32,15 @@ export default function BackgroundCarousel() {
     const duration = currentImage?.display_duration || 5000;
 
     const timer = setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setIsTransitioning(true);
+      const next = (currentIndex + 1) % images.length;
+      setNextIndex(next);
+      
+      // After dissolve transition completes, update current index
+      setTimeout(() => {
+        setCurrentIndex(next);
+        setIsTransitioning(false);
+      }, 1500); // Match dissolve duration
     }, duration);
 
     return () => clearTimeout(timer);
@@ -41,22 +52,45 @@ export default function BackgroundCarousel() {
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      {images.map((image, index) => (
-        <div
-          key={image.id}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-          style={{
-            opacity: index === currentIndex ? 1 : 0,
-            backgroundImage: `url(${image.image_url})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed'
-          }}
-        />
-      ))}
+      {/* Current Image Layer */}
+      <motion.div
+        key={`current-${currentIndex}`}
+        className="absolute inset-0"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isTransitioning ? 0 : 1 }}
+        transition={{ duration: 1.5, ease: 'easeInOut' }}
+        style={{
+          backgroundImage: `url(${images[currentIndex]?.image_url})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }}
+      />
+
+      {/* Next Image Layer (for dissolve effect) */}
+      <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            key={`next-${nextIndex}`}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 1 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            style={{
+              backgroundImage: `url(${images[nextIndex]?.image_url})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundAttachment: 'fixed'
+            }}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
     </div>
   );
 }
