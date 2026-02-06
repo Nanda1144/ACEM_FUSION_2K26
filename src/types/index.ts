@@ -239,6 +239,7 @@ export interface PopupSettings {
   link_url: string | null;
   show_once_per_session: boolean;
   display_delay: number;
+  display_duration: number;
   created_at: string;
   updated_at: string;
 }

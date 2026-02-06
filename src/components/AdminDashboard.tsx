@@ -8,10 +8,8 @@ import ContactManagement from './admin/ContactManagement';
 import PasskeyManagement from './admin/PasskeyManagement';
 import ThemeManagement from './admin/ThemeManagement';
 import PageManagement from './admin/PageManagement';
-import PageBuilder from './admin/PageBuilder';
 import FooterManagement from './admin/FooterManagement';
 import HeaderSettings from './admin/HeaderSettings';
-import OverallCoordinatorManagement from './admin/OverallCoordinatorManagement';
 import SponsorLogoManagement from './admin/SponsorLogoManagement';
 import EventPosterManagement from './admin/EventPosterManagement';
 import PopupManagement from './admin/PopupManagement';
@@ -23,7 +21,7 @@ interface AdminDashboardProps {
 }
 
 export default function AdminDashboard({ onClose }: AdminDashboardProps) {
-  const [activeTab, setActiveTab] = useState('builder');
+  const [activeTab, setActiveTab] = useState('header');
 
   return (
     <div className="min-h-screen bg-background">
@@ -41,8 +39,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-15 mb-8">
-            <TabsTrigger value="builder">Page Builder</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-13 mb-8">
             <TabsTrigger value="header">Header</TabsTrigger>
             <TabsTrigger value="theme">Theme</TabsTrigger>
             <TabsTrigger value="popup">Popup</TabsTrigger>
@@ -50,7 +47,6 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
             <TabsTrigger value="footer">Footer</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="posters">Event Posters</TabsTrigger>
-            <TabsTrigger value="coordinators">Coordinators</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
             <TabsTrigger value="logos">Mobile Logos</TabsTrigger>
@@ -58,10 +54,6 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
             <TabsTrigger value="contact">Contact</TabsTrigger>
             <TabsTrigger value="passkey">Passkey</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="builder">
-            <PageBuilder />
-          </TabsContent>
 
           <TabsContent value="header">
             <HeaderSettings />
@@ -89,10 +81,6 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
           <TabsContent value="posters">
             <EventPosterManagement />
-          </TabsContent>
-
-          <TabsContent value="coordinators">
-            <OverallCoordinatorManagement />
           </TabsContent>
 
           <TabsContent value="committee">

@@ -81,7 +81,8 @@ export default function PopupManagement() {
         image_url: settings.image_url,
         link_url: settings.link_url,
         show_once_per_session: settings.show_once_per_session,
-        display_delay: settings.display_delay
+        display_delay: settings.display_delay,
+        display_duration: settings.display_duration
       });
       
       toast({
@@ -269,6 +270,21 @@ export default function PopupManagement() {
             />
             <p className="text-xs text-muted-foreground">
               Delay before showing popup (1000ms = 1 second)
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="duration">Auto-Close Duration (milliseconds)</Label>
+            <Input
+              id="duration"
+              type="number"
+              min="1000"
+              step="500"
+              value={settings.display_duration}
+              onChange={(e) => setSettings({ ...settings, display_duration: parseInt(e.target.value) || 5000 })}
+            />
+            <p className="text-xs text-muted-foreground">
+              Popup will auto-close after this duration. Hold the image to pause timer. (5000ms = 5 seconds)
             </p>
           </div>
         </div>
