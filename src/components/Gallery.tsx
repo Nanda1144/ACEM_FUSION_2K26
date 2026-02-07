@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { galleryApi } from '@/db/api';
 import type { GalleryImage } from '@/types/index';
 import { Skeleton } from '@/components/ui/skeleton';

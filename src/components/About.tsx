@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { aboutUsApi } from '@/db/api';
 import type { AboutUs } from '@/types/index';
 

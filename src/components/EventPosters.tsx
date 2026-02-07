@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { eventPostersApi } from '@/db/api';
 import type { EventPoster } from '@/types/index';
 import { Skeleton } from '@/components/ui/skeleton';

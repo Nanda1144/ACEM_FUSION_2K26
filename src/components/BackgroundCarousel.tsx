@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { backgroundImagesApi } from '@/db/api';
 import type { BackgroundImage } from '@/types/index';
 import { useRefresh } from '@/contexts/RefreshContext';
