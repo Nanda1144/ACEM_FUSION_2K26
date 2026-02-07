@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
@@ -7,7 +7,7 @@ export default function SplashScreen() {
   useEffect(() => {
     // Check if splash has been shown in this session
     const splashShown = sessionStorage.getItem('splashShown');
-    
+
     if (splashShown) {
       setIsVisible(false);
       return;
