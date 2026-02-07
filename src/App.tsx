@@ -10,6 +10,10 @@ import routes from './routes';
 // import { RouteGuard } from '@/components/common/RouteGuard';
 import { Toaster } from '@/components/ui/toaster';
 
+import ThemeLayout from '@/components/common/ThemeLayout';
+
+import { RefreshProvider } from '@/contexts/RefreshContext';
+
 const App: React.FC = () => {
   useEffect(() => {
     // Set the document title
@@ -17,22 +21,26 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
-      <SplashScreen />
-      <PopupImage />
-      <IntersectObserver />
-      <Routes>
-        {routes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            element={route.element}
-          />
-        ))}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      <Toaster />
-    </Router>
+    <RefreshProvider>
+      <Router>
+        <ThemeLayout>
+          <SplashScreen />
+          <PopupImage />
+          <IntersectObserver />
+          <Routes>
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Toaster />
+        </ThemeLayout>
+      </Router>
+    </RefreshProvider>
   );
 };
 

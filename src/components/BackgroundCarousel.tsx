@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { backgroundImagesApi } from '@/db/api';
 import type { BackgroundImage } from '@/types/index';
+import { useRefresh } from '@/contexts/RefreshContext';
 
 export default function BackgroundCarousel() {
   const [images, setImages] = useState<BackgroundImage[]>([]);
+  const { refreshKey } = useRefresh();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ export default function BackgroundCarousel() {
 
   useEffect(() => {
     loadImages();
-  }, []);
+  }, [refreshKey]);
 
   const loadImages = async () => {
     try {
@@ -35,7 +37,7 @@ export default function BackgroundCarousel() {
       setIsTransitioning(true);
       const next = (currentIndex + 1) % images.length;
       setNextIndex(next);
-      
+
       // After dissolve transition completes, update current index
       setTimeout(() => {
         setCurrentIndex(next);

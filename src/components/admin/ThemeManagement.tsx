@@ -71,10 +71,10 @@ export default function ThemeManagement() {
         title: 'Success',
         description: 'Logo uploaded successfully'
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
-        title: 'Error',
-        description: 'Failed to upload logo',
+        title: 'Upload Failed',
+        description: error?.message || 'Failed to upload logo. Please ensure storage buckets are configured for public access.',
         variant: 'destructive'
       });
     }
@@ -95,10 +95,10 @@ export default function ThemeManagement() {
         title: 'Success',
         description: 'Background image uploaded successfully'
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
-        title: 'Error',
-        description: 'Failed to upload background image',
+        title: 'Upload Failed',
+        description: error?.message || 'Failed to upload background image. Please ensure storage buckets are configured for public access.',
         variant: 'destructive'
       });
     }
@@ -136,7 +136,7 @@ export default function ThemeManagement() {
 
     const samePosLogos = settings.logos.filter(l => l.position === logo.position).sort((a, b) => a.order - b.order);
     const currentIndex = samePosLogos.findIndex(l => l.id === logoId);
-    
+
     if (direction === 'up' && currentIndex > 0) {
       const temp = samePosLogos[currentIndex - 1].order;
       samePosLogos[currentIndex - 1].order = samePosLogos[currentIndex].order;
@@ -424,16 +424,35 @@ export default function ThemeManagement() {
                 </div>
               </div>
 
-              <div>
+              <div className="space-y-4">
                 <Label>Background Image</Label>
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleBackgroundUpload(e, 'page')}
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleBackgroundUpload(e, 'page')}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground">External Image URL</Label>
+                    <Input
+                      type="url"
+                      placeholder="https://example.com/image.jpg"
+                      value={settings.page_bg_image || ''}
+                      onChange={(e) => setSettings({ ...settings, page_bg_image: e.target.value })}
+                    />
+                  </div>
+                </div>
                 {settings.page_bg_image && (
                   <div className="mt-2 flex items-center gap-4">
-                    <img src={settings.page_bg_image} alt="Page BG" className="h-20 w-40 object-cover rounded" />
+                    <div className="relative group h-20 w-40 overflow-hidden rounded">
+                      <img src={settings.page_bg_image} alt="Page BG" className="h-full w-full object-cover" />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <p className="text-[10px] text-white break-all p-1">{settings.page_bg_image}</p>
+                      </div>
+                    </div>
                     <Button
                       variant="outline"
                       size="sm"

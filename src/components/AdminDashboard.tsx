@@ -17,6 +17,7 @@ import BackgroundImageManagement from './admin/BackgroundImageManagement';
 import PopupImageManagement from './admin/PopupImageManagement';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
+import { useRefresh } from '@/contexts/RefreshContext';
 
 interface AdminDashboardProps {
   onClose: () => void;
@@ -24,6 +25,12 @@ interface AdminDashboardProps {
 
 export default function AdminDashboard({ onClose }: AdminDashboardProps) {
   const [activeTab, setActiveTab] = useState('header');
+  const { triggerRefresh } = useRefresh();
+
+  const handleClose = () => {
+    triggerRefresh();
+    onClose();
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,7 +40,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
           <Button
             variant="outline"
             size="icon"
-            onClick={onClose}
+            onClick={handleClose}
             className="border-primary/50 hover:border-primary"
           >
             <X className="h-5 w-5" />
@@ -53,7 +60,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
             <TabsTrigger value="posters">Event Posters</TabsTrigger>
             <TabsTrigger value="committee">Committee</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
-            <TabsTrigger value="logos">Mobile Logos</TabsTrigger>
+            <TabsTrigger value="logos">Partner Logos</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
             <TabsTrigger value="passkey">Passkey</TabsTrigger>

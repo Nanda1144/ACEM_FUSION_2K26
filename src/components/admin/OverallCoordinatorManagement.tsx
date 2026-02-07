@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { Plus, Pencil, Trash2, User, Phone, Briefcase, Image as ImageIcon, Upload } from 'lucide-react';
+import { Plus, Pencil, Trash2, User, Phone, Briefcase, Upload } from 'lucide-react';
 import { overallCoordinatorsApi, uploadImage } from '@/db/api';
 import type { OverallCoordinator } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
@@ -56,11 +56,11 @@ export default function OverallCoordinatorManagement() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file size (1MB limit)
-    if (file.size > 1024 * 1024) {
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
       toast({
         title: 'Error',
-        description: 'File size must be less than 1MB',
+        description: 'File size must be less than 20MB',
         variant: 'destructive'
       });
       return;
@@ -88,7 +88,7 @@ export default function OverallCoordinatorManagement() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name.trim()) {
       toast({
         title: 'Validation Error',
@@ -112,7 +112,7 @@ export default function OverallCoordinatorManagement() {
           description: 'Coordinator added successfully'
         });
       }
-      
+
       setDialogOpen(false);
       resetForm();
       loadCoordinators();
@@ -216,7 +216,7 @@ export default function OverallCoordinatorManagement() {
                       <Label htmlFor="type">Type *</Label>
                       <Select
                         value={formData.type}
-                        onValueChange={(value: 'staff' | 'student') => 
+                        onValueChange={(value: 'staff' | 'student') =>
                           setFormData({ ...formData, type: value })
                         }
                       >
@@ -234,7 +234,7 @@ export default function OverallCoordinatorManagement() {
                       <Label htmlFor="event_type">Event Type *</Label>
                       <Select
                         value={formData.event_type}
-                        onValueChange={(value: 'Technical' | 'Cultural' | 'Both') => 
+                        onValueChange={(value: 'Technical' | 'Cultural' | 'Both') =>
                           setFormData({ ...formData, event_type: value })
                         }
                       >
@@ -293,42 +293,65 @@ export default function OverallCoordinatorManagement() {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="image_url">Photo (Optional)</Label>
-                    <div className="space-y-2">
-                      <div className="flex gap-2">
+                  <div className="space-y-4">
+                    <Label>Photo (Optional)</Label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+                        <div className="flex gap-2">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            className="w-full"
+                            onClick={() => document.getElementById('coordinator-image-upload')?.click()}
+                            disabled={uploading}
+                          >
+                            <Upload className="h-4 w-4 mr-2" />
+                            {uploading ? 'Uploading...' : 'Upload Image'}
+                          </Button>
+                          <input
+                            id="coordinator-image-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            className="hidden"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-xs text-muted-foreground">External Image URL</Label>
                         <Input
-                          id="image_url"
-                          placeholder="Enter image URL or upload"
+                          placeholder="https://example.com/photo.jpg"
                           value={formData.image_url}
                           onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                          className="flex-1"
                         />
+                      </div>
+                    </div>
+                    {formData.image_url && (
+                      <div className="mt-2 flex items-center gap-4 p-2 border rounded-md bg-muted/50">
+                        <div className="relative h-20 w-20 overflow-hidden rounded bg-black/20 flex items-center justify-center">
+                          <img
+                            src={formData.image_url}
+                            alt="Preview"
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = 'https://placehold.co/400x400?text=Invalid';
+                            }}
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-muted-foreground truncate">{formData.image_url}</p>
+                        </div>
                         <Button
                           type="button"
-                          variant="outline"
-                          onClick={() => document.getElementById('coordinator-image-upload')?.click()}
-                          disabled={uploading}
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setFormData({ ...formData, image_url: '' })}
                         >
-                          <Upload className="h-4 w-4 mr-2" />
-                          {uploading ? 'Uploading...' : 'Upload'}
+                          Remove
                         </Button>
                       </div>
-                      <input
-                        id="coordinator-image-upload"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                      />
-                      {formData.image_url && (
-                        <img
-                          src={formData.image_url}
-                          alt="Preview"
-                          className="w-24 h-24 object-cover rounded-md border"
-                        />
-                      )}
-                    </div>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -407,14 +430,14 @@ export default function OverallCoordinatorManagement() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <Badge 
+                      <Badge
                         variant="outline"
                         className={
-                          coordinator.event_type === 'Technical' 
-                            ? 'border-primary text-primary' 
+                          coordinator.event_type === 'Technical'
+                            ? 'border-primary text-primary'
                             : coordinator.event_type === 'Cultural'
-                            ? 'border-secondary text-secondary'
-                            : 'border-accent text-accent'
+                              ? 'border-secondary text-secondary'
+                              : 'border-accent text-accent'
                         }
                       >
                         {coordinator.event_type || 'Both'}
@@ -426,8 +449,8 @@ export default function OverallCoordinatorManagement() {
                     <TableCell className="text-sm">{coordinator.contact || '-'}</TableCell>
                     <TableCell>
                       {coordinator.show_photo && coordinator.image_url ? (
-                        <img 
-                          src={coordinator.image_url} 
+                        <img
+                          src={coordinator.image_url}
                           alt={coordinator.name}
                           className="w-8 h-8 rounded-full object-cover"
                         />

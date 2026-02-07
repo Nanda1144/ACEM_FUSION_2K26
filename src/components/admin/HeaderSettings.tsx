@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { themeSettingsApi, uploadImage } from '@/db/api';
 import type { ThemeSettings, Logo } from '@/types/index';
@@ -41,11 +40,11 @@ export default function HeaderSettings() {
     const file = e.target.files?.[0];
     if (!file || !settings) return;
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
+    // Validate file size (max 20MB)
+    if (file.size > 20 * 1024 * 1024) {
       toast({
         title: 'Error',
-        description: 'Image size must be less than 5MB',
+        description: 'Image size must be less than 20MB',
         variant: 'destructive'
       });
       return;
@@ -58,11 +57,11 @@ export default function HeaderSettings() {
         title: 'Success',
         description: 'Background image uploaded successfully'
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading image:', error);
       toast({
-        title: 'Error',
-        description: 'Failed to upload background image',
+        title: 'Upload Failed',
+        description: error?.message || 'Failed to upload background image. Please ensure storage buckets are configured for public access.',
         variant: 'destructive'
       });
     }
@@ -92,7 +91,7 @@ export default function HeaderSettings() {
 
   const handleAddLogo = () => {
     if (!settings) return;
-    
+
     const newLogo: Logo = {
       id: Date.now(),
       url: '',
@@ -109,7 +108,7 @@ export default function HeaderSettings() {
 
   const handleRemoveLogo = (logoId: number) => {
     if (!settings) return;
-    
+
     setSettings({
       ...settings,
       logos: settings.logos.filter(logo => logo.id !== logoId)
@@ -118,7 +117,7 @@ export default function HeaderSettings() {
 
   const handleLogoChange = (logoId: number, field: keyof Logo, value: string | number) => {
     if (!settings) return;
-    
+
     setSettings({
       ...settings,
       logos: settings.logos.map(logo =>
@@ -273,32 +272,48 @@ export default function HeaderSettings() {
 
           <div className="space-y-2">
             <Label htmlFor="header_bg_image">Background Image</Label>
-            <div className="space-y-2">
-              <div className="flex items-center gap-4">
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleBackgroundImageUpload}
-                  className="flex-1"
-                />
-                {settings.header_bg_image && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSettings({ ...settings, header_bg_image: null })}
-                  >
-                    Remove
-                  </Button>
-                )}
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleBackgroundImageUpload}
+                    className="w-full"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs text-muted-foreground">External Image URL</Label>
+                  <Input
+                    type="url"
+                    placeholder="https://example.com/header-bg.jpg"
+                    value={settings.header_bg_image || ''}
+                    onChange={(e) => setSettings({ ...settings, header_bg_image: e.target.value })}
+                    className="w-full"
+                  />
+                </div>
               </div>
               {settings.header_bg_image && (
-                <div className="relative w-full h-32 rounded-lg overflow-hidden border border-border">
-                  <img
-                    src={settings.header_bg_image}
-                    alt="Header Background Preview"
-                    className="w-full h-full object-cover"
-                  />
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-xs text-muted-foreground">Preview</Label>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSettings({ ...settings, header_bg_image: null })}
+                    >
+                      Remove Image
+                    </Button>
+                  </div>
+                  <div className="relative w-full h-32 rounded-lg overflow-hidden border border-border">
+                    <img
+                      src={settings.header_bg_image}
+                      alt="Header Background Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               )}
               <p className="text-xs text-muted-foreground">
@@ -405,14 +420,12 @@ export default function HeaderSettings() {
                     <img
                       src={logo.url}
                       alt={`Logo ${index + 1}`}
-                      className={`w-12 h-12 object-cover border-2 border-primary/30 ${
-                        logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
-                      }`}
+                      className={`w-12 h-12 object-cover border-2 border-primary/30 ${logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                        }`}
                     />
                   ) : (
-                    <div className={`w-12 h-12 bg-muted flex items-center justify-center border-2 border-primary/30 ${
-                      logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
-                    }`}>
+                    <div className={`w-12 h-12 bg-muted flex items-center justify-center border-2 border-primary/30 ${logo.shape === 'semi-square' ? 'rounded-lg' : 'rounded-full'
+                      }`}>
                       <Upload className="h-5 w-5 text-muted-foreground" />
                     </div>
                   )}

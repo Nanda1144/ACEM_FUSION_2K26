@@ -40,11 +40,11 @@ export default function SponsorLogoManagement() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file size (1MB limit)
-    if (file.size > 1024 * 1024) {
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
       toast({
         title: 'Error',
-        description: 'File size must be less than 1MB',
+        description: 'File size must be less than 20MB',
         variant: 'destructive',
       });
       return;
@@ -112,6 +112,24 @@ export default function SponsorLogoManagement() {
     }
   };
 
+  const updateLogoUrl = async (id: string, newUrl: string) => {
+    try {
+      await sponsorLogosApi.update(id, { image_url: newUrl });
+      setLogos(logos.map((logo) => (logo.id === id ? { ...logo, image_url: newUrl } : logo)));
+      toast({
+        title: 'Success',
+        description: 'Logo URL updated',
+      });
+    } catch (error) {
+      console.error('Error updating URL:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update logo URL',
+        variant: 'destructive',
+      });
+    }
+  };
+
   const handleReorder = async (id: string, newOrder: number) => {
     try {
       await sponsorLogosApi.update(id, { order_number: newOrder });
@@ -140,24 +158,83 @@ export default function SponsorLogoManagement() {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Upload Section */}
-        <div className="space-y-2">
-          <Label htmlFor="logo-upload">Upload Logo</Label>
-          <div className="flex items-center gap-4">
-            <Input
-              id="logo-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              disabled={uploading}
-              className="flex-1"
-            />
-            <Button disabled={uploading} variant="outline">
-              <Upload className="w-4 h-4 mr-2" />
-              {uploading ? 'Uploading...' : 'Upload'}
-            </Button>
+        <div className="space-y-4">
+          <Label>Add Sponsor Logo</Label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+              <div className="flex gap-2">
+                <Button
+                  disabled={uploading}
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => document.getElementById('logo-upload')?.click()}
+                >
+                  <Upload className="w-4 h-4 mr-2" />
+                  {uploading ? 'Uploading...' : 'Upload Image'}
+                </Button>
+                <input
+                  id="logo-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  disabled={uploading}
+                  className="hidden"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-xs text-muted-foreground">External Image URL</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="logo-url"
+                  placeholder="https://example.com/logo.png"
+                  onKeyDown={async (e) => {
+                    if (e.key === 'Enter') {
+                      const url = (e.currentTarget as HTMLInputElement).value;
+                      if (url) {
+                        try {
+                          await sponsorLogosApi.create({
+                            image_url: url,
+                            order_number: logos.length + 1
+                          });
+                          await loadLogos();
+                          (e.currentTarget as HTMLInputElement).value = '';
+                          toast({ title: 'Success', description: 'Logo added via URL' });
+                        } catch (error) {
+                          toast({ title: 'Error', description: 'Failed to add logo URL', variant: 'destructive' });
+                        }
+                      }
+                    }
+                  }}
+                />
+                <Button
+                  variant="secondary"
+                  onClick={async () => {
+                    const input = document.getElementById('logo-url') as HTMLInputElement;
+                    const url = input.value;
+                    if (url) {
+                      try {
+                        await sponsorLogosApi.create({
+                          image_url: url,
+                          order_number: logos.length + 1
+                        });
+                        await loadLogos();
+                        input.value = '';
+                        toast({ title: 'Success', description: 'Logo added via URL' });
+                      } catch (error) {
+                        toast({ title: 'Error', description: 'Failed to add logo URL', variant: 'destructive' });
+                      }
+                    }
+                  }}
+                >
+                  Add
+                </Button>
+              </div>
+            </div>
           </div>
           <p className="text-xs text-muted-foreground">
-            Recommended: Semi-square logos, max 1MB. Height will be set to 80px.
+            Recommended: Semi-square logos, max 20MB. Height will be set to 80px.
           </p>
         </div>
 
@@ -179,32 +256,57 @@ export default function SponsorLogoManagement() {
                   key={logo.id}
                   className="relative group border border-border rounded-lg p-4 bg-card hover:border-primary/50 transition-colors"
                 >
-                  <div className="aspect-square mb-2 flex items-center justify-center bg-muted rounded">
-                    <img
-                      src={logo.image_url}
-                      alt={`Logo ${logo.order_number}`}
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 flex-1">
-                      <GripVertical className="w-4 h-4 text-muted-foreground" />
-                      <Input
-                        type="number"
-                        value={logo.order_number}
-                        onChange={(e) => handleReorder(logo.id, parseInt(e.target.value))}
-                        className="w-16 h-8 text-xs"
-                        min={1}
+                  <div className="space-y-3">
+                    <div className="aspect-square flex items-center justify-center bg-muted rounded overflow-hidden p-2">
+                      <img
+                        src={logo.image_url}
+                        alt={`Logo ${logo.order_number}`}
+                        className="max-w-full max-h-full object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://placehold.co/200x200?text=Invalid';
+                        }}
                       />
                     </div>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => handleDelete(logo.id)}
-                      className="h-8 w-8 p-0"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+
+                    <div className="space-y-1">
+                      <Label className="text-[10px] uppercase text-muted-foreground">Logo URL</Label>
+                      <Input
+                        type="url"
+                        value={logo.image_url}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            updateLogoUrl(logo.id, e.currentTarget.value);
+                          }
+                        }}
+                        onBlur={(e) => {
+                          if (e.target.value !== logo.image_url) {
+                            updateLogoUrl(logo.id, e.target.value);
+                          }
+                        }}
+                        className="h-7 text-xs"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1 flex-1">
+                        <GripVertical className="w-3 h-3 text-muted-foreground" />
+                        <Input
+                          type="number"
+                          value={logo.order_number}
+                          onChange={(e) => handleReorder(logo.id, parseInt(e.target.value))}
+                          className="w-12 h-7 text-xs px-1"
+                          min={1}
+                        />
+                      </div>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => handleDelete(logo.id)}
+                        className="h-7 w-7 p-0"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}

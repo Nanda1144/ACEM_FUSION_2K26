@@ -3,29 +3,30 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { popupImageApi } from '@/db/api';
 import type { PopupImage as PopupImageType } from '@/types/index';
+import { useRefresh } from '@/contexts/RefreshContext';
 
 export default function PopupImage() {
   const [popup, setPopup] = useState<PopupImageType | null>(null);
+  const { refreshKey } = useRefresh();
   const [isVisible, setIsVisible] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<any>(null);
   const startTimeRef = useRef<number>(0);
   const remainingTimeRef = useRef<number>(0);
 
   useEffect(() => {
     loadPopup();
-  }, []);
+  }, [refreshKey]);
 
   const loadPopup = async () => {
     try {
       const data = await popupImageApi.get();
       if (data && data.is_enabled) {
         setPopup(data);
-        setTimeLeft(data.duration);
-        remainingTimeRef.current = data.duration * 1000; // Convert to milliseconds
+        const duration = (data.duration || 10) * 1000;
+        remainingTimeRef.current = duration;
         setIsVisible(true);
-        startTimer(data.duration * 1000);
+        startTimer(duration);
       }
     } catch (error) {
       console.error('Error loading popup:', error);
@@ -57,12 +58,9 @@ export default function PopupImage() {
   };
 
   const handleMouseUp = () => {
-    if (isPaused && remainingTimeRef.current > 0) {
+    if (isPaused) {
       setIsPaused(false);
-      startTimeRef.current = Date.now();
-      timerRef.current = setTimeout(() => {
-        handleClose();
-      }, remainingTimeRef.current);
+      handleClose();
     }
   };
 
@@ -111,7 +109,7 @@ export default function PopupImage() {
                   background: 'radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%)',
                   filter: 'blur(60px)',
                 }}
-                animate={{
+                animate={isPaused ? {} : {
                   scale: [1, 1.2, 1],
                   opacity: [0.3, 0.5, 0.3],
                 }}
@@ -127,7 +125,7 @@ export default function PopupImage() {
                   background: 'radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%)',
                   filter: 'blur(60px)',
                 }}
-                animate={{
+                animate={isPaused ? {} : {
                   scale: [1.2, 1, 1.2],
                   opacity: [0.25, 0.4, 0.25],
                 }}
@@ -144,7 +142,7 @@ export default function PopupImage() {
                   background: 'radial-gradient(circle, rgba(255, 237, 78, 0.2) 0%, transparent 70%)',
                   filter: 'blur(80px)',
                 }}
-                animate={{
+                animate={isPaused ? {} : {
                   scale: [1, 1.3, 1],
                   opacity: [0.2, 0.35, 0.2],
                 }}
@@ -200,7 +198,7 @@ export default function PopupImage() {
                 style={{
                   background: 'linear-gradient(135deg, transparent 0%, rgba(255, 215, 0, 0.4) 45%, rgba(255, 237, 78, 0.6) 50%, rgba(255, 215, 0, 0.4) 55%, transparent 100%)',
                 }}
-                animate={{
+                animate={isPaused ? {} : {
                   x: ['-200%', '200%'],
                 }}
                 transition={{
@@ -242,7 +240,7 @@ export default function PopupImage() {
                 transition={{ delay: 2, duration: 1 }}
                 className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm pointer-events-none"
               >
-                Hold to pause • Click to close
+                Hold to read • Release to close
               </motion.div>
             </div>
           </motion.div>

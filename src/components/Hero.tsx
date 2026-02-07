@@ -35,7 +35,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
       {/* Animated Background Image - Responsive with Pop Animation */}
       <div className="absolute inset-0">
         <motion.img 
-          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
+          src="/acem.jpeg"
           alt="Fusion26 College Fest Background"
           className="w-full h-full object-cover object-center md:object-center lg:object-top"
           initial={{ scale: 0.8, opacity: 0 }}

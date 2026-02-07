@@ -55,6 +55,16 @@ export default function CommitteeManagement() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'File size must be less than 20MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       const url = await uploadImage(file, 'app-9dfi9jpj51xd_committee_images');
       form.setValue('image_url', url);
@@ -220,9 +230,9 @@ export default function CommitteeManagement() {
                     <FormItem>
                       <FormLabel>Info / Bio</FormLabel>
                       <FormControl>
-                        <Textarea 
-                          {...field} 
-                          placeholder="Enter member information or bio (optional)" 
+                        <Textarea
+                          {...field}
+                          placeholder="Enter member information or bio (optional)"
                           rows={3}
                           className="resize-none"
                         />
@@ -246,19 +256,59 @@ export default function CommitteeManagement() {
                   )}
                 />
 
-                <div>
+                <div className="space-y-4">
                   <Label>Member Image</Label>
-                  <div className="mt-2 flex items-center gap-4">
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="flex-1"
-                    />
-                    {form.watch('image_url') && (
-                      <img src={form.watch('image_url')} alt="Preview" className="h-16 w-16 object-cover rounded" />
-                    )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="w-full"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs text-muted-foreground">External Image URL</Label>
+                      <FormField
+                        control={form.control}
+                        name="image_url"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input {...field} placeholder="https://example.com/photo.jpg" className="w-full" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </div>
+                  {form.watch('image_url') && (
+                    <div className="mt-2 flex items-center gap-4 p-2 border rounded-md bg-muted/50">
+                      <div className="relative h-20 w-20 overflow-hidden rounded bg-black/20 flex items-center justify-center">
+                        <img
+                          src={form.watch('image_url')}
+                          alt="Preview"
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://placehold.co/400x400?text=Invalid';
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-muted-foreground truncate">{form.watch('image_url')}</p>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => form.setValue('image_url', '')}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  )}
                 </div>
 
                 <DialogFooter>

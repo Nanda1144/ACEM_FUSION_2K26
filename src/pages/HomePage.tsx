@@ -15,38 +15,18 @@ import Chatbot from '@/components/Chatbot';
 import AdminDashboard from '@/components/AdminDashboard';
 import WelcomePopup from '@/components/WelcomePopup';
 import BackgroundCarousel from '@/components/BackgroundCarousel';
-import { themeSettingsApi } from '@/db/api';
-import type { ThemeSettings } from '@/types/index';
-
 export default function HomePage() {
   const [showAdmin, setShowAdmin] = useState(false);
-  const [themeSettings, setThemeSettings] = useState<ThemeSettings | null>(null);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    loadThemeSettings();
+    // Popup logic could go here if needed
   }, []);
-
-  const loadThemeSettings = async () => {
-    try {
-      const data = await themeSettingsApi.get();
-      setThemeSettings(data);
-    } catch (error) {
-      console.error('Error loading theme settings:', error);
-    }
-  };
 
   const handleClosePopup = () => {
     setShowPopup(false);
   };
 
-  const pageStyle = {
-    backgroundColor: themeSettings?.page_bg_color || '#0A0F1E',
-    backgroundImage: themeSettings?.page_bg_image ? `url(${themeSettings.page_bg_image})` : 'none',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed'
-  };
 
   if (showAdmin) {
     return (
@@ -67,7 +47,7 @@ export default function HomePage() {
         <meta name="description" content="Welcome to ACEM, the ultimate college fest experience! Join us for an unforgettable celebration of talent, creativity, and innovation." />
       </Helmet>
       <BackgroundCarousel />
-      <div className="min-h-screen relative" style={pageStyle}>
+      <div className="relative">
         <FlexibleHeader />
         <Hero onExploreEvents={handleClosePopup} />
         <LogoCarousel />

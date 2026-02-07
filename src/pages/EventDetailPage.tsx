@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
-import { ArrowLeft, Calendar, Clock, MapPin, Users, Trophy, Phone, Mail, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, MapPin, Users, Trophy, Phone, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -63,7 +63,7 @@ export default function EventDetailPage() {
         <meta name="description" content={event.description} />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         <FlexibleHeader />
 
         <main className="pt-24 pb-12 px-4">
@@ -93,11 +93,10 @@ export default function EventDetailPage() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-                      event.type === 'Technical'
-                        ? 'bg-primary/90 text-primary-foreground'
-                        : 'bg-secondary/90 text-secondary-foreground'
-                    }`}>
+                    <span className={`px-4 py-2 rounded-full text-sm font-semibold ${event.type === 'Technical'
+                      ? 'bg-primary/90 text-primary-foreground'
+                      : 'bg-secondary/90 text-secondary-foreground'
+                      }`}>
                       {event.type}
                     </span>
                   </div>
@@ -108,7 +107,7 @@ export default function EventDetailPage() {
                   <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
                     {event.name}
                   </h1>
-                  
+
                   {/* Description with format support */}
                   {event.description_format === 'list' ? (
                     <ul className="text-lg text-muted-foreground mb-6 space-y-2 list-disc list-inside">
@@ -119,7 +118,7 @@ export default function EventDetailPage() {
                       ))}
                     </ul>
                   ) : (
-                    <div 
+                    <div
                       className="text-lg text-muted-foreground mb-6 text-justify leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: event.description }}
                     />

@@ -59,6 +59,16 @@ export default function EventManagement() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'File size must be less than 20MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       const url = await uploadImage(file, 'app-9dfi9jpj51xd_events_images');
       form.setValue('image_url', url);
@@ -241,21 +251,21 @@ export default function EventManagement() {
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         {form.watch('description_format') === 'list' ? (
-                          <Textarea 
+                          <Textarea
                             {...field}
                             placeholder="Enter each point on a new line:&#10;• Point 1&#10;• Point 2&#10;• Point 3"
                             className="min-h-[200px] font-mono"
                           />
                         ) : (
-                          <RichTextEditor 
-                            value={field.value} 
+                          <RichTextEditor
+                            value={field.value}
                             onChange={field.onChange}
                             placeholder="Enter event description with formatting..."
                           />
                         )}
                       </FormControl>
                       <p className="text-xs text-muted-foreground mt-1">
-                        {form.watch('description_format') === 'list' 
+                        {form.watch('description_format') === 'list'
                           ? 'Enter each point on a new line. You can start with • or - for bullets.'
                           : 'Use the rich text editor to format your description.'
                         }
@@ -279,19 +289,59 @@ export default function EventManagement() {
                   )}
                 />
 
-                <div>
+                <div className="space-y-4">
                   <Label>Event Image</Label>
-                  <div className="mt-2 flex items-center gap-4">
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="flex-1"
-                    />
-                    {form.watch('image_url') && (
-                      <img src={form.watch('image_url')} alt="Preview" className="h-16 w-16 object-cover rounded" />
-                    )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="w-full"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs text-muted-foreground">External Image URL</Label>
+                      <FormField
+                        control={form.control}
+                        name="image_url"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input {...field} placeholder="https://example.com/image.jpg" className="w-full" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </div>
+                  {form.watch('image_url') && (
+                    <div className="mt-2 flex items-center gap-4 p-2 border rounded-md bg-muted/50">
+                      <div className="relative h-20 w-32 overflow-hidden rounded bg-black/20 flex items-center justify-center">
+                        <img
+                          src={form.watch('image_url')}
+                          alt="Preview"
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://placehold.co/600x400?text=Invalid+Image+URL';
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-muted-foreground truncate">{form.watch('image_url')}</p>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => form.setValue('image_url', '')}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -337,8 +387,8 @@ export default function EventManagement() {
                     <div>
                       <Label>Student Coordinators</Label>
                       <p className="text-xs text-muted-foreground">
-                        {form.watch('type') === 'Cultural' 
-                          ? 'Add multiple students for cultural events' 
+                        {form.watch('type') === 'Cultural'
+                          ? 'Add multiple students for cultural events'
                           : 'Add one student for technical events'}
                       </p>
                     </div>

@@ -1,25 +1,14 @@
 import { supabase } from './supabase';
-import type { 
-  Event, 
-  CommitteeMember, 
-  Committee,
-  CommitteeCoordinator,
-  EventPoster,
-  BackgroundImage,
-  OverallCoordinator,
-  GalleryImage, 
-  AboutUs, 
-  Contact, 
-  AdminPasskey, 
-  HeaderSettings, 
-  ThemeSettings, 
-  Page, 
-  PageSection, 
-  FooterSettings, 
-  ComponentTemplate,
-  SponsorLogo,
+import type {
+  Event,
+  CommitteeMember,
+  Contact,
+  HeaderSettings,
+  ThemeSettings,
+  Page,
+  PageSection,
+  FooterSettings,
   PopupSettings,
-  PopupImage
 } from '@/types/index';
 
 // Events API
@@ -29,7 +18,7 @@ export const eventsApi = {
       .from('events')
       .select('*')
       .order('created_at', { ascending: false });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -40,7 +29,7 @@ export const eventsApi = {
       .select('*')
       .eq('id', id)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -51,7 +40,7 @@ export const eventsApi = {
       .select('*')
       .eq('type', type)
       .order('created_at', { ascending: false });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -62,7 +51,7 @@ export const eventsApi = {
       .insert([event])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -74,7 +63,7 @@ export const eventsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -84,7 +73,7 @@ export const eventsApi = {
       .from('events')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -96,7 +85,7 @@ export const committeeApi = {
       .from('committee')
       .select('*')
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -107,7 +96,7 @@ export const committeeApi = {
       .insert([member])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -119,7 +108,7 @@ export const committeeApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -129,7 +118,7 @@ export const committeeApi = {
       .from('committee')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -141,7 +130,7 @@ export const galleryApi = {
       .from('gallery')
       .select('*')
       .order('created_at', { ascending: false });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -152,7 +141,7 @@ export const galleryApi = {
       .insert([{ image_url }])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -162,7 +151,7 @@ export const galleryApi = {
       .from('gallery')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -175,7 +164,7 @@ export const aboutUsApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -187,7 +176,7 @@ export const aboutUsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   }
@@ -201,7 +190,7 @@ export const contactApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -213,7 +202,7 @@ export const contactApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   }
@@ -227,7 +216,7 @@ export const passkeyApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -239,7 +228,7 @@ export const passkeyApi = {
       .eq('passkey', passkey)
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return !!data;
   },
@@ -251,7 +240,7 @@ export const passkeyApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   }
@@ -265,7 +254,7 @@ export const headerSettingsApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -277,7 +266,7 @@ export const headerSettingsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   }
@@ -291,7 +280,7 @@ export const themeSettingsApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -303,7 +292,7 @@ export const themeSettingsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   }
@@ -316,7 +305,7 @@ export const pagesApi = {
       .from('pages')
       .select('*')
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -327,7 +316,7 @@ export const pagesApi = {
       .select('*')
       .eq('slug', slug)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -338,7 +327,7 @@ export const pagesApi = {
       .insert([page])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -350,7 +339,7 @@ export const pagesApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -360,7 +349,7 @@ export const pagesApi = {
       .from('pages')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -373,7 +362,7 @@ export const pageSectionsApi = {
       .select('*')
       .eq('page_id', pageId)
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -384,7 +373,7 @@ export const pageSectionsApi = {
       .insert([section])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -396,7 +385,7 @@ export const pageSectionsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -406,7 +395,7 @@ export const pageSectionsApi = {
       .from('page_sections')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -419,7 +408,7 @@ export const footerSettingsApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -431,7 +420,7 @@ export const footerSettingsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   }
@@ -444,7 +433,7 @@ export const componentTemplatesApi = {
       .from('component_templates')
       .select('*')
       .order('category', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -454,7 +443,7 @@ export const componentTemplatesApi = {
       .from('component_templates')
       .select('*')
       .eq('category', category);
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   }
@@ -471,8 +460,8 @@ export const uploadImage = async (
 
   // Check file size and compress if needed (skip compression for background images)
   let fileToUpload = file;
-  if (bucket !== 'app-9dfi9jpj51xd_background_images' && file.size > 1024 * 1024) {
-    // File is larger than 1MB, compress it (except for background images)
+  if (bucket !== 'app-9dfi9jpj51xd_background_images' && file.size > 5 * 1024 * 1024) {
+    // File is larger than 5MB, compress it (except for background images)
     fileToUpload = await compressImage(file);
   }
 
@@ -483,7 +472,10 @@ export const uploadImage = async (
       upsert: false
     });
 
-  if (error) throw error;
+  if (error) {
+    console.error(`Upload failed to bucket ${bucket}:`, error);
+    throw error;
+  }
 
   const { data: { publicUrl } } = supabase.storage
     .from(bucket)
@@ -499,7 +491,7 @@ export const eventPostersApi = {
       .from('event_posters')
       .select('*')
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -510,7 +502,7 @@ export const eventPostersApi = {
       .insert([poster])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -522,7 +514,7 @@ export const eventPostersApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -532,7 +524,7 @@ export const eventPostersApi = {
       .from('event_posters')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -544,7 +536,7 @@ export const backgroundImagesApi = {
       .from('background_images')
       .select('*')
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -555,7 +547,7 @@ export const backgroundImagesApi = {
       .insert([image])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -567,7 +559,7 @@ export const backgroundImagesApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -577,7 +569,7 @@ export const backgroundImagesApi = {
       .from('background_images')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -588,8 +580,8 @@ export const overallCoordinatorsApi = {
     const { data, error } = await supabase
       .from('overall_coordinators')
       .select('*')
-      .order('display_order', { ascending: true});
-    
+      .order('display_order', { ascending: true });
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -600,7 +592,7 @@ export const overallCoordinatorsApi = {
       .select('*')
       .eq('type', type)
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -612,7 +604,7 @@ export const overallCoordinatorsApi = {
       .or(`event_type.eq.${eventType},event_type.eq.Both`)
       .order('type', { ascending: true })
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -632,7 +624,7 @@ export const overallCoordinatorsApi = {
       .insert([coordinator])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -652,7 +644,7 @@ export const overallCoordinatorsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -662,7 +654,7 @@ export const overallCoordinatorsApi = {
       .from('overall_coordinators')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -674,7 +666,7 @@ export const committeesApi = {
       .from('committees')
       .select('*')
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -685,7 +677,7 @@ export const committeesApi = {
       .select('*')
       .eq('id', id)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -701,7 +693,7 @@ export const committeesApi = {
       .insert([committee])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -718,7 +710,7 @@ export const committeesApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -729,13 +721,13 @@ export const committeesApi = {
       .from('committee_coordinators')
       .delete()
       .eq('committee_id', id);
-    
+
     // Then delete the committee
     const { error } = await supabase
       .from('committees')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -747,7 +739,7 @@ export const committeeCoordinatorsApi = {
       .from('committee_coordinators')
       .select('*')
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -758,7 +750,7 @@ export const committeeCoordinatorsApi = {
       .select('*')
       .eq('committee_id', committeeId)
       .order('display_order', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -776,7 +768,7 @@ export const committeeCoordinatorsApi = {
       .insert([coordinator])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -788,13 +780,13 @@ export const committeeCoordinatorsApi = {
     image_url: string;
     display_order: number;
   }>) => {
-    const { data, error} = await supabase
+    const { data, error } = await supabase
       .from('committee_coordinators')
       .update(coordinator)
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -804,7 +796,7 @@ export const committeeCoordinatorsApi = {
       .from('committee_coordinators')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -869,7 +861,7 @@ export const sponsorLogosApi = {
       .from('sponsor_logos')
       .select('*')
       .order('order_number', { ascending: true });
-    
+
     if (error) throw error;
     return Array.isArray(data) ? data : [];
   },
@@ -880,7 +872,7 @@ export const sponsorLogosApi = {
       .insert([logo])
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -892,7 +884,7 @@ export const sponsorLogosApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
   },
@@ -902,7 +894,7 @@ export const sponsorLogosApi = {
       .from('sponsor_logos')
       .delete()
       .eq('id', id);
-    
+
     if (error) throw error;
   }
 };
@@ -915,7 +907,7 @@ export const popupSettingsApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -927,9 +919,24 @@ export const popupSettingsApi = {
       .eq('id', id)
       .select()
       .single();
-    
+
     if (error) throw error;
     return data;
+  },
+
+  upsert: async (settings: Partial<PopupSettings>) => {
+    const existing = await popupSettingsApi.get();
+    if (existing) {
+      return await popupSettingsApi.update(existing.id, settings);
+    } else {
+      const { data, error } = await supabase
+        .from('popup_settings')
+        .insert([{ ...settings, updated_at: new Date().toISOString() }])
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    }
   }
 };
 
@@ -942,7 +949,7 @@ export const popupImageApi = {
       .eq('is_enabled', true)
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -953,7 +960,7 @@ export const popupImageApi = {
       .select('*')
       .limit(1)
       .maybeSingle();
-    
+
     if (error) throw error;
     return data;
   },
@@ -961,7 +968,7 @@ export const popupImageApi = {
   upsert: async (popup: { image_url: string; duration: number; is_enabled: boolean }) => {
     // First, get existing popup
     const existing = await popupImageApi.getForAdmin();
-    
+
     if (existing) {
       // Update existing
       const { data, error } = await supabase
@@ -970,7 +977,7 @@ export const popupImageApi = {
         .eq('id', existing.id)
         .select()
         .single();
-      
+
       if (error) throw error;
       return data;
     } else {
@@ -980,7 +987,7 @@ export const popupImageApi = {
         .insert([popup])
         .select()
         .single();
-      
+
       if (error) throw error;
       return data;
     }
@@ -991,7 +998,7 @@ export const popupImageApi = {
       .from('popup_image')
       .delete()
       .neq('id', '00000000-0000-0000-0000-000000000000'); // Delete all
-    
+
     if (error) throw error;
   }
 };

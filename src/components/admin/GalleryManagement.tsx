@@ -39,6 +39,16 @@ export default function GalleryManagement() {
     setUploading(true);
     try {
       for (const file of Array.from(files)) {
+        // Validate file size (20MB limit)
+        if (file.size > 20 * 1024 * 1024) {
+          toast({
+            title: 'Error',
+            description: `File "${file.name}" exceeds 20MB and was skipped`,
+            variant: 'destructive',
+          });
+          continue;
+        }
+
         const url = await uploadImage(file, 'app-9dfi9jpj51xd_gallery_images');
         await galleryApi.create(url);
       }
@@ -79,24 +89,70 @@ export default function GalleryManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <h2 className="text-2xl font-bold">Gallery Management</h2>
-        <div>
-          <Input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImageUpload}
-            disabled={uploading}
-            className="hidden"
-            id="gallery-upload"
-          />
-          <Button asChild className="glow-cyan" disabled={uploading}>
-            <label htmlFor="gallery-upload" className="cursor-pointer">
-              <Plus className="mr-2 h-4 w-4" />
-              {uploading ? 'Uploading...' : 'Upload Images'}
-            </label>
-          </Button>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
+          <div className="flex-1 min-w-[300px]">
+            <div className="flex gap-2">
+              <Input
+                id="gallery-url"
+                placeholder="Paste image URL and press Add"
+                className="flex-1"
+                onKeyDown={async (e) => {
+                  if (e.key === 'Enter') {
+                    const url = e.currentTarget.value;
+                    if (url) {
+                      try {
+                        await galleryApi.create(url);
+                        loadImages();
+                        e.currentTarget.value = '';
+                        toast({ title: 'Success', description: 'Image added to gallery' });
+                      } catch (error) {
+                        toast({ title: 'Error', description: 'Failed to add image URL', variant: 'destructive' });
+                      }
+                    }
+                  }
+                }}
+              />
+              <Button
+                variant="secondary"
+                onClick={async () => {
+                  const input = document.getElementById('gallery-url') as HTMLInputElement;
+                  const url = input.value;
+                  if (url) {
+                    try {
+                      await galleryApi.create(url);
+                      loadImages();
+                      input.value = '';
+                      toast({ title: 'Success', description: 'Image added to gallery' });
+                    } catch (error) {
+                      toast({ title: 'Error', description: 'Failed to add image URL', variant: 'destructive' });
+                    }
+                  }
+                }}
+              >
+                Add
+              </Button>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground hidden sm:inline">OR</span>
+            <Input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+              disabled={uploading}
+              className="hidden"
+              id="gallery-upload"
+            />
+            <Button asChild className="glow-cyan w-full sm:w-auto" disabled={uploading}>
+              <label htmlFor="gallery-upload" className="cursor-pointer">
+                <Plus className="mr-2 h-4 w-4" />
+                {uploading ? 'Uploading...' : 'Upload Images (Max 20MB each)'}
+              </label>
+            </Button>
+          </div>
         </div>
       </div>
 

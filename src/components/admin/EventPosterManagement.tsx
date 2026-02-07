@@ -39,11 +39,11 @@ export default function EventPosterManagement() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file size (1MB limit)
-    if (file.size > 1024 * 1024) {
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
       toast({
         title: 'Error',
-        description: 'File size must be less than 1MB',
+        description: 'File size must be less than 20MB',
         variant: 'destructive',
       });
       return;
@@ -79,6 +79,24 @@ export default function EventPosterManagement() {
       });
     } finally {
       setUploading(false);
+    }
+  };
+
+  const updateImageUrl = async (id: string, newUrl: string) => {
+    try {
+      await eventPostersApi.update(id, { image_url: newUrl });
+      setPosters(posters.map((p) => (p.id === id ? { ...p, image_url: newUrl } : p)));
+      toast({
+        title: 'Success',
+        description: 'Poster URL updated',
+      });
+    } catch (error) {
+      console.error('Error updating URL:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update poster URL',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -145,30 +163,86 @@ export default function EventPosterManagement() {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Upload Section */}
-        <div className="space-y-4">
-          <Label htmlFor="poster-upload">Upload Event Poster</Label>
-          <div className="flex gap-4">
-            <Button
-              type="button"
-              onClick={() => document.getElementById('poster-upload')?.click()}
-              disabled={uploading}
-              className="w-full sm:w-auto"
-            >
-              <Upload className="h-4 w-4 mr-2" />
-              {uploading ? 'Uploading...' : 'Upload Poster'}
-            </Button>
-            <input
-              id="poster-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <Label htmlFor="poster-upload">Upload Event Poster</Label>
+            <div className="flex gap-4">
+              <Button
+                type="button"
+                onClick={() => document.getElementById('poster-upload')?.click()}
+                disabled={uploading}
+                className="w-full"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                {uploading ? 'Uploading...' : 'Upload Poster'}
+              </Button>
+              <input
+                id="poster-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+            </div>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Upload event posters (max 1MB). Recommended size: 1920x1080px
-          </p>
+
+          <div className="space-y-4">
+            <Label htmlFor="manual-url">Add via Image URL</Label>
+            <div className="flex gap-2">
+              <Input
+                id="manual-url"
+                type="url"
+                placeholder="https://example.com/poster.jpg"
+                onKeyDown={async (e) => {
+                  if (e.key === 'Enter') {
+                    const url = e.currentTarget.value;
+                    if (url) {
+                      try {
+                        const newPoster = await eventPostersApi.create({
+                          image_url: url,
+                          display_order: posters.length + 1,
+                          scroll_duration: 30000
+                        });
+                        setPosters([...posters, newPoster]);
+                        e.currentTarget.value = '';
+                        toast({ title: 'Success', description: 'Poster added via URL' });
+                      } catch (error) {
+                        toast({ title: 'Error', description: 'Failed to add poster URL', variant: 'destructive' });
+                      }
+                    }
+                  }
+                }}
+              />
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={async () => {
+                  const input = document.getElementById('manual-url') as HTMLInputElement;
+                  const url = input.value;
+                  if (url) {
+                    try {
+                      const newPoster = await eventPostersApi.create({
+                        image_url: url,
+                        display_order: posters.length + 1,
+                        scroll_duration: 30000
+                      });
+                      setPosters([...posters, newPoster]);
+                      input.value = '';
+                      toast({ title: 'Success', description: 'Poster added via URL' });
+                    } catch (error) {
+                      toast({ title: 'Error', description: 'Failed to add poster URL', variant: 'destructive' });
+                    }
+                  }
+                }}
+              >
+                Add
+              </Button>
+            </div>
+          </div>
         </div>
+        <p className="text-sm text-muted-foreground">
+          Recommended size: 1920x1080px (max 20MB for uploads)
+        </p>
 
         {/* Posters Grid */}
         {loading ? (
@@ -190,36 +264,56 @@ export default function EventPosterManagement() {
                 </div>
                 <CardContent className="p-4 space-y-3">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <GripVertical className="h-4 w-4 text-muted-foreground" />
-                      <Label htmlFor={`order-${poster.id}`} className="text-sm">
-                        Display Order
-                      </Label>
-                    </div>
-                    <Input
-                      id={`order-${poster.id}`}
-                      type="number"
-                      min="1"
-                      value={poster.display_order}
-                      onChange={(e) => updateDisplayOrder(poster.id, parseInt(e.target.value))}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor={`duration-${poster.id}`} className="text-sm">
-                      Scroll Duration (ms)
+                    <Label htmlFor={`url-${poster.id}`} className="text-sm">
+                      Poster Image URL
                     </Label>
                     <Input
-                      id={`duration-${poster.id}`}
-                      type="number"
-                      min="5000"
-                      step="1000"
-                      value={poster.scroll_duration || 30000}
-                      onChange={(e) => updateScrollDuration(poster.id, parseInt(e.target.value))}
+                      id={`url-${poster.id}`}
+                      type="url"
+                      value={poster.image_url}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          updateImageUrl(poster.id, e.currentTarget.value);
+                        }
+                      }}
+                      onBlur={(e) => {
+                        if (e.target.value !== poster.image_url) {
+                          updateImageUrl(poster.id, e.target.value);
+                        }
+                      }}
                     />
-                    <p className="text-xs text-muted-foreground">
-                      Time for full scroll cycle (30000ms = 30 seconds)
-                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <GripVertical className="h-4 w-4 text-muted-foreground" />
+                        <Label htmlFor={`order-${poster.id}`} className="text-sm">
+                          Order
+                        </Label>
+                      </div>
+                      <Input
+                        id={`order-${poster.id}`}
+                        type="number"
+                        min="1"
+                        value={poster.display_order}
+                        onChange={(e) => updateDisplayOrder(poster.id, parseInt(e.target.value))}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor={`duration-${poster.id}`} className="text-sm">
+                        Duration
+                      </Label>
+                      <Input
+                        id={`duration-${poster.id}`}
+                        type="number"
+                        min="5000"
+                        step="1000"
+                        value={poster.scroll_duration || 30000}
+                        onChange={(e) => updateScrollDuration(poster.id, parseInt(e.target.value))}
+                      />
+                    </div>
                   </div>
 
                   <Button

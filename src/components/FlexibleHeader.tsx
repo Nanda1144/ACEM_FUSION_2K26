@@ -4,12 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { themeSettingsApi, pagesApi } from '@/db/api';
 import type { ThemeSettings, Page } from '@/types/index';
+import { useRefresh } from '@/contexts/RefreshContext';
 
 export default function FlexibleHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [themeSettings, setThemeSettings] = useState<ThemeSettings | null>(null);
   const [pages, setPages] = useState<Page[]>([]);
+  const { refreshKey } = useRefresh();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +25,7 @@ export default function FlexibleHeader() {
   useEffect(() => {
     loadThemeSettings();
     loadPages();
-  }, []);
+  }, [refreshKey]);
 
   const loadThemeSettings = async () => {
     try {
@@ -61,11 +63,6 @@ export default function FlexibleHeader() {
     backgroundAttachment: 'scroll'
   };
 
-  const titleStyle = {
-    fontFamily: themeSettings?.header_font_family || 'Inter',
-    fontSize: getFontSize(themeSettings?.header_font_size || '2xl'),
-    color: themeSettings?.header_text_color || '#00D9FF'
-  };
 
   const navStyle = {
     fontSize: getFontSize(themeSettings?.nav_font_size || 'base'),
@@ -75,11 +72,10 @@ export default function FlexibleHeader() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative ${
-          isScrolled && !themeSettings?.header_bg_color
-            ? 'backdrop-blur-glass border-b border-primary/20 shadow-lg'
-            : ''
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative ${isScrolled && !themeSettings?.header_bg_color
+          ? 'backdrop-blur-glass border-b border-primary/20 shadow-lg'
+          : ''
+          }`}
         style={headerStyle}
       >
         {/* Overlay for better text readability when background image is present */}
@@ -95,9 +91,8 @@ export default function FlexibleHeader() {
                 {leftLogos.map((logo) => (
                   <div
                     key={logo.id}
-                    className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden border border-primary/30 sm:border-2 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                      logo.shape === 'semi-square' ? 'rounded-md sm:rounded-lg' : 'rounded-full'
-                    }`}
+                    className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden border border-primary/30 sm:border-2 hover:border-primary transition-all duration-300 hover:scale-110 ${logo.shape === 'semi-square' ? 'rounded-md sm:rounded-lg' : 'rounded-full'
+                      }`}
                   >
                     <img
                       src={logo.url}
@@ -112,8 +107,8 @@ export default function FlexibleHeader() {
             {/* College Name with Subtitle and Tagline - Responsive Typography */}
             <div className="flex-1 px-2 sm:px-4 md:px-6 min-w-0 text-center">
               {/* ADITYA COLLEGE OF ENGINEERING - Gold with Glow */}
-              <h1 
-                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-center" 
+              <h1
+                className="font-bold truncate text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-center"
                 style={{
                   color: '#D4AF37',
                   textShadow: '0 0 30px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.6), 0 0 50px rgba(212, 175, 55, 0.4)',
@@ -124,22 +119,22 @@ export default function FlexibleHeader() {
               >
                 {themeSettings?.header_title || 'ADITYA COLLEGE OF ENGINEERING'}
               </h1>
-              
+
               {/* Madanapalle - Light-Dark Gold with Glow */}
-              <p 
-                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 sm:mt-1 font-medium truncate text-center" 
-                style={{ 
+              <p
+                className="text-[10px] sm:text-xs md:text-sm lg:text-base mt-0.5 sm:mt-1 font-medium truncate text-center"
+                style={{
                   color: '#E6C86F',
                   textShadow: '0 0 20px rgba(230, 200, 111, 0.7), 0 0 30px rgba(230, 200, 111, 0.5), 0 0 40px rgba(230, 200, 111, 0.3)',
                 }}
               >
                 {themeSettings?.header_subtitle || 'Madanapalle'}
               </p>
-              
+
               {/* UGC Autonomous - White */}
-              <p 
-                className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5 italic font-normal truncate text-center" 
-                style={{ 
+              <p
+                className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5 italic font-normal truncate text-center"
+                style={{
                   color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
                 }}
@@ -166,7 +161,7 @@ export default function FlexibleHeader() {
                     }}
                   >
                     {page.title}
-                    <span 
+                    <span
                       className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
                       style={{ backgroundColor: themeSettings?.nav_hover_color || '#D4AF37' }}
                     />
@@ -180,9 +175,8 @@ export default function FlexibleHeader() {
                   {rightLogos.map((logo) => (
                     <div
                       key={logo.id}
-                      className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden border border-primary/30 sm:border-2 hover:border-primary transition-all duration-300 hover:scale-110 ${
-                        logo.shape === 'semi-square' ? 'rounded-md sm:rounded-lg' : 'rounded-full'
-                      }`}
+                      className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden border border-primary/30 sm:border-2 hover:border-primary transition-all duration-300 hover:scale-110 ${logo.shape === 'semi-square' ? 'rounded-md sm:rounded-lg' : 'rounded-full'
+                        }`}
                     >
                       <img
                         src={logo.url}
@@ -209,8 +203,8 @@ export default function FlexibleHeader() {
                   <div className="flex flex-col gap-6 mt-8">
                     <div className="mb-4">
                       {/* FUSION2K26 with Glow Effect */}
-                      <h2 
-                        className="text-2xl font-bold" 
+                      <h2
+                        className="text-2xl font-bold"
                         style={{
                           color: themeSettings?.header_text_color || '#00D9FF',
                           textShadow: '0 0 20px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.6), 0 0 40px rgba(0, 217, 255, 0.4)',

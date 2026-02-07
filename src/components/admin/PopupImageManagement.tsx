@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { Upload, Trash2, Eye, EyeOff, Save } from 'lucide-react';
+import { Trash2, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase } from '@/db/supabase';
-import { popupImageApi } from '@/db/api';
+import { popupImageApi, uploadImage } from '@/db/api';
 import type { PopupImage } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
 
 export default function PopupImageManagement() {
   const [popup, setPopup] = useState<PopupImage | null>(null);
-  const [duration, setDuration] = useState(6);
+  const [duration, setDuration] = useState(10);
   const [isEnabled, setIsEnabled] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -42,11 +41,11 @@ export default function PopupImageManagement() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file size (50MB)
-    if (file.size > 50 * 1024 * 1024) {
+    // Validate file size (20MB)
+    if (file.size > 20 * 1024 * 1024) {
       toast({
         title: 'Error',
-        description: 'Image size must be less than 50MB',
+        description: 'Image size must be less than 20MB',
         variant: 'destructive',
       });
       return;
@@ -64,22 +63,12 @@ export default function PopupImageManagement() {
 
     setUploading(true);
     try {
-      // Upload to Supabase Storage
-      const fileName = `popup_${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('gallery')
-        .upload(fileName, file);
-
-      if (uploadError) throw uploadError;
-
-      // Get public URL
-      const { data: urlData } = supabase.storage
-        .from('gallery')
-        .getPublicUrl(fileName);
+      // Upload using the utility which handles sanitization and correct bucket
+      const imageUrl = await uploadImage(file, 'app-9dfi9jpj51xd_gallery_images');
 
       // Save to database
       await popupImageApi.upsert({
-        image_url: urlData.publicUrl,
+        image_url: imageUrl,
         duration: duration,
         is_enabled: isEnabled,
       });
@@ -135,6 +124,29 @@ export default function PopupImageManagement() {
     }
   };
 
+  const handleAddFromUrl = async (url: string) => {
+    if (!url) return;
+    try {
+      await popupImageApi.upsert({
+        image_url: url,
+        duration: duration,
+        is_enabled: isEnabled,
+      });
+      toast({
+        title: 'Success',
+        description: 'Popup image added via URL',
+      });
+      loadPopup();
+    } catch (error) {
+      console.error('Error adding image from URL:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to add image',
+        variant: 'destructive'
+      });
+    }
+  };
+
   const handleDelete = async () => {
     if (!popup) return;
 
@@ -144,7 +156,7 @@ export default function PopupImageManagement() {
       // Delete from storage
       const fileName = popup.image_url.split('/').pop();
       if (fileName) {
-        await supabase.storage.from('gallery').remove([fileName]);
+        await supabase.storage.from('app-9dfi9jpj51xd_gallery_images').remove([fileName]);
       }
 
       // Delete from database
@@ -156,7 +168,7 @@ export default function PopupImageManagement() {
       });
 
       setPopup(null);
-      setDuration(6);
+      setDuration(10);
       setIsEnabled(true);
     } catch (error) {
       console.error('Error deleting popup:', error);
@@ -211,27 +223,52 @@ export default function PopupImageManagement() {
           )}
 
           {/* Upload New Image */}
-          <div className="space-y-2">
-            <Label htmlFor="popup-image">
-              {popup ? 'Replace Image' : 'Upload Image'}
-            </Label>
-            <div className="flex items-center gap-4">
-              <Input
-                id="popup-image"
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                disabled={uploading}
-                className="flex-1"
-              />
-              {uploading && (
-                <div className="text-sm text-muted-foreground">Uploading...</div>
-              )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+              <div className="flex items-center gap-4">
+                <Input
+                  id="popup-image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  disabled={uploading}
+                  className="flex-1"
+                />
+                {uploading && (
+                  <div className="text-sm text-muted-foreground">Uploading...</div>
+                )}
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Maximum file size: 50MB. Recommended size: 1920x1080px or similar aspect ratio.
-            </p>
+            <div className="space-y-2">
+              <Label className="text-xs text-muted-foreground">External Image URL</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="manual-url"
+                  placeholder="https://example.com/image.jpg"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddFromUrl(e.currentTarget.value);
+                      e.currentTarget.value = '';
+                    }
+                  }}
+                />
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const input = document.getElementById('manual-url') as HTMLInputElement;
+                    handleAddFromUrl(input.value);
+                    input.value = '';
+                  }}
+                >
+                  Add
+                </Button>
+              </div>
+            </div>
           </div>
+          <p className="text-sm text-muted-foreground">
+            Maximum file size: 20MB. Recommended: 1920x1080px.
+          </p>
 
           {/* Duration Setting */}
           <div className="space-y-2">
@@ -242,7 +279,7 @@ export default function PopupImageManagement() {
               min="1"
               max="60"
               value={duration}
-              onChange={(e) => setDuration(parseInt(e.target.value) || 6)}
+              onChange={(e) => setDuration(parseInt(e.target.value) || 10)}
               className="max-w-xs"
             />
             <p className="text-sm text-muted-foreground">
@@ -282,9 +319,9 @@ export default function PopupImageManagement() {
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>• Popup appears automatically when users visit the site</p>
-          <p>• Displays for the configured duration (default: 6 seconds)</p>
-          <p>• Users can <strong>hold/touch</strong> the image to pause the timer</p>
-          <p>• Timer resumes when user releases</p>
+          <p>• Displays for the configured duration (default: 10 seconds)</p>
+          <p>• Users can <strong>hold/touch</strong> the image to freeze the animation and read</p>
+          <p>• Popup <strong>dissolves (closes)</strong> as soon as the user releases the hold</p>
           <p>• Users can <strong>click</strong> the image or close button to dismiss</p>
           <p>• Background features animated golden glow effects</p>
         </CardContent>

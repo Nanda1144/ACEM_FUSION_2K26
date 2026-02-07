@@ -41,11 +41,11 @@ export default function PopupManagement() {
     const file = e.target.files?.[0];
     if (!file || !settings) return;
 
-    // Validate file size (1MB limit)
-    if (file.size > 1024 * 1024) {
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
       toast({
         title: 'Error',
-        description: 'File size must be less than 1MB',
+        description: 'File size must be less than 20MB',
         variant: 'destructive'
       });
       return;
@@ -76,7 +76,7 @@ export default function PopupManagement() {
 
     try {
       setSaving(true);
-      await popupSettingsApi.update(settings.id, {
+      await popupSettingsApi.upsert({
         enabled: settings.enabled,
         image_url: settings.image_url,
         link_url: settings.link_url,
@@ -84,7 +84,7 @@ export default function PopupManagement() {
         display_delay: settings.display_delay,
         display_duration: settings.display_duration
       });
-      
+
       toast({
         title: 'Success',
         description: 'Popup settings saved successfully'
@@ -118,10 +118,34 @@ export default function PopupManagement() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Popup Management</CardTitle>
+          <CardTitle>Welcome Popup Management</CardTitle>
+          <CardDescription>No settings found. Create initial settings to get started.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-muted-foreground">No settings found</div>
+          <Button
+            onClick={async () => {
+              try {
+                setSaving(true);
+                const newData = await popupSettingsApi.upsert({
+                  enabled: false,
+                  image_url: '',
+                  link_url: '',
+                  show_once_per_session: true,
+                  display_delay: 1000,
+                  display_duration: 10000
+                });
+                setSettings(newData);
+                toast({ title: 'Success', description: 'Initial settings created' });
+              } catch (error) {
+                toast({ title: 'Error', description: 'Failed to create settings', variant: 'destructive' });
+              } finally {
+                setSaving(false);
+              }
+            }}
+            disabled={saving}
+          >
+            {saving ? 'Creating...' : 'Initialize Settings'}
+          </Button>
         </CardContent>
       </Card>
     );
@@ -156,36 +180,43 @@ export default function PopupManagement() {
         {/* Popup Image Upload */}
         <div className="space-y-4">
           <Label htmlFor="popup-image">Popup Image</Label>
-          <div className="space-y-2">
-            <div className="flex gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => document.getElementById('popup-image-upload')?.click()}
+                  disabled={uploading}
+                >
+                  <Upload className="h-4 w-4 mr-2" />
+                  {uploading ? 'Uploading...' : 'Upload Image'}
+                </Button>
+                <input
+                  id="popup-image-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-xs text-muted-foreground">External Image URL</Label>
               <Input
                 id="popup-image-url"
-                placeholder="Enter image URL or upload"
+                placeholder="https://example.com/popup.jpg"
                 value={settings.image_url || ''}
                 onChange={(e) => setSettings({ ...settings, image_url: e.target.value })}
-                className="flex-1"
+                className="w-full"
               />
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => document.getElementById('popup-image-upload')?.click()}
-                disabled={uploading}
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                {uploading ? 'Uploading...' : 'Upload'}
-              </Button>
             </div>
-            <input
-              id="popup-image-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
-            <p className="text-sm text-muted-foreground">
-              Recommended size: 1200x800px or 1920x1080px (max 1MB)
-            </p>
           </div>
+          <p className="text-sm text-muted-foreground">
+            Recommended size: 1200x800px or 1920x1080px (max 1MB)
+          </p>
 
           {/* Image Preview */}
           {settings.image_url && (
@@ -241,7 +272,7 @@ export default function PopupManagement() {
         {/* Display Settings */}
         <div className="space-y-4 p-4 border rounded-lg">
           <h3 className="font-medium">Display Settings</h3>
-          
+
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label htmlFor="show-once" className="text-sm font-medium">
@@ -281,10 +312,10 @@ export default function PopupManagement() {
               min="1000"
               step="500"
               value={settings.display_duration}
-              onChange={(e) => setSettings({ ...settings, display_duration: parseInt(e.target.value) || 5000 })}
+              onChange={(e) => setSettings({ ...settings, display_duration: parseInt(e.target.value) || 10000 })}
             />
             <p className="text-xs text-muted-foreground">
-              Popup will auto-close after this duration. Hold the image to pause timer. (5000ms = 5 seconds)
+              Popup will auto-close after this duration. Hold the image to freeze the animation and read. Release to close. (10000ms = 10 seconds)
             </p>
           </div>
         </div>

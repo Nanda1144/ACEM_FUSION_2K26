@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { popupSettingsApi } from '@/db/api';
 import type { PopupSettings } from '@/types/index';
+import { useRefresh } from '@/contexts/RefreshContext';
 
 interface WelcomePopupProps {
   open: boolean;
@@ -12,20 +13,21 @@ interface WelcomePopupProps {
 
 export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) {
   const [settings, setSettings] = useState<PopupSettings | null>(null);
+  const { refreshKey } = useRefresh();
   const [loading, setLoading] = useState(true);
   const [isHolding, setIsHolding] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<any>(null);
   const startTimeRef = useRef<number>(0);
   const remainingTimeRef = useRef<number>(0);
 
   useEffect(() => {
     loadPopupSettings();
-  }, []);
+  }, [refreshKey]);
 
   useEffect(() => {
     // Start timer when popup opens
-    if (open && settings?.display_duration) {
-      startTimer(settings.display_duration);
+    if (open) {
+      startTimer(settings?.display_duration || 10000);
     }
 
     // Cleanup timer when popup closes
@@ -40,7 +42,7 @@ export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) 
   const startTimer = (duration: number) => {
     startTimeRef.current = Date.now();
     remainingTimeRef.current = duration;
-    
+
     timerRef.current = setTimeout(() => {
       onOpenChange(false);
     }, duration);
@@ -50,18 +52,13 @@ export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) 
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
-      
+
       // Calculate remaining time
       const elapsed = Date.now() - startTimeRef.current;
       remainingTimeRef.current = Math.max(0, remainingTimeRef.current - elapsed);
     }
   };
 
-  const resumeTimer = () => {
-    if (remainingTimeRef.current > 0) {
-      startTimer(remainingTimeRef.current);
-    }
-  };
 
   const loadPopupSettings = async () => {
     try {
@@ -71,7 +68,7 @@ export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) 
       if (data && data.enabled && data.image_url) {
         // Check if popup should be shown
         const hasSeenPopup = sessionStorage.getItem('hasSeenWelcomePopup');
-        
+
         if (!data.show_once_per_session || !hasSeenPopup) {
           // Show popup after delay
           setTimeout(() => {
@@ -138,8 +135,8 @@ export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) 
         >
           <X className="h-5 w-5" />
         </Button>
-        
-        <div 
+
+        <div
           className={`relative w-full ${settings.link_url && !isHolding ? 'cursor-pointer' : ''} select-none`}
           onClick={!isHolding ? handleImageClick : undefined}
           onMouseDown={handleMouseDown}
