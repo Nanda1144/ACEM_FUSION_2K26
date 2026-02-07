@@ -127,8 +127,8 @@ export default function PopupManagement() {
               try {
                 setSaving(true);
                 const newData = await popupSettingsApi.upsert({
-                  enabled: false,
-                  image_url: '',
+                  enabled: true,
+                  image_url: 'https://uploads.onecompiler.io/43bfq86cy/44cvtxece/WhatsApp%20Image%202026-02-07%20at%201.04.41%20PM.jpeg',
                   link_url: '',
                   show_once_per_session: true,
                   display_delay: 1000,
