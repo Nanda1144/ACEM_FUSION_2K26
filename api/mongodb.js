@@ -2,8 +2,8 @@ import { MongoClient, ObjectId } from 'mongodb';
 import 'dotenv/config';
 
 // MongoDB Connection Configuration
-const MONGODB_URI = process.env.MONGODB_URI || process.env.VITE_MONGODB_URI || 'mongodb://localhost:27017';
-const DB_NAME = process.env.MONGODB_DB_NAME || process.env.VITE_MONGODB_DB_NAME || 'acem_db';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const DB_NAME = process.env.MONGODB_DB_NAME || 'acem_db';
 
 let client = null;
 let db = null;
