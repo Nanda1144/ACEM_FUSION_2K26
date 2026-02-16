@@ -25,22 +25,22 @@ export default function EventPosters() {
 
     const scrollContainer = scrollRef.current;
     let scrollPosition = 0;
-    
+
     // Calculate scroll speed based on duration (default 30 seconds for full scroll)
-    const avgDuration = posters.length > 0 
-      ? posters.reduce((sum, p) => sum + (p.scroll_duration || 30000), 0) / posters.length 
+    const avgDuration = posters.length > 0
+      ? posters.reduce((sum, p) => sum + (p.scroll_duration || 30000), 0) / posters.length
       : 30000;
     scrollSpeedRef.current = (scrollContainer.scrollWidth / 2) / (avgDuration / 16.67); // 60fps
 
     const scroll = () => {
       if (!isHolding) {
         scrollPosition += scrollSpeedRef.current;
-        
+
         // Reset scroll position when reaching the end of first set
         if (scrollPosition >= scrollContainer.scrollWidth / 2) {
           scrollPosition = 0;
         }
-        
+
         scrollContainer.scrollLeft = scrollPosition;
       }
       animationRef.current = requestAnimationFrame(scroll);
@@ -109,31 +109,33 @@ export default function EventPosters() {
 
   return (
     <>
-      <section className="py-12 bg-gradient-to-b from-background to-card/30 overflow-hidden">
-        <div className="container mx-auto px-4 mb-8">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-center gradient-text mb-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+      <section className="py-16 bg-gradient-to-b from-background via-background/95 to-card/30 overflow-hidden relative">
+        {/* Background glow effects */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden -z-10">
+          <div className="absolute top-[10%] left-[20%] w-[30vw] h-[30vw] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-[10%] right-[20%] w-[30vw] h-[30vw] bg-secondary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+
+        <div className="container mx-auto px-4 mb-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            Event Highlights
-          </motion.h2>
-          <motion.p
-            className="text-center text-muted-foreground mb-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Hold any poster to view in detail
-          </motion.p>
+            <h2 className="text-4xl md:text-5xl font-bold cinematic-serif gradient-text mb-4 tracking-wider">
+              Event Highlights
+            </h2>
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-6" />
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-light">
+              Experience the pulse of FUSION 2K26. <span className="text-primary font-medium">Hold any poster</span> to immerse in the details.
+            </p>
+          </motion.div>
         </div>
 
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-hidden"
+          className="flex gap-8 overflow-x-hidden py-10"
           style={{
             scrollBehavior: 'auto',
             WebkitOverflowScrolling: 'touch'
@@ -142,11 +144,15 @@ export default function EventPosters() {
           {duplicatedPosters.map((poster, index) => (
             <motion.div
               key={`${poster.id}-${index}`}
-              className="shrink-0 w-80 md:w-96 h-64 rounded-lg overflow-hidden border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:glow-cyan group relative cursor-pointer select-none"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              className={`shrink-0 w-85 md:w-96 h-64 rounded-xl overflow-hidden border-[3px] transition-all duration-500 group relative cursor-pointer select-none
+                ${isHolding && selectedPoster?.id === poster.id
+                  ? 'border-primary scale-[1.05] shadow-[0_0_45px_rgba(0,217,255,0.8)] z-30'
+                  : 'border-white/5 hover:border-primary/60 hover:shadow-[0_0_25px_rgba(0,217,255,0.4)]'
+                }`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.5 }}
+              transition={{ delay: (index % posters.length) * 0.1, duration: 0.6 }}
               onMouseDown={() => handlePosterMouseDown(poster)}
               onMouseUp={handlePosterMouseUp}
               onMouseLeave={handlePosterMouseUp}
@@ -157,12 +163,24 @@ export default function EventPosters() {
               <img
                 src={poster.image_url}
                 alt={`Event Poster ${index + 1}`}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 draggable={false}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-2 right-2 bg-primary/80 text-primary-foreground px-3 py-1 rounded-md text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                Hold to view
+
+              {/* Glossy overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/40 pointer-events-none" />
+
+              {/* Content overlay */}
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+
+              {/* Bottom tag */}
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest text-white font-semibold">
+                  Preview
+                </div>
+                <div className="bg-primary px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest text-black font-extrabold shadow-[0_0_15px_rgba(0,217,255,0.8)]">
+                  Hold
+                </div>
               </div>
             </motion.div>
           ))}
@@ -172,12 +190,12 @@ export default function EventPosters() {
       {/* Popup Dialog for Held Poster */}
       <AnimatePresence>
         {selectedPoster && isHolding && (
-          <Dialog open={true} onOpenChange={() => {}}>
-            <DialogContent className="max-w-5xl p-0 overflow-hidden border-2 border-primary/50 bg-background/95 backdrop-blur-sm">
+          <Dialog open={true} onOpenChange={() => { }}>
+            <DialogContent className="max-w-5xl p-2 overflow-hidden border-4 border-primary bg-black/90 backdrop-blur-xl shadow-[0_0_50px_rgba(0,217,255,0.5)]">
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute right-2 top-2 z-50 rounded-full bg-background/80 hover:bg-background"
+                className="absolute right-4 top-4 z-50 rounded-full bg-black/50 hover:bg-black border border-white/20 text-white"
                 onMouseDown={(e) => {
                   e.stopPropagation();
                   handlePosterMouseUp();
@@ -187,24 +205,34 @@ export default function EventPosters() {
                   handlePosterTouchEnd();
                 }}
               >
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               </Button>
-              
+
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                className="relative w-full"
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full rounded-lg overflow-hidden"
               >
+                <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,217,255,0.2)] pointer-events-none z-10" />
                 <img
                   src={selectedPoster.image_url}
                   alt="Event Poster Detail"
-                  className="w-full h-auto max-h-[85vh] object-contain"
+                  className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                   draggable={false}
                 />
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-background/90 text-foreground px-6 py-3 rounded-lg text-sm font-medium border-2 border-primary">
-                  Release to continue scrolling
+
+                {/* Hold to exit indicator */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className="bg-primary/20 backdrop-blur-xl border-2 border-primary text-primary px-8 py-4 rounded-2xl text-base font-bold tracking-widest uppercase shadow-[0_0_30px_rgba(0,217,255,0.2)]"
+                  >
+                    Release to Exit
+                  </motion.div>
+                  <div className="w-1 h-8 bg-gradient-to-b from-primary to-transparent" />
                 </div>
               </motion.div>
             </DialogContent>

@@ -1,200 +1,71 @@
-# Fusion26 - Quick Start Guide (Supabase Only)
+# Fusion26 - Quick Start Guide (MongoDB & Vercel)
 
 ## ✅ Current Status
-Your application is **fully configured** to use Supabase as the backend. No MongoDB or Express server is needed.
+The application is fully migrated to a **MongoDB + Express** architecture. It is ready for both local development and Vercel deployment.
 
-## 🗄️ Database Backend: Supabase
+---
 
-### What's Already Set Up
-✅ Supabase client configured (`src/db/supabase.ts`)
-✅ Complete API layer for all operations (`src/db/api.ts`)
-✅ Database schema with 14 tables
-✅ Storage buckets for images (events, committee, gallery)
-✅ Row Level Security (RLS) policies
-✅ Default admin passkey: `acemadmin@fusion`
+## 💻 Local Development
 
-### Environment Variables
-Your `.env` file contains:
+### 1. Prerequisites
+- Node.js installed.
+- Access to a MongoDB database (Local or Atlas).
+
+### 2. Environment Setup
+Create a `.env` file in the root with:
 ```env
-VITE_SUPABASE_URL=https://nrgunuzhzlvjkujclrqf.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-VITE_APP_ID=app-9dfi9jpj51xd
+MONGODB_URI=mongodb+srv://your_connection_string
+MONGODB_DB_NAME=acem_db
+VITE_API_URL=http://localhost:5000/api
 ```
 
-## 🚀 How to Run
-
-### Start the Application
+### 3. Running the App
+Run the following command to start both the Vite dev server and the Express backend:
 ```bash
-npm run client
+npm run dev:full
 ```
 
-This starts the Vite development server. The frontend connects directly to Supabase.
+---
 
-### Lint/Check Code
-```bash
-npm run lint
-```
+## ☁️ Vercel Deployment
 
-## 📁 Key Files
+1. **Vercel Config**: The `vercel.json` and `api/` directory are already configured for serverless deployment.
+2. **Environment Variables**: Add `MONGODB_URI` and `MONGODB_DB_NAME` in the Vercel dashboard.
+3. **Internal Routing**: The app is configured to use `/api` internal routing, so no external API URL is needed in production.
 
-### Backend Configuration
-- `src/db/supabase.ts` - Supabase client
-- `src/db/api.ts` - All API functions (860 lines)
-- `supabase/migrations/` - Database schema
+---
 
-### Frontend Components
-- `src/components/Chatbot.tsx` - Admin authentication via passkey
-- `src/components/AdminDashboard.tsx` - Admin panel
-- `src/components/admin/` - All admin management components
-- `src/pages/HomePage.tsx` - Main landing page
+## 🗄️ Database Schema (Collections)
 
-## 🔐 Admin Access
+| Collection | Purpose |
+| :--- | :--- |
+| `admin_passkey` | Admin authentication key (Default: `acemadmin@fusion`) |
+| `events` | Fest events (Technical/Cultural) |
+| `sponsor_logos` | Animated logos for the homepage |
+| `gallery` | Event gallery images |
+| `theme_settings` | Dynamic titles, colors, and logos |
+| `pages` | Dynamic page content |
 
-1. Click the chatbot icon (bottom-right corner)
-2. Enter passkey: `acemadmin@fusion`
-3. Admin dashboard opens
+---
 
-### Change Passkey
-1. Open Admin Dashboard
-2. Go to "Passkey" tab
-3. Enter old passkey, new passkey, and confirm
+## 🖼️ File Uploads
+Images are handled by `multer`. In local development, they are stored in `public/uploads`. On Vercel, they are stored in `/tmp` (ephemeral). 
 
-## 📊 Database Tables
+*Tip: For persistent production image storage, consider migrating the `uploadImage` function in `src/db/api.ts` to use a cloud provider like Cloudinary.*
 
-| Table | Purpose |
-|-------|---------|
-| events | Event information (Technical/Cultural) |
-| committee | Committee members |
-| gallery | Gallery images |
-| about_us | About us content |
-| contact | Contact info & social media |
-| admin_passkey | Admin authentication |
-| theme_settings | Theme customization |
-| pages | Dynamic pages |
-| page_sections | Page builder sections |
-| footer_settings | Footer configuration |
-| component_templates | Page builder templates |
-| overall_coordinators | Event coordinators |
-| sponsor_logos | Sponsor logos |
-| event_posters | Event poster images |
+---
 
-## 🖼️ Image Storage
+## 🛠️ API Layer
+All frontend communication is centralized in `src/db/api.ts`. It uses `axios` to talk to the new backend endpoints.
 
-### Storage Buckets
-1. `app-9dfi9jpj51xd_events_images`
-2. `app-9dfi9jpj51xd_committee_images`
-3. `app-9dfi9jpj51xd_gallery_images`
-
-### Upload Images
-All admin forms have image upload functionality. Images are automatically uploaded to the appropriate Supabase storage bucket.
-
-## 🔧 API Usage Examples
-
-### Get All Events
+**Example**:
 ```typescript
 import { eventsApi } from '@/db/api';
 const events = await eventsApi.getAll();
 ```
 
-### Create Event
-```typescript
-import { eventsApi } from '@/db/api';
-await eventsApi.create({
-  name: 'Hackathon',
-  type: 'Technical',
-  description: 'Coding competition',
-  image_url: 'https://...',
-  staff_coordinators: [{ name: 'Dr. Smith', contact: '1234567890' }],
-  student_coordinators: [{ name: 'John', contact: '9876543210' }],
-  registration_link: 'https://forms.google.com/...'
-});
-```
-
-### Upload Image
-```typescript
-import { uploadImage } from '@/db/api';
-const imageUrl = await uploadImage(file, 'events_images');
-```
-
-## 🗑️ Old MongoDB Server
-
-The old MongoDB/Express server has been **disabled** and backed up to:
-- `server/index.js.mongodb.backup`
-
-This file is not used and can be safely ignored.
-
-## 📚 Documentation
-
-- **Full Architecture**: See `SUPABASE_ARCHITECTURE.md`
-- **Server Info**: See `server/README.md`
-- **Supabase Docs**: https://supabase.com/docs
-
-## ✨ Features
-
-### Public Features
-- Cinematic hero section with parallax scrolling
-- Events section (Technical/Cultural)
-- Committee members display
-- Gallery with lazy loading
-- About Us section
-- Contact section with social media links
-
-### Admin Features (via Chatbot)
-- Event management (CRUD)
-- Committee management (CRUD)
-- Gallery management (upload/delete)
-- About Us editing
-- Contact & social media editing
-- Passkey management
-- Theme customization
-- Page builder
-- Header/Footer settings
-- Overall coordinators management
-- Sponsor logos management
-
-## 🎨 Design
-
-- Dark theme with neon/gradient accents
-- Cinematic animations and transitions
-- Parallax scrolling effects
-- Responsive design (mobile, tablet, desktop)
-- Motion-based micro-interactions
-
-## 🔒 Security Notes
-
-**Current Setup**: Public read/write access (for development)
-
-**For Production**:
-1. Implement Supabase Auth
-2. Restrict RLS policies to authenticated admins
-3. Add input validation
-4. Implement rate limiting
-5. Add error logging
-
-## 🐛 Troubleshooting
-
-### Issue: Can't connect to database
-**Solution**: Check `.env` file has correct Supabase credentials
-
-### Issue: Images not uploading
-**Solution**: Verify storage buckets exist in Supabase dashboard
-
-### Issue: Admin passkey not working
-**Solution**: Check `admin_passkey` table in Supabase has the correct passkey
-
-### Issue: Data not updating
-**Solution**: Check browser console for errors, verify RLS policies
-
-## 📞 Support
-
-For issues or questions:
-1. Check `SUPABASE_ARCHITECTURE.md` for detailed documentation
-2. Review Supabase dashboard for database state
-3. Check browser console for errors
-4. Review `src/db/api.ts` for API functions
-
 ---
 
-**Last Updated**: 2026-02-03
-**Backend**: Supabase (PostgreSQL + Storage)
-**Frontend**: React + TypeScript + Vite + shadcn/ui
+**Last Updated**: 2026-02-16
+**Backend**: MongoDB Atlas
+**Deployment**: Vercel

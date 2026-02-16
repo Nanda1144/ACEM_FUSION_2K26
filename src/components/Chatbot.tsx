@@ -312,11 +312,10 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
                         )}
                         <div className={`flex flex-col gap-2 max-w-[80%]`}>
                           <div
-                            className={`rounded-lg p-3 ${
-                              message.type === 'user'
+                            className={`rounded-lg p-3 ${message.type === 'user'
                                 ? 'bg-primary text-primary-foreground'
                                 : 'bg-muted'
-                            }`}
+                              }`}
                           >
                             <p className="text-sm whitespace-pre-line">{message.content}</p>
                           </div>
@@ -370,7 +369,7 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
                   <form onSubmit={handleSubmit} className="flex gap-2">
                     <Input
                       type="password"
-                      placeholder="Enter admin passkey..."
+                      placeholder="paste your query to get the answer "
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       disabled={loading}
@@ -386,7 +385,7 @@ export default function Chatbot({ onAuthenticated }: ChatbotProps) {
                     </Button>
                   </form>
                   <p className="text-xs text-muted-foreground mt-2 text-center">
-                    {'🔒 Enter your admin passkey to access the dashboard'}
+                    {'Enter your quries here without any worry '}
                   </p>
                 </div>
               </CardContent>

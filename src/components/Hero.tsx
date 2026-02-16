@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useRef } from 'react';
+import LogoCarousel from './LogoCarousel';
 
 interface HeroProps {
   onExploreEvents?: () => void;
@@ -16,7 +17,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
     if (onExploreEvents) {
       onExploreEvents();
     }
-    
+
     // Scroll to events section
     const eventsSection = document.getElementById('events');
     eventsSection?.scrollIntoView({ behavior: 'smooth' });
@@ -34,12 +35,12 @@ export default function Hero({ onExploreEvents }: HeroProps) {
     <section id="home" className="relative min-h-screen flex flex-col justify-start overflow-hidden pt-20 pb-32">
       {/* Animated Background Image - Responsive with Pop Animation */}
       <div className="absolute inset-0">
-        <motion.img 
+        <motion.img
           src="/acem.jpeg"
           alt="Fusion26 College Fest Background"
           className="w-full h-full object-cover object-center md:object-center lg:object-top"
           initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ 
+          animate={{
             scale: [0.8, 1.15, 1.05, 1],
             opacity: [0, 1, 1, 1]
           }}
@@ -55,7 +56,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
         {/* Continuous breathing animation after initial pop */}
         <motion.div
           className="absolute inset-0"
-          animate={{ 
+          animate={{
             scale: [1, 1.05, 1],
           }}
           transition={{
@@ -65,7 +66,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
             delay: 2.5
           }}
         >
-          <img 
+          <img
             src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80"
             alt=""
             className="w-full h-full object-cover object-center md:object-center lg:object-top opacity-0"
@@ -77,7 +78,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
         {/* Gradient overlay from dark at top to transparent */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent" />
       </div>
-      
+
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
         <div className="absolute inset-0 opacity-20">
@@ -85,19 +86,24 @@ export default function Hero({ onExploreEvents }: HeroProps) {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
         </div>
       </div>
-      
+
       {/* Title Content - Positioned 20px from header padding-top */}
-      <div 
-        className="relative z-10 container mx-auto px-4 text-center pt-5" 
+      <div
+        className="relative z-10 container mx-auto px-4 text-center pt-5"
       >
+        {/* Mobile Sponsor Logo Carousel - Positioned between header and title */}
+        <div className="md:hidden mb-4">
+          <LogoCarousel />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 
+          <h1
             ref={titleRef}
-            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-visible animated-gradient-text px-2 sm:px-4 cursor-pointer select-none" 
+            className="cinematic-serif mb-4 sm:mb-6 text-center overflow-visible animated-gradient-text px-2 sm:px-4 cursor-pointer select-none"
             style={{
               fontSize: 'clamp(2rem, 10vw, 10rem)',
               lineHeight: '1.2',
@@ -145,7 +151,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            Integrate Modern Technology With Traditional Culture
+            Integrating Modern Technology With Traditional Culture
           </motion.p>
         </motion.div>
       </div>
@@ -167,7 +173,7 @@ export default function Hero({ onExploreEvents }: HeroProps) {
           </Button>
         </motion.div>
       </div>
-      
+
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"

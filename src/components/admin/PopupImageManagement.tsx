@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/db/supabase';
 import { popupImageApi, uploadImage } from '@/db/api';
+// Removed: import { supabase } from '@/db/supabase';
 import type { PopupImage } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
 
@@ -63,8 +63,8 @@ export default function PopupImageManagement() {
 
     setUploading(true);
     try {
-      // Upload using the utility which handles sanitization and correct bucket
-      const imageUrl = await uploadImage(file, 'app-9dfi9jpj51xd_gallery_images');
+      // Upload using the utility
+      const imageUrl = await uploadImage(file, 'popup-images');
 
       // Save to database
       await popupImageApi.upsert({
@@ -153,12 +153,6 @@ export default function PopupImageManagement() {
     if (!confirm('Are you sure you want to delete the popup image?')) return;
 
     try {
-      // Delete from storage
-      const fileName = popup.image_url.split('/').pop();
-      if (fileName) {
-        await supabase.storage.from('app-9dfi9jpj51xd_gallery_images').remove([fileName]);
-      }
-
       // Delete from database
       await popupImageApi.delete();
 

@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Trash2, Upload, GripVertical } from 'lucide-react';
-import { sponsorLogosApi } from '@/db/api';
-import { supabase } from '@/db/supabase';
+import { sponsorLogosApi, uploadImage } from '@/db/api';
+// Removed: import { supabase } from '@/db/supabase';
 import type { SponsorLogo } from '@/types/index';
 import { useToast } from '@/hooks/use-toast';
 
@@ -13,6 +13,7 @@ export default function SponsorLogoManagement() {
   const [logos, setLogos] = useState<SponsorLogo[]>([]);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [selectedShape, setSelectedShape] = useState<'semi-square' | 'round'>('semi-square');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -53,25 +54,14 @@ export default function SponsorLogoManagement() {
     try {
       setUploading(true);
 
-      // Upload to Supabase Storage
-      const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('app-9dfi9jpj51xd_theme_images')
-        .upload(fileName, file, {
-          cacheControl: '3600',
-          upsert: false
-        });
-
-      if (uploadError) throw uploadError;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('app-9dfi9jpj51xd_theme_images')
-        .getPublicUrl(uploadData.path);
+      // Upload using the new utility
+      const publicUrl = await uploadImage(file, 'sponsor-logos');
 
       // Create logo entry
       const newLogo = await sponsorLogosApi.create({
         image_url: publicUrl,
-        order_number: logos.length + 1
+        order_number: logos.length + 1,
+        shape: selectedShape
       });
 
       setLogos([...logos, newLogo]);
@@ -148,6 +138,24 @@ export default function SponsorLogoManagement() {
     }
   };
 
+  const updateLogoShape = async (id: string, newShape: 'semi-square' | 'round') => {
+    try {
+      await sponsorLogosApi.update(id, { shape: newShape });
+      setLogos(logos.map((logo) => (logo.id === id ? { ...logo, shape: newShape } : logo)));
+      toast({
+        title: 'Success',
+        description: 'Logo shape updated',
+      });
+    } catch (error) {
+      console.error('Error updating shape:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update logo shape',
+        variant: 'destructive',
+      });
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -159,7 +167,27 @@ export default function SponsorLogoManagement() {
       <CardContent className="space-y-6">
         {/* Upload Section */}
         <div className="space-y-4">
-          <Label>Add Sponsor Logo</Label>
+          <div className="flex items-center justify-between">
+            <Label>Add Sponsor Logo</Label>
+            <div className="flex bg-muted rounded-md p-1">
+              <Button
+                variant={selectedShape === 'semi-square' ? 'secondary' : 'ghost'}
+                size="sm"
+                className="h-7 text-xs px-3"
+                onClick={() => setSelectedShape('semi-square')}
+              >
+                Semi-Square
+              </Button>
+              <Button
+                variant={selectedShape === 'round' ? 'secondary' : 'ghost'}
+                size="sm"
+                className="h-7 text-xs px-3"
+                onClick={() => setSelectedShape('round')}
+              >
+                Round
+              </Button>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
@@ -196,7 +224,8 @@ export default function SponsorLogoManagement() {
                         try {
                           await sponsorLogosApi.create({
                             image_url: url,
-                            order_number: logos.length + 1
+                            order_number: logos.length + 1,
+                            shape: selectedShape
                           });
                           await loadLogos();
                           (e.currentTarget as HTMLInputElement).value = '';
@@ -217,7 +246,8 @@ export default function SponsorLogoManagement() {
                       try {
                         await sponsorLogosApi.create({
                           image_url: url,
-                          order_number: logos.length + 1
+                          order_number: logos.length + 1,
+                          shape: selectedShape
                         });
                         await loadLogos();
                         input.value = '';
@@ -288,13 +318,31 @@ export default function SponsorLogoManagement() {
                     </div>
 
                     <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1 flex-1">
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant={logo.shape === 'semi-square' ? 'secondary' : 'ghost'}
+                          size="sm"
+                          className="h-6 text-[10px] px-2"
+                          onClick={() => updateLogoShape(logo.id, 'semi-square')}
+                        >
+                          Sq
+                        </Button>
+                        <Button
+                          variant={logo.shape === 'round' ? 'secondary' : 'ghost'}
+                          size="sm"
+                          className="h-6 text-[10px] px-2"
+                          onClick={() => updateLogoShape(logo.id, 'round')}
+                        >
+                          Rd
+                        </Button>
+                      </div>
+                      <div className="flex items-center gap-1 flex-1 justify-end">
                         <GripVertical className="w-3 h-3 text-muted-foreground" />
                         <Input
                           type="number"
                           value={logo.order_number}
                           onChange={(e) => handleReorder(logo.id, parseInt(e.target.value))}
-                          className="w-12 h-7 text-xs px-1"
+                          className="w-10 h-7 text-xs px-1"
                           min={1}
                         />
                       </div>

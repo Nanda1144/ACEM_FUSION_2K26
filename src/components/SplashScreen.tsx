@@ -40,9 +40,9 @@ export default function SplashScreen() {
             className="relative"
           >
             <img
-              src="https://miaoda-site-img.s3cdn.medo.dev/images/KLing_f7f8b99e-d294-478a-bad4-7fce2f8d3e90.jpg"
-              alt="Fusion26 Splash"
-              className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg glow-cyan"
+              src="/logo1HD.jpeg"
+              alt="Fusion 2k26 Splash"
+              className="max-w-[80vw] md:max-w-md h-auto object-contain filter drop-shadow-[0_0_30px_rgba(0,217,255,0.4)]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent rounded-lg" />
           </motion.div>

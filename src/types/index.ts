@@ -248,6 +248,7 @@ export interface SponsorLogo {
   id: string;
   image_url: string;
   order_number: number;
+  shape?: 'semi-square' | 'round';
   created_at: string;
 }
 
