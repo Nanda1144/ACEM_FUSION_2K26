@@ -39,7 +39,7 @@ export default function FlexibleHeader() {
   const loadPages = async () => {
     try {
       const data = await pagesApi.getAll();
-      setPages(data.filter(page => page.show_in_menu && page.is_published));
+      setPages(data.filter((page: Page) => page.show_in_menu && page.is_published));
     } catch (error) {
       console.error('Error loading pages:', error);
     }

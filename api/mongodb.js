@@ -1,5 +1,12 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
+import dns from 'dns';
+
+// Fix for MongoDB Atlas DNS resolution issues in some environments
+if (process.env.NODE_ENV !== 'production') {
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
+}
+
 dotenv.config();
 dotenv.config({ path: '.env.local', override: true });
 
