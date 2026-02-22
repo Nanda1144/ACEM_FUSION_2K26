@@ -21,18 +21,18 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-// NOTE: Static serving of /uploads will NOT work on Vercel as files are not persistent.
-// Local file uploads via multer will also NOT persist in Vercel Serverless Functions.
 const uploadsPath = path.join(__dirname, '../public/uploads');
-app.use('/uploads', express.static(uploadsPath));
+const uploadDir = process.env.VERCEL ? path.join('/tmp', 'uploads') : uploadsPath;
+
+// Ensure upload directory exists
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+app.use('/uploads', express.static(uploadDir));
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        // Use /tmp for Vercel, or local public/uploads for development
-        const uploadDir = process.env.VERCEL ? path.join('/tmp', 'uploads') : uploadsPath;
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-        }
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
