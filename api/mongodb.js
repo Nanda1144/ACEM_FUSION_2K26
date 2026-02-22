@@ -1,5 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
+dotenv.config({ path: '.env.local', override: true });
 
 // MongoDB Connection Configuration
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
