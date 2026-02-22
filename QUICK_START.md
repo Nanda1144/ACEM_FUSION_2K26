@@ -12,7 +12,7 @@ The application is fully migrated to a **MongoDB + Express** architecture. It is
 - Access to a MongoDB database (Local or Atlas).
 
 ### 2. Environment Setup
-Create a `.env` file in the root with:
+Create a `.env.local` file in the root with:
 ```env
 MONGODB_URI=mongodb+srv://your_connection_string
 MONGODB_DB_NAME=acem_db

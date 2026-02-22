@@ -16,7 +16,7 @@ This application has been migrated from Supabase to a custom **Node.js/Express**
 npm install
 
 # 2. Configure Environment
-# Copy .env.example to .env and fill in your MongoDB URI
+# Copy .env.example to .env.local and fill in your MongoDB URI
 
 # 3. Start Frontend & Backend together
 npm run dev:full
