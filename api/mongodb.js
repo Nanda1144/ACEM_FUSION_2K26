@@ -11,7 +11,7 @@ dotenv.config();
 dotenv.config({ path: '.env.local', override: true });
 
 // MongoDB Connection Configuration
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const MONGODB_URI = process.env.MONGODB_URI;
 const DB_NAME = process.env.MONGODB_DB_NAME || 'acem_db';
 
 let client = null;
@@ -27,6 +27,10 @@ async function connectToMongoDB() {
     }
 
     try {
+        if (!MONGODB_URI) {
+            throw new Error('Missing MONGODB_URI');
+        }
+
         client = new MongoClient(MONGODB_URI, {
             maxPoolSize: 10,
             minPoolSize: 5,
@@ -48,8 +52,8 @@ async function connectToMongoDB() {
 
         return db;
     } catch (error) {
-        console.error('❌ MongoDB connection error:', error);
-        throw new Error('Failed to connect to MongoDB Atlas. Please check your connection string.');
+        console.error('MongoDB connection error:', error?.message || 'unknown error');
+        throw new Error('Database connection failed');
     }
 }
 
@@ -173,3 +177,4 @@ export {
     initializeDatabase,
     ObjectId
 };
+

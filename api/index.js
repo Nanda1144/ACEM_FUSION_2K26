@@ -17,8 +17,20 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const allowedOrigins = [
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+    'http://localhost:5173',
+    'http://localhost:3000',
+    ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()).filter(Boolean) : [])
+].filter(Boolean);
+
 app.use(cors({
-    origin: ["https://your-vercel-app.vercel.app"],
+    origin: (origin, callback) => {
+        // Allow server-to-server requests and same-origin browser requests (no Origin header)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(new Error('CORS not allowed'));
+    },
     credentials: true
 }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -52,6 +64,11 @@ const formatDoc = (doc) => {
     return { id: _id.toString(), ...rest };
 };
 
+const sendInternalError = (res, error) => {
+    console.error('API error:', error?.message || 'unknown error');
+    return res.status(500).json({ error: 'Internal server error' });
+};
+
 const createCrudRoutes = (collectionName, routeName) => {
     app.get(`/api/${routeName}`, async (req, res) => {
         try {
@@ -59,7 +76,7 @@ const createCrudRoutes = (collectionName, routeName) => {
             const items = await db.collection(collectionName).find({}).toArray();
             res.json(formatDoc(items));
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            sendInternalError(res, error);
         }
     });
 
@@ -69,7 +86,7 @@ const createCrudRoutes = (collectionName, routeName) => {
             const item = await db.collection(collectionName).findOne({ _id: new ObjectId(req.params.id) });
             res.json(formatDoc(item));
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            sendInternalError(res, error);
         }
     });
 
@@ -81,7 +98,7 @@ const createCrudRoutes = (collectionName, routeName) => {
             const inserted = await db.collection(collectionName).findOne({ _id: result.insertedId });
             res.status(201).json(formatDoc(inserted));
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            sendInternalError(res, error);
         }
     });
 
@@ -97,7 +114,7 @@ const createCrudRoutes = (collectionName, routeName) => {
             const updated = await db.collection(collectionName).findOne({ _id: new ObjectId(req.params.id) });
             res.json(formatDoc(updated));
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            sendInternalError(res, error);
         }
     });
 
@@ -107,7 +124,7 @@ const createCrudRoutes = (collectionName, routeName) => {
             await db.collection(collectionName).deleteOne({ _id: new ObjectId(req.params.id) });
             res.status(204).send();
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            sendInternalError(res, error);
         }
     });
 };
@@ -123,7 +140,7 @@ app.post('/api/passkey/verify', async (req, res) => {
         const result = await db.collection('admin_passkey').findOne({ passkey });
         res.json({ valid: !!result });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        sendInternalError(res, error);
     }
 });
 
