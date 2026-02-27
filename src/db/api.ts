@@ -15,22 +15,68 @@ const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const api = axios.create({
   baseURL: API_URL,
+  timeout: 10000,
 });
+
+type CacheEntry = {
+  data: any;
+  expiresAt: number;
+};
+
+const GET_CACHE_TTL_MS = 5000;
+const getCache = new Map<string, CacheEntry>();
+const inFlightGets = new Map<string, Promise<any>>();
+
+api.interceptors.request.use((config) => {
+  const method = (config.method || 'get').toLowerCase();
+  if (method !== 'get') {
+    getCache.clear();
+    inFlightGets.clear();
+  }
+  return config;
+});
+
+const getCached = async (url: string) => {
+  const now = Date.now();
+  const cached = getCache.get(url);
+
+  if (cached && cached.expiresAt > now) {
+    return cached.data;
+  }
+
+  const activeRequest = inFlightGets.get(url);
+  if (activeRequest) {
+    return activeRequest;
+  }
+
+  const request = api
+    .get(url)
+    .then(({ data }) => {
+      getCache.set(url, { data, expiresAt: now + GET_CACHE_TTL_MS });
+      return data;
+    })
+    .finally(() => {
+      inFlightGets.delete(url);
+    });
+
+  inFlightGets.set(url, request);
+  return request;
+};
 
 // Events API
 export const eventsApi = {
   getAll: async () => {
-    const { data } = await api.get('/events');
+    const data = await getCached('/events');
     return data;
   },
 
   getById: async (id: string) => {
-    const { data } = await api.get(`/events/${id}`);
+    const data = await getCached(`/events/${id}`);
     return data;
   },
 
   getByType: async (type: 'Technical' | 'Cultural') => {
-    const { data } = await api.get('/events');
+    const data = await getCached('/events');
     return data.filter((e: Event) => e.type === type);
   },
 
@@ -52,7 +98,7 @@ export const eventsApi = {
 // Committee API
 export const committeeApi = {
   getAll: async () => {
-    const { data } = await api.get('/committee');
+    const data = await getCached('/committee');
     return data;
   },
 
@@ -74,7 +120,7 @@ export const committeeApi = {
 // Gallery API
 export const galleryApi = {
   getAll: async () => {
-    const { data } = await api.get('/gallery');
+    const data = await getCached('/gallery');
     return data;
   },
 
@@ -91,7 +137,7 @@ export const galleryApi = {
 // About Us API
 export const aboutUsApi = {
   get: async () => {
-    const { data } = await api.get('/about');
+    const data = await getCached('/about');
     return data[0] || null;
   },
 
@@ -104,7 +150,7 @@ export const aboutUsApi = {
 // Contact API
 export const contactApi = {
   get: async () => {
-    const { data } = await api.get('/contact');
+    const data = await getCached('/contact');
     return data[0] || null;
   },
 
@@ -117,7 +163,7 @@ export const contactApi = {
 // Admin Passkey API
 export const passkeyApi = {
   get: async () => {
-    const { data } = await api.get('/passkey');
+    const data = await getCached('/passkey');
     return data[0] || null;
   },
 
@@ -135,7 +181,7 @@ export const passkeyApi = {
 // Header Settings API
 export const headerSettingsApi = {
   get: async () => {
-    const { data } = await api.get('/header-settings');
+    const data = await getCached('/header-settings');
     return data[0] || null;
   },
 
@@ -148,7 +194,7 @@ export const headerSettingsApi = {
 // Theme Settings API
 export const themeSettingsApi = {
   get: async () => {
-    const { data } = await api.get('/theme');
+    const data = await getCached('/theme');
     return data[0] || null;
   },
 
@@ -161,12 +207,12 @@ export const themeSettingsApi = {
 // Pages API
 export const pagesApi = {
   getAll: async () => {
-    const { data } = await api.get('/pages');
+    const data = await getCached('/pages');
     return data;
   },
 
   getBySlug: async (slug: string) => {
-    const { data } = await api.get('/pages');
+    const data = await getCached('/pages');
     return data.find((p: Page) => p.slug === slug) || null;
   },
 
@@ -188,7 +234,7 @@ export const pagesApi = {
 // Page Sections API
 export const pageSectionsApi = {
   getByPageId: async (pageId: string) => {
-    const { data } = await api.get('/sections');
+    const data = await getCached('/sections');
     return data.filter((s: PageSection) => s.page_id === pageId);
   },
 
@@ -210,7 +256,7 @@ export const pageSectionsApi = {
 // Footer Settings API
 export const footerSettingsApi = {
   get: async () => {
-    const { data } = await api.get('/footer');
+    const data = await getCached('/footer');
     return data[0] || null;
   },
 
@@ -223,12 +269,12 @@ export const footerSettingsApi = {
 // Component Templates API
 export const componentTemplatesApi = {
   getAll: async () => {
-    const { data } = await api.get('/templates');
+    const data = await getCached('/templates');
     return data;
   },
 
   getByCategory: async (category: string) => {
-    const { data } = await api.get('/templates');
+    const data = await getCached('/templates');
     return data.filter((t: any) => t.category === category);
   }
 };
@@ -259,7 +305,7 @@ export const uploadImage = async (
 // Event Posters API
 export const eventPostersApi = {
   getAll: async () => {
-    const { data } = await api.get('/event-posters');
+    const data = await getCached('/event-posters');
     return data;
   },
 
@@ -281,7 +327,7 @@ export const eventPostersApi = {
 // Background Images API
 export const backgroundImagesApi = {
   getAll: async () => {
-    const { data } = await api.get('/background-images');
+    const data = await getCached('/background-images');
     return data;
   },
 
@@ -303,17 +349,17 @@ export const backgroundImagesApi = {
 // Overall Coordinators API
 export const overallCoordinatorsApi = {
   getAll: async () => {
-    const { data } = await api.get('/overall-coordinators');
+    const data = await getCached('/overall-coordinators');
     return data;
   },
 
   getByType: async (type: 'staff' | 'student') => {
-    const { data } = await api.get('/overall-coordinators');
+    const data = await getCached('/overall-coordinators');
     return data.filter((c: any) => c.type === type);
   },
 
   getByEventType: async (eventType: 'Technical' | 'Cultural') => {
-    const { data } = await api.get('/overall-coordinators');
+    const data = await getCached('/overall-coordinators');
     return data.filter((c: any) => c.event_type === eventType || c.event_type === 'Both');
   },
 
@@ -335,12 +381,12 @@ export const overallCoordinatorsApi = {
 // Committees API (new groups-based system)
 export const committeesApi = {
   getAll: async () => {
-    const { data } = await api.get('/committees');
+    const data = await getCached('/committees');
     return data;
   },
 
   getById: async (id: string) => {
-    const { data } = await api.get(`/committees/${id}`);
+    const data = await getCached(`/committees/${id}`);
     return data;
   },
 
@@ -362,12 +408,12 @@ export const committeesApi = {
 // Committee Coordinators API
 export const committeeCoordinatorsApi = {
   getAll: async () => {
-    const { data } = await api.get('/committee-coordinators');
+    const data = await getCached('/committee-coordinators');
     return data;
   },
 
   getByCommittee: async (committeeId: string) => {
-    const { data } = await api.get('/committee-coordinators');
+    const data = await getCached('/committee-coordinators');
     return data.filter((c: any) => c.committee_id === committeeId);
   },
 
@@ -389,7 +435,7 @@ export const committeeCoordinatorsApi = {
 // Popup Settings API
 export const popupSettingsApi = {
   get: async () => {
-    const { data } = await api.get('/popup-settings');
+    const data = await getCached('/popup-settings');
     return data[0] || null;
   },
 
@@ -412,7 +458,7 @@ export const popupSettingsApi = {
 // Sponsor Logos API
 export const sponsorLogosApi = {
   getAll: async () => {
-    const { data } = await api.get('/sponsor-logos');
+    const data = await getCached('/sponsor-logos');
     return data;
   },
 
@@ -434,12 +480,12 @@ export const sponsorLogosApi = {
 // Popup Image API
 export const popupImageApi = {
   get: async () => {
-    const { data } = await api.get('/popup-image');
+    const data = await getCached('/popup-image');
     return data && data.length > 0 ? data.find((p: any) => p.is_enabled) : null;
   },
 
   getForAdmin: async () => {
-    const { data } = await api.get('/popup-image');
+    const data = await getCached('/popup-image');
     return data && data.length > 0 ? data[0] : null;
   },
 
@@ -514,3 +560,4 @@ export const compressImage = async (file: File): Promise<File> => {
     reader.onerror = reject;
   });
 };
+

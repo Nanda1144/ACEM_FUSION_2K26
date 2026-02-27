@@ -1,18 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "api/index.js",
-            "use": "@vercel/node"
-        },
-        {
-            "src": "package.json",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "dist"
-            }
-        }
-    ],
     "rewrites": [
         {
             "source": "/api/(.*)",
@@ -26,8 +13,5 @@
             "source": "/(.*)",
             "destination": "/index.html"
         }
-    ],
-    "env": {
-        "VITE_API_URL": "/api"
-    }
+    ]
 }
