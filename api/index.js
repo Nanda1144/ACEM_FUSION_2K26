@@ -17,17 +17,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const configuredOrigins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()).filter(Boolean)
+    : [];
+
 const allowedOrigins = [
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
     'http://localhost:5173',
     'http://localhost:3000',
-    ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()).filter(Boolean) : [])
+    ...configuredOrigins
 ].filter(Boolean);
 
 app.use(cors({
     origin: (origin, callback) => {
         // Allow server-to-server requests and same-origin browser requests (no Origin header)
         if (!origin) return callback(null, true);
+        // If no explicit allowlist is configured, allow browser origins by default.
+        if (configuredOrigins.length === 0) return callback(null, true);
         if (allowedOrigins.includes(origin)) return callback(null, true);
         return callback(new Error('CORS not allowed'));
     },
