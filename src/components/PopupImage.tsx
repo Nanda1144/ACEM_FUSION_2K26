@@ -5,6 +5,8 @@ import { popupImageApi } from '@/db/api';
 import type { PopupImage as PopupImageType } from '@/types/index';
 import { useRefresh } from '@/contexts/RefreshContext';
 
+const DEFAULT_POPUP_IMAGE = '/main.jpeg';
+
 export default function PopupImage() {
   const [popup, setPopup] = useState<PopupImageType | null>(null);
   const { refreshKey } = useRefresh();
@@ -18,18 +20,32 @@ export default function PopupImage() {
     loadPopup();
   }, [refreshKey]);
 
+  const getDefaultPopup = (): PopupImageType => ({
+    id: 'default-popup-image',
+    image_url: DEFAULT_POPUP_IMAGE,
+    duration: 10,
+    is_enabled: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  });
+
   const loadPopup = async () => {
     try {
       const data = await popupImageApi.get();
-      if (data && data.is_enabled) {
-        setPopup(data);
-        const duration = (data.duration || 10) * 1000;
-        remainingTimeRef.current = duration;
-        setIsVisible(true);
-        startTimer(duration);
-      }
+      const activePopup = data && data.is_enabled ? data : getDefaultPopup();
+      setPopup(activePopup);
+      const duration = (activePopup.duration || 10) * 1000;
+      remainingTimeRef.current = duration;
+      setIsVisible(true);
+      startTimer(duration);
     } catch (error) {
       console.error('Error loading popup:', error);
+      const fallbackPopup = getDefaultPopup();
+      setPopup(fallbackPopup);
+      const duration = (fallbackPopup.duration || 10) * 1000;
+      remainingTimeRef.current = duration;
+      setIsVisible(true);
+      startTimer(duration);
     }
   };
 

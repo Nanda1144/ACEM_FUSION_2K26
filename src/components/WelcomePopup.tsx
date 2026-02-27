@@ -6,6 +6,8 @@ import { popupSettingsApi } from '@/db/api';
 import type { PopupSettings } from '@/types/index';
 import { useRefresh } from '@/contexts/RefreshContext';
 
+const DEFAULT_POPUP_IMAGE = '/main.jpeg';
+
 interface WelcomePopupProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -19,6 +21,18 @@ export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) 
   const timerRef = useRef<any>(null);
   const startTimeRef = useRef<number>(0);
   const remainingTimeRef = useRef<number>(0);
+
+  const defaultPopupSettings: PopupSettings = {
+    id: 'default-popup',
+    enabled: true,
+    image_url: DEFAULT_POPUP_IMAGE,
+    link_url: null,
+    show_once_per_session: true,
+    display_delay: 1000,
+    display_duration: 10000,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
 
   useEffect(() => {
     loadPopupSettings();
@@ -63,22 +77,32 @@ export default function WelcomePopup({ open, onOpenChange }: WelcomePopupProps) 
   const loadPopupSettings = async () => {
     try {
       const data = await popupSettingsApi.get();
-      setSettings(data);
+      const effectiveSettings =
+        data && data.enabled && data.image_url
+          ? data
+          : defaultPopupSettings;
+      setSettings(effectiveSettings);
 
-      if (data && data.enabled && data.image_url) {
-        // Check if popup should be shown
-        const hasSeenPopup = sessionStorage.getItem('hasSeenWelcomePopup');
+      // Check if popup should be shown
+      const hasSeenPopup = sessionStorage.getItem('hasSeenWelcomePopup');
 
-        if (!data.show_once_per_session || !hasSeenPopup) {
-          // Show popup after delay
-          setTimeout(() => {
-            onOpenChange(true);
-            sessionStorage.setItem('hasSeenWelcomePopup', 'true');
-          }, data.display_delay || 1000);
-        }
+      if (!effectiveSettings.show_once_per_session || !hasSeenPopup) {
+        // Show popup after delay
+        setTimeout(() => {
+          onOpenChange(true);
+          sessionStorage.setItem('hasSeenWelcomePopup', 'true');
+        }, effectiveSettings.display_delay || 1000);
       }
     } catch (error) {
       console.error('Error loading popup settings:', error);
+      setSettings(defaultPopupSettings);
+      const hasSeenPopup = sessionStorage.getItem('hasSeenWelcomePopup');
+      if (!hasSeenPopup) {
+        setTimeout(() => {
+          onOpenChange(true);
+          sessionStorage.setItem('hasSeenWelcomePopup', 'true');
+        }, defaultPopupSettings.display_delay);
+      }
     } finally {
       setLoading(false);
     }
