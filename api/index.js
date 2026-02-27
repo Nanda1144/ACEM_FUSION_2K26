@@ -141,7 +141,10 @@ app.get('/api/health', (req, res) => {
 
 app.post('/api/passkey/verify', async (req, res) => {
     try {
-        const { passkey } = req.body;
+        const passkey = typeof req.body?.passkey === 'string' ? req.body.passkey.trim() : '';
+        if (!passkey) {
+            return res.json({ valid: false });
+        }
         const db = await getDatabase();
         const result = await db.collection('admin_passkey').findOne({ passkey });
         res.json({ valid: !!result });
