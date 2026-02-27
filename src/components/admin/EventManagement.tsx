@@ -1,0 +1,487 @@
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import RichTextEditor from '@/components/ui/RichTextEditor';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Plus, Pencil, Trash2 } from 'lucide-react';
+import { eventsApi, uploadImage } from '@/db/api';
+import type { Event, Coordinator } from '@/types/index';
+import { useToast } from '@/hooks/use-toast';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { useForm } from 'react-hook-form';
+
+export default function EventManagement() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editingEvent, setEditingEvent] = useState<Event | null>(null);
+  const { toast } = useToast();
+
+  const form = useForm({
+    defaultValues: {
+      name: '',
+      type: 'Technical' as 'Technical' | 'Cultural',
+      description: '',
+      description_format: 'paragraph' as 'paragraph' | 'list',
+      registration_link: '',
+      image_url: '',
+      staff_coordinators: [] as Coordinator[],
+      student_coordinators: [] as Coordinator[]
+    }
+  });
+
+  useEffect(() => {
+    loadEvents();
+  }, []);
+
+  const loadEvents = async () => {
+    try {
+      const data = await eventsApi.getAll();
+      setEvents(data);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to load events',
+        variant: 'destructive'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'File size must be less than 20MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    try {
+      const url = await uploadImage(file, 'app-9dfi9jpj51xd_events_images');
+      form.setValue('image_url', url);
+      toast({
+        title: 'Success',
+        description: 'Image uploaded successfully'
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to upload image',
+        variant: 'destructive'
+      });
+    }
+  };
+
+  const handleSubmit = async (data: any) => {
+    try {
+      if (editingEvent) {
+        await eventsApi.update(editingEvent.id, data);
+        toast({
+          title: 'Success',
+          description: 'Event updated successfully'
+        });
+      } else {
+        await eventsApi.create(data);
+        toast({
+          title: 'Success',
+          description: 'Event created successfully'
+        });
+      }
+      setDialogOpen(false);
+      setEditingEvent(null);
+      form.reset();
+      loadEvents();
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to save event',
+        variant: 'destructive'
+      });
+    }
+  };
+
+  const handleEdit = (event: Event) => {
+    setEditingEvent(event);
+    form.reset({
+      name: event.name,
+      type: event.type,
+      description: event.description,
+      description_format: event.description_format || 'paragraph',
+      registration_link: event.registration_link || '',
+      image_url: event.image_url || '',
+      staff_coordinators: event.staff_coordinators || [],
+      student_coordinators: event.student_coordinators || []
+    });
+    setDialogOpen(true);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this event?')) return;
+
+    try {
+      await eventsApi.delete(id);
+      toast({
+        title: 'Success',
+        description: 'Event deleted successfully'
+      });
+      loadEvents();
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to delete event',
+        variant: 'destructive'
+      });
+    }
+  };
+
+  const addCoordinator = (type: 'staff' | 'student') => {
+    const field = type === 'staff' ? 'staff_coordinators' : 'student_coordinators';
+    const current = form.getValues(field);
+    form.setValue(field, [...current, { name: '', contact: '' }]);
+  };
+
+  const removeCoordinator = (type: 'staff' | 'student', index: number) => {
+    const field = type === 'staff' ? 'staff_coordinators' : 'student_coordinators';
+    const current = form.getValues(field);
+    form.setValue(field, current.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Event Management</h2>
+        <Dialog open={dialogOpen} onOpenChange={(open) => {
+          setDialogOpen(open);
+          if (!open) {
+            setEditingEvent(null);
+            form.reset();
+          }
+        }}>
+          <DialogTrigger asChild>
+            <Button className="glow-cyan">
+              <Plus className="mr-2 h-4 w-4" />
+              Add Event
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>{editingEvent ? 'Edit Event' : 'Add New Event'}</DialogTitle>
+              <DialogDescription>
+                Fill in the event details below
+              </DialogDescription>
+            </DialogHeader>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Event Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Enter event name" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Event Type</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select event type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Technical">Technical</SelectItem>
+                          <SelectItem value="Cultural">Cultural</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="description_format"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description Format</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select format" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="paragraph">Paragraph</SelectItem>
+                          <SelectItem value="list">List (Bullet Points)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        {form.watch('description_format') === 'list' ? (
+                          <Textarea
+                            {...field}
+                            placeholder="Enter each point on a new line:&#10;• Point 1&#10;• Point 2&#10;• Point 3"
+                            className="min-h-[200px] font-mono"
+                          />
+                        ) : (
+                          <RichTextEditor
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Enter event description with formatting..."
+                          />
+                        )}
+                      </FormControl>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {form.watch('description_format') === 'list'
+                          ? 'Enter each point on a new line. You can start with • or - for bullets.'
+                          : 'Use the rich text editor to format your description.'
+                        }
+                      </p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="registration_link"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Registration Link</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="https://forms.google.com/..." />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="space-y-4">
+                  <Label>Event Image</Label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-xs text-muted-foreground">Upload Local Image</Label>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="w-full"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs text-muted-foreground">External Image URL</Label>
+                      <FormField
+                        control={form.control}
+                        name="image_url"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input {...field} placeholder="https://example.com/image.jpg" className="w-full" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                  {form.watch('image_url') && (
+                    <div className="mt-2 flex items-center gap-4 p-2 border rounded-md bg-muted/50">
+                      <div className="relative h-20 w-32 overflow-hidden rounded bg-black/20 flex items-center justify-center">
+                        <img
+                          src={form.watch('image_url')}
+                          alt="Preview"
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://placehold.co/600x400?text=Invalid+Image+URL';
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-muted-foreground truncate">{form.watch('image_url')}</p>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => form.setValue('image_url', '')}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <Label>Staff Coordinator</Label>
+                      <p className="text-xs text-muted-foreground">Add one staff member for this event</p>
+                    </div>
+                    <Button type="button" size="sm" variant="outline" onClick={() => addCoordinator('staff')}>
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add Staff
+                    </Button>
+                  </div>
+                  {form.watch('staff_coordinators').map((coord, index) => (
+                    <div key={index} className="flex gap-2 mb-2">
+                      <Input
+                        placeholder="Staff Name"
+                        value={coord.name}
+                        onChange={(e) => {
+                          const coords = form.getValues('staff_coordinators');
+                          coords[index].name = e.target.value;
+                          form.setValue('staff_coordinators', coords);
+                        }}
+                      />
+                      <Input
+                        placeholder="Contact Number"
+                        value={coord.contact}
+                        onChange={(e) => {
+                          const coords = form.getValues('staff_coordinators');
+                          coords[index].contact = e.target.value;
+                          form.setValue('staff_coordinators', coords);
+                        }}
+                      />
+                      <Button type="button" size="icon" variant="destructive" onClick={() => removeCoordinator('staff', index)}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <Label>Student Coordinators</Label>
+                      <p className="text-xs text-muted-foreground">
+                        {form.watch('type') === 'Cultural'
+                          ? 'Add multiple students for cultural events'
+                          : 'Add one student for technical events'}
+                      </p>
+                    </div>
+                    <Button type="button" size="sm" variant="outline" onClick={() => addCoordinator('student')}>
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add Student
+                    </Button>
+                  </div>
+                  {form.watch('student_coordinators').map((coord, index) => (
+                    <div key={index} className="flex gap-2 mb-2">
+                      <Input
+                        placeholder="Student Name"
+                        value={coord.name}
+                        onChange={(e) => {
+                          const coords = form.getValues('student_coordinators');
+                          coords[index].name = e.target.value;
+                          form.setValue('student_coordinators', coords);
+                        }}
+                      />
+                      <Input
+                        placeholder="Contact Number"
+                        value={coord.contact}
+                        onChange={(e) => {
+                          const coords = form.getValues('student_coordinators');
+                          coords[index].contact = e.target.value;
+                          form.setValue('student_coordinators', coords);
+                        }}
+                      />
+                      <Button type="button" size="icon" variant="destructive" onClick={() => removeCoordinator('student', index)}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+
+                <DialogFooter>
+                  <Button type="submit" className="glow-purple">
+                    {editingEvent ? 'Update Event' : 'Create Event'}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>All Events</CardTitle>
+          <CardDescription>Manage your fest events</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <p>Loading...</p>
+          ) : events.length === 0 ? (
+            <p className="text-muted-foreground text-center py-8">No events yet</p>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Description</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {events.map((event) => (
+                  <TableRow key={event.id}>
+                    <TableCell className="font-medium">{event.name}</TableCell>
+                    <TableCell>
+                      <Badge variant={event.type === 'Technical' ? 'default' : 'secondary'}>
+                        {event.type}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="max-w-xs truncate">{event.description}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <Button size="icon" variant="outline" onClick={() => handleEdit(event)}>
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="destructive" onClick={() => handleDelete(event.id)}>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
